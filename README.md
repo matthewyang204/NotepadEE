@@ -5,9 +5,9 @@ Simple version of notepad for computers without simple-enough notepad software
 HTML file is for Chromebooks
 
 
-To build, run 
+To build on mac, run 
 ```
-cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.0/build.sh && sh build.sh
+cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.0/build.sh && sh buildMacVersion.sh
 ```
 
 
