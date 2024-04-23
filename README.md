@@ -2,7 +2,7 @@
 Simple version of notepad for computers without simple-enough notepad software
 
 
-HTML file is for Chromebooks
+HTML file in each release is for Chromebooks
 
 
 To build on Mac, run 
