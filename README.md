@@ -7,7 +7,7 @@ HTML file is for Chromebooks
 
 To build on Mac, run 
 ```
-cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.0/buildMacVersion.sh && sh buildMacVersion.sh
+cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.1/buildMacVersion.sh && sh buildMacVersion.sh
 ```
 
 
