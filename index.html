@@ -12,7 +12,8 @@
 <body>
     <div id="menu">
         <button onclick="saveTextAsFile()">Save</button>
-        <button onclick="loadFileAsText()">Load</button>
+        <input type="file" id="fileLoader" style="display:none;" onchange="loadFileAsText()"/>
+        <button onclick="document.getElementById('fileLoader').click()">Load</button>
         <button onclick="cutText()">Cut</button>
         <button onclick="copyText()">Copy</button>
         <button onclick="pasteText()">Paste</button>
@@ -42,7 +43,7 @@
         }
 
         function loadFileAsText() {
-            var fileToLoad = document.getElementById("fileToLoad").files[0];
+            var fileToLoad = document.getElementById("fileLoader").files[0];
 
             var fileReader = new FileReader();
             fileReader.onload = function(fileLoadedEvent) {
