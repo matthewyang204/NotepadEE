@@ -1,8 +1,8 @@
 #!/bin/sh
 
-Installing dependencies...
+echo "Installing dependencies..."
 
-Checking for Homebrew...
+echo "Checking for Homebrew..."
 # Check for Homebrew
 if test ! $(which brew); then
     echo "no. Installing..."
@@ -11,7 +11,7 @@ else
     echo "yes."
 fi
 
-Checking for node...
+echo "Checking for node..."
 # Check for Node.js and npm
 if test ! $(which node); then
     echo "no. Installing..."
@@ -20,7 +20,7 @@ else
     echo "yes"
 fi
 
-Checking for node...
+echo "Checking for node..."
 if test ! $(which npm); then
     echo "no. Installing..."
     brew install npm
@@ -28,7 +28,7 @@ else
     echo "yes."
 fi
 
-Checking for npx...
+echo "Checking for npx..."
 # Check for npx
 if test ! $(which npx); then
     echo "no. Installing..."
