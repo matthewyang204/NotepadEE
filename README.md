@@ -15,5 +15,5 @@ Note: If building from source, unzip the node_modules.zip file to the source fol
 
 To update, run
 ```
-cd ~/Downloads && https://github.com/matthewyang204/NotepadEE/releases/download/1.2/SoftwareUpdate.sh && sh SoftwareUpdate.sh
+cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.2/SoftwareUpdate.sh && sh SoftwareUpdate.sh
 ```
