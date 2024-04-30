@@ -7,7 +7,7 @@ HTML file in each release is for Chromebooks
 
 To build on Mac, run 
 ```
-cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.1/buildMacVersion.sh && sh buildMacVersion.sh
+cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.2/buildMacVersion.sh && sh buildMacVersion.sh
 ```
 
 
@@ -15,5 +15,5 @@ Note: If building from source, unzip the node_modules.zip file to the source fol
 
 To update, run
 ```
-cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.1/SoftwareUpdate.sh && sh SoftwareUpdate.sh
+cd ~/Downloads && curl -LO https://github.com/matthewyang204/NotepadEE/releases/download/1.2/SoftwareUpdate.sh && sh SoftwareUpdate.sh
 ```
