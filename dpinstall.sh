@@ -8,7 +8,7 @@ if test ! $(which brew); then
     echo "no. Installing..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-    echo "yes."
+    echo "yes"
 fi
 
 echo "Checking for node..."
@@ -25,7 +25,7 @@ if test ! $(which npm); then
     echo "no. Installing..."
     brew install npm
 else
-    echo "yes."
+    echo "yes"
 fi
 
 echo "Checking for npx..."
