@@ -1,5 +1,5 @@
 # Notepad==
-Simple version of notepad for computers without simple-enough notepad software
+Simple notepad for computers without simple-enough notepad software
 
 
 HTML file in each release is for Chromebooks
