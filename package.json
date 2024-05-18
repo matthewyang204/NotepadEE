@@ -2,7 +2,7 @@
   "name": "notepad",
   "version": "1.0.0",
   "description": "A simple Electron and HTML-based notepad",
-  "main": "main.js",
+  "main": "JS/main.js",
   "scripts": {
     "test": "test"
   },
