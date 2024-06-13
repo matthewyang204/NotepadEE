@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/opt/lib/python3.11/site-packages')
 import tkinter as tk
 from tkinter import filedialog
 
