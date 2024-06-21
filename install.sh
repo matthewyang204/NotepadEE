@@ -9,7 +9,9 @@ fi
 # 2. Download the zip file to the Downloads folder and extract it.
 echo "Downloading the necessary files..."
 cd ~/Downloads
-wget https://github.com/matthewyang204/NotepadEE/releases/download/2.1/Notepad.zip
+wget https://github.com/matthewyang204/NotepadEE/releases/download/2.2/Notepad.zip
+
+echo "Unpacking Notepad==..."
 unzip Notepad.zip
 mv Notepad== Notepad
 cd Notepad
