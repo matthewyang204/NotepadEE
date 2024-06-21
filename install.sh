@@ -9,12 +9,11 @@ fi
 # 2. Download the zip file to the Downloads folder and extract it.
 echo "Downloading the necessary files..."
 cd ~/Downloads
-wget https://github.com/matthewyang204/NotepadEE/releases/download/2.2/Notepad.zip
+wget https://github.com/matthewyang204/NotepadEE/releases/download/2.2/NotepadEE-Linux.zip
 
 echo "Unpacking Notepad==..."
-unzip Notepad.zip
-mv Notepad== Notepad
-cd Notepad
+unzip NotepadEE-Linux.zip
+cd Notepad==
 
 # 3. Check whether matthewyang folder exists in /opt. If not, create it.
 echo "Creating necessary directories..."
@@ -35,6 +34,6 @@ sudo update-desktop-database
 
 echo "Cleaning up..."
 cd ~/Downloads
-sudo rm -R Notepad.zip
-sudo rm -R Notepad
+sudo rm -R NotepadEE-Linux.zip
+sudo rm -R Notepad==
 sudo rm -R _MACOSX
