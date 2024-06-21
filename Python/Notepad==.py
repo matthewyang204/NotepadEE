@@ -10,7 +10,7 @@ def save_as():
         file.write(text)
 
 def open_file():
-    file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         text_area.delete(1.0, "end")
         with open(file_path, 'r') as file:
