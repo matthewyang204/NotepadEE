@@ -10,8 +10,14 @@ Unsigned Mac installer packages (pkg) available in latest release
 
 Linux binaries are only AMD64
 
-install.sh above is only for linux, you can download it to your Downloads folder and run 
+install-linux.sh can be downloaded to your Downloads folder and run 
 ```
-sh ~/Downloads/install.sh
+sh ~/Downloads/install-linux.sh
+```
+Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
+
+Separate setup-mac.sh CLI installation wizard can be downloaded to Downloads folder before executing
+```
+sh ~/Downloads/setup-mac.sh
 ```
 Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
