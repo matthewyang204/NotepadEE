@@ -46,6 +46,7 @@ sudo ln -s /opt/matthewyang/Notepad==/Notepad== /usr/local/bin/notepadee
 # 6. Copy notepadee.desktop from the extracted zip to the /usr/share/applications/ folder
 sudo cp notepadee.desktop /usr/share/applications/notepadee.desktop
 sudo update-desktop-database
+sudo chown -R $USER /opt/matthewyang
 
 echo "Cleaning up..."
 cd ~/Downloads

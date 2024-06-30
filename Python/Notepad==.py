@@ -64,6 +64,7 @@ def save_file():
         response = messagebox.askyesno("Create new file", "The file does not exist. Do you want to create it as a new file?")
         if response:
             save_as()
+            file_open()
 
 def clear():
     global current_file
