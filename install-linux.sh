@@ -1,5 +1,15 @@
 #!/bin/bash
 
+echo "Checking for and deleting any pieces of old installation..."
+sudo rm -R /opt/matthewyang/Notepad==
+sudo rm -R /usr/share/applications/notepadee.desktop
+sudo rm -R /usr/local/bin/notepadee
+sudo rm -R ~/Library
+cd ~/Downloads
+sudo rm -R NotepadEE-3-Linux-AMD64.zip
+sudo rm -R Notepad==
+sudo rm -R __MACOSX
+
 # 1. Check whether the system is AMD64.
 if [ "$(uname -m)" != "x86_64" ]; then
     echo "This software is only compatible with AMD64 systems."
@@ -20,6 +30,11 @@ echo "Creating necessary directories..."
 if [ ! -d "/opt/matthewyang" ]; then
     sudo mkdir /opt/matthewyang
 fi
+if [ ! -d "~/Library/Caches/NotepadEE" ]; then
+    mkdir ~/Library
+    mkdir ~/Library/Caches
+    mkdir ~/Library/Caches/NotepadEE
+fi    
 
 # 4. Copy the Notepad== folder from the extracted contents of the zip to /opt/matthewyang/ folder.
 echo "Copying necessary files..."
@@ -34,6 +49,6 @@ sudo update-desktop-database
 
 echo "Cleaning up..."
 cd ~/Downloads
-sudo rm -R NotepadEE-3-Linux-x86_64.zip
+sudo rm -R NotepadEE-3-Linux-AMD64.zip
 sudo rm -R Notepad==
-sudo rm -R _MACOSX
+sudo rm -R __MACOSX
