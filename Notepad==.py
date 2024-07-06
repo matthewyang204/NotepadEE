@@ -23,7 +23,7 @@ folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'Note
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
-def write_cache():
+def write_cache(event=None):
     global current_file
     with open(os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
@@ -32,7 +32,7 @@ def write_cache():
         file.write(current_file)
     root.after(5000, write_cache)
 
-def save_as():
+def save_as(event=None):
     global current_file
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     current_file=file_path
@@ -42,7 +42,7 @@ def save_as():
     write_cache()
     file_open=1
 
-def open_file():
+def open_file(event=None):
     global current_file
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
@@ -53,7 +53,7 @@ def open_file():
     write_cache()
     file_open=1
 
-def save_file():
+def save_file(event=None):
     global current_file
     if file_open==1:
         with open(current_file, 'w') as file:
@@ -66,7 +66,7 @@ def save_file():
             save_as()
             file_open()
 
-def clear():
+def clear(event=None):
     global current_file
     text_area.delete(1.0, "end")
     current_file=""
@@ -90,7 +90,6 @@ root.config(menu=menu)
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=clear)
-file_menu.add_command(label="Save As...", command=save_as)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file)
 
@@ -100,6 +99,10 @@ edit_menu.add_command(label="Cut", command=lambda: root.focus_get().event_genera
 edit_menu.add_command(label="Copy", command=lambda: root.focus_get().event_generate("<<Copy>>"))
 edit_menu.add_command(label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>"))
 edit_menu.add_command(label="Select All", command=lambda: root.focus_get().event_generate("<<SelectAll>>"))
+
+root.bind_all('<Command-n>', clear)
+root.bind_all('<Command-o>', open_file)
+root.bind_all('<Command-s>', save_file)
 
 write_cache()
 root.mainloop()
