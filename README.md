@@ -1,6 +1,11 @@
 # Notepad==
 Simple notepad for computers without simple-enough notepad software
 
+System requirements:
+
+Apple Silicon Version: macOS 11.0 or above
+
+Intel Silicon Version: macOSX 10.4 or above
 
 You can download prebuilt Mac and Linux binaries in the Releases.
 
