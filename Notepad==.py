@@ -73,11 +73,26 @@ def clear(event=None):
     write_cache()
     file_open=0
 
+def cut_text(event=None):
+    text_area.clipboard_clear()
+    text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
+    text_area.delete("sel.first", "sel.last")
+
+def copy_text(event=None):
+    text_area.clipboard_clear()
+    text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
+
+def paste_text(event=None):
+    text_area.insert("insert", text_area.clipboard_get())
+
+def select_all_text(event=None):
+    text_area.tag_add("sel", "1.0", "end")
+
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
 
-text_area = tk.Text(root, width=100, height=80)
+text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
 text_area.pack()
 if os.path.exists(last_write):
     text_area.delete(1.0, "end")
@@ -95,14 +110,19 @@ file_menu.add_command(label="Save", command=save_file)
 
 edit_menu = tk.Menu(menu)
 menu.add_cascade(label="Edit", menu=edit_menu)
-edit_menu.add_command(label="Cut", command=lambda: root.focus_get().event_generate("<<Cut>>"))
-edit_menu.add_command(label="Copy", command=lambda: root.focus_get().event_generate("<<Copy>>"))
-edit_menu.add_command(label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>"))
-edit_menu.add_command(label="Select All", command=lambda: root.focus_get().event_generate("<<SelectAll>>"))
+edit_menu.add_command(label="Cut", command=cut_text)
+edit_menu.add_command(label="Copy", command=copy_text)
+edit_menu.add_command(label="Paste", command=paste_text)
+edit_menu.add_command(label="Select All", command=select_all_text)
 
 root.bind_all('<Command-n>', clear)
 root.bind_all('<Command-o>', open_file)
 root.bind_all('<Command-s>', save_file)
+
+root.bind_all('<Command-x>', cut_text)
+root.bind_all('<Command-c>', copy_text)
+root.bind_all('<Command-v>', paste_text)
+root.bind_all('<Command-a>', select_all_text)
 
 write_cache()
 root.mainloop()
