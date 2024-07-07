@@ -1,7 +1,7 @@
 # Notepad==
 Simple notepad for computers without simple-enough notepad software
 
-System requirements:
+Mac system requirements:
 
 Apple Silicon Version: macOS 11.0 or above
 
