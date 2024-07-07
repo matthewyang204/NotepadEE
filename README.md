@@ -25,4 +25,10 @@ xattr -d com.apple.quarantine
 ```
 and drag the .command installer into the terminal window. Press Enter and your thing will no longer prompt you about the unidentified developer thing.
 
+If the installer window doesn't open still, then type 
+```
+chmod +x
+```
+and then drag the .command file into the window. And then try again.
+
 Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
