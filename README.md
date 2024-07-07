@@ -13,6 +13,8 @@ You can download prebuilt Mac and Linux binaries in the Releases.
 
 Linux binaries are only AMD64
 
+Mac binaries are not signed
+
 install-linux.sh can be downloaded to your Downloads folder and run 
 ```
 sh ~/Downloads/install-linux.sh
