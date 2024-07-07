@@ -19,8 +19,10 @@ sh ~/Downloads/install-linux.sh
 ```
 Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
 
-Separate setup-mac-[your cpu architecture].tool CLI installation wizard can be downloaded to Downloads folder before executing
+Separate setup-mac-[your cpu architecture].tool CLI installation wizard can be downloaded to Downloads folder before double-clicking to launch. If it prompts you that the app is not from an identified developer, you can open up a terminal window, type in 
 ```
-sh ~/Downloads/setup-mac.sh
+xattr -d com.apple.quarantine 
 ```
+and drag the .tool installer into the terminal window. Press Enter and your thing will no longer prompt you about the unidentified developer thing.
+
 Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
