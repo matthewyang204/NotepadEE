@@ -7,7 +7,7 @@ Apple Silicon Version: macOS 11.0 or above
 
 Intel Silicon Version: macOSX 10.4 or above
 
-Just about any GUI Linux version released in the last 20-25 years should work
+Just about any GUI 64-bit Linux version released in the last 20-25 years should work
 
 You can download prebuilt Mac and Linux binaries in the Releases.
 
