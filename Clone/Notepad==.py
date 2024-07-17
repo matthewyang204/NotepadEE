@@ -18,19 +18,20 @@ else:
     current_file  =  ""
     file_open=0
 
-last_write=os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_write')
-folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE')
-if not os.path.exists(folder_path):
-    os.makedirs(folder_path)
+#last_write=os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_write')
+#folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE')
+#if not os.path.exists(folder_path):
+#    os.makedirs(folder_path)
 
 def write_cache(event=None):
-    global current_file
-    with open(os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_write'), 'w') as file:
-        file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
-    with open(last_file_path, 'w') as file:
-        file.write(current_file)
-    root.after(5000, write_cache)
+    print("Autosave is deprececated on clone instances")
+#    global current_file
+#    with open(os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_write'), 'w') as file:
+#        file.write(text_area.get('1.0', 'end-1c'))
+#    last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
+#    with open(last_file_path, 'w') as file:
+#        file.write(current_file)
+#    root.after(5000, write_cache)
 
 def save_as(event=None):
     global current_file
@@ -94,10 +95,10 @@ root.title("Notepad==")
 
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
 text_area.pack()
-if os.path.exists(last_write):
-    text_area.delete(1.0, "end")
-    with open(last_write, 'r') as file:
-        text_area.insert(1.0, file.read())
+#if os.path.exists(last_write):
+#    text_area.delete(1.0, "end")
+#    with open(last_write, 'r') as file:
+#        text_area.insert(1.0, file.read())
 
 menu = tk.Menu(root)
 root.config(menu=menu)

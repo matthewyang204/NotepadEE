@@ -33,4 +33,9 @@ chmod +x
 ```
 and then drag the .command file into the window. And then try again.
 
+After installing the app either using the zip file or the installer, run this to bypass gatekeeper:
+```
+xattr -d com.apple.quarantine /Applications/Notepad==.app
+```
+
 Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
