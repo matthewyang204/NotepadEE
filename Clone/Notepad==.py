@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 from tkinter import messagebox
-import subprocess
-import shutil
 
 global file_open
 file_open=0
@@ -11,7 +9,7 @@ last_file_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'N
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
         current_file  = file.read()
-        if current_file.strip() == '':  
+        if current_file.strip() == '':  # Check if the file is empty
             file_open = 0
         else:
             file_open = 1
@@ -24,36 +22,6 @@ last_write=os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadE
 folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
-
-make_new_instance = """#!/bin/bash
-
-INSTANCES=~/Library/Caches/NotepadEE/Instances
-if [ ! -d "$INSTANCES" ]; then
-  mkdir "$INSTANCES"
-fi
-
-SRC_DIR=/Applications/Notepad==.app/Contents/Resources/Clone
-SRC_FILE="Notepad=="
-
-TARGET_DIR=~/Library/Caches/NotepadEE/Instances
-
-EXT=.app
-
-cp -R "$SRC_DIR/Notepad==.app" "${TARGET_DIR}/Notepad==0$EXT"
-
-NUM=1
-while [ -f "${TARGET_DIR}/Notepad==$NUM$EXT" ]; do
-  ((NUM++))
-done
-
-mv "${TARGET_DIR}/Notepad==0${EXT}" "${TARGET_DIR}/Notepad==$NUM$EXT"
-open -a "${TARGET_DIR}/Notepad==$NUM$EXT"
-"""
-
-instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'make_new_instance.sh')
-
-with open(instanceshellscriptpath, "w") as f:
-    f.write(make_new_instance)
 
 def write_cache(event=None):
     global current_file
@@ -120,15 +88,6 @@ def paste_text(event=None):
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
 
-def add_instance(event=None):
-  subprocess.run(["/bin/bash", instanceshellscriptpath])
-
-def clear_instances(event=None):
-    response2 = messagebox.askyesno("Clear instances", "Are you sure you want to clear all instances? Make sure to close all other instances before clearing. Click 'No' to get back to clear all other instances.")
-    if response2:
-        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'Instances')
-        shutil.rmtree(folder_path)
-
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
@@ -155,11 +114,6 @@ edit_menu.add_command(label="Cut", command=cut_text)
 edit_menu.add_command(label="Copy", command=copy_text)
 edit_menu.add_command(label="Paste", command=paste_text)
 edit_menu.add_command(label="Select All", command=select_all_text)
-
-window_menu = tk.Menu(menu)
-menu.add_cascade(label="Window", menu=window_menu)
-window_menu.add_command(label="Launch new instance", command=add_instance)
-window_menu.add_command(label="Clear all instances", command=clear_instances)
 
 root.bind_all('<Command-n>', clear)
 root.bind_all('<Command-o>', open_file)
