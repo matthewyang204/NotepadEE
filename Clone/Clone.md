@@ -1,0 +1,3 @@
+#Making new instances
+
+The latest developer beta update to Notepad== allows you to create new instances in order to view/edit/save without autosave capabilities. You can directly compile the main .py file on the root of this repository, then compile the .py file in this directory. After compiling, move Notepad==.app inside of this directory into the main Notepad==.app's Contents/Resources/Clone/ directory.
