@@ -11,11 +11,11 @@ Just about any GUI 64-bit Linux version released in the last 20-25 years should 
 
 You can download prebuilt Mac and Linux binaries in the Releases.
 
-Linux binaries are only AMD64
+Linux can run up to 3.1.0 if compiled from source, while it only has 3.0.0
 
 Mac binaries are not signed
 
-install-linux.sh can be downloaded to your Downloads folder and run 
+install-linux.sh can be downloaded from the 3.0.0 source code to your Downloads folder and run 
 ```
 sh ~/Downloads/install-linux.sh
 ```
