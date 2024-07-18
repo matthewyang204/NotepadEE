@@ -5,18 +5,18 @@ from tkinter import messagebox
 
 global file_open
 file_open=0
-last_file_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_file_path')
-if os.path.exists(last_file_path):
-    with open(last_file_path, 'r') as file:
-        current_file  = file.read()
-        if current_file.strip() == '':  # Check if the file is empty
-            file_open = 0
-        else:
-            file_open = 1
+#last_file_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_file_path')
+#if os.path.exists(last_file_path):
+#    with open(last_file_path, 'r') as file:
+#        current_file  = file.read()
+#        if current_file.strip() == '':  # Check if the file is empty
+#            file_open = 0
+#        else:
+#            file_open = 1
     
-else:
-    current_file  =  ""
-    file_open=0
+#else:
+#    current_file  =  ""
+#    file_open=0
 
 #last_write=os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_write')
 #folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE')
