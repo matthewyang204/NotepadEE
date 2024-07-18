@@ -37,7 +37,7 @@ def write_cache(event=None):
 #    root.after(5000, write_cache)
 
 def save_as(event=None):
-    global current_file
+    global current_file, file_open
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     current_file=file_path
     with open(file_path, 'w') as file:
@@ -47,7 +47,7 @@ def save_as(event=None):
     file_open=1
 
 def open_file(event=None):
-    global current_file
+    global current_file, file_open
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         text_area.delete(1.0, "end")
@@ -58,7 +58,7 @@ def open_file(event=None):
     file_open=1
 
 def save_file(event=None):
-    global current_file
+    global current_file, file_open
     if file_open==1:
         with open(current_file, 'w') as file:
             text = text_area.get('1.0', 'end-1c')
@@ -68,10 +68,9 @@ def save_file(event=None):
         response = messagebox.askyesno("Create new file", "The file does not exist. Do you want to create it as a new file?")
         if response:
             save_as()
-            file_open()
 
 def clear(event=None):
-    global current_file
+    global current_file, file_open
     text_area.delete(1.0, "end")
     current_file=""
     write_cache()
@@ -118,6 +117,7 @@ menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=clear)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file)
+file_menu.add_command(label="Save as...", command=save_as)
 
 edit_menu = tk.Menu(menu)
 menu.add_cascade(label="Edit", menu=edit_menu)
@@ -133,6 +133,7 @@ window_menu.add_command(label="Launch new instance", command=add_instance)
 root.bind_all('<Command-n>', clear)
 root.bind_all('<Command-o>', open_file)
 root.bind_all('<Command-s>', save_file)
+root.bind_all('<Command-S>', save_as)
 
 text_area.bind('<Command-x>', cut_text)
 text_area.bind('<Command-c>', copy_text)

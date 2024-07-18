@@ -32,7 +32,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['/Users/matthewyang/NotepadEE/Notepad.png'],
+    icon=['Notepad.png'],
 )
 coll = COLLECT(
     exe,
@@ -46,6 +46,6 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='Notepad==.app',
-    icon='/Users/matthewyang/NotepadEE/Notepad.png',
+    icon='Notepad.png',
     bundle_identifier=None,
 )
