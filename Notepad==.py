@@ -109,16 +109,20 @@ def cut_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
     text_area.delete("sel.first", "sel.last")
+    return 'break'
 
 def copy_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
+    return 'break'
 
 def paste_text(event=None):
     text_area.insert("insert", text_area.clipboard_get())
+    return 'break'
 
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
+    return 'break'
 
 def add_instance(event=None):
   subprocess.run(["/bin/bash", instanceshellscriptpath])
@@ -161,14 +165,14 @@ menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Launch new instance", command=add_instance)
 window_menu.add_command(label="Clear all instances", command=clear_instances)
 
-root.bind_all('<Command-n>', clear)
-root.bind_all('<Command-o>', open_file)
-root.bind_all('<Command-s>', save_file)
+root.bind('<Command-n>', clear)
+root.bind('<Command-o>', open_file)
+root.bind('<Command-s>', save_file)
 
-root.bind_all('<Command-x>', cut_text)
-root.bind_all('<Command-c>', copy_text)
-root.bind_all('<Command-v>', paste_text)
-root.bind_all('<Command-a>', select_all_text)
+text_area.bind('<Command-x>', cut_text)
+text_area.bind('<Command-c>', copy_text)
+text_area.bind('<Command-v>', paste_text)
+text_area.bind('<Command-a>', select_all_text)
 
 write_cache()
 root.mainloop()
