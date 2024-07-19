@@ -1,41 +1,20 @@
 # Notepad==
-Simple notepad for computers without simple-enough notepad software
+Simple notepad for Macs
 
-Mac system requirements:
+System requirements:
 
 Apple Silicon Version: macOS 11.0 or above
 
 Intel Silicon Version: macOSX 10.4 or above
 
-Just about any GUI 64-bit Linux version released in the last 20-25 years should work
+You can download prebuilt binaries in the Releases
 
-You can download prebuilt Mac and Linux binaries in the Releases.
+Binaries are not signed
 
-Linux can run up to 3.1.0 if compiled from source, while it only has 3.0.0
-
-Mac binaries are not signed
-
-install-linux.sh can be downloaded from the 3.0.0 source code to your Downloads folder and run 
-```
-sh ~/Downloads/install-linux.sh
-```
-Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
-
-Separate setup-mac-[your cpu architecture].command CLI installation wizard can be downloaded to Downloads folder before double-clicking to launch. If it prompts you that the app is not from an identified developer, you can open up a terminal window, type in 
-```
-xattr -d com.apple.quarantine 
-```
-and drag the .command installer into the terminal window. Press Enter and your thing will no longer prompt you about the unidentified developer thing.
-
-If the installer window doesn't open still, then type 
-```
-chmod +x
-```
-and then drag the .command file into the window. And then try again.
-
-After installing the app either using the zip file or the installer, run this to bypass gatekeeper:
+After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, either using the zip file or the installer, run this to bypass gatekeeper:
 ```
 xattr -d com.apple.quarantine /Applications/Notepad==.app
+xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clone/Notepad==.app
 ```
 
-Enter your password if prompted because some parts of the script requires administrator (sudo) priveleges
+Note: The feature of launching a new instance does not work unless the app bundle is placed in /Applications in the root of your Mac's drive.

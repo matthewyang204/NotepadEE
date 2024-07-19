@@ -1,8 +1,8 @@
 # Making new instances
 
-The latest developer beta update to Notepad== allows you to create new instances in order to view/edit/save without autosave capabilities on macOS. You can directly compile the main .py file on the root of this repository, then compile the .py file in this directory. After compiling, move Notepad==.app inside of this directory into the main Notepad==.app's Contents/Resources/Clone/ directory.
+The latest update to Notepad== allows you to create new instances in order to view/edit/save multiple files without autosave capabilities at the same time on macOS. This feature does not work unless the .app bundle is placed in /Applications in the root of your Mac's drive.
 
-If you decided to install the developer beta, you need to do this to verify the app instead of the normal way:
+To verify the app:
 ```
 xattr -d com.apple.quarantine /Applications/Notepad==.app
 xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clone/Notepad==.app
