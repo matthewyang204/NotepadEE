@@ -14,10 +14,13 @@ EXT=.app
 
 cp -R "$SRC_DIR/Notepad==.app" "${TARGET_DIR}/Notepad==0$EXT"
 
-NUM=1
-while [ -f "${TARGET_DIR}/Notepad==$NUM$EXT" ]; do
-  ((NUM++))
+NUM=0
+for (( NUM=0; ; NUM++ )); do
+  if [ ! -e "${TARGET_DIR}/Notepad==$NUM$EXT" ]; then
+    break
+  fi
 done
 
-mv "${TARGET_DIR}/Notepad==0${EXT}" "${TARGET_DIR}/Notepad==$NUM$EXT"
+cp -R "${TARGET_DIR}/Notepad==0${EXT}" "${TARGET_DIR}/Notepad==$NUM$EXT"
+
 open -a "${TARGET_DIR}/Notepad==$NUM$EXT"
