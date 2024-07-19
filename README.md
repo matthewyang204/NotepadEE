@@ -21,5 +21,5 @@ Note: The feature of launching a new instance does not work unless the app bundl
 
 Linux:
 
-Older 3.1.x releases work on Linux when compiled from source
-Download latest version for Linux, 3.1.2, here: https://github.com/matthewyang204/NotepadEE/releases/tag/3.1.2
+- Older 3.1.x releases work on Linux when compiled from source
+- Download latest version for Linux, 3.1.2, here: https://github.com/matthewyang204/NotepadEE/releases/tag/3.1.2
