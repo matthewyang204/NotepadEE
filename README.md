@@ -22,5 +22,5 @@ Note: The feature of launching a new instance does not work unless the app bundl
 Linux:
 - Older x.1.x releases will work on Linux when compiled from source
 - Latest x.1.x version is 3.1.x
-- Download latest source code from the Linux repository: https://github.com/matthewyang204/NotepadEE-x.1.x
+- Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE-x.1.x
 - Download latest release source code for Linux, 3.1.2, here: https://github.com/matthewyang204/NotepadEE/releases/tag/3.1.2
