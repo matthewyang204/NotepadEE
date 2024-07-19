@@ -9,9 +9,9 @@ Intel Silicon Version: macOSX 10.4 or above
 
 You can download prebuilt binaries in the Releases
 
-Binaries are not signed
+Binaries are now signed
 
-After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper:
+After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper if it doesn't show a blue open button in the popup:
 ```
 xattr -d com.apple.quarantine /Applications/Notepad==.app
 xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clone/Notepad==.app
