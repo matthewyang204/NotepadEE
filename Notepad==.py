@@ -179,5 +179,8 @@ text_area.bind('<Command-c>', copy_text)
 text_area.bind('<Command-v>', paste_text)
 text_area.bind('<Command-a>', select_all_text)
 
+root.bind('<Command-l>', add_instance)
+root.bind('<Command-L>', clear_instances)
+
 write_cache()
 root.mainloop()
