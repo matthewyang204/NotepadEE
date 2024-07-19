@@ -11,7 +11,7 @@ You can download prebuilt binaries in the Releases
 
 Binaries are not signed
 
-After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, either using the zip file or the installer, run this to bypass gatekeeper:
+After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper:
 ```
 xattr -d com.apple.quarantine /Applications/Notepad==.app
 xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clone/Notepad==.app
