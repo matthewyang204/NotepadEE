@@ -13,7 +13,7 @@ Binaries are now signed with a personal certificate, meaning they will say unide
 
 If you're interested, read this: https://www.wikihow.com/Install-Software-from-Unsigned-Developers-on-a-Mac
 
-After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper if it doesn't show a blue open button in the popup:
+If you don't want to edit your privacy settings, after downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper if it doesn't show a blue open button in the popup:
 ```
 xattr -d com.apple.quarantine /Applications/Notepad==.app
 xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clone/Notepad==.app
