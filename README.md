@@ -26,3 +26,8 @@ Linux:
 - Latest x.1.x version is 3.1.x
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE-x.1.x
 - Download latest release source code for Linux, 3.1.2, here: https://github.com/matthewyang204/NotepadEE/releases/tag/3.1.2
+
+Linux build instructions:
+- Please unzip the folder and then cd into the folder in a terminal
+- Type pyinstaller --hidden-import=tkinter -i Notepad.png Notepad==.py to compile
+- Make sure pillow, tkinter, and pyinstaller are installed with pip3, and pip3 is installed with Python before building
