@@ -68,6 +68,12 @@ def write_cache(event=None):
     last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
+    if file_open==1:
+        with open(current_file, 'w') as file:
+            text = text_area.get('1.0', 'end-1c')
+            file.write(text)
+    else:
+        return 'break'
     root.after(5000, write_cache)
 
 def save_as(event=None):
@@ -78,28 +84,6 @@ def save_as(event=None):
     with open(file_path, 'w') as file:
         text = text_area.get(1.0, "end-1c")
         file.write(text)
-    write_cache()
-    file_open=1
-
-def open_file(event=None):
-    global current_file, file_open
-    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file=file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-    write_cache()
-    file_open=1
-
-def open_file_arg(macOS_file_path=None):
-    file_path=macOS_file_path
-    global current_file, file_open
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file=file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
     write_cache()
     file_open=1
 
@@ -116,8 +100,32 @@ def save_file(event=None):
         if response:
             save_as()
 
+def open_file(event=None):
+    global current_file, file_open
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file=file_path
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+    clear()
+    write_cache()
+    file_open=1
+
+def open_file_arg(macOS_file_path=None):
+    file_path=macOS_file_path
+    global current_file, file_open
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file=file_path
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+    write_cache()
+    file_open=1
+
 def clear(event=None):
     global current_file, file_open
+    save_file()
     text_area.delete(1.0, "end")
     current_file=""
     write_cache()
