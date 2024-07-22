@@ -4,6 +4,7 @@ import os
 from tkinter import messagebox
 import subprocess
 import shutil
+import sys
 
 global file_open
 global current_file
@@ -91,6 +92,17 @@ def open_file(event=None):
     write_cache()
     file_open=1
 
+def open_file_arg(macOS_file_path=None):
+    file_path=macOS_file_path
+    global current_file, file_open
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file=file_path
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+    write_cache()
+    file_open=1
+
 def save_file(event=None):
     global current_file
     global file_open
@@ -149,6 +161,8 @@ if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
         text_area.insert(1.0, file.read())
+if len(sys.argv) > 1:
+    open_file_arg(sys.argv[1])
 
 menu = tk.Menu(root)
 root.config(menu=menu)
