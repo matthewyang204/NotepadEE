@@ -72,8 +72,6 @@ def write_cache(event=None):
         with open(current_file, 'w') as file:
             text = text_area.get('1.0', 'end-1c')
             file.write(text)
-    else:
-        return 'break'
     root.after(5000, write_cache)
 
 def save_as(event=None):
@@ -100,16 +98,23 @@ def save_file(event=None):
         if response:
             save_as()
 
+def clear(event=None):
+    global current_file, file_open
+    save_file()
+    text_area.delete(1.0, "end")
+    current_file=""
+    write_cache()
+    file_open=0
+
 def open_file(event=None):
     global current_file, file_open
+    clear()
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         text_area.delete(1.0, "end")
         current_file=file_path
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
-    clear()
-    write_cache()
     file_open=1
 
 def open_file_arg(macOS_file_path=None):
@@ -122,14 +127,6 @@ def open_file_arg(macOS_file_path=None):
             text_area.insert(1.0, file.read())
     write_cache()
     file_open=1
-
-def clear(event=None):
-    global current_file, file_open
-    save_file()
-    text_area.delete(1.0, "end")
-    current_file=""
-    write_cache()
-    file_open=0
 
 def cut_text(event=None):
     text_area.clipboard_clear()
