@@ -69,9 +69,12 @@ def write_cache(event=None):
     with open(last_file_path, 'w') as file:
         file.write(current_file)
     if file_open==1:
-        with open(current_file, 'w') as file:
-            text = text_area.get('1.0', 'end-1c')
-            file.write(text)
+        try:
+            with open(current_file, 'w') as file:
+                text = text_area.get('1.0', 'end-1c')
+                file.write(text)
+        except FileNotFoundError:
+            file_open = 0
     root.after(5000, write_cache)
 
 def save_as(event=None):
@@ -100,7 +103,12 @@ def save_file(event=None):
 
 def clear(event=None):
     global current_file, file_open
-    save_file()
+    global current_file
+    global file_open
+    if current_file != "":
+        with open(current_file, 'w') as file:
+            text = text_area.get('1.0', 'end-1c')
+            file.write(text)
     text_area.delete(1.0, "end")
     current_file=""
     write_cache()
@@ -108,9 +116,9 @@ def clear(event=None):
 
 def open_file(event=None):
     global current_file, file_open
-    clear()
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
+        clear()
         text_area.delete(1.0, "end")
         current_file=file_path
         with open(file_path, 'r') as file:
