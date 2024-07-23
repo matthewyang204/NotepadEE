@@ -3,6 +3,7 @@ from tkinter import filedialog
 import os
 from tkinter import messagebox
 import subprocess
+import sys
 
 global file_open
 file_open=0

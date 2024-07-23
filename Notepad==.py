@@ -5,6 +5,9 @@ from tkinter import messagebox
 import subprocess
 import shutil
 import sys
+from Cocoa import NSObject, NSApplication, NSEvent, NSAppleEventManager, NSURL
+from PyObjCTools import AppHelper
+import threading
 
 global file_open
 global current_file
@@ -136,6 +139,25 @@ def open_file_arg(macOS_file_path=None):
     write_cache()
     file_open=1
 
+file_to_open = None
+
+class AppDelegate(NSObject):
+    def application_openFile_(self, app, file_url):
+        # This method is called when a file is opened with your application
+        global file_to_open
+        file_to_open = file_url.path()  # Store the file path in the global variable
+        return True
+
+def macOS_file_open():
+    app = NSApplication.sharedApplication()
+    delegate = AppDelegate.alloc().init()
+    app.setDelegate_(delegate)
+    # Initialize functions, variables, and the GUI here
+    # ...
+    # Then, if a file was opened with the application, open it in the text editor
+    if file_to_open is not None:
+        open_file_arg(file_to_open)
+
 def cut_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
@@ -174,8 +196,6 @@ if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
         text_area.insert(1.0, file.read())
-if len(sys.argv) > 1:
-    open_file_arg(sys.argv[1])
 
 menu = tk.Menu(root)
 root.config(menu=menu)
@@ -213,4 +233,5 @@ root.bind('<Command-l>', add_instance)
 root.bind('<Command-L>', clear_instances)
 
 write_cache()
+threading.Thread(target=macOS_file_open).start()
 root.mainloop()
