@@ -4,10 +4,6 @@ import os
 from tkinter import messagebox
 import subprocess
 import shutil
-import sys
-from Cocoa import NSObject, NSApplication, NSEvent, NSAppleEventManager, NSURL
-from PyObjCTools import AppHelper
-import threading
 
 global file_open
 global current_file
@@ -71,13 +67,6 @@ def write_cache(event=None):
     last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
-    if file_open==1:
-        try:
-            with open(current_file, 'w') as file:
-                text = text_area.get('1.0', 'end-1c')
-                file.write(text)
-        except FileNotFoundError:
-            file_open = 0
     root.after(5000, write_cache)
 
 def save_as(event=None):
@@ -88,6 +77,17 @@ def save_as(event=None):
     with open(file_path, 'w') as file:
         text = text_area.get(1.0, "end-1c")
         file.write(text)
+    write_cache()
+    file_open=1
+
+def open_file(event=None):
+    global current_file, file_open
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file=file_path
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
     write_cache()
     file_open=1
 
@@ -106,57 +106,10 @@ def save_file(event=None):
 
 def clear(event=None):
     global current_file, file_open
-    global current_file
-    global file_open
-    if current_file != "":
-        with open(current_file, 'w') as file:
-            text = text_area.get('1.0', 'end-1c')
-            file.write(text)
     text_area.delete(1.0, "end")
     current_file=""
     write_cache()
     file_open=0
-
-def open_file(event=None):
-    global current_file, file_open
-    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
-        clear()
-        text_area.delete(1.0, "end")
-        current_file=file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-    file_open=1
-
-def open_file_arg(macOS_file_path=None):
-    file_path=macOS_file_path
-    global current_file, file_open
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file=file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-    write_cache()
-    file_open=1
-
-file_to_open = None
-
-class AppDelegate(NSObject):
-    def application_openFile_(self, app, file_url):
-        # This method is called when a file is opened with your application
-        global file_to_open
-        file_to_open = file_url.path()  # Store the file path in the global variable
-        return True
-
-def macOS_file_open():
-    app = NSApplication.sharedApplication()
-    delegate = AppDelegate.alloc().init()
-    app.setDelegate_(delegate)
-    # Initialize functions, variables, and the GUI here
-    # ...
-    # Then, if a file was opened with the application, open it in the text editor
-    if file_to_open is not None:
-        open_file_arg(file_to_open)
 
 def cut_text(event=None):
     text_area.clipboard_clear()
@@ -233,5 +186,4 @@ root.bind('<Command-l>', add_instance)
 root.bind('<Command-L>', clear_instances)
 
 write_cache()
-threading.Thread(target=macOS_file_open).start()
 root.mainloop()
