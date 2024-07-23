@@ -43,7 +43,11 @@ def save_as(event=None):
     with open(file_path, 'w') as file:
         text = text_area.get(1.0, "end-1c")
         file.write(text)
-    write_cache()
+    if file_open==1:
+        with open(current_file, 'w') as file:
+            text = text_area.get('1.0', 'end-1c')
+            file.write(text)
+        write_cache()
     file_open=1
 
 def open_file(event=None):
@@ -54,7 +58,11 @@ def open_file(event=None):
         current_file=file_path
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
-    write_cache()
+    if file_open==1:
+        with open(current_file, 'w') as file:
+            text = text_area.get('1.0', 'end-1c')
+            file.write(text)
+        write_cache()
     file_open=1
 
 def save_file(event=None):
@@ -71,9 +79,13 @@ def save_file(event=None):
 
 def clear(event=None):
     global current_file, file_open
+    if file_open==1:
+        with open(current_file, 'w') as file:
+            text = text_area.get('1.0', 'end-1c')
+            file.write(text)
+        write_cache()
     text_area.delete(1.0, "end")
     current_file=""
-    write_cache()
     file_open=0
 
 def cut_text(event=None):
