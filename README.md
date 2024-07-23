@@ -9,7 +9,7 @@ Intel Silicon Version: macOSX 10.4 or above
 
 You can download prebuilt binaries in the Releases
 
-Binaries are now signed with personal signature
+Binaries are now signed with self-signed signature
 
 After downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper if it doesn't show a pop-up with a blue open button upon launch:
 ```
