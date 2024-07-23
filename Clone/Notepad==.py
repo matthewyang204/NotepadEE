@@ -26,15 +26,26 @@ file_open=0
 
 instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'make_new_instance.sh')
 
+def autosave_file(event=None):
+    global current_file
+    global file_open
+    try:
+        if file_open==1:
+            with open(current_file, 'w') as file:
+                text = text_area.get('1.0', 'end-1c')
+                file.write(text)
+    except FileNotFoundError:
+        return 'break'
+
 def write_cache(event=None):
-    print("Autosave is deprececated on clone instances")
 #    global current_file
 #    with open(os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_write'), 'w') as file:
 #        file.write(text_area.get('1.0', 'end-1c'))
 #    last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
 #    with open(last_file_path, 'w') as file:
 #        file.write(current_file)
-#    root.after(5000, write_cache)
+    autosave_file()
+    root.after(5000, write_cache)
 
 def save_as(event=None):
     global current_file, file_open

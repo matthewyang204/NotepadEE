@@ -59,6 +59,17 @@ instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Cach
 with open(instanceshellscriptpath, "w") as f:
     f.write(make_new_instance)
 
+def autosave_file(event=None):
+    global current_file
+    global file_open
+    try:
+        if file_open==1:
+            with open(current_file, 'w') as file:
+                text = text_area.get('1.0', 'end-1c')
+                file.write(text)
+    except FileNotFoundError:
+        return 'break'
+
 def write_cache(event=None):
     global current_file
     global file_open
@@ -67,6 +78,7 @@ def write_cache(event=None):
     last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
+    autosave_file()
     root.after(5000, write_cache)
 
 def save_as(event=None):
