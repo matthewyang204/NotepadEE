@@ -159,9 +159,14 @@ line_var = tk.StringVar()
 line_label = tk.Label(root, textvariable=line_var)
 line_label.pack()
 
+column_var = tk.StringVar()
+column_label = tk.Label(root, textvariable=column_var)
+column_label.pack()
+
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
+    column_var.set("Column: " + column)
 
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
