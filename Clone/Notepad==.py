@@ -113,8 +113,17 @@ root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
 
+line_var = tk.StringVar()
+line_label = tk.Label(root, textvariable=line_var)
+line_label.pack()
+
+def update_line_number(event=None):
+    line, column = text_area.index(tk.INSERT).split('.')
+    line_var.set("Line: " + line)
+
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
+text_area.bind('<KeyRelease>', update_line_number)
 #if os.path.exists(last_write):
 #    text_area.delete(1.0, "end")
 #    with open(last_write, 'r') as file:
