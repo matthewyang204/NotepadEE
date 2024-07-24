@@ -149,7 +149,6 @@ def update_line_number(event=None):
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
 
-text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', update_line_number)
 #if os.path.exists(last_write):
