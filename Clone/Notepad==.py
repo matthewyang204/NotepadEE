@@ -114,7 +114,7 @@ ask_quit = False
 root.title("Notepad==")
 
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
-text_area.pack()
+text_area.pack(fill=tk.BOTH, expand=tk.YES)
 #if os.path.exists(last_write):
 #    text_area.delete(1.0, "end")
 #    with open(last_write, 'r') as file:
