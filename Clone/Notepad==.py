@@ -26,6 +26,27 @@ file_open=0
 
 instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'make_new_instance.sh')
 
+root = tk.Tk()
+ask_quit = False
+root.title("Notepad==")
+
+status_frame = tk.Frame(root)
+status_frame.pack()
+
+line_var = tk.StringVar()
+line_label = tk.Label(status_frame, textvariable=line_var)
+line_label.pack(side=tk.LEFT)
+
+column_var = tk.StringVar()
+column_label = tk.Label(status_frame, textvariable=column_var)
+column_label.pack(side=tk.LEFT)
+
+word_count_var = tk.StringVar()
+word_count_label = tk.Label(status_frame, textvariable=word_count_var)
+word_count_label.pack(side=tk.LEFT)
+
+text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
+
 def autosave_file(event=None):
     global current_file
     global file_open
@@ -109,17 +130,24 @@ def select_all_text(event=None):
 def add_instance(event=None):
   subprocess.run(["/bin/bash", instanceshellscriptpath])
 
-root = tk.Tk()
-ask_quit = False
-root.title("Notepad==")
+def undo(event=None):
+    try:
+        text_area.edit_undo()
+    except tk.TclError:
+        pass
 
-line_var = tk.StringVar()
-line_label = tk.Label(root, textvariable=line_var)
-line_label.pack()
+def redo(event=None):
+    try:
+        text_area.edit_redo()
+    except tk.TclError:
+        pass
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
+    column_var.set("Column: " + column)
+    words = text_area.get(1.0, 'end-1c').split()
+    word_count_var.set("Words: " + str(len(words)))
 
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD)
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
@@ -145,6 +173,8 @@ edit_menu.add_command(label="Cut", command=cut_text)
 edit_menu.add_command(label="Copy", command=copy_text)
 edit_menu.add_command(label="Paste", command=paste_text)
 edit_menu.add_command(label="Select All", command=select_all_text)
+edit_menu.add_command(label="Undo", command=undo)
+edit_menu.add_command(label="Redo", command=redo)
 
 window_menu = tk.Menu(menu)
 menu.add_cascade(label="Window", menu=window_menu)
@@ -159,6 +189,8 @@ text_area.bind('<Command-x>', cut_text)
 text_area.bind('<Command-c>', copy_text)
 text_area.bind('<Command-v>', paste_text)
 text_area.bind('<Command-a>', select_all_text)
+text_area.bind('<Command-z>', undo)
+text_area.bind('<Command-Z>', redo)
 
 root.bind('<Command-l>', add_instance)
 
