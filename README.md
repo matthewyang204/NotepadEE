@@ -22,10 +22,10 @@ xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clo
 Note: The feature of launching a new instance does not work unless the app bundle is placed in /Applications in the root of your Mac's drive.
 
 Linux:
-- Older x.1.x releases will work on Linux when compiled from source
-- Latest x.1.x version is 3.1.x
+- Newer x.1.x releases will work on Linux when compiled from source
+- Latest x.1.x version is 4.1.x
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE-x.1.x
-- Download latest release source code for Linux, 3.1.4, here: https://github.com/matthewyang204/NotepadEE/releases/tag/3.1.4
+- Download latest release source code for Linux, 4.1.0, here: https://github.com/matthewyang204/NotepadEE/releases/tag/3.1.4
 
 Linux build instructions:
 - Please unzip the folder and then cd into the folder in a terminal
