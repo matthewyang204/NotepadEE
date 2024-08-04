@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['Notepad==.py'],
+    ['Clone/Notepad==.py'],
     pathex=[],
     binaries=[],
     datas=[],

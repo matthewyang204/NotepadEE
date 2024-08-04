@@ -1,0 +1,4 @@
+../dist/arm64/Notepad==.app
+../dist/arm64/Notepad==.app/Contents/Resources/Clone/Notepad==.app
+../dist/x86_64/Notepad==.app
+../dist/x86_64/Notepad==.app/Contents/Resources/Clone/Notepad==.app
