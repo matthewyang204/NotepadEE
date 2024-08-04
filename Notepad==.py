@@ -8,7 +8,7 @@ import shutil
 global file_open
 global current_file
 file_open=0
-last_file_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_file_path')
+last_file_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'last_file_path')
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
         current_file  = file.read()
@@ -21,14 +21,18 @@ else:
     current_file  =  ""
     file_open=0
 
-last_write=os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE', 'last_write')
-folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Caches', 'NotepadEE')
+last_write=os.path.join(os.path.expanduser('~'),  'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'last_write')
+folder_path  = os.path.join(os.path.expanduser('~'),  'Library', 'Preferences', 'com.matthewyang.NotepadEE')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
 make_new_instance = """#!/bin/bash
 
 INSTANCES=~/Library/Caches/NotepadEE/Instances
+CACHES=~/Library/Caches/NotepadEE
+if [ ! -d "$CACHES" ]; then
+  mkdir "$CACHES"
+fi
 if [ ! -d "$INSTANCES" ]; then
   mkdir "$INSTANCES"
 fi
@@ -54,7 +58,7 @@ cp -R "${TARGET_DIR}/Notepad==0${EXT}" "${TARGET_DIR}/Notepad==$NUM$EXT"
 open -a "${TARGET_DIR}/Notepad==$NUM$EXT"
 """
 
-instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'make_new_instance.sh')
+instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'make_new_instance.sh')
 
 with open(instanceshellscriptpath, "w") as f:
     f.write(make_new_instance)
@@ -94,9 +98,9 @@ text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 def write_cache(event=None):
     global current_file
     global file_open
-    with open(os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), 'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'last_file_path')
+    last_file_path = os.path.join(os.path.expanduser('~'), 'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
     autosave_file()
@@ -169,7 +173,7 @@ def add_instance(event=None):
 def clear_instances(event=None):
     response2 = messagebox.askyesno("Clear instances", "Are you sure you want to clear all instances? Make sure to close all other instances before clearing. Click 'No' to get back to clear all other instances.")
     if response2:
-        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'Instances')
+        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'Instances')
         shutil.rmtree(folder_path)
 
 def undo(event=None):

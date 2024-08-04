@@ -1,6 +1,10 @@
 #!/bin/bash
 
 INSTANCES=~/Library/Caches/NotepadEE/Instances
+CACHES=~/Library/Caches/NotepadEE
+if [ ! -d "$CACHES" ]; then
+  mkdir "$CACHES"
+fi
 if [ ! -d "$INSTANCES" ]; then
   mkdir "$INSTANCES"
 fi
