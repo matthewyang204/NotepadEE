@@ -60,7 +60,8 @@ open -a "${TARGET_DIR}/Notepad==$NUM$EXT"
 
 instanceshellscriptpath = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'make_new_instance.sh')
 cachefolder = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE')
-os.makedirs(cachefolder)
+if not os.path.exists(cachefolder):
+    os.makedirs(cachefolder)
 
 with open(instanceshellscriptpath, "w") as f:
     f.write(make_new_instance)
