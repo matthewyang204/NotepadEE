@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['Clone/Notepad==.py'],
+    ['Notepad==.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -29,7 +29,7 @@ exe = EXE(
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
-    target_arch=None,
+    target_arch='universal2',
     codesign_identity=None,
     entitlements_file=None,
     icon=['Notepad.png'],
