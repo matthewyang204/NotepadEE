@@ -7,9 +7,9 @@ Apple Silicon Version: macOS 11.0 or above
 
 Intel Silicon Version: macOSX 10.4 or above
 
-You can download prebuilt binaries in the Releases
+You can download prebuilt universal (works on both apple silicon and intel silicon) binaries in the Releases
 
-Binaries are now signed with a personal certificate, meaning they will say unidentified developer if downloaded on a Mac with default security settings
+Binaries are signed with a personal certificate, meaning they will say unidentified developer if downloaded on a Mac with default security settings
 
 If you're interested, read this: https://www.wikihow.com/Install-Software-from-Unsigned-Developers-on-a-Mac
 
