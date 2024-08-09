@@ -110,15 +110,19 @@ def write_cache(event=None):
     root.after(5000, write_cache)
 
 def save_as(event=None):
-    global current_file
-    global file_open
+    global current_file, file_open
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     current_file=file_path
-    with open(file_path, 'w') as file:
-        text = text_area.get(1.0, "end-1c")
-        file.write(text)
-    write_cache()
-    file_open=1
+    if not file_path:
+        return 'break'
+    try:
+        with open(file_path, 'w') as file:
+            text = text_area.get(1.0, "end-1c")
+            file.write(text)
+        write_cache()
+        file_open=1
+    except FileNotFoundError:
+        return 'break'
 
 def open_file(event=None):
     global current_file, file_open
@@ -176,7 +180,7 @@ def add_instance(event=None):
 def clear_instances(event=None):
     response2 = messagebox.askyesno("Clear instances", "Are you sure you want to clear all instances? Make sure to close all other instances before clearing. Click 'No' to get back to clear all other instances.")
     if response2:
-        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Preferences', 'com.matthewyang.NotepadEE', 'Instances')
+        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'Instances')
         shutil.rmtree(folder_path)
 
 def undo(event=None):

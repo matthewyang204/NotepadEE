@@ -1,8 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
 a = Analysis(
-    ['Notepad==.py'],
+    ['Clone/Notepad==.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -26,13 +25,13 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=False,
+    console=False,  # This flag is equivalent to --windowed
     disable_windowed_traceback=False,
     argv_emulation=False,
-    target_arch='universal2',
+    target_arch='x86_64',
     codesign_identity=None,
     entitlements_file=None,
-    icon=['Notepad.png'],
+    icon=['Notepad.png'],  # Icon for the executable
 )
 coll = COLLECT(
     exe,
@@ -46,6 +45,6 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='Notepad==.app',
-    icon='Notepad.png',
+    icon='Notepad.png',  # Icon for the application bundle
     bundle_identifier=None,
 )

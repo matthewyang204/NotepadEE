@@ -57,11 +57,16 @@ def save_as(event=None):
     global current_file, file_open
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     current_file=file_path
-    with open(file_path, 'w') as file:
-        text = text_area.get(1.0, "end-1c")
-        file.write(text)
-    write_cache()
-    file_open=1
+    if not file_path:
+        return 'break'
+    try:
+        with open(file_path, 'w') as file:
+            text = text_area.get(1.0, "end-1c")
+            file.write(text)
+        write_cache()
+        file_open=1
+    except FileNotFoundError:
+        return 'break'
 
 def open_file(event=None):
     global current_file, file_open
