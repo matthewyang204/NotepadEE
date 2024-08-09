@@ -28,6 +28,6 @@ Linux:
 - Download latest release source code for Linux, 4.1.0, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.0
 
 Linux build instructions:
-- Please unzip the folder and then cd into the folder in a terminal
+- Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
 - Type `pyinstaller --windowed --hidden-import=tkinter -i Notepad.png Notepad==.py` to compile
 - Make sure pillow, tkinter, and pyinstaller are installed with pip3, and pip3 is installed with Python before building
