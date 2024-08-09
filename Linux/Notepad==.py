@@ -82,10 +82,13 @@ def open_file(event=None):
 def save_file(event=None):
     global current_file, file_open
     if file_open==1:
-        with open(current_file, 'w') as file:
-            text = text_area.get('1.0', 'end-1c')
-            file.write(text)
-        write_cache()
+        try:
+            with open(current_file, 'w') as file:
+                text = text_area.get('1.0', 'end-1c')
+                file.write(text)
+            write_cache()
+        except FileNotFoundError:
+            return 'break'
     else:
         response = messagebox.askyesno("Create new file", "The file does not exist. Do you want to create it as a new file?")
         if response:
