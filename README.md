@@ -25,7 +25,7 @@ Linux:
 - Newer x.1.x releases will work on Linux when compiled from source
 - Latest x.1.x version is 4.1.x
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
-- Download latest release source code for Linux, 4.1.0, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.1
+- Download latest release source code for Linux, 4.1.1, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.1
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
