@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Check for Python 3
+if ! command -v python3 &> /dev/null
+then
+    echo "Python 3 not found. Installing..."
+    sudo apt update
+    sudo apt install -y python3 python3-pip
+else
+    echo "Python 3 is installed."
+fi
+
+# Check for pip3
+if ! command -v pip3 &> /dev/null
+then
+    echo "pip3 not found. Installing..."
+    sudo apt install -y python3-pip
+else
+    echo "pip3 is installed."
+fi
+
+# Check for PyInstaller
+if ! command -v pyinstaller &> /dev/null
+then
+    echo "PyInstaller not found. Installing..."
+    pip3 install pyinstaller
+else
+    echo "PyInstaller is installed."
+fi
+
+# Build the application
+echo "Building the application..."
+pyinstaller --windowed -i Notepad.png --hidden-import=tkinter Notepad==.py
+
+echo "Build complete."
