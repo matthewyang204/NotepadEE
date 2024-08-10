@@ -30,4 +30,4 @@ Linux:
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
-- Type `./configure && make && sudo make install` to build from source and install
+- Type `sudo ./configure && make && sudo make install` to build from source and install
