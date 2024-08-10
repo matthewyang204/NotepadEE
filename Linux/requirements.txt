@@ -1,0 +1,3 @@
+pyinstaller
+pillow
+tk

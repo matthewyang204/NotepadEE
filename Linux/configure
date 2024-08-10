@@ -6,6 +6,7 @@ then
     echo "Python 3 not found. Installing..."
     sudo apt update
     sudo apt install -y python3 python3-pip
+    echo "done"
 else
     echo "Python 3 is installed."
 fi
@@ -15,20 +16,14 @@ if ! command -v pip3 &> /dev/null
 then
     echo "pip3 not found. Installing..."
     sudo apt install -y python3-pip
+    echo "done"
 else
     echo "pip3 is installed."
 fi
 
-# Check for PyInstaller
-if ! command -v pyinstaller &> /dev/null
-then
-    echo "PyInstaller not found. Installing..."
-    pip3 install pyinstaller
-else
-    echo "PyInstaller is installed."
-fi
-
-# Install pillow
-pip3 install pillow --break-system-packages
+# Install required python packages
+echo "Installing required packages"
+pip3 install -r requirements.txt
+echo "done"
 
 echo "Now run 'make' to build."
