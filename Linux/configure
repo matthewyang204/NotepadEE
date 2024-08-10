@@ -23,7 +23,10 @@ fi
 
 # Install required python packages
 echo "Installing required packages"
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt --break-system-packages
 echo "done"
+
+# Install tk
+sudo apt install python3-tk
 
 echo "Now run 'make' to build."
