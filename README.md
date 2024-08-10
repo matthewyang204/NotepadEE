@@ -29,5 +29,5 @@ Linux:
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
-- Type `pyinstaller --windowed --hidden-import=tkinter -i Notepad.png Notepad==.py` to compile
+- Type `./configure && make && sudo make install` to build from source and install
 - Make sure pillow, tkinter, and pyinstaller are installed with pip3, and pip3 is installed with Python before building
