@@ -28,8 +28,4 @@ else
     echo "PyInstaller is installed."
 fi
 
-# Build the application
-echo "Building the application..."
-pyinstaller --windowed -i Notepad.png --hidden-import=tkinter Notepad==.py
-
-echo "Build complete."
+echo "Now run 'make' to build."
