@@ -27,6 +27,12 @@ install:
 
 	echo "Install completed"
 
+install-no-desktop-file:
+	sudo mkdir -p $(INSTALL_DIR)
+	sudo cp -R dist/$(APP_NAME) $(INSTALL_DIR)/$(APP_NAME)
+	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
+	echo "Install completed"
+
 uninstall:
 	sudo rm -rf /opt/matthewyang/$(APP_NAME)
 	sudo rm -f $(BIN_LINK)
