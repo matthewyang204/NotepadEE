@@ -14,4 +14,4 @@ Just about any GUI Linux version released in the last 20-25 years should work
 Build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
 - Type `sudo ./configure && make && sudo make install` to build from source and install
-- Make sure pillow, tkinter, and pyinstaller are installed with pip3, and pip3 is installed with Python before building
+- You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
