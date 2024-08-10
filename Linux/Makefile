@@ -19,8 +19,8 @@ install:
 	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
 	echo "[Desktop Entry]" | sudo tee $(DESKTOP_FILE); \
 	echo "Name=Notepad" | sudo tee -a $(DESKTOP_FILE); \
-	echo "Exec=$(INSTALL_DIR)/$(APP_NAME)" | sudo tee -a $(DESKTOP_FILE); \
-	echo "Icon=$(INSTALL_DIR)/Notepad.png" | sudo tee -a $(DESKTOP_FILE); \
+	echo "Exec=$(BIN_LINK)" | sudo tee -a $(DESKTOP_FILE); \
+	echo "Icon=$(INSTALL_DIR)/$(APP_NAME)/Notepad.png" | sudo tee -a $(DESKTOP_FILE); \
 	echo "Type=Application" | sudo tee -a $(DESKTOP_FILE); \
 	echo "Terminal=false" | sudo tee -a $(DESKTOP_FILE); \
 	sudo update-desktop-database
