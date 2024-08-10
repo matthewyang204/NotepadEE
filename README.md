@@ -25,7 +25,7 @@ Linux:
 - Older x.1.x releases will work on Linux when compiled from source
 - Latest x.1.x version is 4.1.x
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
-- Download latest release source code for Linux, 4.1.4, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.4
+- Download latest release source code for Linux, 4.1.5, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.5
 - Binaries are back, so you can now download them and use them.
 
 Linux build instructions:
