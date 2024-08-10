@@ -9,7 +9,7 @@ Linux releases will always be in the main repository, numbered x.1.x in the main
 
 4.1.5 is the latest x.1.x version
 
-Just about any GUI Linux version released in the last 20-25 years should work
+Just about any Debian-based Linux distribution with a GUI released in the last 20-25 years should work for building; any GUI distribution should be able to run the compiled binaries
 
 Build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
