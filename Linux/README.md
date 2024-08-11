@@ -1,5 +1,6 @@
-# Notepad==
-Simple notepad for computers without simple-enough notepad software
+# Notepad== Linux Version
+
+This is the repository for the linux version of this software.
 
 Main repository: https://www.github.com/matthewyang204/NotepadEE
 
@@ -9,11 +10,11 @@ Linux releases will always be in the main repository, numbered x.1.x in the main
 
 4.1.5 is the latest x.1.x version
 
-Just about any Debian-based Linux distribution with a GUI released in the last 20-25 years should work for building; any GUI distribution should be able to run the compiled binaries
+Just about any Debian-based Linux distribution with a GUI released in the last 10-15 years should work for building; any GUI distribution should be able to run the compiled binaries
 
 Build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
 - Type `sudo ./configure && make && sudo make install` to build from source and install
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
 - Debian-based distro is required to build
-- `sudo` is required because my ./configure script automatically installs dependencies with `apt` and `pip3`.
+- `sudo` is required because my `./configure` script automatically installs dependencies with `apt` and `pip3`.
