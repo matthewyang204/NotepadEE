@@ -29,7 +29,7 @@ Linux:
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
 - Download latest release source code for Linux, 4.1.5, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.5
 - Binaries are back, so you can now download them and use them.
-- Any debian-based distro from the last 20-25 years should work with the binaries
+- Any debian-based distro from the last 10-15 years should work for building, binaries work with just about any GUI distro
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
