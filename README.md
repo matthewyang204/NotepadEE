@@ -33,3 +33,4 @@ Linux build instructions:
 - Type `sudo ./configure && make && sudo make install` to build from source and install
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
 - Requires Debian-based distro to build
+- `sudo` is required because my ./configure script installs dependencies automatically with `apt` and `pip3`.
