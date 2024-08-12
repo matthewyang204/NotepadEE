@@ -44,6 +44,20 @@ word_count_label.pack(side=tk.LEFT)
 
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 
+def debug_var(event=None):
+#    global file_open, current_file
+#    if current_file:
+#        print("Current file variable works")
+#        print(current_file)
+#    else:
+#        print("Not intact")
+#    if file_open:
+#        print("File_open variable is intact")
+#        print(file_open)
+#    else:
+#        print("Not working")
+    return 'break'
+
 def write_cache(event=None):
     global current_file, file_open
     with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'cache', 'last_write'), 'w') as file:
@@ -83,6 +97,7 @@ def save_file(event=None):
     global current_file, file_open
     if file_open==1:
         try:
+            debug_var()
             with open(current_file, 'w') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
