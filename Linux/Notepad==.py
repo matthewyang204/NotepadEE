@@ -90,8 +90,8 @@ def open_file(event=None):
         current_file=file_path
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
+        file_open=1
     write_cache()
-    file_open=1
 
 def save_file(event=None):
     global current_file, file_open
