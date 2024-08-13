@@ -148,7 +148,7 @@ def save_file(event=None):
         if response:
             save_as()
 
-def clear(event=None):
+def new_file(event=None):
     global current_file, file_open
     text_area.delete(1.0, "end")
     current_file=""
@@ -214,7 +214,7 @@ root.config(menu=menu)
 
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New", command=clear)
+file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file)
 file_menu.add_command(label="Save as...", command=save_as)
@@ -233,7 +233,7 @@ menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Launch new instance", command=add_instance)
 window_menu.add_command(label="Clear all instances", command=clear_instances)
 
-root.bind('<Command-n>', clear)
+root.bind('<Command-n>', new_file)
 root.bind('<Command-o>', open_file)
 root.bind('<Command-s>', save_file)
 root.bind('<Command-S>', save_as)

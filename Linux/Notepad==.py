@@ -109,7 +109,7 @@ def save_file(event=None):
         if response:
             save_as()
 
-def clear(event=None):
+def new_file(event=None):
     global current_file, file_open
     text_area.delete(1.0, "end")
     current_file=""
@@ -166,7 +166,7 @@ root.config(menu=menu)
 
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New", command=clear)
+file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file)
 file_menu.add_command(label="Save as...", command=save_as)
@@ -180,7 +180,7 @@ edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
 
-root.bind_all('<Control-n>', clear)
+root.bind_all('<Control-n>', new_file)
 root.bind_all('<Control-o>', open_file)
 root.bind_all('<Control-s>', save_file)
 root.bind_all('<Control-S>', save_as)
