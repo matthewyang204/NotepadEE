@@ -66,17 +66,6 @@ if not os.path.exists(cachefolder):
 with open(instanceshellscriptpath, "w") as f:
     f.write(make_new_instance)
 
-def autosave_file(event=None):
-    global current_file
-    global file_open
-    try:
-        if file_open==1:
-            with open(current_file, 'w') as file:
-                text = text_area.get('1.0', 'end-1c')
-                file.write(text)
-    except FileNotFoundError:
-        return 'break'
-
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
@@ -111,6 +100,17 @@ def debug_var(event=None):
 #    else:
 #        print("Not working")
     return 'break'
+
+def autosave_file(event=None):
+    global current_file
+    global file_open
+    try:
+        if file_open==1:
+            with open(current_file, 'w') as file:
+                text = text_area.get('1.0', 'end-1c')
+                file.write(text)
+    except FileNotFoundError:
+        return 'break'
 
 def write_cache(event=None):
     global current_file
