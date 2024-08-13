@@ -46,4 +46,6 @@ clean:
 
 upgrade:uninstall install
 
+upgrade-no-desktop-file:uninstall install-no-desktop-file
+
 .PHONY: configure build install clean
