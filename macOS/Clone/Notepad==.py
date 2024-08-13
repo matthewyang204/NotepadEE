@@ -47,6 +47,20 @@ word_count_label.pack(side=tk.LEFT)
 
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 
+def debug_var(event=None):
+#    global file_open, current_file
+#    if current_file:
+#        print("Current file variable works")
+#        print(current_file)
+#    else:
+#        print("Not intact")
+#    if file_open:
+#        print("File_open variable is intact")
+#        print(file_open)
+#    else:
+#        print("Not working")
+    return 'break'
+
 def autosave_file(event=None):
     global current_file
     global file_open
@@ -91,8 +105,8 @@ def open_file(event=None):
         current_file=file_path
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
+        file_open=1
     write_cache()
-    file_open=1
 
 def save_file(event=None):
     global current_file, file_open
