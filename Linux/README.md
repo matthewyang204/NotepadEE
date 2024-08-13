@@ -8,7 +8,7 @@ This is the Linux version's source code
 
 Linux releases will always be in the main repository, numbered x.1.x in the main repository's releases
 
-4.1.5 is the latest x.1.x version
+4.1.6 is the latest x.1.x version
 
 Just about any Debian-based Linux distribution with a GUI released in the last 10-15 years should work for building; any GUI distribution should be able to run the compiled binaries
 
