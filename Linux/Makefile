@@ -36,6 +36,12 @@ install-no-desktop-file:
 uninstall:
 	sudo rm -rf /opt/matthewyang/$(APP_NAME)
 	sudo rm -f $(BIN_LINK)
+	sudo rm -rf $(DESKTOP_FILE)
+	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
+
+uninstall-no-desktop-file:
+	sudo rm -rf /opt/matthewyang/$(APP_NAME)
+	sudo rm -f $(BIN_LINK)
 	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
 
 clean:
@@ -46,6 +52,6 @@ clean:
 
 upgrade:uninstall install
 
-upgrade-no-desktop-file:uninstall install-no-desktop-file
+upgrade-no-desktop-file:uninstall-no-desktop-file install-no-desktop-file
 
 .PHONY: configure build install clean
