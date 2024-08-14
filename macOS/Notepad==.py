@@ -188,15 +188,6 @@ def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
     return 'break'
 
-def add_instance(event=None):
-  subprocess.run(["/bin/bash", instanceshellscriptpath])
-
-def clear_instances(event=None):
-    response2 = messagebox.askyesno("Clear instances", "Are you sure you want to clear all instances? Make sure to close all other instances before clearing. Click 'No' to get back to clear all other instances.")
-    if response2:
-        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'Instances')
-        shutil.rmtree(folder_path)
-
 def undo(event=None):
     try:
         text_area.edit_undo()
@@ -208,6 +199,15 @@ def redo(event=None):
         text_area.edit_redo()
     except tk.TclError:
         pass
+
+def add_instance(event=None):
+  subprocess.run(["/bin/bash", instanceshellscriptpath])
+
+def clear_instances(event=None):
+    response2 = messagebox.askyesno("Clear instances", "Are you sure you want to clear all instances? Make sure to close all other instances before clearing. Click 'No' to get back to clear all other instances.")
+    if response2:
+        folder_path = os.path.join(os.path.expanduser('~'), 'Library', 'Caches', 'NotepadEE', 'Instances')
+        shutil.rmtree(folder_path)
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
