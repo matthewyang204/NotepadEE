@@ -141,12 +141,16 @@ def save_as(event=None):
 def open_file(event=None):
     global current_file, file_open
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file=file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
+    if not file_path:
+        return 'break'
+    try:
+        with open(file_path, 'w') as file:
+            text = text_area.get(1.0, "end-1c")
+            file.write(text)
+        write_cache()
         file_open=1
+    except FileNotFoundError:
+        messagebox.showerror("Error", "File not found.")
     write_cache()
 
 def save_file(event=None):

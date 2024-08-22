@@ -92,7 +92,7 @@ def save_as(event=None):
         write_cache()
         file_open=1
     except FileNotFoundError:
-        return 'break'
+        messagebox.showerror("Error", "File not found.")
 
 def open_file(event=None):
     global current_file, file_open
