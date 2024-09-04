@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Sun Aug 25 14:44:59 2024
+
+# Make data base, printed on Tue Aug 27 21:25:00 2024
 
 # Variables
 
@@ -19,6 +22,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# environment
+CPPFLAGS = -I/opt/local/include
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -31,16 +36,18 @@ SHELL = /bin/sh
 VSCODE_NLS_CONFIG = {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/Applications/Visual Studio Code.app/Contents/Resources/app/out/nls.messages.json","locale":"en","availableLanguages":{}}
 # environment
 _ = /usr/bin/make
+# environment
+CFLAGS = -I/opt/X11/include
 # makefile
 MAKEFILE_LIST := 
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-INFOPATH = /opt/homebrew/share/info:/opt/homebrew/share/info:
+INFOPATH = /opt/homebrew/share/info:
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /usr/local/bin/pkg-config:/opt/homebrew/opt/llvm/bin:/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin:/usr/local/bin/pkg-config:/opt/homebrew/opt/llvm/bin:/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin
+PATH = /opt/local/bin:/opt/local/lib/pkg-config:/opt/local/opt/llvm/bin:/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin
 # environment
 SDKMAN_DIR = /Users/matthewyang/.sdkman
 # environment
@@ -51,26 +58,32 @@ ZDOTDIR = /Users/matthewyang
 SDKMAN_PLATFORM = darwinarm64
 # environment
 ELECTRON_RUN_AS_NODE = 1
+# environment
+LDFLAGS = -L/opt/X11/lib
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.cgKDezqphb/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.rQSx38iI6y/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.d6O2lnx0FE/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.xSnY8iOya2/org.xquartz:0
 # environment
 PWD = /Users/matthewyang/NotepadEE
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
+PKG_CONFIG_PATH = /opt/homebrew/lib/pkgconfig:/opt/local/lib/pkgconfig:/opt/local/share/pkgconfig:/opt/local/lib/pkgconfig:/opt/local/lib/pkgconfig:/opt/local/lib/pkgconfig:/opt/local/share/pkgconfig:/opt/local/opt/libxcrypt/lib/pkgconfig:/opt/local/opt/libxslt/lib/pkgconfig:/opt/local/opt/icu4c/lib/pkgconfig:/opt/local/lib/pkgconfig:
+# environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-MANPATH = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/opt/local/share/man::/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/opt/local/share/man:
+MANPATH = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/opt/local/share/man:
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/matthewyang
+# environment
+LD_LIBRARY_PATH = /opt/local/lib:
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
@@ -91,8 +104,6 @@ MAKE = $(MAKE_COMMAND)
 MAKECMDGOALS := all
 # environment
 SHLVL = 1
-# environment
-LOCAL_GIT_DIRECTORY = /Applications/GitHub Desktop.app/Contents/Resources/app/git
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -152,9 +163,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 31657
+VSCODE_PID = 18560
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=1/92=1%
+# Load=75/1024=7%, Rehash=0, Collisions=1/96=1%
 
 # Pattern-specific Variable Values
 
@@ -162,7 +173,7 @@ VSCODE_PID = 31657
 
 # Directories
 
-# . (device 16777232, inode 51480906): 9 files, no impossibilities.
+# . (device 16777231, inode 51480906): 9 files, no impossibilities.
 
 # 9 files, no impossibilities in 1 directories.
 
@@ -224,6 +235,7 @@ GNUmakefile:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
+ 
 # Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
 
@@ -236,8 +248,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sun Aug 25 14:44:59 2024
+# Finished Make data base on Tue Aug 27 21:25:00 2024
 
  
-make: *** No rule to make target `all'.  Stop.
-
