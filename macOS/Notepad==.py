@@ -70,6 +70,8 @@ with open(instanceshellscriptpath, "w") as f:
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
+root.minsize(800, 600)
+root.pack_propagate(False)
 
 status_frame = tk.Frame(root)
 status_frame.pack()
