@@ -88,7 +88,15 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
-text_font = font.Font(family="Menlo", size=12)
+def get_font_for_platform():
+    if os.name == 'nt':
+        return font.Font(family="Consolas", size=12)
+    elif os.uname().sysname == 'Darwin':
+        return font.Font(family="Menlo", size=12)
+    else:
+        return font.Font(family="DejaVu Sans Mono", size=12)
+
+text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
