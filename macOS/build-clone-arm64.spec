@@ -31,7 +31,7 @@ exe = EXE(
     target_arch='arm64',
     codesign_identity=None,
     entitlements_file=None,
-    icon=['Notepad.png'],  # Icon for the executable
+    icon=['Notepad.icns'],  # Icon for the executable
 )
 coll = COLLECT(
     exe,
@@ -45,6 +45,6 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='Notepad==.app',
-    icon='Notepad.png',  # Icon for the application bundle
+    icon='Notepad.icns',  # Icon for the application bundle
     bundle_identifier=None,
 )
