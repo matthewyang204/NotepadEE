@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 from tkinter import messagebox
+from tkinter import font
 
 global file_open
 file_open=0
@@ -26,6 +27,8 @@ if not os.path.exists(folder_path):
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
+root.minsize(800, 600)
+root.pack_propagate(False)
 
 status_frame = tk.Frame(root)
 status_frame.pack()
@@ -42,7 +45,17 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
+def get_font_for_platform():
+    if os.name == 'nt':
+        return font.Font(family="Consolas", size=12)
+    elif os.uname().sysname == 'Darwin':
+        return font.Font(family="Menlo", size=12)
+    else:
+        return font.Font(family="DejaVu Sans Mono", size=12)
+
+text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
+text_area.config(font=text_font)
 
 def debug_var(event=None):
 #    global file_open, current_file
@@ -166,6 +179,14 @@ def update_line_number(event=None):
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
 
+def increase_font_size(event=None):
+    current_size = text_font['size']
+    text_font.config(size=current_size + 1)
+
+def decrease_font_size(event=None):
+    current_size = text_font['size']
+    text_font.config(size=current_size - 1)
+
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', update_line_number)
 if os.path.exists(last_write):
@@ -192,6 +213,11 @@ edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
 
+accessibility_menu = tk.Menu(menu)
+menu.add_cascade(label="Accessibility", menu=accessibility_menu)
+accessibility_menu.add_command(label="Zoom in", command=increase_font_size)
+accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
+
 root.bind_all('<Control-n>', new_file)
 root.bind_all('<Control-o>', open_file)
 root.bind_all('<Control-s>', save_file)
@@ -203,6 +229,9 @@ text_area.bind('<Control-v>', paste_text)
 text_area.bind('<Control-a>', select_all_text)
 text_area.bind('<Control-z>', undo)
 text_area.bind('<Control-y>', redo)
+
+text_area.bind('<Command-equal>', increase_font_size)
+text_area.bind('<Command-minus>', decrease_font_size)
 
 write_cache()
 root.mainloop()
