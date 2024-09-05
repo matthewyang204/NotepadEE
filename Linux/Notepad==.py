@@ -230,8 +230,8 @@ text_area.bind('<Control-a>', select_all_text)
 text_area.bind('<Control-z>', undo)
 text_area.bind('<Control-y>', redo)
 
-text_area.bind('<Command-equal>', increase_font_size)
-text_area.bind('<Command-minus>', decrease_font_size)
+text_area.bind('<Control-equal>', increase_font_size)
+text_area.bind('<Control-minus>', decrease_font_size)
 
 write_cache()
 root.mainloop()
