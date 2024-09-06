@@ -34,6 +34,7 @@ Linux
 - Download latest release source code for Linux, 4.1.9, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.9
 - Binaries are back, so you can now download them and use them.
 - Any debian-based distro from the last 10-15 years should work for building, binaries work with just about any GUI distro
+- In the next set of releases, I will be moving the linux binaries into all releases, removing the need for this odd versioning system
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
