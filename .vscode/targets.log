@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Thu Sep  5 19:48:33 2024
+# Make data base, printed on Fri Sep  6 16:04:18 2024
 
 # Variables
 
@@ -30,7 +30,6 @@ CPPFLAGS = -I/opt/local/include
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/matthewyang/NotepadEE
- 
 # makefile
 SHELL = /bin/sh
 # environment
@@ -64,7 +63,6 @@ PYENV_ROOT = /Users/matthewyang/.pyenv
 # environment
 LDFLAGS = -L/opt/X11/lib
 # default
- 
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
 SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AudIurBxH8/Listeners
@@ -97,7 +95,6 @@ VSCODE_CODE_CACHE_PATH = /Users/matthewyang/Library/Application Support/Code/Cac
 # environment
 LOGNAME = matthewyang
 # environment
- 
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
@@ -162,7 +159,6 @@ LC_ALL = C
 # automatic
 ^F = $(notdir $^)
 # default
- 
 SUFFIXES := 
 # environment
 PYENV_VIRTUALENV_INIT = 1
@@ -173,7 +169,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 76496
+VSCODE_PID = 96299
 # variable set hash-table stats:
 # Load=78/1024=8%, Rehash=0, Collisions=1/99=1%
 
@@ -211,7 +207,6 @@ all:
 # Not a target:
 Makefile:
 #  A default, MAKEFILES, or -include/sinclude makefile.
- 
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
@@ -257,8 +252,7 @@ GNUmakefile:
 # # of strcache buffers: 0
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
- 
 
-# Finished Make data base on Thu Sep  5 19:48:33 2024
+# Finished Make data base on Fri Sep  6 16:04:18 2024
 
  
