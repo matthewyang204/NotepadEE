@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Wed Sep  4 17:13:06 2024
+
+# Make data base, printed on Thu Sep  5 19:48:33 2024
 
 # Variables
 
@@ -27,10 +30,11 @@ CPPFLAGS = -I/opt/local/include
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/matthewyang/NotepadEE
+ 
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/Applications/Visual Studio Code.app/Contents/Resources/app/out/nls.messages.json","locale":"en","availableLanguages":{}}
+VSCODE_NLS_CONFIG = {"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/Applications/Visual Studio Code.app/Contents/Resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}
 # environment
 _ = /usr/bin/make
 # environment
@@ -46,8 +50,6 @@ VSCODE_CWD = /
 # environment
 PATH = /Users/matthewyang/.pyenv/plugins/pyenv-virtualenv/shims:/Users/matthewyang/.pyenv/shims:/Users/matthewyang/.pyenv/bin:/opt/local/bin:/opt/local/lib/pkg-config:/opt/local/opt/llvm/bin:/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin
 # environment
-__TELEMETRY_CLIENT_ID = 2076f377-d8b2-42f7-9a56-a187cdb46176
-# environment
 SDKMAN_DIR = /Users/matthewyang/.sdkman
 # environment
 SDKMAN_CANDIDATES_API = https://api.sdkman.io/2
@@ -62,6 +64,7 @@ PYENV_ROOT = /Users/matthewyang/.pyenv
 # environment
 LDFLAGS = -L/opt/X11/lib
 # default
+ 
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
 SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AudIurBxH8/Listeners
@@ -90,10 +93,11 @@ LD_LIBRARY_PATH = /opt/local/lib:/opt/local/lib:
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/matthewyang/Library/Application Support/Code/CachedData/fee1edb8d6d72a0ddff41e5f71a671c23ed924b9
+VSCODE_CODE_CACHE_PATH = /Users/matthewyang/Library/Application Support/Code/CachedData/4849ca9bdf9666755eb463db297b69e5385090e3
 # environment
 LOGNAME = matthewyang
 # environment
+ 
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
@@ -124,7 +128,7 @@ TMPDIR = /var/folders/gw/_w0rct991k3f1swk2fd67q580000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/matthewyang/Library/Application Support/Code/1.92-main.sock
+VSCODE_IPC_HOOK = /Users/matthewyang/Library/Application Support/Code/1.93-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -134,7 +138,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.101373577.104638037
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.109029804.109029810
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -158,6 +162,7 @@ LC_ALL = C
 # automatic
 ^F = $(notdir $^)
 # default
+ 
 SUFFIXES := 
 # environment
 PYENV_VIRTUALENV_INIT = 1
@@ -168,9 +173,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 83793
+VSCODE_PID = 76496
 # variable set hash-table stats:
-# Load=79/1024=8%, Rehash=0, Collisions=1/100=1%
+# Load=78/1024=8%, Rehash=0, Collisions=1/99=1%
 
 # Pattern-specific Variable Values
 
@@ -206,6 +211,7 @@ all:
 # Not a target:
 Makefile:
 #  A default, MAKEFILES, or -include/sinclude makefile.
+ 
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
@@ -251,9 +257,8 @@ GNUmakefile:
 # # of strcache buffers: 0
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
+ 
 
-# Finished Make data base on Wed Sep  4 17:13:06 2024
+# Finished Make data base on Thu Sep  5 19:48:33 2024
 
  
-make: *** No rule to make target `all'.  Stop.
-
