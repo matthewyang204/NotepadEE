@@ -90,7 +90,6 @@ def write_cache(event=None):
     with open(last_file_path, 'w') as file:
         file.write(current_file)
     autosave_file()
-    root.after(5000, write_cache)
 
 def save_as(event=None):
     global current_file, file_open
@@ -187,8 +186,12 @@ def decrease_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size - 1)
 
+def runonkeyrelease(event=None):
+    write_cache()
+    update_line_number()
+
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
-text_area.bind('<KeyRelease>', update_line_number)
+text_area.bind('<KeyRelease>', runonkeyrelease)
 if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
