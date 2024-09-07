@@ -35,6 +35,8 @@ Linux
 - Binaries are back, so you can now download them and use them.
 - Any debian-based distro from the last 10-15 years should work for building, binaries work with just about any GUI distro
 - In the next set of releases, I will be moving the linux binaries into all releases, removing the need for this odd versioning system
+- They will be together with the Mac releases, and besides, the source code nowadays contains both the Linux and macOS source code
+- To build the Linux version, there literally is a "Linux" folder for Linux, and for macOS, there is a "macOS" folder as well.
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
