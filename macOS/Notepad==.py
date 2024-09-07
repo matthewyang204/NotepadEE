@@ -156,9 +156,10 @@ def open_file(event=None):
     if not file_path:
         return 'break'
     try:
-        with open(file_path, 'w') as file:
-            text = text_area.get(1.0, "end-1c")
-            file.write(text)
+        with open(file_path, 'r') as file:
+            text = file.read()  # Read the entire contents of the file
+            text_area.delete(1.0, "end")  # Clear the current contents of text_area
+            text_area.insert(1.0, text)  # Insert the read text into text_area
         write_cache()
         file_open=1
     except FileNotFoundError:
