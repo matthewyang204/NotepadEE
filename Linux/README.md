@@ -16,3 +16,4 @@ Build instructions:
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
 - Debian-based distro is required to build
 - `sudo` is required because my `./configure` script automatically installs dependencies with `apt` and `pip3`.
+- Source code is in the Linux folder; macOS source code is in separate macOS folder
