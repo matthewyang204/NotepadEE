@@ -10,12 +10,13 @@ all: build
 configure: ./configure
 
 build:
-	pyinstaller --windowed -i Notepad.png --hidden-import=tkinter $(APP_NAME).py
+	nuitka --standalone --onefile --enable-plugin=tk-inter --output-dir=$(BUILD_DIR) $(APP_NAME).py
+	mv dist/Notepad==.bin dist/Notepad==
 	echo "Build completed. To install, run 'sudo make install'"
 
 install:
 	sudo mkdir -p $(INSTALL_DIR)
-	sudo cp -R dist/$(APP_NAME) $(INSTALL_DIR)/$(APP_NAME)
+	sudo cp -R $(BUILD_DIR) $(INSTALL_DIR)/$(APP_NAME)
 	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
 	echo "[Desktop Entry]" | sudo tee $(DESKTOP_FILE); \
 	echo "Name=Notepad==" | sudo tee -a $(DESKTOP_FILE); \
@@ -24,12 +25,11 @@ install:
 	echo "Type=Application" | sudo tee -a $(DESKTOP_FILE); \
 	echo "Terminal=false" | sudo tee -a $(DESKTOP_FILE); \
 	sudo update-desktop-database
-
 	echo "Install completed"
 
 install-no-desktop-file:
 	sudo mkdir -p $(INSTALL_DIR)
-	sudo cp -R dist/$(APP_NAME) $(INSTALL_DIR)/$(APP_NAME)
+	sudo cp -R $(BUILD_DIR) $(INSTALL_DIR)/$(APP_NAME)
 	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
 	echo "Install completed"
 
@@ -50,8 +50,8 @@ clean:
 	rm -rf $(APP_NAME).spec
 	echo "Cleaned all temp files used"
 
-upgrade:uninstall install
+upgrade: uninstall install
 
-upgrade-no-desktop-file:uninstall-no-desktop-file install-no-desktop-file
+upgrade-no-desktop-file: uninstall-no-desktop-file install-no-desktop-file
 
 .PHONY: configure build install clean
