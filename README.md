@@ -9,7 +9,7 @@ System requirements:
 
 Apple Silicon Version: macOS 11.0 or above
 
-Intel Silicon Version: macOSX 10.4 or above
+Intel Silicon Version: macOSX 10.9 or above
 
 You can download prebuilt universal (works on both apple silicon and intel silicon) binaries in the Releases
 
