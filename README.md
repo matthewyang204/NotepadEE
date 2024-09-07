@@ -28,15 +28,10 @@ Note: The feature of launching a new instance does not work unless the app bundl
 -----
 Linux
 -----
-- Older x.1.x releases will work on Linux when compiled from source
-- Latest x.1.x version is 4.1.x
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
-- Download latest release source code for Linux, 4.1.9, here: https://github.com/matthewyang204/NotepadEE/releases/tag/4.1.9
+- These binaries are next to the macOS binaries
 - Binaries are back, so you can now download them and use them.
 - Any debian-based distro from the last 10-15 years should work for building, binaries work with just about any GUI distro
-- In the next set of releases, I will be moving the linux binaries into all releases, removing the need for this odd versioning system
-- They will be together with the Mac releases, and besides, the source code nowadays contains both the Linux and macOS source code
-- To build the Linux version, there literally is a "Linux" folder for Linux, and for macOS, there is a "macOS" folder as well.
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
