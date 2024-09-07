@@ -28,5 +28,6 @@ echo "done"
 
 # Install tk
 sudo apt install python3-tk
+sudo apt install patchelf
 
 echo "Now run 'make' to build."
