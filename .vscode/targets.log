@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Tue Sep 17 20:18:52 2024
+# Make data base, printed on Tue Sep 17 20:22:08 2024
 
 # Variables
 
@@ -27,7 +27,6 @@ CPPFLAGS = -I/opt/local/include
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
- 
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/matthewyang/NotepadEE
@@ -49,8 +48,6 @@ INFOPATH = /opt/homebrew/share/info:
 VSCODE_CWD = /
 # environment
 PATH = /Users/matthewyang/.pyenv/plugins/pyenv-virtualenv/shims:/Users/matthewyang/.pyenv/shims:/Users/matthewyang/.pyenv/bin:/opt/local/bin:/opt/local/lib/pkg-config:/opt/local/opt/llvm/bin:/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin
-# environment
-__TELEMETRY_CLIENT_ID = 2076f377-d8b2-42f7-9a56-a187cdb46176
 # environment
 SDKMAN_DIR = /Users/matthewyang/.sdkman
 # environment
@@ -143,10 +140,11 @@ XPC_SERVICE_NAME = application.com.microsoft.VSCode.109318664.111121342
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 +F = $(notdir $+)
 # environment
- 
 HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0:0
@@ -173,7 +171,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 39381
+VSCODE_PID = 41279
 # variable set hash-table stats:
 # Load=79/1024=8%, Rehash=0, Collisions=1/100=1%
 
@@ -257,6 +255,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Tue Sep 17 20:18:52 2024
+# Finished Make data base on Tue Sep 17 20:22:08 2024
+ 
 
  

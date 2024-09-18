@@ -15,10 +15,11 @@ You can download prebuilt universal (works on both apple silicon and intel silic
 
 Binaries are signed with a personal certificate, meaning they will say unidentified developer if downloaded on a Mac with default security settings (I didn't pay for the official notarization/developer program because it's just extremely expensive, at $99 annually)
 
-Run this in order to get rid of gatekeeper's annoying warnings (gatekeeper is the built-in security thingy):
+Run this in order to get rid of gatekeeper's annoying warnings (gatekeeper is the built-in security thingy) in a new terminal:
 ```
 sudo spctl --master-disable
 ```
+You need to run this under an admin account (log into one) and it requires that account's password
 
 Note: The feature of launching a new instance does not work unless the app bundle is placed in /Applications in the root of your Mac's drive.
 
