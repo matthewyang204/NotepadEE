@@ -13,14 +13,11 @@ Intel Silicon Version: macOSX 10.9 or above
 
 You can download prebuilt universal (works on both apple silicon and intel silicon) binaries in the Releases
 
-Binaries are signed with a personal certificate, meaning they will say unidentified developer if downloaded on a Mac with default security settings
+Binaries are signed with a personal certificate, meaning they will say unidentified developer if downloaded on a Mac with default security settings (I didn't pay for the official notarization/developer program because it's just extremely expensive, at $99 annually)
 
-If you're interested, read this: https://www.wikihow.com/Install-Software-from-Unsigned-Developers-on-a-Mac
-
-If you don't want to edit your privacy settings, after downloading the binary, extracting the .zip file, and moving the unzipped app to the Applications folder on your root drive, run this to bypass gatekeeper if it doesn't show a blue open button in the popup:
+Run this in order to get rid of gatekeeper's annoying warnings (gatekeeper is the built-in security thingy):
 ```
-xattr -d com.apple.quarantine /Applications/Notepad==.app
-xattr -d com.apple.quarantine /Applications/Notepad==.app/Contents/Resources/Clone/Notepad==.app
+sudo spctl --master-disable
 ```
 
 Note: The feature of launching a new instance does not work unless the app bundle is placed in /Applications in the root of your Mac's drive.
