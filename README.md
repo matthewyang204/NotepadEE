@@ -24,7 +24,7 @@ You need to run this under an admin account (log into one) and it requires that 
 Note: The feature of launching a new instance does not work unless the app bundle is placed in /Applications in the root of your Mac's drive.
 
 macOS build instructions:
-- Run `git clone https://github.com/matthewyang204/NotepadEE.git` download the latest source code (only the latest dev source code contains the makefiles)
+- Run `git clone https://github.com/matthewyang204/NotepadEE.git` download the latest source code
 - Run `cd NotepadEE/macOS` to enter the macOS build directory
 - Let's run `./configure` to find out what you're missing
 - Download the missing stuff and add it to your PATH if needed
