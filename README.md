@@ -28,7 +28,6 @@ Linux
 -----
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
 - These binaries are next to the macOS binaries
-- Binaries are back, so you can now download them and use them.
 - Any debian-based distro from the last 10-15 years should work for building, binaries work with just about any GUI distro
 
 Linux build instructions:
