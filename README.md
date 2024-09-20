@@ -23,6 +23,17 @@ You need to run this under an admin account (log into one) and it requires that 
 
 Note: The feature of launching a new instance does not work unless the app bundle is placed in /Applications in the root of your Mac's drive.
 
+macOS build instructions:
+- Run `git clone https://github.com/matthewyang204/NotepadEE.git` download the latest source code (only the latest dev source code contains the makefiles)
+- Run `cd NotepadEE/macOS` to enter the macOS build directory
+- Let's run `./configure` to find out what you're missing
+- Download the missing stuff and add it to your PATH if needed
+- Run `./configure` again
+- Repeat if it failed
+- If it comes out perfectly, run `make` to build the software from source
+- Run `sudo make install` if you don't already have an installation
+- If you do already have one, run `sudo make upgrade` to upgrade your installation
+
 -----
 Linux
 -----
@@ -32,8 +43,8 @@ Linux
 
 Linux build instructions:
 - Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
-- Type `sudo ./configure && make && sudo make install` to build from source and install
+- Type `./configure && make && sudo make install` to build from source and install
+- If the configure script needs to install stuff, enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
 - Requires Debian-based distro to build
-- `sudo` is required because my `./configure` script installs dependencies automatically with `apt` and `pip3`.
 - Source code is in the Linux folder; macOS source code is in separate macOS folder
