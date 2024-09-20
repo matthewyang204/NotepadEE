@@ -1,5 +1,5 @@
 # Notepad==
-Simple notepad for POSIX systems
+Have you ever wanted to jot something down on a Unix system and wished the Windows Notepad were there? Then you can use Notepad== to jot stuff down! Notepad== is a quick and simple text editor for POSIX systems.
 
 ------
 macOS
