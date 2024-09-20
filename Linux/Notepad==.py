@@ -171,6 +171,35 @@ def redo(event=None):
     except tk.TclError:
         pass
 
+def find_and_replace():
+    popup = tk.Toplevel(root)
+    popup.title("Find and Replace")
+
+    find_label = tk.Label(popup, text="Enter the text you want to find:")
+    find_label.pack()
+    find_entry = tk.Entry(popup)
+    find_entry.pack()
+
+    replace_label = tk.Label(popup, text="Enter the text you want to it replace with:")
+    replace_label.pack()
+    replace_entry = tk.Entry(popup)
+    replace_entry.pack()
+
+    def perform_replace():
+        find_text = find_entry.get()
+        replace_text = replace_entry.get()
+
+        text_widget = text_area.get("1.0", tk.END)
+        if find_text:
+            text_widget = text_widget.replace(find_text, replace_text)
+            text_area.delete("1.0", tk.END)
+            text_area.insert(tk.END, text_widget)
+
+        popup.destroy()
+
+    replace_button = tk.Button(popup, text="Replace", command=perform_replace)
+    replace_button.pack()
+
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
@@ -215,6 +244,7 @@ edit_menu.add_command(label="Paste", command=paste_text)
 edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
+edit_menu.add_command(label="Find and Replace", command=find_and_replace)
 
 accessibility_menu = tk.Menu(menu)
 menu.add_cascade(label="Accessibility", menu=accessibility_menu)
