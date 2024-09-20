@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Thu Sep 19 19:04:06 2024
+# Make data base, printed on Thu Sep 19 19:05:29 2024
 
 # Variables
 
@@ -104,6 +104,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 XPC_FLAGS = 0x0
 # default
 MAKE = $(MAKE_COMMAND)
+ 
 # default
 MAKECMDGOALS := all
 # environment
@@ -140,6 +141,8 @@ XPC_SERVICE_NAME = application.com.microsoft.VSCode.109318664.111121342
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -169,9 +172,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 81361
+VSCODE_PID = 82907
 # variable set hash-table stats:
-# Load=78/1024=8%, Rehash=0, Collisions=1/99=1%
+# Load=79/1024=8%, Rehash=0, Collisions=1/100=1%
 
 # Pattern-specific Variable Values
 
@@ -253,6 +256,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Thu Sep 19 19:04:06 2024
+# Finished Make data base on Thu Sep 19 19:05:29 2024
 
  

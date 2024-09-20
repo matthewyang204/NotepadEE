@@ -22,22 +22,7 @@ fi
 
 # Install required python packages
 echo "Installing required packages"
-python3 -m pip install -r requirements.txt --break-system-packages
+pip3 install -r requirements.txt --break-system-packages
 echo "done"
-
-# Install tk
-if ! command -v patchelf >/dev/null 2>&1; then
-    echo "patchelf is not installed. Please install it to continue."
-    exit 1
-else
-    echo "python3-tk is installed."
-fi
-
-if ! dpkg -l | grep python3-tk >/dev/null 2>&1; then
-    echo "python3-tk is not installed. Please install it to continue."
-    exit 1
-else
-    echo "patchelf is installed."
-fi
 
 echo "Now run 'make' to build."
