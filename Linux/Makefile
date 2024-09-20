@@ -12,6 +12,7 @@ configure: ./configure
 build:
 	nuitka --standalone --onefile --enable-plugin=tk-inter --output-dir=$(BUILD_DIR) $(APP_NAME).py
 	mv dist/Notepad==/Notepad==.bin dist/Notepad==/Notepad==
+	mv Notepad.png dist/Notepad==/
 	echo "Build completed. To install, run 'sudo make install'"
 
 install:
