@@ -15,5 +15,5 @@ Build instructions:
 - Type `./configure && make && sudo make install` to build from source and install
 - If the configure script needs to install stuff, go ahead and enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
-- Debian-based distro is required to build
+- Any GUI distro from the last 10-15 years should work for building from source and running binaries
 - Source code is in the Linux folder; macOS source code is in separate macOS folder
