@@ -99,7 +99,7 @@ def write_cache(event=None):
 
 def save_as(event=None):
     global current_file, file_open
-    file_path = filedialog.asksaveasfilename(defaultextension=".txt")
+    file_path = filedialog.asksaveasfilename(defaultextension="")
     current_file=file_path
     if not file_path:
         return 'break'
