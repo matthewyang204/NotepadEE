@@ -13,19 +13,14 @@ build:
 	nuitka --standalone --onefile --enable-plugin=tk-inter --output-dir=$(BUILD_DIR) $(APP_NAME).py
 	# mv dist/Notepad==/Notepad==.bin dist/Notepad==/Notepad==
 	rm -rf $(BUILD_DIR)/Notepad==.build $(BUILD_DIR)/Notepad==.dist $(BUILD_DIR)/Notepad==.onefile-build $(BUILD_DIR)/Notepad==.bin
-	mv Notepad.png dist/Notepad==/
+	cp Notepad.png dist/Notepad==/
 	echo "Build completed. To install, run 'sudo make install'"
 
 install:
 	sudo mkdir -p $(INSTALL_DIR)
-	sudo cp -R $(BUILD_DIR) $(INSTALL_DIR)/$(APP_NAME)
+	sudo cp -R $(BUILD_DIR) $(INSTALL_DIR)
 	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
-	echo "[Desktop Entry]" | sudo tee $(DESKTOP_FILE); \
-	echo "Name=Notepad==" | sudo tee -a $(DESKTOP_FILE); \
-	echo "Exec=$(BIN_LINK)" | sudo tee -a $(DESKTOP_FILE); \
-	echo "Icon=$(INSTALL_DIR)/$(APP_NAME)/Notepad.png" | sudo tee -a $(DESKTOP_FILE); \
-	echo "Type=Application" | sudo tee -a $(DESKTOP_FILE); \
-	echo "Terminal=false" | sudo tee -a $(DESKTOP_FILE); \
+	sudo cp notepadee.desktop $(DESKTOP_FILE)
 	sudo update-desktop-database
 	echo "Install completed"
 
