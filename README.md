@@ -27,7 +27,7 @@ macOS build instructions:
 - Run `git clone https://github.com/matthewyang204/NotepadEE.git` download the latest source code
 - Run `cd NotepadEE/macOS` to enter the macOS build directory
 - Let's run `./configure` to find out what you're missing
-- Download the missing stuff and add it to your PATH if needed
+- Download the missing stuff, ideally with a package manager, and add it to your PATH if needed
 - Run `./configure` again
 - Repeat if it failed
 - If it comes out perfectly, run `make` to build the software from source
