@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Notepad==
-Exec=/usr/local/bin/notepadee
+Exec=/opt/matthewyang/Notepad==/Notepad==
 Icon=/opt/matthewyang/Notepad==/Notepad.png
 Type=Application
 Terminal=false
