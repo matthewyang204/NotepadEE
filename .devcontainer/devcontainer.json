@@ -1,0 +1,11 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+  },
+    "customizations": {
+    "environment": {
+      "VSCODE_ARCH": "arm64"
+    }
+  }
+}
+}
