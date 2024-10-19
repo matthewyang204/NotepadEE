@@ -1,4 +1,2 @@
-nuitka --standalone --enable-plugin=tk-inter --output-dir=dist src/Notepad==.py
-xcopy /E /I "dist\Notepad==.dist" "dist\Notepad=="
-rcedit dist\Notepad==\Notepad==.exe --set-icon Notepad.ico
-echo "Build completed. To install, compile the Inno Setup installer and then run it."
+nuitka --standalone --enable-plugin=tk-inter --windows-disable-console --output-dir=dist src/Notepad==.py
+postbuild.bat
