@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Notepad==
+Exec=/opt/matthewyang/Notepad==/Notepad==
+Icon=/opt/matthewyang/Notepad==/Notepad.png
+Type=Application
+Terminal=false

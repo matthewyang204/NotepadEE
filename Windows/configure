@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Check for Python 3
+if ! command -v python3 &> /dev/null
+then
+    echo "Python 3 not found. Please install it to continue."
+    exit 1
+else
+    echo "Python 3 is installed."
+fi
+
+# Check for pip3
+if ! command -v pip3 &> /dev/null
+then
+    echo "pip3 not found. Please install it to continue."
+else
+    echo "pip3 is installed."
+fi
+
+# Install required python packages
+echo "Installing required packages"
+python3 -m pip install -r requirements.txt --break-system-packages
+echo "done"
+
+# Install tk
+if ! command -v patchelf >/dev/null 2>&1; then
+    echo "patchelf is not installed. Please install it to continue."
+    exit 1
+else
+    echo "patchelf is installed."
+fi
+
+if ! dpkg -l | grep python3-tk >/dev/null 2>&1; then
+    echo "python3-tk is not installed. Please install it to continue."
+    exit 1
+else
+    echo "python3-tk is installed."
+fi
+
+echo "Now run 'make' to build."

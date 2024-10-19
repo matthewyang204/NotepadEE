@@ -1,0 +1,3 @@
+nuitka
+pillow
+tk
