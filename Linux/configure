@@ -12,10 +12,7 @@ fi
 # Check for pip3
 if ! command -v pip3 &> /dev/null
 then
-    echo "pip3 not found. Installing with python..."
-    wget https://bootstrap.pypa.io/get-pip.py
-    python3 get-pip.py
-    python3 -m pip install --upgrade pip
+    echo "pip3 not found. Please install it to continue."
 else
     echo "pip3 is installed."
 fi
