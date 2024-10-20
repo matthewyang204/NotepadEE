@@ -32,7 +32,7 @@ DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputBaseFilename=notepadee-x64-setup
-SetupIconFile=C:\Users\matth\Documents\GitHub\NotepadEE\Windows\Notepad.ico
+SetupIconFile=\Notepad.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -44,8 +44,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\matth\Documents\GitHub\NotepadEE\Windows\dist\Notepad==\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\matth\Documents\GitHub\NotepadEE\Windows\dist\Notepad==\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "dist\Notepad==\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\Notepad==\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
