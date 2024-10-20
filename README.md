@@ -54,8 +54,10 @@ Windows
 -----
 - Download the latest dev source code from the Windows repository: https://github.com/matthewyang204/NotepadEE/tree/main/Windows
 - Binaries are next to all other binaries
-- Will not provide instructions, as building is very system-specific in terms of PATHs
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
 - Windows 7 x64 or later
 - Windows 11 ARM64 or later
+
+Upgrading:
+- You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.

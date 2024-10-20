@@ -1,19 +1,30 @@
-# Notepad== Linux Version
+# Notepad== Windows Version
 
-This is the repository for the linux version of this software.
+This is the repository for the Windows version of this software.
 
 Main repository: https://www.github.com/matthewyang204/NotepadEE
 
-This is the Linux version's source code
+This is the Windows version's source code
 
-The Linux binaries can be downloaded from the releases
+The Windows binaries can be downloaded from the releases
 
-Any Debian-based distro works for building, otherwise, any distro can be used with the binaries
+Any PC running Windows 10 x64 or later works for building, otherwise, any distro can be used with the binaries
 
 Build instructions:
-- Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
-- Type `./configure && make && sudo make install` to build from source and install
-- If the configure script needs to install stuff, go ahead and enter your password if prompted
-- You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
-- Any GUI distro from the last 10-15 years should work for building from source and running binaries
-- Source code is in the Linux folder; macOS source code is in separate macOS folder
+- Run the command prompt as admin and navigate to the folder.
+- Run `dpinstall.bat` in the Command Prompt to find out what's missing. Install the missing component that the batch script specifies if it fails.
+- If all dependencies are met, it will automatically use pip3 to install the needed Python libraries.
+- Once dependencies are met, run `build.bat`. Make sure to agree with nuitka's y/n prompts.
+- After running `build.bat`, run `postbuild.bat` to move things into place
+- Download and install Inno Setup if you haven't already. Then, open the .iss setup script and build by clicking Build>Compile.
+- Run the installer and you've successfully installed.
+
+Installing from the precompiled binaries:
+- Binaries are next to all other binaries
+- x64 binaries are provided for users, however, they are not signed
+- Version compatibility:
+- Windows 7 x64 or later
+- Windows 11 ARM64 or later
+
+Upgrading:
+- You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
