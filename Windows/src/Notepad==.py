@@ -5,6 +5,8 @@ from tkinter import messagebox
 from tkinter import font
 import sys
 
+local_app_data_path = os.getenv('LOCALAPPDATA')
+
 filearg = sys.argv
 if len(filearg) <= 1:
     openFile = 0
@@ -19,7 +21,7 @@ else:
 
 global file_open
 file_open = 0
-last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache',
+last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                               'last_file_path')
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
@@ -33,11 +35,17 @@ else:
     current_file = ""
     file_open = 0
 
-last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache',
+last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                           'last_write')
-folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
+folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
+
+try:
+    from ctypes import windll
+    windll.shcore.SetProcessDpiAwareness(1)
+except:
+    pass
 
 root = tk.Tk()
 ask_quit = False
@@ -105,11 +113,11 @@ def autosave_file(event=None):
 def write_cache(event=None):
     global current_file, file_open
     with open(
-            os.path.join(os.path.expanduser('~'), '.notepadee', 'cache',
+            os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                          'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee',
-                                  'cache', 'last_file_path')
+    last_file_path = os.path.join(local_app_data_path, 'NotepadEE',
+                                  'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
     autosave_file()
