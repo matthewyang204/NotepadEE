@@ -19,7 +19,7 @@ else:
 
 global file_open
 file_open = 0
-last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache',
+last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
                               'last_file_path')
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
@@ -33,9 +33,9 @@ else:
     current_file = ""
     file_open = 0
 
-last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache',
+last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
                           'last_write')
-folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
+folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
@@ -102,14 +102,14 @@ def autosave_file(event=None):
         return 'break'
 
 
-def write_cache(event=None):
+def write_prefs(event=None):
     global current_file, file_open
     with open(
-            os.path.join(os.path.expanduser('~'), '.notepadee', 'cache',
+            os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
                          'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee',
-                                  'cache', 'last_file_path')
+                                  'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
     autosave_file()
@@ -125,7 +125,7 @@ def save_as(event=None):
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
-        write_cache()
+        write_prefs()
         file_open = 1
     except FileNotFoundError:
         messagebox.showerror("Error", "File not found.")
@@ -140,7 +140,7 @@ def open_file(event=None):
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
-    write_cache()
+    write_prefs()
 
 
 def save_file(event=None):
@@ -151,7 +151,7 @@ def save_file(event=None):
             with open(current_file, 'w') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
-            write_cache()
+            write_prefs()
         except FileNotFoundError:
             return 'break'
     else:
@@ -166,7 +166,7 @@ def new_file(event=None):
     global current_file, file_open
     text_area.delete(1.0, "end")
     current_file = ""
-    write_cache()
+    write_prefs()
     file_open = 0
 
 
@@ -257,7 +257,7 @@ def decrease_font_size(event=None):
 
 
 def runonkeyrelease(event=None):
-    write_cache()
+    write_prefs()
     update_line_number()
 
 
@@ -269,7 +269,7 @@ if openFile == 1:
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
-    write_cache()
+    write_prefs()
     print("File loaded")
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
@@ -319,5 +319,5 @@ text_area.bind('<Control-y>', redo)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
-write_cache()
+write_prefs()
 root.mainloop()
