@@ -8,7 +8,7 @@ This is the Windows version's source code
 
 The Windows binaries can be downloaded from the releases
 
-Any PC running Windows 10 x64 or later works for building, otherwise, any distro can be used with the binaries
+Any PC running Windows 10 x64 or later works for building, otherwise, Windows 7 x64 or later can be used with the binaries
 
 Build instructions:
 - Run the command prompt as admin and navigate to the folder.
