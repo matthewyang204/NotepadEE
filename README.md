@@ -33,6 +33,8 @@ Upgrading:
 macOS
 ------
 
+Note: macOS version is not supported anymore, have not decided whether I will update it again. Last update was v4.3.1.
+
 System requirements:
 
 Apple Silicon Version: macOS 11.0 or above
