@@ -116,8 +116,8 @@ def write_cache(event=None):
             os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                          'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(local_app_data_path, 'NotepadEE',
-                                  'prefs', 'last_file_path')
+    last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
+                                  'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
     autosave_file()
@@ -141,6 +141,8 @@ def save_as(event=None):
 
 def open_file(event=None):
     global current_file, file_open
+    if current_file:
+        save_file()
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         text_area.delete(1.0, "end")
@@ -172,6 +174,7 @@ def save_file(event=None):
 
 def new_file(event=None):
     global current_file, file_open
+    save_file()
     text_area.delete(1.0, "end")
     current_file = ""
     write_cache()
