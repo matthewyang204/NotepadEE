@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Notepad=="
-#define MyAppVersion "4.4.1"
+#define MyAppVersion "4.4.3"
 #define MyAppPublisher "Matthew Yang"
 #define MyAppURL "https://www.github.com/matthewyang204/NotepadEE"
 #define MyAppExeName "Notepad==.exe"
