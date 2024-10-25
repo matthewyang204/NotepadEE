@@ -12,12 +12,13 @@ configure: ./configure
 build:
 	nuitka --standalone --enable-plugin=tk-inter --output-dir=$(BUILD_DIR) src/$(APP_NAME).py
 	mv dist/Notepad==.dist dist/Notepad==
+	mv dist/Notepad==/Notepad==.bin dist/Notepad==/Notepad==
 	cp Notepad.png dist/Notepad==/
 	echo "Build completed. To install, run 'sudo make install'"
 
 install:
 	sudo mkdir -p $(INSTALL_DIR)
-	sudo cp -R $(BUILD_DIR) $(INSTALL_DIR)/
+	sudo cp -R $(BUILD_DIR)/$(APP_NAME) $(INSTALL_DIR)/
 	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
 	sudo cp notepadee.desktop $(DESKTOP_FILE)
 	sudo update-desktop-database
@@ -25,7 +26,7 @@ install:
 
 install-no-desktop-file:
 	sudo mkdir -p $(INSTALL_DIR)
-	sudo cp -R $(BUILD_DIR) $(INSTALL_DIR)/
+	sudo cp -R $(BUILD_DIR)/$(APP_NAME) $(INSTALL_DIR)/
 	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
 	echo "Install completed"
 
