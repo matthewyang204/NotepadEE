@@ -267,13 +267,23 @@ def runonkeyrelease(event=None):
 if openFile == 1:
     file_path = fileToBeOpened
     if file_path:
-        text_area.delete(1.0, "end")
-        current_file = file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-        file_open = 1
-    write_prefs()
-    print("File loaded")
+        if os.path.exists(file_path):
+            text_area.delete(1.0, "end")
+            current_file = file_path
+            with open(file_path, 'r') as file:
+                text_area.insert(1.0, file.read())
+            write_cache()
+            file_open = 1
+            print("File loaded")
+        else:
+            text_area.delete(1.0, "end")
+            current_file = file_path
+            with open(file_path, 'w') as file:
+                text = text_area.get(1.0, "end-1c")
+                file.write(text)
+            file_open = 1
+            write_cache()
+            print("Because the file doesn't exist, it was created as a blank new file instead")
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runonkeyrelease)
