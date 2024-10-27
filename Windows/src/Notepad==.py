@@ -97,19 +97,6 @@ def debug_var(event=None):
     #        print("Not working")
     return 'break'
 
-
-def autosave_file(event=None):
-    global current_file
-    global file_open
-    try:
-        if file_open == 1:
-            with open(current_file, 'w') as file:
-                text = text_area.get('1.0', 'end-1c')
-                file.write(text)
-    except FileNotFoundError:
-        return 'break'
-
-
 def write_cache(event=None):
     global current_file, file_open
     with open(
