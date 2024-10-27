@@ -272,7 +272,7 @@ if openFile == 1:
             current_file = file_path
             with open(file_path, 'r') as file:
                 text_area.insert(1.0, file.read())
-            write_cache()
+            write_prefs()()
             file_open = 1
             print("File loaded")
         else:
@@ -282,7 +282,7 @@ if openFile == 1:
                 text = text_area.get(1.0, "end-1c")
                 file.write(text)
             file_open = 1
-            write_cache()
+            write_prefs()()
             print("Because the file doesn't exist, it was created as a blank new file instead")
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
