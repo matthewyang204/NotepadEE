@@ -97,6 +97,19 @@ def debug_var(event=None):
     #        print("Not working")
     return 'break'
 
+
+def autosave_file(event=None):
+    global current_file
+    global file_open
+    try:
+        if file_open == 1:
+            with open(current_file, 'w') as file:
+                text = text_area.get('1.0', 'end-1c')
+                file.write(text)
+    except FileNotFoundError:
+        return 'break'
+
+
 def write_cache(event=None):
     global current_file, file_open
     with open(
@@ -105,11 +118,17 @@ def write_cache(event=None):
     last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
+    autosave_file()
 
-def save_as(x):
+
+def save_as(event=None):
     global current_file, file_open
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt")
+    current_file = file_path
+    if not file_path:
+        return 'break'
     try:
-        with open(x, 'w') as file:
+        with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_cache()
@@ -118,20 +137,18 @@ def save_as(x):
         messagebox.showerror("Error", "File not found.")
 
 
-def open_file(x):
+def open_file(event=None):
     global current_file, file_open
     if current_file:
         save_file()
-    if not x:
-        x = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if x:
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
         text_area.delete(1.0, "end")
-        current_file = x
-        with open(x, 'r') as file:
+        current_file = file_path
+        with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
     write_cache()
-    save_file()
 
 
 def save_file(event=None):
@@ -150,11 +167,7 @@ def save_file(event=None):
             "Create new file",
             "The file does not exist. Do you want to create it as a new file?")
         if response:
-            file_path = filedialog.asksaveasfilename(defaultextension=".txt")
-            current_file = file_path
-        if not file_path:
-            return 'break'
-        save_as(current_file)
+            save_as()
 
 
 def new_file(event=None):
@@ -164,6 +177,7 @@ def new_file(event=None):
     current_file = ""
     write_cache()
     file_open = 0
+
 
 def cut_text(event=None):
     text_area.clipboard_clear()
@@ -282,7 +296,7 @@ menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file)
-file_menu.add_command(label="Save as...", command=save_as(current_file))
+file_menu.add_command(label="Save as...", command=save_as)
 
 edit_menu = tk.Menu(menu)
 menu.add_cascade(label="Edit", menu=edit_menu)
