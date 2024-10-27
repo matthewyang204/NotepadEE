@@ -110,7 +110,7 @@ def autosave_file(event=None):
         return 'break'
 
 
-def write_cache(event=None):
+def write_prefs()(event=None):
     global current_file, file_open
     with open(
             os.path.join(local_app_data_path, 'NotepadEE', 'prefs','last_write'), 'w') as file:
@@ -131,7 +131,7 @@ def save_as(event=None):
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
-        write_cache()
+        write_prefs()()
         file_open = 1
     except FileNotFoundError:
         messagebox.showerror("Error", "File not found.")
@@ -148,7 +148,7 @@ def open_file(event=None):
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
-    write_cache()
+    write_prefs()()
 
 
 def save_file(event=None):
@@ -159,7 +159,7 @@ def save_file(event=None):
             with open(current_file, 'w') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
-            write_cache()
+            write_prefs()()
         except FileNotFoundError:
             return 'break'
     else:
@@ -175,7 +175,7 @@ def new_file(event=None):
     save_file()
     text_area.delete(1.0, "end")
     current_file = ""
-    write_cache()
+    write_prefs()()
     file_open = 0
 
 
@@ -266,7 +266,7 @@ def decrease_font_size(event=None):
 
 
 def runonkeyrelease(event=None):
-    write_cache()
+    write_prefs()()
     update_line_number()
 
 
@@ -278,7 +278,7 @@ if openFile == 1:
             current_file = file_path
             with open(file_path, 'r') as file:
                 text_area.insert(1.0, file.read())
-            write_cache()
+            write_prefs()()
             file_open = 1
             print("File loaded")
         else:
@@ -288,7 +288,7 @@ if openFile == 1:
                 text = text_area.get(1.0, "end-1c")
                 file.write(text)
             file_open = 1
-            write_cache()
+            write_prefs()()
             print("Because the file doesn't exist, it was created as a blank new file instead")
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
@@ -338,5 +338,5 @@ text_area.bind('<Control-y>', redo)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
-write_cache()
+write_prefs()()
 root.mainloop()
