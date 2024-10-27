@@ -118,13 +118,11 @@ def write_cache(event=None):
     last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(current_file)
-    autosave_file()
 
-
-def save_as(file_path):
+def save_as(x):
     global current_file, file_open
     try:
-        with open(file_path, 'w') as file:
+        with open(x, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_cache()
@@ -133,18 +131,20 @@ def save_as(file_path):
         messagebox.showerror("Error", "File not found.")
 
 
-def open_file(event=None):
+def open_file(x):
     global current_file, file_open
     if current_file:
         save_file()
-    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
+    if not x:
+        x = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if x:
         text_area.delete(1.0, "end")
-        current_file = file_path
-        with open(file_path, 'r') as file:
+        current_file = x
+        with open(x, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
     write_cache()
+    save_file()
 
 
 def save_file(event=None):
@@ -177,7 +177,6 @@ def new_file(event=None):
     current_file = ""
     write_cache()
     file_open = 0
-
 
 def cut_text(event=None):
     text_area.clipboard_clear()
