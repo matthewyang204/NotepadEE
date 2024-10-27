@@ -121,12 +121,8 @@ def write_cache(event=None):
     autosave_file()
 
 
-def save_as(event=None):
+def save_as(file_path):
     global current_file, file_open
-    file_path = filedialog.asksaveasfilename(defaultextension=".txt")
-    current_file = file_path
-    if not file_path:
-        return 'break'
     try:
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
@@ -167,7 +163,11 @@ def save_file(event=None):
             "Create new file",
             "The file does not exist. Do you want to create it as a new file?")
         if response:
-            save_as()
+            file_path = filedialog.asksaveasfilename(defaultextension=".txt")
+            current_file = file_path
+        if not file_path:
+            return 'break'
+        save_as(current_file)
 
 
 def new_file(event=None):
