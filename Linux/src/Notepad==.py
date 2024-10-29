@@ -156,16 +156,12 @@ def save_file(warn):
         except FileNotFoundError:
             return 'break'
     else:
-        if warn = "y":
-            response = messagebox.askyesno(
-                "Warning: File is not saved",
-                "The current file is not saved. Do you want to save it to a selected location?")
+        if warn == "y":
+            response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
             if response:
                 save_as()
         else:
-            response = messagebox.askyesno(
-                "Create new file",
-                "The file does not exist. Do you want to create it as a new file?")
+            response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
                 save_as()
 
