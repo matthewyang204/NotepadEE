@@ -9,7 +9,7 @@ Linux
 - Any GUI distro from the last 10-15 years should work for building from source and running binaries
 
 Linux build instructions:
-- Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
+- Please clone the repo and cd into it
 - Type `./configure && make && sudo make install` to build from source and install
 - If the configure script needs to install stuff, enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
