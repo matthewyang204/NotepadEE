@@ -306,7 +306,7 @@ file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open...", command=open_file)
-file_menu.add_command(label="Save", command=save_file)
+file_menu.add_command(label="Save", command=save_file("n"))
 file_menu.add_command(label="Save as...", command=save_as)
 
 edit_menu = tk.Menu(menu)
