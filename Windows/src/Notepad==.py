@@ -117,7 +117,7 @@ def write_prefs(event=None):
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
-        file.write(current_file)
+        file.write(str(current_file))
     autosave_file()
 
 
@@ -309,7 +309,7 @@ file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open...", command=open_file)
-file_menu.add_command(label="Save", command=save_file)
+file_menu.add_command(label="Save", command=save_file("n"))
 file_menu.add_command(label="Save as...", command=save_as)
 
 edit_menu = tk.Menu(menu)
