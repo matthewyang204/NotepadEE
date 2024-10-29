@@ -264,6 +264,7 @@ def runonkeyrelease(event=None):
     update_line_number()
 
 def runonfilearg(file_path):
+    global file_open, current_file
     if os.path.exists(file_path):
         text_area.delete(1.0, "end")
         current_file = os.path.abspath(file_path)
