@@ -11,7 +11,7 @@ The Windows binaries can be downloaded from the releases
 Any PC running Windows 10 x64 or later works for building, otherwise, Windows 7 x64 or later can be used with the binaries
 
 Build instructions:
-- Run the command prompt as admin and navigate to the folder.
+- Run the command prompt as admin and navigate to the cloned repository.
 - Run `dpinstall.bat` in the Command Prompt to find out what's missing. Install the missing component that the batch script specifies if it fails.
 - If all dependencies are met, it will automatically use pip3 to install the needed Python libraries.
 - Once dependencies are met, run `build.bat`. Make sure to agree with nuitka's y/n prompts.
