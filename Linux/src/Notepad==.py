@@ -145,7 +145,7 @@ def open_file(event=None):
     write_prefs()
 
 
-def save_file(event=None):
+def save_file(warn):
     global current_file, file_open
     if file_open == 1:
         try:
@@ -157,11 +157,18 @@ def save_file(event=None):
         except FileNotFoundError:
             return 'break'
     else:
-        response = messagebox.askyesno(
-            "Create new file",
-            "The file does not exist. Do you want to create it as a new file?")
-        if response:
-            save_as()
+        if warn = "y":
+            response = messagebox.askyesno(
+                "Warning: File is not saved",
+                "The current file is not saved. Do you want to save it to a selected location?")
+            if response:
+                save_as()
+        else:
+            response = messagebox.askyesno(
+                "Create new file",
+                "The file does not exist. Do you want to create it as a new file?")
+            if response:
+                save_as()
 
 
 def new_file(event=None):
