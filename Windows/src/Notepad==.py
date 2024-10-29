@@ -157,6 +157,10 @@ def save_file(warn):
             if response:
                 save_as()
 
+def save_file2(event=None):
+    global current_file, file_open
+    save_file("n")
+
 def open_file(event=None):
     global current_file, file_open
     save_file("y")
@@ -309,7 +313,7 @@ file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 file_menu.add_command(label="Open...", command=open_file)
-file_menu.add_command(label="Save", command=save_file("n"))
+file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
 
 edit_menu = tk.Menu(menu)
