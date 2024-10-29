@@ -136,22 +136,7 @@ def save_as(event=None):
     except FileNotFoundError:
         messagebox.showerror("Error", "File not found.")
 
-
-def open_file(event=None):
-    global current_file, file_open
-    if current_file:
-        save_file()
-    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file = file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-        file_open = 1
-    write_prefs()
-
-
-def save_file(event=None):
+def save_file(warn):
     global current_file, file_open
     if file_open == 1:
         try:
@@ -163,12 +148,26 @@ def save_file(event=None):
         except FileNotFoundError:
             return 'break'
     else:
-        response = messagebox.askyesno(
-            "Create new file",
-            "The file does not exist. Do you want to create it as a new file?")
-        if response:
-            save_as()
+        if warn == "y":
+            response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
+            if response:
+                save_as()
+        else:
+            response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
+            if response:
+                save_as()
 
+def open_file(event=None):
+    global current_file, file_open
+    save_file("y")
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file = file_path
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+        file_open = 1
+    write_prefs()
 
 def new_file(event=None):
     global current_file, file_open
