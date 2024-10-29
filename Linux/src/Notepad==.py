@@ -111,7 +111,7 @@ def write_prefs(event=None):
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee',
                                   'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
-        file.write(current_file)
+        file.write(str(current_file))
     autosave_file()
 
 
