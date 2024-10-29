@@ -278,6 +278,8 @@ def runonfilearg(file_path):
             text_area.insert(1.0, file.read())
         write_prefs()
         file_open = 1
+        print("Current file path: " + current_file)
+        print("File open: " + str(file_open))
         print("File loaded")
     else:
         text_area.delete(1.0, "end")
@@ -286,6 +288,8 @@ def runonfilearg(file_path):
             file.write(text)
         file_open = 1
         current_file = os.path.abspath(file_path)
+        print("Current file path: " + current_file)
+        print("File open: " + str(file_open))
         write_prefs()
         print("Because the file doesn't exist, it was created as a blank new file instead")
 
