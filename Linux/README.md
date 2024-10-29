@@ -11,7 +11,7 @@ The Linux binaries can be downloaded from the releases
 Any Debian-based distro works for building, otherwise, any distro can be used with the binaries
 
 Build instructions:
-- Please unzip the folder and then cd into the Linux folder within the extracted folder in a terminal
+- Please clone the repo and then cd into the Linux folder within the cloned repo in a terminal
 - Type `./configure && make && sudo make install` to build from source and install
 - If the configure script needs to install stuff, go ahead and enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
