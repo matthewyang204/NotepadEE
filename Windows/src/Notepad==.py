@@ -269,27 +269,28 @@ def runonkeyrelease(event=None):
     write_prefs()
     update_line_number()
 
+def runonfilearg(file_path):
+    global file_open, current_file
+    if os.path.exists(file_path):
+        text_area.delete(1.0, "end")
+        current_file = os.path.abspath(file_path)
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+        write_prefs()
+        file_open = 1
+        print("File loaded")
+    else:
+        text_area.delete(1.0, "end")
+        with open(file_path, 'w') as file:
+            text = text_area.get(1.0, "end-1c")
+            file.write(text)
+        file_open = 1
+        current_file = os.path.abspath(file_path)
+        write_prefs()
+        print("Because the file doesn't exist, it was created as a blank new file instead")
 
 if openFile == 1:
-    file_path = fileToBeOpened
-    if file_path:
-        if os.path.exists(file_path):
-            text_area.delete(1.0, "end")
-            current_file = os.path.abspath(file_path)
-            with open(file_path, 'r') as file:
-                text_area.insert(1.0, file.read())
-            write_prefs()
-            file_open = 1
-            print("File loaded")
-        else:
-            text_area.delete(1.0, "end")
-            with open(file_path, 'w') as file:
-                text = text_area.get(1.0, "end-1c")
-                file.write(text)
-            file_open = 1
-            current_file = os.path.abspath(file_path)
-            write_prefs()
-            print("Because the file doesn't exist, it was created as a blank new file instead")
+    runonfilearg(fileToBeOpened)
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runonkeyrelease)
