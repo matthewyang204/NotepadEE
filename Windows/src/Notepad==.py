@@ -175,7 +175,7 @@ def open_file(event=None):
 
 def new_file(event=None):
     global current_file, file_open
-    save_file()
+    save_file("y")
     text_area.delete(1.0, "end")
     current_file = ""
     write_prefs()
