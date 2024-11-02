@@ -14,7 +14,7 @@ Build instructions:
 - Run the command prompt as admin and navigate to the cloned repository.
 - Run `dpinstall.bat` in the Command Prompt to find out what's missing. Install the missing component that the batch script specifies if it fails.
 - If all dependencies are met, it will automatically use pip3 to install the needed Python libraries.
-- Once dependencies are met, run `build.bat`. Make sure to agree with nuitka's y/n prompts.
+- Once dependencies are met, run `build.bat`.
 - Download and install Inno Setup if you haven't already. Then, open the .iss setup script and build by clicking Build>Compile.
 - Run the installer and you've successfully installed.
 
