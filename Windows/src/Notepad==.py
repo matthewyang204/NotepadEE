@@ -164,6 +164,7 @@ def save_file(warn):
 
 def save_file2(event=None):
     global current_file, file_open
+    print("No-warning wrapper triggered, running save_file with nowarning option")
     save_file("n")
 
 def open_file(event=None):
@@ -183,37 +184,38 @@ def new_file(event=None):
     global current_file, file_open
     save_file("y")
     text_area.delete(1.0, "end")
+    print("Cleared text_area")
     current_file = ""
     write_prefs()
     file_open = 0
-    print("text_area cleared, new file created")
+    print("New file created")
 
 
 def cut_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
     text_area.delete("sel.first", "sel.last")
-    return 'break'
     print("Cut option ran successfully")
+    return 'break'
 
 
 def copy_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
-    return 'break'
     print("Text copied to clipboard successfully")
+    return 'break'
 
 
 def paste_text(event=None):
     text_area.insert("insert", text_area.clipboard_get())
-    return 'break'
     print("Text pasted from clipboard successfully")
+    return 'break'
 
 
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
-    return 'break'
     print("All text selected")
+    return 'break'
 
 
 def undo(event=None):
