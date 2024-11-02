@@ -108,6 +108,7 @@ def autosave_file(event=None):
                 file.write(text)
     except FileNotFoundError:
         return 'break'
+    print("Autosaved file")
 
 
 def write_prefs(event=None):
@@ -119,6 +120,7 @@ def write_prefs(event=None):
     with open(last_file_path, 'w') as file:
         file.write(str(current_file))
     autosave_file()
+    print("Prefs written")
 
 
 def save_as(event=None):
@@ -135,6 +137,7 @@ def save_as(event=None):
         file_open = 1
     except FileNotFoundError:
         messagebox.showerror("Error", "File not found.")
+    print("File was saved to different location successfully.")
 
 def save_file(warn):
     global current_file, file_open
@@ -152,10 +155,12 @@ def save_file(warn):
             response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
             if response:
                 save_as()
+                print("File saved to a permanent location without warning successfully.")
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
                 save_as()
+                print("File saved to permanent location before proceeding to run next function successfully.")
 
 def save_file2(event=None):
     global current_file, file_open
@@ -171,6 +176,7 @@ def open_file(event=None):
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
+        print("File opened successfully.")
     write_prefs()
 
 def new_file(event=None):
@@ -180,6 +186,7 @@ def new_file(event=None):
     current_file = ""
     write_prefs()
     file_open = 0
+    print("text_area cleared, new file created")
 
 
 def cut_text(event=None):
@@ -187,22 +194,26 @@ def cut_text(event=None):
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
     text_area.delete("sel.first", "sel.last")
     return 'break'
+    print("Cut option ran successfully")
 
 
 def copy_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
     return 'break'
+    print("Text copied to clipboard successfully")
 
 
 def paste_text(event=None):
     text_area.insert("insert", text_area.clipboard_get())
     return 'break'
+    print("Text pasted from clipboard successfully")
 
 
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
     return 'break'
+    print("All text selected")
 
 
 def undo(event=None):
@@ -210,6 +221,7 @@ def undo(event=None):
         text_area.edit_undo()
     except tk.TclError:
         pass
+    print("Edit undone")
 
 
 def redo(event=None):
@@ -217,7 +229,7 @@ def redo(event=None):
         text_area.edit_redo()
     except tk.TclError:
         pass
-
+    print("Edit redone")
 
 def find_and_replace():
     popup = tk.Toplevel(root)
@@ -256,16 +268,19 @@ def update_line_number(event=None):
     column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
+    print("Status bar updated")
 
 
 def increase_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size + 1)
+    print("Font size increased by 1 pt")
 
 
 def decrease_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size - 1)
+    print("Font size decreased by 1 pt")
 
 
 def runonkeyrelease(event=None):
