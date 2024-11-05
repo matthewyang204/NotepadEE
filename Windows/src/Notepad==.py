@@ -35,9 +35,14 @@ else:
     current_file = ""
     file_open = 0
 
+
 last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                           'last_write')
 folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
+file_lock_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'file.lock')
+global file_lock_path
+file_lock_int = 0
+global file_lock_int
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
@@ -46,6 +51,14 @@ try:
     windll.shcore.SetProcessDpiAwareness(1)
 except:
     pass
+
+if not os.path.exists(file_lock):
+    with open(file_lock_path, 'w') as file:
+        file_lock_str = "0":
+        file.write(file_lock_str)
+else:
+    with open(file_lock_path, 'r') as file:
+        file_lock_int = str(file.read())
 
 root = tk.Tk()
 ask_quit = False
