@@ -40,9 +40,7 @@ last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                           'last_write')
 folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
 file_lock_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'file.lock')
-global file_lock_path
 file_lock_int = 0
-global file_lock_int
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
