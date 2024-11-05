@@ -52,18 +52,17 @@ except:
 
 if not os.path.exists(file_lock_path):
     with open(file_lock_path, 'w') as file:
-        file_lock_int = 1
-        file.write(str(file_lock_int))
+        file_lock_int = 0
+        file.write("1")
 else:
     with open(file_lock_path, 'r') as file:
-        file_lock_int = str(file.read())
+        file_lock_int = int(file.read())
         if file_lock_int == 1:
             print("Could not get file_lock, autosave prefs will not work in this instance as another instance is already using it")
         if file_lock_int == 0:
             print("File_lock is open, setting file_lock...")
-            file_lock_int = 1
             with open(file_lock_path, 'w') as file:
-                file.write(str(file_lock_int))
+                file.write("1")
             print("File_lock written and set, autosave prefs will work in this instance, other instances will not be able to use autosave")
 
 root = tk.Tk()
@@ -96,7 +95,6 @@ def get_font_for_platform():
     else:
         return font.Font(family="DejaVu Sans Mono", size=12)
 
-
 text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
@@ -121,7 +119,6 @@ def autosave_file(event=None):
     global current_file
     global file_open
     global file_lock_int
-        return 'break'
     try:
         if file_open == 1:
             with open(current_file, 'w') as file:
