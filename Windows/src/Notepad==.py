@@ -4,6 +4,7 @@ import os
 from tkinter import messagebox
 from tkinter import font
 import sys
+import atexit
 
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
@@ -342,6 +343,15 @@ def runonfilearg(file_path):
         #print("File open: " + str(file_open))
         write_prefs()
         print("Because the file doesn't exist, it was created as a blank new file instead")
+
+def exit_handler(event=None):
+    if file_lock_int == 0:
+        print("This instance held file.lock,unlocking...")
+        with open(file_lock_path, 'w') as file:
+            file.write("0")
+        print("Unlocked, program exiting...")
+
+atexit.register(exit_handler)        
 
 if openFile == 1:
     runonfilearg(fileToBeOpened)
