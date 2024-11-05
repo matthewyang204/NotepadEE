@@ -5,7 +5,7 @@ Have you ever wanted to jot something down on a Unix system and wished the Windo
 Linux
 -----
 - Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
-- These binaries are next to the macOS binaries
+- These binaries are next to the Windows binaries
 - Any GUI distro from the last 10-15 years should work for building from source and running binaries
 
 Linux build instructions:
@@ -14,7 +14,7 @@ Linux build instructions:
 - If the configure script needs to install stuff, enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
 - Requires Debian-based distro to build
-- Source code is in the Linux folder; macOS source code is in separate macOS folder
+- Source code is in the Linux folder; Windows source code is in separate Windows folder
 
 -----
 Windows
