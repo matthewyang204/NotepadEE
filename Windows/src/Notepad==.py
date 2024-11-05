@@ -50,15 +50,22 @@ try:
 except:
     pass
 
+# create file.lock if it is not already in the prefs folder
 if not os.path.exists(file_lock_path):
     with open(file_lock_path, 'w') as file:
         file_lock_int = 0
         file.write("1")
+
+# otherwise, determine whether autosave should be enabled from the state in file.lock
 else:
     with open(file_lock_path, 'r') as file:
         file_lock_int = int(file.read())
+        
+        # if it is already set, disable autosave
         if file_lock_int == 1:
             print("Could not get file_lock, autosave prefs will not work in this instance as another instance is already using it")
+        
+        # if it is not already set, set it and enable autosave
         if file_lock_int == 0:
             print("File_lock is open, setting file_lock...")
             with open(file_lock_path, 'w') as file:
