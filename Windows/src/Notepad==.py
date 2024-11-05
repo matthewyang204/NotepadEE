@@ -54,7 +54,7 @@ except:
 
 if not os.path.exists(file_lock):
     with open(file_lock_path, 'w') as file:
-        file_lock_str = "0":
+        file_lock_str = "0"
         file.write(file_lock_str)
 else:
     with open(file_lock_path, 'r') as file:
