@@ -50,13 +50,21 @@ try:
 except:
     pass
 
-if not os.path.exists(file_lock):
+if not os.path.exists(file_lock_path):
     with open(file_lock_path, 'w') as file:
-        file_lock_str = "0"
-        file.write(file_lock_str)
+        file_lock_int = 1
+        file.write(str(file_lock_int))
 else:
     with open(file_lock_path, 'r') as file:
         file_lock_int = str(file.read())
+        if file_lock_int == 1:
+            print("Could not get file_lock, autosave prefs will not work in this instance as another instance is already using it")
+        if file_lock_int == 0:
+            print("File_lock is open, setting file_lock...")
+            file_lock_int = 1
+            with open(file_lock_path, 'w') as file:
+                file.write(str(file_lock_int))
+            print("File_lock written and set, autosave prefs will work in this instance, other instances will not be able to use autosave")
 
 root = tk.Tk()
 ask_quit = False
@@ -112,6 +120,8 @@ def debug_var(event=None):
 def autosave_file(event=None):
     global current_file
     global file_open
+    global file_lock_int
+        return 'break'
     try:
         if file_open == 1:
             with open(current_file, 'w') as file:
@@ -123,7 +133,10 @@ def autosave_file(event=None):
 
 
 def write_prefs(event=None):
-    global current_file, file_open
+    global current_file, file_open, file_lock_int
+    if file_lock_int == 1:
+        print("File_lock was already set by another instance, autosave prefs won't work in this instance...")
+        return('break')
     with open(
             os.path.join(local_app_data_path, 'NotepadEE', 'prefs','last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
