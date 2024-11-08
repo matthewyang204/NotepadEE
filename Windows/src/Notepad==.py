@@ -4,7 +4,6 @@ import os
 from tkinter import messagebox
 from tkinter import font
 import sys
-import atexit
 
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
@@ -36,12 +35,9 @@ else:
     current_file = ""
     file_open = 0
 
-
 last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                           'last_write')
 folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
-file_lock_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'file.lock')
-file_lock_int = 0
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
@@ -50,29 +46,6 @@ try:
     windll.shcore.SetProcessDpiAwareness(1)
 except:
     pass
-
-# create file.lock if it is not already in the prefs folder
-if not os.path.exists(file_lock_path):
-    with open(file_lock_path, 'w') as file:
-        file_lock_int = 0
-        file.write("1")
-    print("file.lock was not in the prefs folder, so it was created and set")
-
-# otherwise, determine whether autosave should be enabled from the state in file.lock
-else:
-    with open(file_lock_path, 'r') as file:
-        file_lock_int = int(file.read())
-        
-        # if it is already set, disable autosave
-        if file_lock_int == 1:
-            print("Could not get file_lock, autosave prefs will not work in this instance as another instance is already using it")
-        
-        # if it is not already set, set it and enable autosave
-        elif file_lock_int == 0:
-            print("File_lock is open, setting file_lock...")
-            with open(file_lock_path, 'w') as file:
-                file.write("1")
-            print("File_lock written and set, autosave prefs will work in this instance, other instances will not be able to use autosave")
 
 root = tk.Tk()
 ask_quit = False
@@ -104,6 +77,7 @@ def get_font_for_platform():
     else:
         return font.Font(family="DejaVu Sans Mono", size=12)
 
+
 text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
@@ -127,7 +101,6 @@ def debug_var(event=None):
 def autosave_file(event=None):
     global current_file
     global file_open
-    global file_lock_int
     try:
         if file_open == 1:
             with open(current_file, 'w') as file:
@@ -139,11 +112,7 @@ def autosave_file(event=None):
 
 
 def write_prefs(event=None):
-    global current_file, file_open, file_lock_int
-    # don't write prefs if file_lock_int variable is set to 1
-    if file_lock_int == 1:
-        print("File_lock was already set by another instance, autosave prefs won't work in this instance...")
-        return('break')
+    global current_file, file_open
     with open(
             os.path.join(local_app_data_path, 'NotepadEE', 'prefs','last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
@@ -343,15 +312,6 @@ def runonfilearg(file_path):
         #print("File open: " + str(file_open))
         write_prefs()
         print("Because the file doesn't exist, it was created as a blank new file instead")
-
-def exit_handler(event=None):
-    if file_lock_int == 0:
-        print("This instance held file.lock,unlocking...")
-        with open(file_lock_path, 'w') as file:
-            file.write("0")
-        print("Unlocked, program exiting...")
-
-atexit.register(exit_handler)        
 
 if openFile == 1:
     runonfilearg(fileToBeOpened)
