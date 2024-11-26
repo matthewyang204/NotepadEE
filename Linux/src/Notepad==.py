@@ -39,6 +39,9 @@ folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
+file_written = 0
+print("file_written set to " + str(file_written))
+
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
@@ -117,23 +120,28 @@ def write_prefs(event=None):
     print("Wrote prefs successfully")
 
 
+# save_as provides the dialog
 def save_as(event=None):
     global current_file, file_open
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     current_file = file_path
+    # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
-        return 'break'
+        return False, 'break'
+    
+    # if we get a valid file_path, let's save via dialog
     try:
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
-            print("File saved to a new location")
         write_prefs()
         file_open = 1
-        print("New location selected as current file being edited")
+    
+    # if any errors manage to get past this, let's do an exception to quit gracefully
     except FileNotFoundError:
-        messagebox.showerror("Error", "File not found.")
-
+        messagebox.showerror("Error", "Location nonexistent")
+        return False
+    print("File was saved to different location successfully.")
 
 def open_file(event=None):
     global current_file, file_open
@@ -179,13 +187,23 @@ def save_file2(event=None):
 
 def new_file(event=None):
     global current_file, file_open
-    save_file("y")
-    text_area.delete(1.0, "end")
-    print("Cleared text_area")
-    current_file = ""
-    write_prefs()
-    file_open = 0
-    print("New file created")
+
+    # Check if there is text in text_area
+    if file_written == 1:
+        # Only run this code if save_file, otherwise, don't force user to clear
+        if save_file("y"):
+            text_area.delete(1.0, "end")
+            print("Cleared text_area")
+            current_file = ""
+            write_prefs()
+            file_open = 0
+            print("New file created")
+    
+    # Otherwise, clear without obstruction
+    else:
+        text_area.delete(1.0, "end")
+        print("Cleared text_area")
+        current_file = ""
 
 
 def cut_text(event=None):
@@ -282,10 +300,24 @@ def decrease_font_size(event=None):
     text_font.config(size=current_size - 1)
     print("Font size decreased by 1 pt")
 
+# Create a function to check for text in text_area
+def check_file_written(event=None):
+    global file_written
+    print("Checking if text_area has been edited by the user to contain text...")
+    current_text = text_area.get(1.0, "end-1c")
+    # if there is text, set it to 1
+    if current_text:
+        print("There is text; setting to 1")
+        file_written = 1
+    # otherwise, set it to 0
+    else:
+        print("No text")
+        file_written = 0
 
 def runonkeyrelease(event=None):
     write_prefs()
     update_line_number()
+    check_file_written()
 
 def runonfilearg(file_path):
     global file_open, current_file
