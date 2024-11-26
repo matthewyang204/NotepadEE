@@ -47,6 +47,11 @@ try:
 except:
     pass
 
+# useful to avoid overwhelming user when he/she hits File > New
+global file_written
+file_written = 0
+print("file_written set to " + str(file_written))
+
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
@@ -197,8 +202,19 @@ def open_file(event=None):
 def new_file(event=None):
     global current_file, file_open
 
-    # Only run this code if it worked fine, otherwise, don't force user to clear
-    if save_file("y"):
+    # Check if there is text in text_area
+    if file_written == 1:
+        # Only run this code if save_file, otherwise, don't force user to clear
+        if save_file("y"):
+            text_area.delete(1.0, "end")
+            print("Cleared text_area")
+            current_file = ""
+            write_prefs()
+            file_open = 0
+            print("New file created")
+    
+    # Otherwise, clear without obstruction
+    else:
         text_area.delete(1.0, "end")
         print("Cleared text_area")
         current_file = ""
@@ -300,10 +316,26 @@ def decrease_font_size(event=None):
     text_font.config(size=current_size - 1)
     print("Font size decreased by 1 pt")
 
+# Create a function to check for text in text_area
+def check_file_written(event=None):
+    global file_written
+    print("Checking if text_area has been edited by the user to contain text...")
+    current_text = text_area.get(1.0, "end-1c")
+
+    # if there is text, set it to 1
+    if current_text:
+        print("There is text; setting to 1")
+        file_written = 1
+
+    # otherwise, set it to 0
+    else:
+        print("No text")
+        file_written = 0
 
 def runonkeyrelease(event=None):
     write_prefs()
     update_line_number()
+    check_file_written()
 
 def runonfilearg(file_path):
     global file_open, current_file
@@ -338,6 +370,8 @@ if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
         text_area.insert(1.0, file.read())
+
+check_file_written()
 
 menu = tk.Menu(root)
 root.config(menu=menu)
