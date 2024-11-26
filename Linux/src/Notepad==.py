@@ -198,6 +198,7 @@ def new_file(event=None):
             write_prefs()
             file_open = 0
             print("New file created")
+            file_written = 0
     
     # Otherwise, clear without obstruction
     else:
