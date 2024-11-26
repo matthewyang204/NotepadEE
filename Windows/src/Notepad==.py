@@ -122,21 +122,27 @@ def write_prefs(event=None):
     autosave_file()
     print("Prefs written")
 
-
+# save_as provides the dialog
 def save_as(event=None):
     global current_file, file_open
     file_path = filedialog.asksaveasfilename(defaultextension=".txt")
     current_file = file_path
+    # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
-        return 'break'
+        return False, 'break'
+    
+    # if we get a valid file_path, let's save via dialog
     try:
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
         file_open = 1
+    
+    # if any errors manage to get past this, let's do an exception to quit gracefully
     except FileNotFoundError:
-        messagebox.showerror("Error", "File not found.")
+        messagebox.showerror("Error", "Location nonexistent")
+        return False
     print("File was saved to different location successfully.")
 
 def save_file(warn):
@@ -154,8 +160,16 @@ def save_file(warn):
         if warn == "y":
             response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
             if response:
-                save_as()
-                print("File saved to a permanent location without warning successfully.")
+                if save_as():
+                    print("File saved to a permanent location without warning successfully.")
+                
+                # Return false if save_as() returns false
+                else:
+                    return False
+            
+            # Return true if response is no or else new_file() will not run correctly
+            else:
+                return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
@@ -182,13 +196,15 @@ def open_file(event=None):
 
 def new_file(event=None):
     global current_file, file_open
-    save_file("y")
-    text_area.delete(1.0, "end")
-    print("Cleared text_area")
-    current_file = ""
-    write_prefs()
-    file_open = 0
-    print("New file created")
+
+    # Only run this code if it worked fine, otherwise, don't force user to clear
+    if save_file("y"):
+        text_area.delete(1.0, "end")
+        print("Cleared text_area")
+        current_file = ""
+        write_prefs()
+        file_open = 0
+        print("New file created")
 
 
 def cut_text(event=None):
