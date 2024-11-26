@@ -200,7 +200,7 @@ def open_file(event=None):
     write_prefs()
 
 def new_file(event=None):
-    global current_file, file_open
+    global current_file, file_open, file_written
 
     # Check if there is text in text_area
     if file_written == 1:

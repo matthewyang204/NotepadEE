@@ -181,7 +181,7 @@ def save_file(warn):
                 print("File saved after warning user")
 
 def save_file2(event=None):
-    global current_file, file_open
+    global current_file, file_open, file_written
     print("No-warning wrapper triggered, running save_file with nowarning option")
     save_file("n")
 
