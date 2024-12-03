@@ -130,7 +130,7 @@ def write_prefs(event=None):
 # save_as provides the dialog
 def save_as(event=None):
     global current_file, file_open
-    file_path = filedialog.asksaveasfilename(defaultextension="", filetypes=(("All Files","*.*") ("Plain text file", ".txt") ("Batch script", ".bat") ("Shell script", ".sh") ("Python script", ".py")))
+    file_path = filedialog.asksaveasfilename(defaultextension="", filetypes=(("All Files","*.*"), ("Plain text file", ".txt"), ("Batch script", ".bat"), ("Shell script", ".sh"), ("Python script", ".py")))
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
