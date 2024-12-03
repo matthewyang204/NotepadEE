@@ -3,6 +3,7 @@ from tkinter import messagebox, font, filedialog
 import os
 import sys
 
+# define the variables required for the program to start
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
 filearg = sys.argv
@@ -50,6 +51,7 @@ global file_written
 file_written = 0
 print("file_written set to " + str(file_written))
 
+# load the GUI before defining userland functions
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
@@ -71,7 +73,7 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
-
+# define the userland functions
 def get_font_for_platform():
     if os.name == 'nt':
         return font.Font(family="Consolas", size=12)
@@ -100,10 +102,10 @@ def debug_var(event=None):
     #        print("Not working")
     return 'break'
 
-
 def autosave_file(event=None):
     global current_file
     global file_open
+    # if a file is open, save to the save PATH, otherwise, quit upon known error
     try:
         if file_open == 1:
             with open(current_file, 'w') as file:
