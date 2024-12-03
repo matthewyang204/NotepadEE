@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import messagebox, font, filedialog
 import os
-from tkinter import messagebox
-from tkinter import font
 import sys
 
 local_app_data_path = os.getenv('LOCALAPPDATA')
