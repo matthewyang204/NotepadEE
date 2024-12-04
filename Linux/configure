@@ -12,7 +12,7 @@ fi
 # Check for pip3
 if ! command -v pip3 &> /dev/null
 then
-    echo "pip3 not found. Please install it to continue."
+    echo "pip3 was not found. Please install it to your respective Python 3 installation to continue."
 else
     echo "pip3 is installed."
 fi
