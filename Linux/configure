@@ -37,4 +37,11 @@ else
     echo "python3-tk is installed."
 fi
 
+if ! dpkg -l | grep python3-dev >/dev/null 2>&1; then
+    echo "python3-dev is not installed. Please install it to continue."
+    exit 1
+else
+    echo "python3-dev is installed."
+fi
+
 echo "Now run 'make' to build."
