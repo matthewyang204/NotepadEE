@@ -10,7 +10,7 @@ all: build
 configure: ./configure
 
 build:
-	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
+	pyinstaller --hidden-import=tkinter -i Notepad.png --enable-shared src/$(APP_NAME).py
 	cp Notepad.png dist/Notepad==/
 	echo "Build completed. To install, run 'sudo make install'"
 
