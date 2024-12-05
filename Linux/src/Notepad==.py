@@ -123,7 +123,39 @@ def write_prefs(event=None):
 # save_as provides the dialog
 def save_as(event=None):
     global current_file, file_open
-    file_path = filedialog.asksaveasfilename(defaultextension="", filetypes=(("All Files","*.*"), ("Plain text file", ".txt"), ("Batch script", ".bat"), ("Shell script", ".sh"), ("Python script", ".py")))
+    file_path = filedialog.asksaveasfilename(
+    defaultextension="",
+    filetypes=(
+        ("All Files", "*.*"),
+        
+        # Notepad files
+        ("Plain text file", ".txt"),
+        ("Log", ".log"),
+        
+        # ms ini/inf
+        ("INI files", ".ini"),
+        ("INF files", ".inf"),
+        
+        # C, C++, objc
+        ("C, C++, objc", ".h .hh .hpp .hxx .c .cpp .cxx .cc .m .mm .vcxproj .vcproj .props .vsprops .manifest"),
+        
+        # Java, C#, Pascal
+        ("Java, C#, Pascal", ".java .cs .pas .pp .inc"),
+        
+        # Web script
+        ("Web script", ".html .htm .shtml .shtm .hta .asp .aspx .css .js .json .mjs .jsm .jsp .php .php3 .php4 .php5 .phps .phpt .phtml .xml .xhtml .xht .xul .kml .xaml .xsml"),
+        
+        # Script files
+        ("Script files", ".sh .bsh .bash .bat .cmd .nsi .nsh .lua .pl .pm .py .iss"),
+        
+        # Property scripts
+        ("Property scripts", ".rc .as .mx .vb .vbs"),
+        
+        # Fortran, TeX, SQL
+        ("Fortran, TeX, SQL", ".f .for .f90 .f95 .f2k .tex .sql"),
+        
+        # Miscellaneous files
+        ("Miscellaneous", ".nfo .mak")))
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
