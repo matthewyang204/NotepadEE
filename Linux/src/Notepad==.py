@@ -124,104 +124,38 @@ def write_prefs(event=None):
 def save_as(event=None):
     global current_file, file_open
     file_path = filedialog.asksaveasfilename(
-        defaultextension="",
-        filetypes=(
-            ("All Files (*.*)", "*.*"),
-
-            # Notepad files
-            ("Plain text file (.txt)", ".txt"),
-            ("Log file (.log)", ".log"),
-
-            # ms ini/inf
-            ("INI file (.ini)", ".ini"),
-            ("INF file (.inf)", ".inf"),
-
-            # C, C++, objc
-            ("C, C++, objc header (.h)", ".h"),
-            ("C, C++, objc header (.hh)", ".hh"),
-            ("C, C++, objc header (.hpp)", ".hpp"),
-            ("C, C++, objc header (.hxx)", ".hxx"),
-            ("C, C++, objc source (.c)", ".c"),
-            ("C, C++, objc source (.cpp)", ".cpp"),
-            ("C, C++, objc source (.cxx)", ".cxx"),
-            ("C, C++, objc source (.cc)", ".cc"),
-            ("C, C++, objc source (.m)", ".m"),
-            ("C, C++, objc source (.mm)", ".mm"),
-            ("C, C++, objc project (.vcxproj)", ".vcxproj"),
-            ("C, C++, objc project (.vcproj)", ".vcproj"),
-            ("C, C++, objc properties (.props)", ".props"),
-            ("C, C++, objc properties (.vsprops)", ".vsprops"),
-            ("C, C++, objc manifest (.manifest)", ".manifest"),
-
-            # Java, C#, Pascal
-            ("Java file (.java)", ".java"),
-            ("C# file (.cs)", ".cs"),
-            ("Pascal file (.pas)", ".pas"),
-            ("Pascal file (.pp)", ".pp"),
-            ("Include file (.inc)", ".inc"),
-
-            # Web script files
-            ("HTML file (.html)", ".html"),
-            ("HTML file (.htm)", ".htm"),
-            ("Server-side HTML (.shtml)", ".shtml"),
-            ("Server-side HTML (.shtm)", ".shtm"),
-            ("HTML Application (.hta)", ".hta"),
-            ("ASP file (.asp)", ".asp"),
-            ("ASP.NET file (.aspx)", ".aspx"),
-            ("CSS file (.css)", ".css"),
-            ("JavaScript file (.js)", ".js"),
-            ("JSON file (.json)", ".json"),
-            ("JavaScript module (.mjs)", ".mjs"),
-            ("JavaScript module (.jsm)", ".jsm"),
-            ("JSP file (.jsp)", ".jsp"),
-            ("PHP file (.php)", ".php"),
-            ("PHP3 file (.php3)", ".php3"),
-            ("PHP4 file (.php4)", ".php4"),
-            ("PHP5 file (.php5)", ".php5"),
-            ("PHP script (.phps)", ".phps"),
-            ("PHP script (.phpt)", ".phpt"),
-            ("PHP file (.phtml)", ".phtml"),
-            ("XML file (.xml)", ".xml"),
-            ("XHTML file (.xhtml)", ".xhtml"),
-            ("XHTML file (.xht)", ".xht"),
-            ("XUL file (.xul)", ".xul"),
-            ("KML file (.kml)", ".kml"),
-            ("XAML file (.xaml)", ".xaml"),
-            ("XSML file (.xsml)", ".xsml"),
-
-            # Script files
-            ("Shell script (.sh)", ".sh"),
-            ("Bash script (.bsh)", ".bsh"),
-            ("Bash script (.bash)", ".bash"),
-            ("Batch file (.bat)", ".bat"),
-            ("Command file (.cmd)", ".cmd"),
-            ("NSIS script (.nsi)", ".nsi"),
-            ("NSIS header (.nsh)", ".nsh"),
-            ("Lua script (.lua)", ".lua"),
-            ("Perl script (.pl)", ".pl"),
-            ("Perl module (.pm)", ".pm"),
-            ("Python script (.py)", ".py"),
-            ("Inno Setup script (.iss)", ".iss"),
-
-            # Property scripts
-            ("Resource file (.rc)", ".rc"),
-            ("ActionScript (.as)", ".as"),
-            ("MaxScript (.mx)", ".mx"),
-            ("Visual Basic (.vb)", ".vb"),
-            ("Visual Basic script (.vbs)", ".vbs"),
-
-            # Fortran, TeX, SQL
-            ("Fortran file (.f)", ".f"),
-            ("Fortran file (.for)", ".for"),
-            ("Fortran 90 file (.f90)", ".f90"),
-            ("Fortran 95 file (.f95)", ".f95"),
-            ("Fortran 2000 file (.f2k)", ".f2k"),
-            ("TeX file (.tex)", ".tex"),
-            ("SQL file (.sql)", ".sql"),
-
-            # Miscellaneous files
-            ("NFO file (.nfo)", ".nfo"),
-            ("Makefile (.mak)", ".mak")))
+    defaultextension="",
+    filetypes=(
+        ("All Files", "*.*"),
+        
+        # Notepad files
+        ("Plain text file", ".txt"),
+        ("Log", ".log"),
+        
+        # ms ini/inf
+        ("INI files", ".ini"),
+        ("INF files", ".inf"),
+        
+        # C, C++, objc
+        ("C, C++, objc", ".h .hh .hpp .hxx .c .cpp .cxx .cc .m .mm .vcxproj .vcproj .props .vsprops .manifest"),
+        
+        # Java, C#, Pascal
+        ("Java, C#, Pascal", ".java .cs .pas .pp .inc"),
+        
+        # Web script
+        ("Web script", ".html .htm .shtml .shtm .hta .asp .aspx .css .js .json .mjs .jsm .jsp .php .php3 .php4 .php5 .phps .phpt .phtml .xml .xhtml .xht .xul .kml .xaml .xsml"),
+        
+        # Script files
+        ("Script files", ".sh .bsh .bash .bat .cmd .nsi .nsh .lua .pl .pm .py .iss"),
+        
+        # Property scripts
+        ("Property scripts", ".rc .as .mx .vb .vbs"),
+        
+        # Fortran, TeX, SQL
+        ("Fortran, TeX, SQL", ".f .for .f90 .f95 .f2k .tex .sql"),
+        
+        # Miscellaneous files
+        ("Miscellaneous", ".nfo .mak")))
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
