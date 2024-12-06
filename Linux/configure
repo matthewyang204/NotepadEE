@@ -19,7 +19,8 @@ fi
 
 # Install required python packages
 echo "Installing required packages"
-if ! command -v python3 -m pip install -r requirements.txt --break-system-packages >/dev/null 2>&1; then
+if ! command -v python3 -m pip install -r requirements.txt --break-system-packages &> /dev/null
+then
     echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages"
     python3 -m pip install -r requirements.txt
 else
