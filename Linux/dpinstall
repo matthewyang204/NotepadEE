@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "This script needs to install some packages as root, so please enter your password if prompted."
+echo "Installing system-level packages..."
+
+echo "Updating apt first..."
+yes | sudo apt-get update
+
+echo "Installing packages..."
+yes | sudo apt-get install python3 python3-tk python3-pip python3-dev patchelf
+
+echo "done"
+
+echo "Installing python packages with pip..."
+if python3 -m pip install -r requirements.txt --break-system-packages &> /dev/null; then
+    echo "Required python packages installed"
+else
+    echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages"
+    python3 -m pip install -r requirements.txt
+fi
+echo "done"
