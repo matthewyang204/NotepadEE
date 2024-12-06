@@ -123,7 +123,105 @@ def write_prefs(event=None):
 # save_as provides the dialog
 def save_as(event=None):
     global current_file, file_open
-    file_path = filedialog.asksaveasfilename(defaultextension="", filetypes=(("All Files","*.*"), ("Plain text file", ".txt"), ("Batch script", ".bat"), ("Shell script", ".sh"), ("Python script", ".py")))
+    file_path = filedialog.asksaveasfilename(
+        defaultextension="",
+        filetypes=(
+            ("All Files", "*.*"),
+
+            # Notepad files
+            ("Plain text file", ".txt"),
+            ("Log file", ".log"),
+
+            # ms ini/inf
+            ("INI file", ".ini"),
+            ("INF file (.inf)", ".inf"),
+
+            # C, C++, objc
+            ("C, C++, objc header", ".h"),
+            ("C, C++, objc header", ".hh"),
+            ("C, C++, objc header", ".hpp"),
+            ("C, C++, objc header", ".hxx"),
+            ("C, C++, objc source", ".c"),
+            ("C, C++, objc source", ".cpp"),
+            ("C, C++, objc source", ".cxx"),
+            ("C, C++, objc source", ".cc"),
+            ("C, C++, objc source", ".m"),
+            ("C, C++, objc source", ".mm"),
+            ("C, C++, objc project", ".vcxproj"),
+            ("C, C++, objc project", ".vcproj"),
+            ("C, C++, objc properties", ".props"),
+            ("C, C++, objc properties", ".vsprops"),
+            ("C, C++, objc manifest", ".manifest"),
+
+            # Java, C#, Pascal
+            ("Java file", ".java"),
+            ("C# file", ".cs"),
+            ("Pascal file", ".pas"),
+            ("Pascal file", ".pp"),
+            ("Include file", ".inc"),
+
+            # Web script files
+            ("HTML file", ".html"),
+            ("HTML file", ".htm"),
+            ("Server-side HTML", ".shtml"),
+            ("Server-side HTML", ".shtm"),
+            ("HTML Application", ".hta"),
+            ("ASP file", ".asp"),
+            ("ASP.NET file", ".aspx"),
+            ("CSS file", ".css"),
+            ("JavaScript file", ".js"),
+            ("JSON file", ".json"),
+            ("JavaScript module", ".mjs"),
+            ("JavaScript module", ".jsm"),
+            ("JSP file", ".jsp"),
+            ("PHP file", ".php"),
+            ("PHP3 file", ".php3"),
+            ("PHP4 file", ".php4"),
+            ("PHP5 file", ".php5"),
+            ("PHP script", ".phps"),
+            ("PHP script", ".phpt"),
+            ("PHP file", ".phtml"),
+            ("XML file", ".xml"),
+            ("XHTML file", ".xhtml"),
+            ("XHTML file", ".xht"),
+            ("XUL file", ".xul"),
+            ("KML file", ".kml"),
+            ("XAML file", ".xaml"),
+            ("XSML file", ".xsml"),
+
+            # Script files
+            ("Shell script", ".sh"),
+            ("Bash script", ".bsh"),
+            ("Bash script", ".bash"),
+            ("Batch file", ".bat"),
+            ("Command file", ".cmd"),
+            ("NSIS script", ".nsi"),
+            ("NSIS header", ".nsh"),
+            ("Lua script", ".lua"),
+            ("Perl script", ".pl"),
+            ("Perl module", ".pm"),
+            ("Python script", ".py"),
+            ("Inno Setup script", ".iss"),
+
+            # Property scripts
+            ("Resource file", ".rc"),
+            ("ActionScript", ".as"),
+            ("MaxScript", ".mx"),
+            ("Visual Basic", ".vb"),
+            ("Visual Basic script", ".vbs"),
+
+            # Fortran, TeX, SQL
+            ("Fortran file", ".f"),
+            ("Fortran file", ".for"),
+            ("Fortran 90 file", ".f90"),
+            ("Fortran 95 file", ".f95"),
+            ("Fortran 2000 file", ".f2k"),
+            ("TeX file", ".tex"),
+            ("SQL file", ".sql"),
+
+            # Miscellaneous files
+            ("NFO file", ".nfo"),
+            ("Makefile", ".mak")))
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:

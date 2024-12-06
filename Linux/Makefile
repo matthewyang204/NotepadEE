@@ -10,9 +10,7 @@ all: build
 configure: ./configure
 
 build:
-	nuitka --standalone --enable-plugin=tk-inter --output-dir=$(BUILD_DIR) src/$(APP_NAME).py
-	mv dist/Notepad==.dist dist/Notepad==
-	mv dist/Notepad==/Notepad==.bin dist/Notepad==/Notepad==
+	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
 	cp Notepad.png dist/Notepad==/
 	echo "Build completed. To install, run 'sudo make install'"
 
