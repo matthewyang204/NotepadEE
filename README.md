@@ -11,6 +11,7 @@ Linux
 
 Linux build instructions:
 - Please clone the repo and cd into it
+- If you haven't yet, please run the `dpinstall` script to install dependencies to your system
 - Type `./configure && make && sudo make install` to build from source and install
 - If the configure script needs to install stuff, enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
