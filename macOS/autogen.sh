@@ -3,7 +3,7 @@
 
 # First copy files from the Linux section of the repository
 echo "Copying files..."
-cp -R -V ../Linux/* ./
+cp -R -v ../Linux/* ./
 echo "done"
 
 # Patch the files
