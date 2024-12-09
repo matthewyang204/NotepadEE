@@ -3,12 +3,8 @@ all: build
 configure: ./configure
 
 build:
-	nuitka --macos-create-app-bundle --macos-app-icon=Notepad.icns --macos-app-version=custom-built --macos-app-name="Notepad==" --enable-plugin=tk-inter --output-dir=dist src/main/Notepad==.py
-	nuitka --macos-create-app-bundle --macos-app-icon=Notepad.icns --macos-app-version=custom-built \--macos-app-name="Notepad==" --enable-plugin=tk-inter --output-dir=dist/clone src/clone/Notepad==.py
-	mkdir dist/Notepad==.app/Contents/Resources/Clone
-	mv dist/clone/Notepad==.app dist/Notepad==.app/Contents/Resources/Clone/
+	pyinstaller --windowed --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
 	echo "Build completed. To install, run 'sudo make install'"
-
 install:
 	sudo mv dist/Notepad==.app /Applications/
 	echo "Install successfull"
@@ -24,6 +20,8 @@ uninstall-upgrade:
 
 clean:
 	rm -rf dist
+	rm -rf build
+	rm Notepad==.spec
 	echo "Cleaned all temp files used"
 
 upgrade: uninstall-upgrade install
