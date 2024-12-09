@@ -40,11 +40,11 @@ Any Mac capable of running Python 3.4 or later works for building. Therefore, yo
 
 Binaries are not provided.
 
-# Prebuild requirements
+Prebuild requirements:
 - Python 3.4 or later
 - make installed
 - `configure` script will automatically install Python packages
 
-# Build instructions
+Build instructions:
 1. Clone the repository and navigate to the macOS folder inside of it
 2. Run `sh autogen.sh` to automatically configure and build
