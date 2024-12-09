@@ -38,6 +38,8 @@ Source code located in the [macOS section](https://github.com/matthewyang204/Not
 
 Any Mac capable of running Python 3.4 or later works for building. Therefore, your Mac must be capable of running macOSX 10.9 Mavericks or later in order to build, as it is the earliest version of macOSX capable of running Python 3.4.
 
+Hackintoshes are supported.
+
 Binaries are not provided.
 
 Prebuild requirements:
