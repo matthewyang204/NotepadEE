@@ -1,3 +1,0 @@
-nuitka
-pillow
-tk
