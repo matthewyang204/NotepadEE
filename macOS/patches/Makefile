@@ -3,7 +3,7 @@ all: build
 configure: ./configure
 
 build:
-	pyinstaller --windowed --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
+	pyinstaller --windowed --hidden-import=tkinter -i Notepad.png src/Notepad==.py
 	echo "Build completed. To install, run 'sudo make install'"
 install:
 	sudo mv dist/Notepad==.app /Applications/
