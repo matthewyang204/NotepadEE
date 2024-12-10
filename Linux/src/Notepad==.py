@@ -264,6 +264,7 @@ def save_file(warn):
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
             write_prefs()
+            return True
         except FileNotFoundError:
             return 'break'
     else:
