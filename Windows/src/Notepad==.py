@@ -257,6 +257,7 @@ def save_file(warn):
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
             write_prefs()
+            return True
         except FileNotFoundError:
             return 'break'
     else:
@@ -419,7 +420,7 @@ def decrease_font_size(event=None):
 def check_file_written(event=None):
     global file_written
     print("Checking if text_area has been edited by the user to contain text...")
-    current_text = text_area.get(1.0, "end-1c")
+    current_text = text_area.get(1.0, "end-1c").strip()
 
     # if there is text, set it to 1
     if current_text:
