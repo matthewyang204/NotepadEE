@@ -22,10 +22,19 @@ echo "done"
 echo "done"
 
 # Configure the build
+# Configure the build
 echo "Configuring build..."
 ./configure
-echo "done"
 
-# Build
-echo "Building..."
-make
+# Check if the configure command was successful
+if [ $? -eq 0 ]; then
+    echo "Configuration successful. Proceeding to build..."
+    
+    # Build
+    echo "Building..."
+    make
+    echo "done"
+else
+    echo "Configuration failed. Exiting."
+    exit 1
+fi
