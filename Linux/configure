@@ -50,3 +50,7 @@ else
 fi
 
 echo "Now run 'make' to build."
+
+# Force a failure at the end of the script for testing purposes; uncomment these lines to purposely crash the configure script
+# echo "Simulating failure for testing..."
+# exit 1
