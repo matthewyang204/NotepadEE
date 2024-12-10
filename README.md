@@ -4,7 +4,7 @@ Have you ever wanted to jot something down on a Unix system and wished the Windo
 -----
 Linux
 -----
-- Download latest dev source code from the Linux repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
+- Download latest dev source code from the Linux section of this repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
 - These binaries are next to the Windows binaries
 - Any Debian-based distro should work for building
 - Any GUI distro from the last 10-15 years should work for running binaries
@@ -21,7 +21,7 @@ Linux build instructions:
 -----
 Windows
 -----
-- Download the latest dev source code from the Windows repository: https://github.com/matthewyang204/NotepadEE/tree/main/Windows
+- Download the latest dev source code from the Windows section of this repository: https://github.com/matthewyang204/NotepadEE/tree/main/Windows
 - Binaries are next to all other binaries
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
