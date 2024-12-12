@@ -49,4 +49,12 @@ else
     echo "python3-dev is installed."
 fi
 
+if ! command -v tar &> /dev/null
+then
+    echo "Tar not found. Install it before continuing."
+    exit 1
+else
+    echo "Tar is installed."
+fi
+
 echo "Now run 'make' to build."

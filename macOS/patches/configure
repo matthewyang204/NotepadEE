@@ -20,6 +20,14 @@ else
     echo "pip3 is installed."
 fi
 
+if ! command -v tar &> /dev/null
+then
+    echo "Tar not found. Install it before continuing."
+    exit 1
+else
+    echo "Tar is installed."
+fi
+
 # Install required python packages
 echo "Installing required packages"
 pip3 install -r requirements.txt --break-system-packages
