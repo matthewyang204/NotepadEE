@@ -25,6 +25,16 @@ clean:
 	rm Notepad==.spec
 	echo "Cleaned all temp files used"
 
+dist: clean
+	mkdir ../temp
+	cp -R ./* ../temp/
+	tar -czvf NotepadEE-macOS-src.tar.gz -C ../temp .
+	rm -rf ../temp
+
+clean-dist: clean
+	rm -rf NotepadEE-Linux-src.tar.gz
+	rm -rf ../temp
+
 upgrade: uninstall-upgrade install
 
 .PHONY: configure build install clean
