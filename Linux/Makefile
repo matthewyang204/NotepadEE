@@ -45,6 +45,16 @@ clean:
 	rm -rf $(APP_NAME).spec
 	echo "Cleaned all temp files used"
 
+dist: clean
+	mkdir NotepadEE-Linux-src
+	cp -R ./* NotepadEE-Linux-src/
+	tar -czf NotepadEE-Linux-src.tar NotepadEE-Linux-src
+	rm -rf NotepadEE-Linux-src
+
+clean-dist: clean
+	rm -rf NotepadEE-Linux-src.tar
+	rm -rf NotepadEE-Linux-src
+
 upgrade: uninstall install
 
 upgrade-no-desktop-file: uninstall-no-desktop-file install-no-desktop-file
