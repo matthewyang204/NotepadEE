@@ -46,13 +46,14 @@ clean:
 	echo "Cleaned all temp files used"
 
 dist: clean
-	cp -R ./* NotepadEE-Linux-src/
-	tar -czf NotepadEE-Linux-src.tar NotepadEE-Linux-src
-	rm -rf NotepadEE-Linux-src
+	mkdir ../temp
+	cp -R ./* ../temp/
+	tar -czf NotepadEE-Linux-src.tar.gz temp
+	rm -rf ../temp
 
 clean-dist: clean
-	rm -rf NotepadEE-Linux-src.tar
-	rm -rf NotepadEE-Linux-src
+	rm -rf NotepadEE-Linux-src.tar.gz
+	rm -rf temp
 
 upgrade: uninstall install
 
