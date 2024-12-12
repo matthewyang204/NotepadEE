@@ -48,7 +48,7 @@ clean:
 dist: clean
 	mkdir ../temp
 	cp -R ./* ../temp/
-	tar -czf NotepadEE-Linux-src.tar.gz ../temp
+	tar -czvf NotepadEE-Linux-src.tar.gz -C ../temp .
 	rm -rf ../temp
 
 clean-dist: clean
