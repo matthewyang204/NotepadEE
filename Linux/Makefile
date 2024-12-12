@@ -53,7 +53,7 @@ dist: clean
 
 clean-dist: clean
 	rm -rf NotepadEE-Linux-src.tar.gz
-	rm -rf temp
+	rm -rf ../temp
 
 upgrade: uninstall install
 
