@@ -226,7 +226,7 @@ def save_as(event=None):
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
-        return False, 'break'
+        return False
     
     # if we get a valid file_path, let's save via dialog
     try:
@@ -235,12 +235,13 @@ def save_as(event=None):
             file.write(text)
         write_prefs()
         file_open = 1
+        print("File was saved to different location successfully.")
+        return True
     
     # if any errors manage to get past this, let's do an exception to quit gracefully
     except FileNotFoundError:
         messagebox.showerror("Error", "Location nonexistent")
         return False
-    print("File was saved to different location successfully.")
 
 def open_file(event=None):
     global current_file, file_open
