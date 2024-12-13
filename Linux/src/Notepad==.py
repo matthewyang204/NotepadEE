@@ -4,6 +4,7 @@ import os
 from tkinter import messagebox
 from tkinter import font
 import sys
+import time
 
 filearg = sys.argv
 if len(filearg) <= 1:
@@ -397,6 +398,7 @@ def update_line_number(event=None):
 def updatetwice(event=None):
     for i in range(2):
         update_line_number()
+        time.sleep(0.5)
 
 def increase_font_size(event=None):
     current_size = text_font['size']
