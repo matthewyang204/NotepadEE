@@ -448,6 +448,7 @@ if openFile == 1:
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runonkeyrelease)
+runonkeyrelease()
 if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
