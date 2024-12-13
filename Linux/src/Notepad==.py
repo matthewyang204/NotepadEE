@@ -274,11 +274,15 @@ def save_file(warn):
                 save_as()
                 print("File saved without warning")
                 return True
+            else:
+                return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
                 save_as()
                 print("File saved after warning user")
+                return True
+            else:
                 return True
 
 def save_file2(event=None):
