@@ -414,7 +414,7 @@ def check_file_written(event=None):
         print("No text")
         file_written = 0
 
-def runonkeyrelease(event=None):
+def runinbackground(event=None):
     write_prefs()
     update_line_number()
     check_file_written()
@@ -445,10 +445,10 @@ def runonfilearg(file_path):
 
 if openFile == 1:
     runonfilearg(fileToBeOpened)
-
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
-text_area.bind('<KeyRelease>', runonkeyrelease)
-runonkeyrelease()
+text_area.bind('<KeyRelease>', runinbackground)
+text_area.bind('<Button-1>', runinbackground)
+runinbackground()
 if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
