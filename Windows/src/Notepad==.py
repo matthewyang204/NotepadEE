@@ -236,6 +236,7 @@ def save_as(event=None):
     
     # if we get a valid file_path, let's save via dialog
     try:
+        print(file_path)
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
