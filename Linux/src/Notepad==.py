@@ -394,6 +394,9 @@ def update_line_number(event=None):
     word_count_var.set("Words: " + str(len(words)))
     print("Status bar updated")
 
+def updatetwice(event=None):
+    for i in range(2):
+        update_line_number()
 
 def increase_font_size(event=None):
     current_size = text_font['size']
@@ -453,7 +456,7 @@ if openFile == 1:
     runonfilearg(fileToBeOpened)
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
-text_area.bind('<Button-1>', runinbackground)
+text_area.bind('<Button-1>', updatetwice)
 runinbackground()
 if os.path.exists(last_write):
     text_area.delete(1.0, "end")
