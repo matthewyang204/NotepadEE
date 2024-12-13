@@ -241,12 +241,13 @@ def save_as(event=None):
             file.write(text)
         write_prefs()
         file_open = 1
+        print("File was saved to different location successfully.")
+        return True
     
     # if any errors manage to get past this, let's do an exception to quit gracefully
     except FileNotFoundError:
         messagebox.showerror("Error", "Location nonexistent")
         return False
-    print("File was saved to different location successfully.")
 
 def save_file(warn):
     global current_file, file_open
