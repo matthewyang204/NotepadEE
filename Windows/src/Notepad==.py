@@ -264,21 +264,19 @@ def save_file(warn):
         if warn == "y":
             response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
             if response:
-                if save_as():
-                    print("File saved to a permanent location without warning successfully.")
-                
-                # Return false if save_as() returns false
-                else:
-                    return False
-            
-            # Return true if response is no or else new_file() will not run correctly
+                save_as()
+                print("File saved without warning")
+                return True
             else:
                 return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
                 save_as()
-                print("File saved to permanent location before proceeding to run next function successfully.")
+                print("File saved after warning user")
+                return True
+            else:
+                return True
 
 def save_file2(event=None):
     global current_file, file_open
@@ -432,9 +430,9 @@ def check_file_written(event=None):
         print("No text")
         file_written = 0
 
-def runonkeyrelease(event=None):
+def runinbackground(event=None):
     write_prefs()
-    update_line_number()
+    root.after(50, update_line_number)
     check_file_written()
 
 def runonfilearg(file_path):
@@ -465,7 +463,9 @@ if openFile == 1:
     runonfilearg(fileToBeOpened)
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
-text_area.bind('<KeyRelease>', runonkeyrelease)
+text_area.bind('<KeyRelease>', runinbackground)
+text_area.bind('<Button-1>', runinbackground)
+runinbackground()
 if os.path.exists(last_write):
     text_area.delete(1.0, "end")
     with open(last_write, 'r') as file:
