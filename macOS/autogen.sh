@@ -22,7 +22,6 @@ echo "done"
 echo "done"
 
 # Configure the build
-# Configure the build
 echo "Configuring build..."
 ./configure
 
