@@ -5,6 +5,8 @@ INSTALL_DIR = /opt/matthewyang
 BIN_LINK = /usr/local/bin/notepadee
 DESKTOP_FILE = /usr/share/applications/notepadee.desktop
 
+.SILENT:
+
 all: build
 
 configure:

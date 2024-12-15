@@ -1,3 +1,5 @@
+.SILENT:
+
 all: build
 
 configure: ./configure
@@ -37,4 +39,4 @@ clean-dist: clean
 
 upgrade: uninstall-upgrade install
 
-.PHONY: configure build install clean
+.PHONY: configure build install uninstall uninstall-upgrade clean dist clean-dist upgrade
