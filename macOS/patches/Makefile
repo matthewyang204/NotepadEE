@@ -1,3 +1,5 @@
+@echo off
+
 all: build
 
 configure: ./configure

@@ -1,3 +1,6 @@
+# Stop echo from spitting out every single command
+@echo off
+
 # Variables
 APP_NAME = Notepad==
 BUILD_DIR = dist
