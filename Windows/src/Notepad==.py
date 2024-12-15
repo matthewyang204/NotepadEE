@@ -7,12 +7,11 @@ import sys
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
 filearg = sys.argv
+global openFile
+global fileToBeOpened
 if len(filearg) <= 1:
     openFile = 0
-    print(
-        "No arguments provided. Proceeding to load program with last known file..."
-    )
-    print("Program loaded")
+    print("No arguments provided. Proceeding to load program with last known file...")
 else:
     openFile = 1
     print("Assuming argument is the file to open. Loading file...")
@@ -34,8 +33,10 @@ else:
     current_file = ""
     file_open = 0
 
+global last_write
 last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
                           'last_write')
+global folder_path
 folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
@@ -87,6 +88,11 @@ text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
+if os.path.exists(last_write):
+    text_area.delete(1.0, "end")
+    with open(last_write, 'r') as file:
+        text_area.insert(1.0, file.read())
+    print("Program loaded")
 
 def debug_var(event=None):
     global file_open, current_file
@@ -470,10 +476,6 @@ text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
-if os.path.exists(last_write):
-    text_area.delete(1.0, "end")
-    with open(last_write, 'r') as file:
-        text_area.insert(1.0, file.read())
 
 check_file_written()
 
