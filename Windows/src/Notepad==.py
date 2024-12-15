@@ -89,17 +89,17 @@ text_area.config(font=text_font)
 
 
 def debug_var(event=None):
-    #    global file_open, current_file
-    #    if current_file:
-    #        print("Current file variable works")
-    #        print(current_file)
-    #    else:
-    #        print("Not intact")
-    #    if file_open:
-    #        print("File_open variable is intact")
-    #        print(file_open)
-    #    else:
-    #        print("Not working")
+    global file_open, current_file
+    if current_file:
+        print("Current file variable works")
+        print(current_file)
+    else:
+        print("Not intact")
+    if file_open:
+        print("File_open variable is intact")
+        print(file_open)
+    else:
+        print("Not working")
     return 'break'
 
 def autosave_file(event=None):
