@@ -437,6 +437,7 @@ def runinbackground(event=None):
     write_prefs()
     root.after(50, update_line_number)
     check_file_written()
+    debug_var()
 
 def runonfilearg(file_path):
     global file_open, current_file
