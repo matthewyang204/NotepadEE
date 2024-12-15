@@ -88,11 +88,10 @@ text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
-if os.path.exists(last_write):
-    text_area.delete(1.0, "end")
-    with open(last_write, 'r') as file:
-        text_area.insert(1.0, file.read())
-    print("Program loaded")
+text_area.delete(1.0, "end")
+with open(last_write, 'r') as file:
+    text_area.insert(1.0, file.read())
+print("Program loaded")
 
 def debug_var(event=None):
     global file_open, current_file
