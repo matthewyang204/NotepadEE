@@ -6,6 +6,9 @@ import sys
 # define the variables required for the program to start
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
+# for debugging on Linux
+# local_app_data_path = os.path.expanduser('~')
+
 filearg = sys.argv
 if len(filearg) <= 1:
     openFile = 0
@@ -34,11 +37,15 @@ else:
     current_file = ""
     file_open = 0
 
-last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
-                          'last_write')
 folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
+
+last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_write')
+if not os.path.exists(last_write):
+    with open(last_write, 'w'):
+        pass
+
 
 try:
     from ctypes import windll
