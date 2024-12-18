@@ -5,9 +5,12 @@ INSTALL_DIR = /opt/matthewyang
 BIN_LINK = /usr/local/bin/notepadee
 DESKTOP_FILE = /usr/share/applications/notepadee.desktop
 
+.SILENT:
+
 all: build
 
-configure: ./configure
+configure:
+	./configure
 
 build:
 	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
@@ -34,10 +37,19 @@ uninstall:
 	sudo rm -rf $(DESKTOP_FILE)
 	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
 
+uninstall-upgrade:
+	sudo rm -rf /opt/matthewyang/$(APP_NAME)
+	sudo rm -f $(BIN_LINK)
+	sudo rm -rf $(DESKTOP_FILE)
+
 uninstall-no-desktop-file:
 	sudo rm -rf /opt/matthewyang/$(APP_NAME)
 	sudo rm -f $(BIN_LINK)
 	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
+
+uninstall-no-desktop-file-upgrade:
+	sudo rm -rf /opt/matthewyang/$(APP_NAME)
+	sudo rm -f $(BIN_LINK)
 
 clean:
 	rm -rf dist
@@ -55,8 +67,8 @@ clean-dist: clean
 	rm -rf NotepadEE-Linux-src.tar.gz
 	rm -rf ../temp
 
-upgrade: uninstall install
+upgrade: uninstall-upgrade install
 
-upgrade-no-desktop-file: uninstall-no-desktop-file install-no-desktop-file
+upgrade-no-desktop-file: uninstall-no-desktop-file-upgrade install-no-desktop-file
 
-.PHONY: configure build install clean
+.PHONY: configure build install clean dist clean-dist

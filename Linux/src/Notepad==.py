@@ -38,6 +38,7 @@ folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
+global last_write
 last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
 if not os.path.exists(last_write):
     with open(last_write, 'w'):
@@ -81,19 +82,23 @@ text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
+text_area.delete(1.0, "end")
+with open(last_write, 'r') as file:
+    text_area.insert(1.0, file.read())
+print("Program loaded")
 
 def debug_var(event=None):
-    #    global file_open, current_file
-    #    if current_file:
-    #        print("Current file variable works")
-    #        print(current_file)
-    #    else:
-    #        print("Not intact")
-    #    if file_open:
-    #        print("File_open variable is intact")
-    #        print(file_open)
-    #    else:
-    #        print("Not working")
+    global file_open, current_file
+    if current_file:
+        print("Current file variable works")
+        print(current_file)
+    else:
+        print("Not intact")
+    if file_open:
+        print("File_open variable is intact")
+        print(file_open)
+    else:
+        print("Not working")
     return 'break'
 
 
@@ -430,6 +435,7 @@ def runinbackground(event=None):
     write_prefs()
     root.after(50, update_line_number)
     check_file_written()
+    debug_var()
 
 def runonfilearg(file_path):
     global file_open, current_file
@@ -461,10 +467,6 @@ text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
-if os.path.exists(last_write):
-    text_area.delete(1.0, "end")
-    with open(last_write, 'r') as file:
-        text_area.insert(1.0, file.read())
 
 menu = tk.Menu(root)
 root.config(menu=menu)
