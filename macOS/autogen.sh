@@ -21,6 +21,10 @@ cp patches/Makefile ./
 echo "done"
 echo "done"
 
+# Debugging exit to check if files have been properly patched
+# Only enable if you need it
+# exit 0
+
 # Make the configure script executable
 echo "Making scripts executable"
 chmod +x configure
