@@ -10,18 +10,14 @@ echo "done"
 echo "Patching files..."
 echo "Removing dpinstall..."
 rm dpinstall
-echo "done"
 echo "Patching configure script..."
 rm configure
 cp patches/configure ./
-echo "done"
 echo "Patching Makefile..."
 rm Makefile
 cp patches/Makefile ./
-echo "done"
 echo "Patching the key mappings..."
 sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
-echo "done"
 echo "done"
 
 
