@@ -21,6 +21,11 @@ cp patches/Makefile ./
 echo "done"
 echo "done"
 
+# Make the configure script executable
+echo "Making scripts executable"
+chmod +x configure
+echo "done"
+
 # Configure the build
 echo "Configuring build..."
 ./configure
