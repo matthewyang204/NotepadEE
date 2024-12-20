@@ -20,7 +20,7 @@ rm Makefile
 cp patches/Makefile ./
 echo "done"
 echo "Patching the key mappings..."
-sed -i 's/<Control-/<Command-/g' src/Notepad==.py
+sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
 echo "done"
 echo "done"
 
