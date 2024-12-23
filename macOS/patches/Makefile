@@ -1,10 +1,10 @@
 .SILENT:
 
-all: build
+all: build-pyinstaller
 
 configure: ./configure
 
-build:
+build-pyinstaller:
 	echo "Building with PyInstaller..."
 	pyinstaller --windowed --hidden-import=tkinter -i Notepad.png src/Notepad==.py
 	sed -i '' 's/0\.0\.0/4\.7\.4/g' dist/Notepad==.app/Contents/Info.plist
