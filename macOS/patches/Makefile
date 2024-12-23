@@ -17,6 +17,7 @@ build-nuitka:
 	echo "Please select an architecture to build for:"
 	echo "1. 'x86_64' (Intel)"
 	echo "2. 'arm64' (Apple Silicon)"
+	# echo "3. 'universal' (Intel and Apple Silicon in a single fat binary, not currently supported)"
 	echo "Enter an architecture and press ENTER:"
 	read NUITKA_ARCH
 	nuitka --include-module=tkinter --output-dir=dist --macos-create-app-bundle --macos-target-arch=$(NUITKA_ARCH) --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.7.4 src/Notepad==.py
