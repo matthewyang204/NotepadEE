@@ -399,6 +399,7 @@ def find_and_replace():
 
 
 def update_line_number(event=None):
+    time.sleep(0.1)
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
     column_var.set("Column: " + column)
@@ -433,6 +434,7 @@ def check_file_written(event=None):
 
 def runinbackground(event=None):
     write_prefs()
+    update_line_number()
     check_file_written()
     debug_var()
 
@@ -466,7 +468,6 @@ text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
-root.after(100, update_line_number)
 
 menu = tk.Menu(root)
 root.config(menu=menu)
