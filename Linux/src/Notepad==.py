@@ -434,7 +434,6 @@ def check_file_written(event=None):
 
 def runinbackground(event=None):
     write_prefs()
-    update_line_number()
     check_file_written()
     debug_var()
 
@@ -468,6 +467,7 @@ text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
+update_line_number()
 
 menu = tk.Menu(root)
 root.config(menu=menu)

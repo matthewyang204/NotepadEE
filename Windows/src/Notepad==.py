@@ -415,7 +415,8 @@ def update_line_number(event=None):
     column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
-    print("Status bar updated")
+    # print("Status bar updated")
+    root.after(100, update_line_number)
 
 
 def increase_font_size(event=None):
@@ -447,7 +448,6 @@ def check_file_written(event=None):
 
 def runinbackground(event=None):
     write_prefs()
-    root.after(50, update_line_number)
     check_file_written()
     debug_var()
 
@@ -482,6 +482,7 @@ text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
+update_line_number()
 
 check_file_written()
 
