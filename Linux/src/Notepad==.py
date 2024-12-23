@@ -404,7 +404,7 @@ def update_line_number(event=None):
     column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
-    print("Status bar updated")
+    # print("Status bar updated")
     root.after(100, update_line_number)
 
 def increase_font_size(event=None):
