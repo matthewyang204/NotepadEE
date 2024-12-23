@@ -466,7 +466,7 @@ text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
-root.after(50, update_line_number)
+root.after(100, update_line_number)
 
 menu = tk.Menu(root)
 root.config(menu=menu)
