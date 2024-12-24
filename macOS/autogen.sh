@@ -1,10 +1,9 @@
-#!/bin/zsh
+#!/bin/bash
 @echo off
 
 if [ $1 == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
-    setopt extended_glob
-    rm -rf -- ^(patches|autogen.sh|README.md)
+    find . -mindepth 1 ! -name 'patches' ! -name 'autogen.sh' ! -name 'README.md' -exec rm -rf {} +
     echo "done"
     exit
 fi
