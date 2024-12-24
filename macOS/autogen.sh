@@ -18,6 +18,9 @@ rm Makefile
 cp patches/Makefile ./
 echo "Patching the key mappings..."
 sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
+echo "Patching the requirements..."
+rm requirements.txt
+cp patches/requirements.txt ./
 echo "done"
 
 
