@@ -1,17 +1,18 @@
 #!/bin/bash
 @echo off
 
-# First copy files from the Linux section of the repository
-echo "Copying files..."
-cp -R -v ../Linux/* ./
-echo "done"
-
 if [ $1 == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
     shopt -s extglob
     rm -rf !(patches|autogen.sh|README.md)
     echo "done"
+    exit
 fi
+
+# First copy files from the Linux section of the repository
+echo "Copying files..."
+cp -R -v ../Linux/* ./
+echo "done"
 
 # Patch the files
 echo "Patching files..."
