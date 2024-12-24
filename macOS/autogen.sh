@@ -1,5 +1,5 @@
 #!/bin/bash
-@echo off
+set +x
 
 if [ $1 == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
