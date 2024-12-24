@@ -3,7 +3,13 @@ set +x
 
 if [ "$1" == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
-    find . -mindepth 1 \( ! -name 'patches' -prune \) ! -name 'autogen.sh' ! -name 'README.md' -exec rm -rf {} +
+    make clean
+    rm Makefile
+    rm Notepad.png
+    rm configure
+    rm notepadee.desktop
+    rm requirements.txt
+    rm -rf src
     echo "done"
     exit
 fi
