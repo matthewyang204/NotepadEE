@@ -13,6 +13,10 @@ echo "Copying files..."
 cp -R -v ../Linux/* ./
 echo "done"
 
+# Debugging exit to check if files have been properly copied
+# Only enable if you need it
+# exit 0
+
 # Patch the files
 echo "Patching files..."
 echo "Removing dpinstall..."
