@@ -11,8 +11,6 @@ build-pyinstaller:
 	echo "Build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 build-nuitka:
-	echo "Installing required libraries for Nuitka to fix icon..."
-	pip3 install imageio --break-system-packages
 	echo "Building with Nuitka..."
 	echo "Please select an architecture to build for:"
 	echo "1. 'x86_64' (Intel)"

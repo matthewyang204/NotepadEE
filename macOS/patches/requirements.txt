@@ -1,0 +1,5 @@
+pyinstaller
+pillow
+tk
+nuitka
+imageio
