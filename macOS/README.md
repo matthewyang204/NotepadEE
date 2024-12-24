@@ -10,7 +10,7 @@ Hackintoshes are supported.
 I have separate binaries for Intel and Apple Silicon macs. Please download the correct one. I have signed it with a self-signed signature and can't afford the full Apple Developer notarization. On macOS Sonoma or below, you can bypass the warnings by right-clicking the app and selecting "Open". On macOS Sequioa or later, you will need to disable Gatekeeper entirely by running `sudo spctl --master-disable` and then selecting "Anywhere" at the bottom of the Privacy & Security section of the settings in the "Allow apps from" setting.
 
 # Prebuild requirements
-- Python 3.4 or later
+- Python 3.4 to 3.12
 - make installed
 - `configure` script will automatically install Python packages
 
