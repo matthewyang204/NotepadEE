@@ -38,7 +38,7 @@ uninstall:
 uninstall-upgrade:
 	sudo rm -rf /Applications/Notepad==.app
 
-clean:
+clean-pyinstaller:
 	rm -rf dist
 	rm -rf build
 	rm Notepad==.spec
