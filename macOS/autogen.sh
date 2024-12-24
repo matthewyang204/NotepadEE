@@ -6,6 +6,13 @@ echo "Copying files..."
 cp -R -v ../Linux/* ./
 echo "done"
 
+if [ $1 == "clean" ]; then
+    echo "Received 'clean' argument, removing everything copied over for building..."
+    shopt -s extglob
+    rm -rf !(patches|autogen.sh|README.md)
+    echo "done"
+fi
+
 # Patch the files
 echo "Patching files..."
 echo "Removing dpinstall..."
