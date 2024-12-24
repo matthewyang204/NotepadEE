@@ -1,7 +1,7 @@
 #!/bin/bash
 set +x
 
-if [ $1 == "clean" ]; then
+if [ "$1" == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
     find . -mindepth 1 ! -name 'patches' ! -name 'autogen.sh' ! -name 'README.md' -exec rm -rf {} +
     echo "done"
