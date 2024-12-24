@@ -3,8 +3,8 @@
 
 if [ $1 == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
-    shopt -s extglob
-    rm -rf !(patches|autogen.sh|README.md)
+    setopt extended_glob
+    rm -rf -- ^(patches|autogen.sh|README.md)
     echo "done"
     exit
 fi
