@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 @echo off
 
 if [ $1 == "clean" ]; then
