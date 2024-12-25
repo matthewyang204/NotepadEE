@@ -377,7 +377,7 @@ def find_and_replace():
     find_entry.pack()
 
     replace_label = tk.Label(
-        popup, text="Enter the text you want to it replace with:")
+        popup, text="Enter the text you want to replace it with:")
     replace_label.pack()
     replace_entry = tk.Entry(popup)
     replace_entry.pack()
