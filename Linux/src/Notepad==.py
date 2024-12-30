@@ -18,7 +18,6 @@ if platform.system() == "Darwin":
     # macOS logic to fetch the Finder file path
     try:
         # Get the Finder file path from AppleScript (returns file path of selected file in Finder)
-        
         result = subprocess.run(
             ["/usr/bin/osascript", "-e", apple_script],
             shell=True,
@@ -27,6 +26,7 @@ if platform.system() == "Darwin":
             check=True,
             env=os.environ
         )
+        print(result.stderr)
         if result.stdout.strip():
             fileToBeOpened = result.stdout.strip()  # Extract the file path
             openFile = 1
