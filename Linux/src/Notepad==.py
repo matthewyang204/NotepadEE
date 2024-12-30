@@ -35,6 +35,7 @@ if platform.system() == "Darwin":
 
         result = subprocess.run(
             [osascript_helper_path],
+            shell=True,
             text=True,
             capture_output=True,
             check=True,
