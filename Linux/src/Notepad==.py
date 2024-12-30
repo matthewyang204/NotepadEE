@@ -8,8 +8,7 @@ import time
 import platform
 import subprocess
 
-cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache'
-if not os.path.exists(folder_path):
+cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
     os.makedirs(folder_path)
 
 # Check if the system is macOS (Darwin)
