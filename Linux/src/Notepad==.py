@@ -24,7 +24,7 @@ if platform.system() == "Darwin":
             ["/usr/bin/osascript", "-e", apple_script],
             text=True,
             capture_output=True,
-            check=True
+            check=True,
             env=os.environ
         )
         if result.stdout.strip():
