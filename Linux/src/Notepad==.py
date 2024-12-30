@@ -34,7 +34,7 @@ if platform.system() == "Darwin":
             check=True,
             env=os.environ
         )
-        print(result.stderr)
+        print(f"stdout: {result.stdout}")
         if result.stdout.strip():
             fileToBeOpened = result.stdout.strip()  # Extract the file path
             openFile = 1
