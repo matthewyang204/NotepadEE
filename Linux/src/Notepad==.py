@@ -34,7 +34,6 @@ if platform.system() == "Darwin":
         # Get the Finder file path from AppleScript (returns file path of selected file in Finder)
         result = subprocess.run(
             ["/usr/bin/osascript", "-e", apple_script],
-            shell=True,
             text=True,
             capture_output=True,
             check=True,
