@@ -9,7 +9,8 @@ import platform
 import subprocess
 
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
-os.makedirs(folder_path)
+if not os.path.exists(cache_path):
+    os.makedirs(cache_path)
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
