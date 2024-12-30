@@ -40,9 +40,7 @@ else:
     filearg = sys.argv
     if len(filearg) <= 1:
         openFile = 0
-        print(
-            "No arguments provided. Proceeding to load program with last known file..."
-        )
+        print("No arguments provided. Proceeding to load program with last known file...")
         print("Program loaded")
     else:
         openFile = 1
