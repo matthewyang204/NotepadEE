@@ -26,9 +26,14 @@ if platform.system() == "Darwin":
             capture_output=True,
             check=True
         )
-        fileToBeOpened = result.stdout.strip()  # Extract the file path
-        openFile = 1
-        print(f"Loading file from Finder at {fileToBeOpened}...")
+        if result.stdout.strip():
+            fileToBeOpened = result.stdout.strip()  # Extract the file path
+            openFile = 1
+            print(f"Loading file from Finder at {fileToBeOpened}...")
+        else:
+            print("No file selected in Finder, loading program with last known file...")
+            fileToBeOpened = None
+            openFile = 0
     except subprocess.CalledProcessError:
         fileToBeOpened = None
         openFile = 0
