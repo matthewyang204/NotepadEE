@@ -5,18 +5,49 @@ from tkinter import messagebox
 from tkinter import font
 import sys
 import time
+import platform
+import subprocess
 
-filearg = sys.argv
-if len(filearg) <= 1:
-    openFile = 0
-    print(
-        "No arguments provided. Proceeding to load program with last known file..."
-    )
-    print("Program loaded")
+# Check if the system is macOS (Darwin)
+if platform.system() == "Darwin":
+    # Tell the user in the console that it is running from macOS
+    print("Detected that we are running on macOS, retrieving filepath through AppleScript...")
+    # macOS logic to fetch the Finder file path
+    try:
+        # Get the Finder file path from AppleScript (returns file path of selected file in Finder)
+        apple_script = """
+        tell application "Finder"
+            set filePath to the POSIX path of (selection as alias)
+        end tell
+        """
+        result = subprocess.run(
+            ["osascript", "-e", apple_script],
+            text=True,
+            capture_output=True,
+            check=True
+        )
+        fileToBeOpened = result.stdout.strip()  # Extract the file path
+        openFile = 1
+        print(f"File to open from Finder: {fileToBeOpened}")
+    except subprocess.CalledProcessError:
+        fileToBeOpened = None
+        openFile = 0
+        print("No file selected in Finder.")
 else:
-    openFile = 1
-    print("Assuming argument is the file to open. Loading file...")
-    fileToBeOpened = filearg[1]
+    # Tell the user through the console that we are running on Linux
+    print("We are running on a standard Linux distro or other OS, falling back to file arguments...")
+    # If not macOS, fallback to command line arguments
+    filearg = sys.argv
+    if len(filearg) <= 1:
+        openFile = 0
+        print(
+            "No arguments provided. Proceeding to load program with last known file..."
+        )
+        print("Program loaded")
+    else:
+        openFile = 1
+        print("Assuming argument is the file to open. Loading file...")
+        fileToBeOpened = filearg[1]
 
 global file_open
 file_open = 0
