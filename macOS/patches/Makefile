@@ -24,7 +24,7 @@ build-nuitka:
 	echo "Nuitka build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 install:
-	sudo mv dist/Notepad==.app /Applications/
+	sudo mv "dist/Notepad==.app" /Applications/
 	echo "Install successfull"
 
 uninstall:
@@ -33,7 +33,7 @@ uninstall:
 	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
 
 uninstall-upgrade:
-	sudo rm -rf /Applications/Notepad==.app
+	sudo rm -rf "/Applications/Notepad==.app"
 
 clean:
 	rm -rf dist
