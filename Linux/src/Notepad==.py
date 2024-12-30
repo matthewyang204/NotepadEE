@@ -35,6 +35,8 @@ if platform.system() == "Darwin":
             env=os.environ
         )
         print(f"stdout: {result.stdout}")
+        if result.returncode != 0:
+            print(f"osascript failed with return code {result.returncode}")
         if result.stdout.strip():
             fileToBeOpened = result.stdout.strip()  # Extract the file path
             openFile = 1
