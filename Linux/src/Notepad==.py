@@ -44,7 +44,7 @@ if platform.system() == "Darwin":
             print("No file selected in Finder, loading program with last known file...")
             fileToBeOpened = None
             openFile = 0
-    except subprocess.CalledProcessError:
+    except Exception as e:
         fileToBeOpened = None
         openFile = 0
         print("No file selected in Finder, loading program with last known file...")
