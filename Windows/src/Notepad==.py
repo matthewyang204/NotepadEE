@@ -98,7 +98,6 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
-print("Program loaded")
 
 def debug_var(event=None):
     global file_open, current_file
@@ -477,6 +476,8 @@ def runonfilearg(file_path):
 
 if openFile == 1:
     runonfilearg(fileToBeOpened)
+else:
+    print("Program loaded")
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
