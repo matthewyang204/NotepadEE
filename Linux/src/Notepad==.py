@@ -8,9 +8,9 @@ import time
 import platform
 import subprocess
 
-cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
-if not os.path.exists(cache_path):
-    os.makedirs(cache_path)
+cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache'
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
@@ -19,23 +19,10 @@ if platform.system() == "Darwin":
     # macOS logic to fetch the Finder file path
     try:
         # Get the Finder file path from AppleScript (returns file path of selected file in Finder)
-        osascript_helper = """
-        #!/bin/bash
-
-        osascript -e '
-        tell application "Finder"
-            set filePath to the POSIX path of (selection as alias)
-        end tell
-        '
-        """
-
-        osascript_helper_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache', 'osascript_helper.sh')
-        with open('osascript_helper.sh', 'w') as file:
-            file.write(osascript_helper)
-
+        
         result = subprocess.run(
-            [osascript_helper_path],
-            shell=True,
+            ["/usr/bin/osascript", "-e", apple_script],
+            shell=True
             text=True,
             capture_output=True,
             check=True,
