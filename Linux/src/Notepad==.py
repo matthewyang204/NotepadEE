@@ -25,6 +25,7 @@ if platform.system() == "Darwin":
             text=True,
             capture_output=True,
             check=True
+            env=os.environ
         )
         if result.stdout.strip():
             fileToBeOpened = result.stdout.strip()  # Extract the file path
