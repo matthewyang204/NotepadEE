@@ -21,7 +21,7 @@ if platform.system() == "Darwin":
         end tell
         """
         result = subprocess.run(
-            ["osascript", "-e", apple_script],
+            ["/usr/bin/osascript", "-e", apple_script],
             text=True,
             capture_output=True,
             check=True
