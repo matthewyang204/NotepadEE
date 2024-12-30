@@ -7,7 +7,7 @@ configure: ./configure
 build-pyinstaller:
 	echo "Building with PyInstaller..."
 	pyinstaller --windowed --hidden-import=tkinter -i Notepad.png src/Notepad==.py
-	sed -i '' 's/0\.0\.0/4\.7\.4/g' dist/Notepad==.app/Contents/Info.plist
+	sed -i '' 's/0\.0\.0/4\.7\.5/g' dist/Notepad==.app/Contents/Info.plist
 	echo "Build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 build-nuitka:
@@ -20,7 +20,7 @@ build-nuitka:
 	@read NUITKA_ARCH && \
 	echo "Building for architecture $$NUITKA_ARCH..." && \
 	export NUITKA_ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$NUITKA_ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.7.4 src/Notepad==.py
+	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$NUITKA_ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.7.5 src/Notepad==.py
 	echo "Nuitka build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 install:
