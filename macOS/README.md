@@ -20,10 +20,3 @@ I have separate binaries for Intel and Apple Silicon macs. Please download the c
 3. Select a compiler. You can type `pyinstaller` or `nuitka`.
 4. You need to select the architecture that you want if you select nuitka. Note that you cannot cross compile unless you are running the universal version of Python obtained from Python.org's download page.
 5. After you're done compiling, you can use `sudo make install` to install.
-
-# Opening files
-The app bundle cannot be used to open files directly from the Finder. This is because I never wrote it to take Apple's custom NeXTSTEP-based file opening files. All standard Unix systems and NT systems use arguments, which is what I wrote it for. To open files:
-
-0. Install a binary or follow the build instructions and run `sudo make install` first if there isn't a Notepad==.app in your /Applications folder.
-1. Symlink the executable inside of the MacOS folder within the bundle to a symlink called `notepadee` located in a directory in your PATH. `/usr/local/bin/notepadee` is a good choice.
-2. Now, just navigate to the directory you want to open files in, and then run `notepadee <yourfile>` to open the file.
