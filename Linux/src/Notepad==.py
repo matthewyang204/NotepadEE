@@ -18,6 +18,13 @@ if platform.system() == "Darwin":
     print("Detected that we are running on macOS, retrieving filepath through AppleScript...")
     # macOS logic to fetch the Finder file path
     try:
+        # Define the AppleScript code
+        apple_script = """
+        tell application "Finder"
+            set filePath to the POSIX path of (selection as alias)
+        end tell
+        """
+
         # Get the Finder file path from AppleScript (returns file path of selected file in Finder)
         result = subprocess.run(
             ["/usr/bin/osascript", "-e", apple_script],
