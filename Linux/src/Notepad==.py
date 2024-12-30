@@ -21,7 +21,13 @@ if platform.system() == "Darwin":
         # Define the AppleScript code
         apple_script = """
         tell application "Finder"
-            set filePath to the POSIX path of (selection as alias)
+            try
+                if count of selection is 0 then
+                    set filePath to ""
+                else
+                    set filePath to the POSIX path of (selection as alias)
+            on error
+                set filePath to ""
         end tell
         """
 
