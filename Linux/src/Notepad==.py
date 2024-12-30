@@ -28,11 +28,11 @@ if platform.system() == "Darwin":
         )
         fileToBeOpened = result.stdout.strip()  # Extract the file path
         openFile = 1
-        print(f"File to open from Finder: {fileToBeOpened}")
+        print(f"Loading file from Finder at {fileToBeOpened}...")
     except subprocess.CalledProcessError:
         fileToBeOpened = None
         openFile = 0
-        print("No file selected in Finder.")
+        print("No file selected in Finder, loading program with last known file...")
 else:
     # Tell the user through the console that we are running on Linux
     print("We are running on a standard Linux distro or other OS, falling back to file arguments...")
@@ -41,7 +41,6 @@ else:
     if len(filearg) <= 1:
         openFile = 0
         print("No arguments provided. Proceeding to load program with last known file...")
-        print("Program loaded")
     else:
         openFile = 1
         print("Assuming argument is the file to open. Loading file...")
@@ -492,6 +491,8 @@ def runonfilearg(file_path):
 
 if openFile == 1:
     runonfilearg(fileToBeOpened)
+else:
+    print("Program loaded")
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
