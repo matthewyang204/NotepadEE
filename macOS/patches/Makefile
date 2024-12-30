@@ -29,14 +29,11 @@ install:
 
 uninstall:
 	sudo rm -rf /Applications/Notepad==.app
-	sudo rm -rf ~/Library/Caches/NotepadEE
-	sudo rm -rf ~/Library/Preferences/com.matthewyang.NotepadEE
+	sudo rm -rf ~/.notepadee
 	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
 
 uninstall-upgrade:
 	sudo rm -rf /Applications/Notepad==.app
-	sudo rm -rf ~/Library/Caches/NotepadEE
-	sudo rm -rf ~/Library/Preferences/com.matthewyang.NotepadEE
 
 clean:
 	rm -rf dist
