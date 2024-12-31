@@ -1,2 +1,2 @@
 @echo off
-pyinstaller --noconsole --hidden-import=tkinter -i Notepad.ico src\Notepad==.py
+python -m pyinstaller --noconsole --hidden-import=tkinter -i Notepad.ico src\Notepad==.py
