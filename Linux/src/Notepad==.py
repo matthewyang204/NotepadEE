@@ -10,12 +10,20 @@ import subprocess
 
 import objc
 from AppKit import NSApplication
+import AppKit
 
+# Dummy monkey patch functions
 def dummy_macOSVersion(self):
     print("Intercepted call to macOSVersion!")
     return None
 
+def patched_setup(self):
+    print("Intercepted _setup method call!")
+    return None
+
+# Set monkey patches to run
 objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
+AppKit.NSApplication._setup_ = patched_setup
 
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
