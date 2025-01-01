@@ -68,7 +68,7 @@ if platform.system() == "Darwin":
         fileToBeOpened = ""
         openFile = 0
         debug_NS_var()
-        printlog(stra(e))
+        printlog(str(e))
         print("No file selected in Finder, loading program with last known file...")
 else:
     # Tell the user through the console that we are running on Linux
