@@ -63,9 +63,9 @@ if platform.system() == "Darwin":
             def applicationDidFinishLaunching_(self, notification):
                 pass
 
-            def application_openFile_(self, application, filePath):
+            def application_openFile_(self, application, fileName):
                 global fileToBeOpened, openFile
-                if not str(filePath): # no file path provided
+                if not str(fileName): # no file path provided
                     # Handle the case where no file is passed, like launching from dock
                     fileToBeOpened = ""
                     openFile = 0
@@ -73,7 +73,7 @@ if platform.system() == "Darwin":
                     printlog("No file selected in Finder, loading program with last known file...")
                 else:
                     # File path is passed, take the file
-                    fileToBeOpened = str(filePath)
+                    fileToBeOpened = str(fileName)
                     openFile = 1
                     debug_NS_var()
                     printlog("File was passed through Finder, opening file...")
