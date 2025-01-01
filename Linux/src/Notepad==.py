@@ -38,8 +38,9 @@ if platform.system() == "Darwin":
     # macOS logic to fetch the Finder file path
     try:
         class AppDelegate(NSObject):
-            def applicationOpenFile_(self, sender, filePath):
+            def applicationOpenFile_(self, sender):
                 global fileToBeOpened, openFile
+                filePath = sender
                 if not str(filePath): # no file path provided
                     # Handle the case where no file is passed, like launching from dock
                     fileToBeOpened = ""
