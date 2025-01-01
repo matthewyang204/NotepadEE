@@ -12,6 +12,11 @@ cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
     os.makedirs(cache_path)
 
+global fileToBeOpened
+global openFile
+fileToBeOpened = None
+openFile = None
+
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
     from Cocoa import NSApplication, NSApp
@@ -20,17 +25,31 @@ if platform.system() == "Darwin":
     print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
     # macOS logic to fetch the Finder file path
     try:
-        class AppDelegate_(self, sender, filePath):
-            if not filePath: # no file path provided
-                # Handle the case where no file is passed, like launching from dock
-                fileToBeOpened = None
-                openFile = 0
-                print("No file selected in Finder, loading program with last known file...")
-            else:
-                # File path is passed, take the file
-                fileToBeOpened = filePath
-                openFile = 1
-                print("File was passed through Finder, opening file...")
+        class AppDelegate:
+            def applicationOpenFile_(self, sender, filePath):
+                global fileToBeOpened, openFile
+                if not filePath: # no file path provided
+                    # Handle the case where no file is passed, like launching from dock
+                    fileToBeOpened = None
+                    openFile = 0
+                    print("No file selected in Finder, loading program with last known file...")
+                else:
+                    # File path is passed, take the file
+                    fileToBeOpened = filePath
+                    openFile = 1
+                    print("File was passed through Finder, opening file...")
+
+                return True
+        
+        def retrieve():
+            global fileToBeOpened, openFile
+            app_delegate = AppDelegate()
+            app = NSApplication.sharedApplication()
+            app.selfDelegate_(app_delegate)
+            app.run
+        
+        retrieve()
+
     except Exception as e:
         fileToBeOpened = None
         openFile = 0
