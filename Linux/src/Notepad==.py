@@ -26,7 +26,7 @@ fileToBeOpened = None
 openFile = None
 
 def debug_NS_var():
-    printlog("fileToBeOpened = " + fileToBeOpened)
+    printlog("fileToBeOpened = " + str(fileToBeOpened))
     printlog("openFile = " + str(openFile))
 
 # Check if the system is macOS (Darwin)
@@ -42,7 +42,7 @@ if platform.system() == "Darwin":
                 global fileToBeOpened, openFile
                 if not str(filePath): # no file path provided
                     # Handle the case where no file is passed, like launching from dock
-                    fileToBeOpened = None
+                    fileToBeOpened = ""
                     openFile = 0
                     debug_NS_var()
                     print("No file selected in Finder, loading program with last known file...")
@@ -65,7 +65,7 @@ if platform.system() == "Darwin":
         retrieve()
 
     except Exception as e:
-        fileToBeOpened = None
+        fileToBeOpened = ""
         openFile = 0
         debug_NS_var()
         printlog(e)
