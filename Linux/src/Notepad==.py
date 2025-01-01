@@ -32,7 +32,7 @@ def debug_NS_var():
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
-    # import objc
+    import objc
     # from AppKit import NSApplication
     # import AppKit
 
