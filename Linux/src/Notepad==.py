@@ -14,7 +14,7 @@ if not os.path.exists(cache_path):
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
-    from Cocoa import NSApplications, NSApp
+    from Cocoa import NSApplication, NSApp
     from Foundation import NSURL
     # Tell the user in the console that it is running from macOS
     print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
