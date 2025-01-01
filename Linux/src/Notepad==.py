@@ -19,6 +19,7 @@ log_file = os.path.join(cache_path, "notepadee_log.txt")
 def printlog(message):
     with open(log_file, 'a') as file:
         file.write(message + '\n')
+    print(message)
 
 global fileToBeOpened
 global openFile
@@ -37,15 +38,15 @@ if platform.system() == "Darwin":
 
     # Dummy monkey patch functions
     def dummy_macOSVersion(self):
-        print("Intercepted call to macOSVersion!")
+        printlog("Intercepted call to macOSVersion!")
         return None
 
     def patched_setup(self, arg):
-        print("Intercepted _setup method call!")
+        printlog("Intercepted _setup method call!")
         try:
             return original_setup(self)
         except Exception as e:
-            print(f"Error in patched _setup: {e}")
+            printlog(f"Error in patched _setup: {e}")
             return None
 
     # Set monkey patches to run
@@ -55,7 +56,7 @@ if platform.system() == "Darwin":
     from Cocoa import NSApplication, NSApp, NSObject
     from Foundation import NSURL
     # Tell the user in the console that it is running from macOS
-    print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
+    printlog("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
     # macOS logic to fetch the Finder file path
     try:
         class AppDelegate(NSObject):
@@ -69,13 +70,13 @@ if platform.system() == "Darwin":
                     fileToBeOpened = ""
                     openFile = 0
                     debug_NS_var()
-                    print("No file selected in Finder, loading program with last known file...")
+                    printlog("No file selected in Finder, loading program with last known file...")
                 else:
                     # File path is passed, take the file
                     fileToBeOpened = str(filePath)
                     openFile = 1
                     debug_NS_var()
-                    print("File was passed through Finder, opening file...")
+                    printlog("File was passed through Finder, opening file...")
 
                 return True
         
@@ -93,18 +94,18 @@ if platform.system() == "Darwin":
         openFile = 0
         debug_NS_var()
         printlog(str(e))
-        print("No file selected in Finder, loading program with last known file...")
+        printlog("No file selected in Finder, loading program with last known file...")
 else:
     # Tell the user through the console that we are running on Linux
-    print("We are running on a standard Linux distro or other OS, falling back to file arguments...")
+    printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
     # If not macOS, fallback to command line arguments
     filearg = sys.argv
     if len(filearg) <= 1:
         openFile = 0
-        print("No arguments provided. Proceeding to load program with last known file...")
+        printlog("No arguments provided. Proceeding to load program with last known file...")
     else:
         openFile = 1
-        print("Assuming argument is the file to open. Loading file...")
+        printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
 
 global file_open
@@ -134,7 +135,7 @@ if not os.path.exists(last_write):
         pass
 
 file_written = 0
-print("file_written set to " + str(file_written))
+printlog("file_written set to " + str(file_written))
 
 root = tk.Tk()
 ask_quit = False
@@ -174,20 +175,20 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
-print("Program loaded")
+printlog("Program loaded")
 
 def debug_var(event=None):
     global file_open, current_file
     if current_file:
-        print("Current file variable works")
-        print(current_file)
+        printlog("Current file variable works")
+        printlog(current_file)
     else:
-        print("Not intact")
+        printlog("Not intact")
     if file_open:
-        print("File_open variable is intact")
-        print(file_open)
+        printlog("File_open variable is intact")
+        printlog(file_open)
     else:
-        print("Not working")
+        printlog("Not working")
     return 'break'
 
 
@@ -201,7 +202,7 @@ def autosave_file(event=None):
                 file.write(text)
     except FileNotFoundError:
         return 'break'
-    print("Autosaved file")
+    printlog("Autosaved file")
 
 
 def write_prefs(event=None):
@@ -215,7 +216,7 @@ def write_prefs(event=None):
     with open(last_file_path, 'w') as file:
         file.write(str(current_file))
     autosave_file()
-    print("Wrote prefs successfully")
+    printlog("Wrote prefs successfully")
 
 
 # save_as provides the dialog
@@ -327,14 +328,14 @@ def save_as(event=None):
     
     # if we get a valid file_path, let's save via dialog
     try:
-        print("Saving file to location:")
-        print(file_path)
+        printlog("Saving file to location:")
+        printlog(file_path)
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
         file_open = 1
-        print("File was saved to different location successfully.")
+        printlog("File was saved to different location successfully.")
         return True
     
     # if any errors manage to get past this, let's do an exception to quit gracefully
@@ -352,7 +353,7 @@ def open_file(event=None):
         with open(file_path, 'r') as file:
             text_area.insert(1.0, file.read())
         file_open = 1
-        print("New file opened")
+        printlog("New file opened")
     write_prefs()
 
 
@@ -373,7 +374,7 @@ def save_file(warn):
             response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
             if response:
                 if save_as():
-                    print("File saved without warning")
+                    printlog("File saved without warning")
                     return True
             else:
                 return True
@@ -381,14 +382,14 @@ def save_file(warn):
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file before proceeding?")
             if response:
                 if save_as():
-                    print("File saved after warning user")
+                    printlog("File saved after warning user")
                     return True
             else:
                 return True
 
 def save_file2(event=None):
     global current_file, file_open, file_written
-    print("No-warning wrapper triggered, running save_file with nowarning option")
+    printlog("No-warning wrapper triggered, running save_file with nowarning option")
     save_file("n")
 
 def new_file(event=None):
@@ -399,17 +400,17 @@ def new_file(event=None):
         # Only run this code if save_file, otherwise, don't force user to clear
         if save_file("y"):
             text_area.delete(1.0, "end")
-            print("Cleared text_area")
+            printlog("Cleared text_area")
             current_file = ""
             write_prefs()
             file_open = 0
-            print("New file created")
+            printlog("New file created")
             file_written = 0
     
     # Otherwise, clear without obstruction
     else:
         text_area.delete(1.0, "end")
-        print("Cleared text_area")
+        printlog("Cleared text_area")
         current_file = ""
 
 
@@ -417,26 +418,26 @@ def cut_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
     text_area.delete("sel.first", "sel.last")
-    print("Cut option succeeded")
+    printlog("Cut option succeeded")
     return 'break'
 
 
 def copy_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
-    print("Text copied to clipboard")
+    printlog("Text copied to clipboard")
     return 'break'
 
 
 def paste_text(event=None):
     text_area.insert("insert", text_area.clipboard_get())
-    print("Text pasted from clipboard")
+    printlog("Text pasted from clipboard")
     return 'break'
 
 
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
-    print("Text selected")
+    printlog("Text selected")
     return 'break'
 
 
@@ -445,7 +446,7 @@ def undo(event=None):
         text_area.edit_undo()
     except tk.TclError:
         pass
-    print("Edit undone")
+    printlog("Edit undone")
 
 
 def redo(event=None):
@@ -453,7 +454,7 @@ def redo(event=None):
         text_area.edit_redo()
     except tk.TclError:
         pass
-    print("Edit redone")
+    printlog("Edit redone")
 
 
 def find_and_replace():
@@ -493,32 +494,32 @@ def update_line_number(event=None):
     column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
-    # print("Status bar updated")
+    # printlog("Status bar updated")
     root.after(100, update_line_number)
 
 def increase_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size + 1)
-    print("Font size increased by 1 pt")
+    printlog("Font size increased by 1 pt")
 
 
 def decrease_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size - 1)
-    print("Font size decreased by 1 pt")
+    printlog("Font size decreased by 1 pt")
 
 # Create a function to check for text in text_area
 def check_file_written(event=None):
     global file_written
-    print("Checking if text_area has been edited by the user to contain text...")
+    printlog("Checking if text_area has been edited by the user to contain text...")
     current_text = text_area.get(1.0, "end-1c")
     # if there is text, set it to 1
     if current_text:
-        print("There is text; setting to 1")
+        printlog("There is text; setting to 1")
         file_written = 1
     # otherwise, set it to 0
     else:
-        print("No text")
+        printlog("No text")
         file_written = 0
 
 def runinbackground(event=None):
@@ -535,9 +536,9 @@ def runonfilearg(file_path):
             text_area.insert(1.0, file.read())
         write_prefs()
         file_open = 1
-        #print("Current file path: " + current_file)
-        #print("File open: " + str(file_open))
-        print("File loaded")
+        #printlog("Current file path: " + current_file)
+        #printlog("File open: " + str(file_open))
+        printlog("File loaded")
     else:
         text_area.delete(1.0, "end")
         with open(file_path, 'w') as file:
@@ -545,15 +546,15 @@ def runonfilearg(file_path):
             file.write(text)
         file_open = 1
         current_file = os.path.abspath(file_path)
-        #print("Current file path: " + current_file)
-        #print("File open: " + str(file_open))
+        #printlog("Current file path: " + current_file)
+        #printlog("File open: " + str(file_open))
         write_prefs()
-        print("Because the file doesn't exist, it was created as a blank new file instead")
+        printlog("Because the file doesn't exist, it was created as a blank new file instead")
 
 if openFile == 1:
     runonfilearg(fileToBeOpened)
 else:
-    print("Program loaded")
+    printlog("Program loaded")
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
