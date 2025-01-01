@@ -17,6 +17,10 @@ global openFile
 fileToBeOpened = None
 openFile = None
 
+def debug_NS_var():
+    print("fileToBeOpened = " + fileToBeOpened)
+    print("openFile = " str(openFile))
+
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
     from Cocoa import NSApplication, NSApp
@@ -32,11 +36,13 @@ if platform.system() == "Darwin":
                     # Handle the case where no file is passed, like launching from dock
                     fileToBeOpened = None
                     openFile = 0
+                    debug_NS_var()
                     print("No file selected in Finder, loading program with last known file...")
                 else:
                     # File path is passed, take the file
                     fileToBeOpened = filePath
                     openFile = 1
+                    debug_NS_var()
                     print("File was passed through Finder, opening file...")
 
                 return True
