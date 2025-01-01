@@ -32,7 +32,7 @@ if platform.system() == "Darwin":
         class AppDelegate(NSObject):
             def applicationOpenFile_(self, sender, filePath):
                 global fileToBeOpened, openFile
-                if not filePath: # no file path provided
+                if not str(filePath): # no file path provided
                     # Handle the case where no file is passed, like launching from dock
                     fileToBeOpened = None
                     openFile = 0
@@ -40,7 +40,7 @@ if platform.system() == "Darwin":
                     print("No file selected in Finder, loading program with last known file...")
                 else:
                     # File path is passed, take the file
-                    fileToBeOpened = filePath
+                    fileToBeOpened = str(filePath)
                     openFile = 1
                     debug_NS_var()
                     print("File was passed through Finder, opening file...")
