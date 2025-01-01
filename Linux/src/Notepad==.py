@@ -55,6 +55,7 @@ if platform.system() == "Darwin":
 
     from Cocoa import NSApplication, NSApp, NSObject
     from Foundation import NSURL
+    import threading
     # Tell the user in the console that it is running from macOS
     printlog("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
     # macOS logic to fetch the Finder file path
@@ -78,21 +79,18 @@ if platform.system() == "Darwin":
                     debug_NS_var()
                     printlog("File was passed through Finder, opening file...")
 
-                self.exit_event_loop()
-                
-            def exit_event_loop(self):
-                printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
-                NSApplication.sharedApplication().terminate_(None)
-        
-        def retrieve():
+        def cocoa_thread():
             global fileToBeOpened, openFile
             app_delegate = AppDelegate()
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
             app.run()
             printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
-            app.stop_(None)
             printlog("done")
+
+        def retrieve():
+            cocoa_threading = thread.Thread(target=cocoa_thread)
+            cocoa_threading.start()
         
         retrieve()
 
