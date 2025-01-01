@@ -3,3 +3,4 @@ pillow
 tk
 nuitka
 imageio
+pyobjc
