@@ -19,7 +19,7 @@ openFile = None
 
 def debug_NS_var():
     print("fileToBeOpened = " + fileToBeOpened)
-    print("openFile = " str(openFile))
+    print("openFile = " + str(openFile))
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
