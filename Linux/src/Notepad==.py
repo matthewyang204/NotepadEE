@@ -25,7 +25,7 @@ if platform.system() == "Darwin":
     print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
     # macOS logic to fetch the Finder file path
     try:
-        class AppDelegate:
+        class AppDelegate(NSObject):
             def applicationOpenFile_(self, sender, filePath):
                 global fileToBeOpened, openFile
                 if not filePath.absoluteString(): # no file path provided
@@ -45,7 +45,7 @@ if platform.system() == "Darwin":
             global fileToBeOpened, openFile
             app_delegate = AppDelegate()
             app = NSApplication.sharedApplication()
-            app.selfDelegate_(app_delegate)
+            app.setDelegate_(app_delegate)
             app.run
         
         retrieve()
