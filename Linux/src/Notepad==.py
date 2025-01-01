@@ -40,7 +40,7 @@ if platform.system() == "Darwin":
         class AppDelegate(NSObject):
             def applicationOpenFile_(self, sender):
                 global fileToBeOpened, openFile
-                filePath = sender.absoluteString() if isinstance(sender, NSURL) else None
+                filePath = sender.absoluteString() if hasattr(sender, 'absoluteString') else None
                 if not str(filePath): # no file path provided
                     # Handle the case where no file is passed, like launching from dock
                     fileToBeOpened = ""
