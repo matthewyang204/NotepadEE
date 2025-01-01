@@ -77,8 +77,12 @@ if platform.system() == "Darwin":
                     openFile = 1
                     debug_NS_var()
                     printlog("File was passed through Finder, opening file...")
-
+                
                 return True
+                
+            def exit_event_loop(self):
+                printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
+                NSApplication.sharedApplication().terminate_(None)
         
         def retrieve():
             global fileToBeOpened, openFile
@@ -107,9 +111,6 @@ else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
-
-print("Retrieved filepath, exiting Cocoa event loop to proceed...")
-NSApplication.sharedApplication().terminate_(None)
 
 global file_open
 file_open = 0
