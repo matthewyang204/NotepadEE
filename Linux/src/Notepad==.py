@@ -17,7 +17,7 @@ def dummy_macOSVersion(self):
     print("Intercepted call to macOSVersion!")
     return None
 
-def patched_setup(self):
+def patched_setup(self, *args, **kwargs):
     print("Intercepted _setup method call!")
     try:
         return original_setup(self)
