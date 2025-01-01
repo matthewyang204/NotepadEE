@@ -81,9 +81,9 @@ if platform.system() == "Darwin":
                 self.exit_event_loop()                
                 return True
                 
-            # def exit_event_loop(self):
-            #     printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
-            #     NSApplication.sharedApplication().terminate_(None)
+            def exit_event_loop(self):
+                printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
+                NSApplication.sharedApplication().terminate_(None)
         
         def retrieve():
             global fileToBeOpened, openFile
