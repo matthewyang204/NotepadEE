@@ -85,6 +85,7 @@ if platform.system() == "Darwin":
             app_delegate = AppDelegate()
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
+            app.run()
         
         retrieve()
 
@@ -106,6 +107,9 @@ else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
+
+print("Retrieved filepath, exiting Cocoa event loop to proceed...")
+NSApplication.sharedApplication().terminate_(None)
 
 global file_open
 file_open = 0
