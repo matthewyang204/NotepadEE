@@ -40,7 +40,7 @@ if platform.system() == "Darwin":
         print("Intercepted call to macOSVersion!")
         return None
 
-    def patched_setup(self, *args, **kwargs):
+    def patched_setup(self, arg):
         print("Intercepted _setup method call!")
         try:
             return original_setup(self)
