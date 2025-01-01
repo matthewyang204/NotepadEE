@@ -12,6 +12,12 @@ cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
     os.makedirs(cache_path)
 
+# Open a log file in write mode
+log_file = open(os.path.join(cache_path, "notepadee_log.txt"), "a")
+
+# Redirect standard output (print statements) to the log file
+sys.stdout = log_file
+
 global fileToBeOpened
 global openFile
 fileToBeOpened = None
