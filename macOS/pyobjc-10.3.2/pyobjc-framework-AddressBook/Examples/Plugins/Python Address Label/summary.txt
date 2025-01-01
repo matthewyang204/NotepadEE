@@ -1,2 +1,0 @@
-This plugin adds an 'Python Address Label' action to "Address" properties in
-the AddressBook application.

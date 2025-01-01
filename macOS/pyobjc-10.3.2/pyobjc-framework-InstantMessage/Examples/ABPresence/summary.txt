@@ -1,3 +1,0 @@
-Simple example that uses the InstantMessage framework
-to show the connection status of persons in your
-address book.

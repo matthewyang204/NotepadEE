@@ -31,7 +31,6 @@ fi
 # Install required python packages
 echo "Installing required packages"
 pip3 install --upgrade -r requirements.txt --break-system-packages
-python3 pyobjc-10.3.2/install.py
 echo "done"
 
 echo "Now run 'make' to build."
