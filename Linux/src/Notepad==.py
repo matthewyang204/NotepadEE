@@ -19,7 +19,11 @@ def dummy_macOSVersion(self):
 
 def patched_setup(self):
     print("Intercepted _setup method call!")
-    return None
+    try:
+        return original_setup(self)
+    except Exception as e:
+        print(f"Error in patched _setup: {e}")
+        return None
 
 # Set monkey patches to run
 objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
