@@ -31,7 +31,7 @@ def debug_NS_var():
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
-    from Cocoa import NSApplication, NSApp
+    from Cocoa import NSApplication, NSApp, NSObject
     from Foundation import NSURL
     # Tell the user in the console that it is running from macOS
     print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
