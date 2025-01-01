@@ -91,6 +91,7 @@ if platform.system() == "Darwin":
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
             app.run()
+            app.stop_(None)
         
         retrieve()
 
