@@ -1,0 +1,475 @@
+{
+ "definitions": {
+  "enum_type": {
+   "SFSafariServicesVersion": { "type": "q" }
+  },
+  "enum": {
+   "SFErrorNoExtensionFound": { "value": 1 },
+   "SFErrorNoAttachmentFound": { "value": 2 },
+   "SFErrorLoadingInterrupted": { "value": 3 },
+   "SFSafariServicesVersion10_0": { "value": 0 },
+   "SFSafariServicesVersion10_1": { "value": 1 },
+   "SFSafariServicesVersion11_0": { "value": 2 },
+   "SFSafariServicesVersion12_0": { "value": 3 },
+   "SFSafariServicesVersion12_1": { "value": 4 },
+   "SFSafariServicesVersion13_0": { "value": 5 }
+  },
+  "classes": {
+   "NSObject": {
+    "methods": [
+     {
+      "selector": "additionalRequestHeadersForURL:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "type_override": "@?",
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "validateContextMenuItemWithCommand:inPage:userInfo:validationHandler:",
+      "class_method": false,
+      "args": {
+       "3": {
+        "type_override": "@?",
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "Z" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "validateToolbarItemInWindow:validationHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "type_override": "@?",
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "Z" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFSafariTab": {
+    "methods": [
+     {
+      "selector": "getContainingWindowWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getActivePageWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getPagesWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "activateWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFSafariPage": {
+    "methods": [
+     {
+      "selector": "getScreenshotOfVisibleAreaWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getContainingTabWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getPagePropertiesWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFSafariWindow": {
+    "methods": [
+     {
+      "selector": "getAllTabsWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getToolbarItemWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getActiveTabWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "openTabWithURL:makeActiveIfPossible:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": { "type_override": "Z" },
+       "2": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFSafariExtensionManager": {
+    "methods": [
+     {
+      "selector": "getStateOfSafariExtensionWithIdentifier:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFSafariApplication": {
+    "methods": [
+     {
+      "selector": "getAllWindowsWithCompletionHandler:",
+      "class_method": true,
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+ 	 "0": { "typestr": "^v" },
+ 	 "1": { "typestr": "@" }
+ 	},
+ 	"retval": { "typestr": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "dispatchMessageWithName:toExtensionWithIdentifier:userInfo:completionHandler:",
+      "class_method": true,
+      "args": {
+       "3": {
+        "callable": {
+         "arguments": {
+ 	 "0": { "typestr": "^v" },
+ 	 "1": { "typestr": "@" }
+ 	},
+ 	"retval": { "typestr": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "getHostApplicationWithCompletionHandler:",
+      "class_method": true,
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+ 	 "0": { "typestr": "^v" },
+ 	 "1": { "typestr": "@" }
+ 	},
+ 	"retval": { "typestr": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "showPreferencesForExtensionWithIdentifier:completionHandler:",
+      "class_method": true,
+      "args": {
+       "1": {
+        "callable": {
+         "arguments": {
+ 	 "0": { "typestr": "^v" },
+ 	 "1": { "typestr": "@" }
+ 	},
+ 	"retval": { "typestr": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "getActiveWindowWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+ 	 "0": { "typestr": "^v" },
+ 	 "1": { "typestr": "@" }
+ 	},
+ 	"retval": { "typestr": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "openWindowWithURL:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+         "arguments": {
+ 	 "0": { "typestr": "^v" },
+ 	 "1": { "typestr": "@" }
+ 	},
+ 	"retval": { "typestr": "v" }
+        }
+       }
+      }
+     }
+    ]
+   },
+   "SFContentBlockerManager": {
+    "methods": [
+     {
+      "selector": "reloadContentBlockerWithIdentifier:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "getStateOfContentBlockerWithIdentifier:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFContentBlockerState": {
+    "methods": [
+     {
+      "selector": "isEnabled",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setEnabled:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     }
+    ]
+   },
+   "SFSafariExtension": {
+    "methods": [
+     {
+      "selector": "getBaseURIWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "SFSafariExtensionState": {
+    "methods": [
+     {
+      "selector": "isEnabled",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "SFSafariPageProperties": {
+    "methods": [
+     {
+      "selector": "usesPrivateBrowsing",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "isActive",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "SFSafariToolbarItem": {
+    "methods": [
+     {
+      "selector": "setEnabled:withBadgeText:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "setEnabled:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

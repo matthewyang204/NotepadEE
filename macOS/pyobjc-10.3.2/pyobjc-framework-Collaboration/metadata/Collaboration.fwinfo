@@ -1,0 +1,153 @@
+# objective.metada exceptions file, see its document
+# for information on how to update this file.
+{
+ "definitions": {
+  "classes": {
+   "CBIdentity": {
+    "methods": [
+     {
+      "selector": "identityWithUUIDString:authority:",
+      "class_method": true,
+      "deprecated": 1011
+     },
+     {
+      "selector": "UUIDString",
+      "class_method": false,
+      "deprecated": 1011
+     },
+     {
+      "selector": "members",
+      "class_method": false,
+      "deprecated": 1011
+     },
+     {
+      "args": {
+       "0": {
+        "type_override": "^{__CSIdentity=}"
+       }
+      },
+      "class_method": true,
+      "selector": "identityWithCSIdentity:"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "^{__CSIdentity=}"
+      },
+      "selector": "CSIdentity"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "Z"
+      },
+      "selector": "isHidden"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "Z"
+      },
+      "selector": "isMemberOfGroup:"
+     }
+    ]
+   },
+   "CBIdentityAuthority": {
+    "methods": [
+     {
+      "args": {
+       "0": {
+        "type_override": "^{__CSIdentityAuthority=}"
+       }
+      },
+      "class_method": true,
+      "selector": "identityAuthorityWithCSIdentityAuthority:"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "^{__CSIdentityAuthority=}"
+      },
+      "selector": "CSIdentityAuthority"
+     }
+    ]
+   },
+   "CBIdentityPicker": {
+    "methods": [
+     {
+      "selector": "runModalForWindow:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "I" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "args": {
+       "2": {
+        "sel_of_type": "v@:@q^v"
+       },
+       "3": {
+        "type_override": "^v"
+       }
+      },
+      "deprecated": 1011,
+      "class_method": false,
+      "selector": "runModalForWindow:modalDelegate:didEndSelector:contextInfo:"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "Z"
+      },
+      "selector": "allowsMultipleSelection"
+     },
+     {
+      "args": {
+       "0": {
+        "type_override": "Z"
+       }
+      },
+      "class_method": false,
+      "selector": "setAllowsMultipleSelection:"
+     }
+    ]
+   },
+   "CBUserIdentity": {
+    "methods": [
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "^{OpaqueSecCertificateRef=}"
+      },
+      "selector": "certificate"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "Z"
+      },
+      "selector": "authenticateWithPassword:"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "type_override": "Z"
+      },
+      "selector": "isEnabled"
+     }
+    ]
+   }
+  },
+  "formal_protocols": {},
+  "functions": {},
+  "informal_protocols": {}
+ }
+}

@@ -1,0 +1,17 @@
+include *.txt MANIFEST.in setup.py MANIFEST
+graft Doc
+graft Examples
+graft Lib
+graft Misc
+graft Modules
+graft PyObjCTest
+graft Scripts
+graft Tools
+graft setup-lib
+graft source-deps
+global-exclude .DS_Store
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.so
+global-exclude __pycache__
+prune Lib/objc/*.dSYM

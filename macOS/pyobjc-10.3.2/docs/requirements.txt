@@ -1,0 +1,3 @@
+sphinx-sitemap
+sphinxcontrib.blockdiag
+sphinxcontrib.spelling

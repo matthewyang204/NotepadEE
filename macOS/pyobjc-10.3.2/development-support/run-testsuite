@@ -1,0 +1,531 @@
+#!/usr/bin/env python3 -B
+"""
+Helper script for running the PyObjC test suite
+"""
+
+import argparse
+import collections
+import configparser
+import json
+import logging
+import os
+import re
+import shutil
+import ssl
+import subprocess
+import sys
+import time
+from http.client import HTTPSConnection
+from urllib.parse import urlencode
+
+from _common_definitions import (
+    PY_VERSIONS,
+    TEST_STATE_DIR,
+    TOP_DIR,
+    setup_variant,
+    system_report,
+    variants,
+    virtualenv,
+    sort_framework_wrappers,
+)
+
+_detected_versions = None
+
+
+def detect_pyversions():
+    global _detected_versions
+    if _detected_versions is not None:
+        return _detected_versions
+
+    result = []
+    for ver in PY_VERSIONS:
+        if ver.endswith('t'):
+            if os.path.exists(
+                os.path.join("/Library/Frameworks/PythonT.framework/Versions", ver[:-1])
+            ):
+
+                result.append(ver)
+        else:
+            if os.path.exists(
+                os.path.join("/Library/Frameworks/Python.framework/Versions", ver)
+            ):
+
+                result.append(ver)
+
+    _detected_versions = result
+    return _detected_versions
+
+
+def load_pushover_keys():
+    cfg = configparser.ConfigParser()
+    cfg.read([os.path.expanduser("~/.pushover-key")])
+
+    result = {}
+
+    if not cfg.has_section("pushover"):
+        return result
+
+    if cfg.has_option("pushover", "app"):
+        result["app"] = cfg.get("pushover", "app")
+
+    if cfg.has_option("pushover", "user"):
+        result["user"] = cfg.get("pushover", "user")
+
+    return result
+
+
+def send_pushover(keys, message):
+    if "app" not in keys or "user" not in keys:
+        return
+
+    body = {
+        "priority": 1,
+        "token": keys["app"],
+        "user": keys["user"],
+        "message": message,
+    }
+
+    context = ssl.create_default_context()
+    context.check_hostname = False
+    context.verify_mode = ssl.CERT_NONE
+    conn = HTTPSConnection("api.pushover.net:443", context=context)
+    conn.request(
+        "POST",
+        "/1/messages.json",
+        urlencode(body),
+        {"Content-Type": "application/x-www-form-urlencoded"},
+    )
+    conn.getresponse()
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Run PyObjC testsuite")
+    parser.add_argument(
+        "--python-version",
+        dest="python_versions",
+        metavar="VER",
+        action="append",
+        default=[],
+        help="Select python version to test (%s)" % (", ".join(detect_pyversions())),
+    )
+
+    parser.add_argument(
+        "--arch",
+        dest="arch",
+        metavar="ARCH",
+        action="append",
+        default=[],
+        help="Select the system architectures to test (defaults to all)",
+    )
+
+    parser.add_argument(
+        "--state-dir",
+        dest="state_dir",
+        metavar="DIR",
+        default=TEST_STATE_DIR,
+        help="Directory to store test results (%(default)s)",
+    )
+
+    parser.add_argument(
+        "--variant",
+        dest="permitted_variants",
+        metavar="VAR",
+        action="append",
+        default=[],
+        help="Restrict python variants to test (default: no restrictions)",
+    )
+
+    result = parser.parse_args()
+    if not result.python_versions:
+        result.python_versions = detect_pyversions()
+
+    return result
+
+
+def build_project(*, interpreter, py_ver, project):
+    lg = logging.getLogger("build_project")
+
+    proj_dir = os.path.join(TOP_DIR, project)
+
+    # Clean up any existing build artifacts
+    if os.path.exists(os.path.join(proj_dir, "build")):
+        shutil.rmtree(os.path.join(proj_dir, "build"))
+    if os.path.exists(os.path.join(proj_dir, "dist")):
+        shutil.rmtree(os.path.join(proj_dir, "dist"))
+
+    # Actually build
+    lg.info("building %r using %r (%s)", project, interpreter, py_ver)
+    status = subprocess.call(
+        [interpreter, "-mpip", "install", "--no-deps", "--no-cache-dir", "."],
+        cwd=proj_dir,
+    )
+    if status != 0:
+        lg.warning("build %r failed (status %s)", project, status)
+        return False
+
+    lg.info("checking install %r using %r (%s)", project, interpreter, py_ver)
+    status = subprocess.call(
+        [
+            interpreter,
+            "-c",
+            "import pkg_resources; pkg_resources.require(%r)" % (project),
+        ]
+    )
+    if status != 0:
+        lg.warning("build %r failed: package not actually installed?", project)
+        return False
+
+    return True
+
+
+def run_tests(*, interpreter, arch, py_ver, project, state_dir):
+    lg = logging.getLogger("run_tests")
+
+    proj_dir = os.path.join(TOP_DIR, project)
+
+    lg.info("testing %r using %r (%s, %7s)", project, interpreter, py_ver, arch)
+    k = {}
+    k["env"] = os.environ.copy()
+    k["env"]["PATH"] = os.path.dirname(interpreter) + ":" + k["env"]["PATH"]
+
+    p = subprocess.Popen(
+        [
+            "/usr/bin/arch",
+            f"-{arch}",
+            interpreter,
+            # XXX: Coverage support is disabled for now because
+            # I've never actually used it.
+            # "-mcoverage",
+            # "run",
+            # "--branch",
+            # "--parallel",
+            "setup.py",
+            "test",
+            "-v",
+        ],
+        cwd=proj_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        **k
+    )
+    stdout, stderr = p.communicate()
+    exitcode = p.wait()
+
+    try:
+        status_line = stdout.decode("utf-8").rsplit("\n", 2)[-2]
+        if not status_line.startswith("SUMMARY"):
+            status = {
+                "message": "No status line at end",
+            }
+        else:
+            status = eval(status_line.split(None, 1)[1])
+
+    except IndexError:
+        status = {
+            "message": "Cannot fetch status line",
+            "stdout": stdout.decode("utf-8"),
+        }
+
+    status["exitcode"] = exitcode
+
+    if not os.path.exists(state_dir):
+        os.makedirs(state_dir)
+
+    with open(os.path.join(state_dir, project + ".status"), "w") as fp:
+        json.dump(status, fp)
+
+    with open(os.path.join(state_dir, project + ".stdout"), "wb") as fp:
+        fp.write(stdout)
+
+    with open(os.path.join(state_dir, project + ".stderr"), "wb") as fp:
+        fp.write(stderr)
+
+
+def test_summary(fp_out, state_dir):
+    print("Build information")
+    print("=================")
+    with open(os.path.join(state_dir, "build-info.txt")) as fp:
+        fp_out.write(fp.read())
+
+    results = collections.defaultdict(dict)
+
+    for nm in os.listdir(state_dir):
+        if nm.endswith(".txt"):
+            continue
+
+        sd = os.path.join(state_dir, nm)
+        for fn in os.listdir(sd):
+            if not fn.endswith(".status"):
+                continue
+            proj = fn[:-7]
+            proj = proj.replace("pyobjc-framework-", "FWK: ")
+
+            with open(os.path.join(sd, fn)) as fp:
+                results[proj][nm] = json.load(fp)
+
+    keys = tuple(sorted(results[next(iter(results))].keys()))
+    width = max(len(x) for x in keys)
+
+    fmt = "%28s" + (" | %%%ds" % width) * len(keys)
+    print(file=fp_out)
+    print()
+    print(fmt % (("Project",) + keys), file=fp_out)
+    print(
+        (fmt % ((len(keys) + 1) * ("",))).replace(" ", "=").replace("|", "+"),
+        file=fp_out,
+    )
+
+    ok = True
+    for proj in sorted(results):
+        # Note: DictionaryServices has a known crashing testcase,
+        # ignore errors w.r.t. reporting if there were problems in the test run.
+        row = [proj]
+        for k in keys:
+            info = results[proj][k]
+            if info.get("errors"):
+                row.append("E:{}".format(info["errors"]))
+                if proj != "DictionaryServices":
+                    ok = False
+            elif info.get("fails"):
+                row.append("F:{}".format(info["fails"]))
+                if proj != "DictionaryServices":
+                    ok = False
+            elif "count" not in info and info.get("message"):
+                row.append("CRASH")
+                if proj != "DictionaryServices":
+                    ok = False
+            else:
+                row.append("")
+
+        print(fmt % tuple(row), file=fp_out)
+    return ok
+
+
+def system_supports_arch(interpreter, arch):
+    assert supports_arch(interpreter, arch)
+
+    try:
+        subprocess.check_output(
+            ["/usr/bin/arch", f"-{arch}", interpreter, "-c", ""]
+        )
+    except subprocess.CalledProcessError:
+        return False
+
+    return True
+
+
+def supports_arch(interpreter, arch):
+    lines = subprocess.check_output(["/usr/bin/file", interpreter])
+    lines = lines.decode("utf-8").splitlines()
+    for ln in lines:
+        # For fat binaries:
+        m = re.search(r"for architecture (\S+)\)", ln)
+        if m is not None:
+            if m.group(1).startswith(arch):
+                return True
+
+        # For single-arch binaries:
+        m = re.search(r"Mach-O .* executable (\S+)", ln)
+        if m is not None:
+            if m.group(1).startswith(arch):
+                return True
+
+    return False
+
+
+def compiler_supports_arch(arch):
+    if os.path.exists("/tmp/detect"):
+        os.unlink("/tmp/detect")
+    with open("/tmp/detect.c", "w") as fp:
+        fp.write("int main(void) { return 42; }\n")
+
+    try:
+        subprocess.check_call(
+            ["cc", "-o", "/tmp/detect", "/tmp/detect.c", "-arch", arch]
+        )
+    except subprocess.CalledProcessError:
+        os.unlink("/tmp/detect.c")
+        return False
+
+    os.unlink("/tmp/detect.c")
+    if not os.path.exists("/tmp/detect"):
+        return False
+
+    os.unlink("/tmp/detect")
+    return True
+
+
+def format_seconds(seconds):
+    seconds = int(seconds)
+
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+
+    if hours:
+        return "%d:%02d:%02d hours" % (hours, minutes, seconds)
+
+    elif minutes:
+        return "%02d:%02d minutes" % (minutes, seconds)
+
+    else:
+        return "%d seconds" % (seconds,)
+
+
+def main():
+    start_time = time.time()
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    lg = logging.getLogger("runtests")
+
+    options = parse_arguments()
+
+    # The exceptionhandling testsuite calls atos and that can ask for a password.
+    # Run the executable now to avoid problems later
+    print("Please ignore the atos output below")
+    subprocess.call(["/usr/bin/atos", "/bin/sh", "0x0"])
+
+    # Invoke 'sw_vers' to get the real system version, even if Python was compiled
+    # with an older SDK.
+    osx_release = subprocess.check_output(["sw_vers", "-productVersion"]).decode().strip()
+
+    lg.info(
+        "running PyObjC tests on OSX %s with python versions %s",
+        osx_release,
+        ", ".join(options.python_versions),
+    )
+    osx_dir = os.path.join(options.state_dir, ".".join(osx_release.split(".")[:2]))
+    if not os.path.exists(osx_dir):
+        os.makedirs(osx_dir)
+
+    system_report(os.path.join(osx_dir, "build-info.txt"), options.python_versions)
+
+    build_order = ["pyobjc-core"] + sort_framework_wrappers()
+
+    # Clear coverage directories to avoid using old coverage information
+    for project in build_order:
+        cov_dir = os.path.join(TOP_DIR, project, ".coverage")
+        if os.path.isdir(cov_dir):
+            shutil.rmtree(cov_dir)
+        elif os.path.isfile(cov_dir):
+            os.unlink(cov_dir)
+
+    for py_ver in options.python_versions:
+        for variant in variants(py_ver, options.permitted_variants):
+            lg.info(f"Preparing variant {variant!r} of python {py_ver}")
+
+            setup_variant(py_ver, variant)
+
+            with virtualenv(f"python{py_ver}") as interpreter:
+                # Install tools
+                subprocess.check_call(
+                    [
+                        interpreter,
+                        "-mpip",
+                        "install",
+                        "--no-warn-script-location",
+                        "-U",
+                        "coverage",
+
+                        # For some reason 'chardet' is needed for some
+                        # 'pyobjc' tests on x86_64 (in emulation)
+                        "chardet",
+                    ]
+                )
+
+                # Install packages into the virtualenv
+                for project in build_order:
+                    build_project(
+                        interpreter=interpreter, py_ver=variant, project=project
+                    )
+
+                # Then run tests for all supported architectures
+                for arch in ("x86_64", "arm64"):
+                    if options.arch and arch not in options.arch:
+                        continue
+
+                    if not supports_arch(interpreter, arch):
+                        lg.info(
+                            "skipping Python %s (%7s), unsupported architecture",
+                            variant,
+                            arch,
+                        )
+                        continue
+
+                    if not system_supports_arch(interpreter, arch):
+                        lg.info(
+                            "skipping Python %s (%7s), system cannot run architecture",
+                            variant,
+                            arch,
+                        )
+                        continue
+
+                    if not compiler_supports_arch(arch):
+                        lg.info(
+                            "skipping Python %s (%7s), compiler cannot build for architecture",
+                            variant,
+                            arch,
+                        )
+                        continue
+
+                    lg.info(
+                        "running with Python %s (%7s) using %s",
+                        variant,
+                        arch,
+                        interpreter,
+                    )
+                    state_dir = os.path.join(osx_dir, f"{variant}-{arch}")
+
+                    for project in ["pyobjc"] + build_order:
+                        run_tests(
+                            interpreter=interpreter,
+                            arch=arch,
+                            py_ver=variant,
+                            project=project,
+                            state_dir=state_dir,
+                        )
+
+    lg.info("done")
+    with open(os.path.join(osx_dir, "summary.txt"), "w") as fp:
+        test_summary(fp, osx_dir)
+
+    ok = test_summary(sys.stdout, osx_dir)
+
+    keys = load_pushover_keys()
+    send_pushover(
+        keys, "Testsuite finished" if ok else "Testsuite finished with errors"
+    )
+
+    # Save HTML coverage reports
+    # TODO: Find a way to combine all of this in 1 big report
+    # with virtualenv("python{}".format(options.python_versions[-1])) as interpreter:
+    #    subprocess.check_call(
+    #        [interpreter, "-mpip", "install", "--no-warn-script-location", "coverage"]
+    #    )
+    #    for project in build_order:
+    #        proj_dir = os.path.join(TOP_DIR, project)
+    #        if not os.path.exists(os.path.join(proj_dir, ".coverage")):
+    #            continue
+    #
+    #        subprocess.check_call([interpreter, "-mcoverage", "combine"], cwd=proj_dir)
+    #        subprocess.check_call(
+    #            [
+    #                interpreter,
+    #                "-mcoverage",
+    #                "html",
+    #                "--include=Lib/*",
+    #                "--omit=*/_metadata.py",
+    #                "--title=%s" % (project,),
+    #            ],
+    #            cwd=proj_dir,
+    #        )
+
+    end_time = time.time()
+    print("Testing took", format_seconds(end_time - start_time))
+
+    if not ok:
+        print()
+        print("ERROR: some tests have failures")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

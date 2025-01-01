@@ -1,0 +1,1 @@
+var tabberOptions = {titleElementsStripHTML : false}

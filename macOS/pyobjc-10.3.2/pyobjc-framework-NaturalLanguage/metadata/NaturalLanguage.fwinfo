@@ -1,0 +1,336 @@
+{
+ "definitions": {
+  "typed_enum": {
+   "NLTagScheme": { "type": "@", "type_name": "NSString" },
+   "NLTag": { "type": "@", "type_name": "NSString" },
+   "NLLanguage": { "type": "@", "type_name": "NSString" },
+   "NLScript": { "type": "@", "type_name": "NSString" },
+   "NLContextualEmbeddingKey": { "type": "@", "type_name": "NSString" }
+  },
+  "enum": {
+   "NLTokenUnitWord": { "value": 0 },
+   "NLTokenUnitSentence": { "value": 1 },
+   "NLTokenUnitParagraph": { "value": 2 },
+   "NLTokenUnitDocument": { "value": 3 },
+   "NLTokenizerAttributeNumeric": { "value": 1 },
+   "NLTokenizerAttributeSymbolic": { "value": 2 },
+   "NLTokenizerAttributeEmoji": { "value": 4 },
+   "NLModelTypeClassifier": { "value": 0 },
+   "NLModelTypeSequence": { "value": 1 },
+   "NLTaggerOmitWords": { "value": 1 },
+   "NLTaggerOmitPunctuation": { "value": 2 },
+   "NLTaggerOmitWhitespace": { "value": 4 },
+   "NLTaggerOmitOther": { "value": 8 },
+   "NLTaggerJoinNames": { "value": 16 },
+   "NLTaggerJoinContractions": { "value": 32 }
+  },
+  "externs": {
+   "NLLanguageUndetermined": { "typestr": "@" },
+   "NLLanguageAmharic": { "typestr": "@" },
+   "NLLanguageArabic": { "typestr": "@" },
+   "NLLanguageArmenian": { "typestr": "@" },
+   "NLLanguageBengali": { "typestr": "@" },
+   "NLLanguageBulgarian": { "typestr": "@" },
+   "NLLanguageBurmese": { "typestr": "@" },
+   "NLLanguageCatalan": { "typestr": "@" },
+   "NLLanguageCherokee": { "typestr": "@" },
+   "NLLanguageCroatian": { "typestr": "@" },
+   "NLLanguageCzech": { "typestr": "@" },
+   "NLLanguageDanish": { "typestr": "@" },
+   "NLLanguageDutch": { "typestr": "@" },
+   "NLLanguageEnglish": { "typestr": "@" },
+   "NLLanguageFinnish": { "typestr": "@" },
+   "NLLanguageFrench": { "typestr": "@" },
+   "NLLanguageGeorgian": { "typestr": "@" },
+   "NLLanguageGerman": { "typestr": "@" },
+   "NLLanguageGreek": { "typestr": "@" },
+   "NLLanguageGujarati": { "typestr": "@" },
+   "NLLanguageHebrew": { "typestr": "@" },
+   "NLLanguageHindi": { "typestr": "@" },
+   "NLLanguageHungarian": { "typestr": "@" },
+   "NLLanguageIcelandic": { "typestr": "@" },
+   "NLLanguageIndonesian": { "typestr": "@" },
+   "NLLanguageItalian": { "typestr": "@" },
+   "NLLanguageJapanese": { "typestr": "@" },
+   "NLLanguageKannada": { "typestr": "@" },
+   "NLLanguageKhmer": { "typestr": "@" },
+   "NLLanguageKorean": { "typestr": "@" },
+   "NLLanguageLao": { "typestr": "@" },
+   "NLLanguageMalay": { "typestr": "@" },
+   "NLLanguageMalayalam": { "typestr": "@" },
+   "NLLanguageMarathi": { "typestr": "@" },
+   "NLLanguageMongolian": { "typestr": "@" },
+   "NLLanguageNorwegian": { "typestr": "@" },
+   "NLLanguageOriya": { "typestr": "@" },
+   "NLLanguagePersian": { "typestr": "@" },
+   "NLLanguagePolish": { "typestr": "@" },
+   "NLLanguagePortuguese": { "typestr": "@" },
+   "NLLanguagePunjabi": { "typestr": "@" },
+   "NLLanguageRomanian": { "typestr": "@" },
+   "NLLanguageRussian": { "typestr": "@" },
+   "NLLanguageSimplifiedChinese": { "typestr": "@" },
+   "NLLanguageSinhalese": { "typestr": "@" },
+   "NLLanguageSlovak": { "typestr": "@" },
+   "NLLanguageSpanish": { "typestr": "@" },
+   "NLLanguageSwedish": { "typestr": "@" },
+   "NLLanguageTamil": { "typestr": "@" },
+   "NLLanguageTelugu": { "typestr": "@" },
+   "NLLanguageThai": { "typestr": "@" },
+   "NLLanguageTibetan": { "typestr": "@" },
+   "NLLanguageTraditionalChinese": { "typestr": "@" },
+   "NLLanguageTurkish": { "typestr": "@" },
+   "NLLanguageUkrainian": { "typestr": "@" },
+   "NLLanguageUrdu": { "typestr": "@" },
+   "NLLanguageVietnamese": { "typestr": "@" },
+   "NLTagSchemeTokenType": { "typestr": "@" },
+   "NLTagSchemeLexicalClass": { "typestr": "@" },
+   "NLTagSchemeNameType": { "typestr": "@" },
+   "NLTagSchemeNameTypeOrLexicalClass": { "typestr": "@" },
+   "NLTagSchemeLemma": { "typestr": "@" },
+   "NLTagSchemeLanguage": { "typestr": "@" },
+   "NLTagSchemeScript": { "typestr": "@" },
+   "NLTagWord": { "typestr": "@" },
+   "NLTagPunctuation": { "typestr": "@" },
+   "NLTagWhitespace": { "typestr": "@" },
+   "NLTagOther": { "typestr": "@" },
+   "NLTagNoun": { "typestr": "@" },
+   "NLTagVerb": { "typestr": "@" },
+   "NLTagAdjective": { "typestr": "@" },
+   "NLTagAdverb": { "typestr": "@" },
+   "NLTagPronoun": { "typestr": "@" },
+   "NLTagDeterminer": { "typestr": "@" },
+   "NLTagParticle": { "typestr": "@" },
+   "NLTagPreposition": { "typestr": "@" },
+   "NLTagNumber": { "typestr": "@" },
+   "NLTagConjunction": { "typestr": "@" },
+   "NLTagInterjection": { "typestr": "@" },
+   "NLTagClassifier": { "typestr": "@" },
+   "NLTagIdiom": { "typestr": "@" },
+   "NLTagOtherWord": { "typestr": "@" },
+   "NLTagSentenceTerminator": { "typestr": "@" },
+   "NLTagOpenQuote": { "typestr": "@" },
+   "NLTagCloseQuote": { "typestr": "@" },
+   "NLTagOpenParenthesis": { "typestr": "@" },
+   "NLTagCloseParenthesis": { "typestr": "@" },
+   "NLTagWordJoiner": { "typestr": "@" },
+   "NLTagDash": { "typestr": "@" },
+   "NLTagOtherPunctuation": { "typestr": "@" },
+   "NLTagParagraphBreak": { "typestr": "@" },
+   "NLTagOtherWhitespace": { "typestr": "@" },
+   "NLTagPersonalName": { "typestr": "@" },
+   "NLTagPlaceName": { "typestr": "@" },
+   "NLTagOrganizationName": { "typestr": "@" }
+  },
+  "classes": {
+   "NLGazetteer": {
+    "methods": [
+     {
+      "selector": "gazetteerWithContentsOfURL:error:",
+      "class_method": true,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "writeGazetteerForDictionary:language:toURL:error:",
+      "class_method": false,
+      "args": {
+       "3": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "initWithDictionary:language:error:",
+      "class_method": false,
+      "args": {
+       "2": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "initWithContentsOfURL:error:",
+      "class_method": false,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "initWithData:error:",
+      "class_method": false,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     }
+    ]
+   },
+   "NLModel": {
+    "methods": [
+     {
+      "selector": "modelWithContentsOfURL:error:",
+      "class_method": true,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "modelWithMLModel:error:",
+      "class_method": true,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     }
+    ]
+   },
+   "NLEmbedding": {
+    "methods": [
+     {
+      "selector": "getVector:forString:",
+      "class_method": false,
+      "args": {
+       "0": { "type_modifier": "o", "c_array_of_variable_length": true }
+      }
+     },
+     {
+      "selector": "writeEmbeddingForDictionary:language:revision:toURL:error:",
+      "class_method": true,
+      "args": {
+       "4": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "enumerateNeighborsForVector:maximumCount:maximumDistance:distanceType:usingBlock:",
+      "class_method": true,
+      "args": {
+       "4": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "d" },
+	  "3": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "enumerateNeighborsForVector:maximumCount:distanceType:usingBlock:",
+      "class_method": true,
+      "args": {
+       "3": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "d" },
+	  "3": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "enumerateNeighborsForString:maximumCount:maximumDistance:distanceType:usingBlock:",
+      "class_method": true,
+      "args": {
+       "4": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "d" },
+	  "3": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "enumerateNeighborsForString:maximumCount:distanceType:usingBlock:",
+      "class_method": true,
+      "args": {
+       "3": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "d" },
+	  "3": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "NLTagger": {
+    "methods": [
+     {
+      "selector": "tagHypothesesAtIndex:unit:scheme:maximumCount:tokenRange:",
+      "class_method": true,
+      "args": {
+       "4": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "requestAssetsForLanguage:tagScheme:completionHandler:",
+      "class_method": true,
+      "args": {
+       "2": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "q" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "enumerateTagsInRange:unit:scheme:options:usingBlock:",
+      "class_method": true,
+      "args": {
+       "4": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "{_NSRange=QQ}" },
+	  "3": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "NLTokenizer": {
+    "methods": [
+     {
+      "selector": "enumerateTokensInRange:usingBlock:",
+      "class_method": true,
+      "args": {
+       "1": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "{_NSRange=QQ}" },
+	  "2": { "typestr": "Q" },
+	  "3": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

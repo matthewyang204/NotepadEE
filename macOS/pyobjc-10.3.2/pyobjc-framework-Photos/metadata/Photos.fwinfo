@@ -1,0 +1,815 @@
+# objective.metada exceptions file, see its document
+# for information on how to update this file.
+{
+ "definitions": {
+  "typed_enum": {
+   "PHLivePhotoEditingOption": { "type": "@", "type_name": "NSString" }
+  },
+  "aliases": {
+   "PHCollectionListSubtypeAny": { "alias": "NSIntegerMax" },
+   "PHImageContentModeDefault": { "alias": "PHImageContentModeAspectFit" },
+   "PHAssetCollectionSubtypeAny": { "alias": "NSIntegerMax" }
+  },
+  "externs": {
+   "PHLocalIdentifierNotFound": { "typestr": "@" },
+   "PHLivePhotoEditingErrorDomain": { "typestr": "@" },
+   "PHLivePhotoShouldRenderAtPlaybackTime": { "typestr": "@" },
+   "PHImageManagerMaximumSize": { "typestr": "{CGSize=dd}" },
+   "PHImageResultIsInCloudKey": { "typestr": "@" },
+   "PHImageResultIsDegradedKey": { "typestr": "@" },
+   "PHImageResultRequestIDKey": { "typestr": "@" },
+   "PHImageCancelledKey": { "typestr": "@" },
+   "PHImageErrorKey": { "typestr": "@" }
+  },
+  "enum": {
+   "PHPhotosErrorInternalError": { "value": -1 },
+   "PHPhotosErrorUserCancelled": { "value": 3072 },
+   "PHPhotosErrorLibraryVolumeOffline": { "value": 3114 },
+   "PHPhotosErrorRelinquishingLibraryBundleToWriter": { "value": 3142 },
+   "PHPhotosErrorSwitchingSystemPhotoLibrary": { "value": 3143 },
+   "PHPhotosErrorNetworkAccessRequired": { "value": 3164 },
+   "PHPhotosErrorIdentifierNotFound": { "value": 3201 },
+   "PHPhotosErrorMultipleIdentifiersFound": { "value": 3202 },
+   "PHPhotosErrorChangeNotSupported": { "value": 3300 },
+   "PHPhotosErrorOperationInterrupted": { "value": 3301 },
+   "PHPhotosErrorInvalidResource": { "value": 3302 },
+   "PHPhotosErrorMissingResource": { "value": 3303 },
+   "PHPhotosErrorNotEnoughSpace": { "value": 3305 },
+   "PHPhotosErrorRequestNotSupportedForAsset": { "value": 3306 },
+   "PHPhotosErrorAccessRestricted": { "value": 3310 },
+   "PHPhotosErrorAccessUserDenied": { "value": 3311 },
+   "PHPhotosErrorInvalid": { "value": -1 },
+   "PHLivePhotoRequestIDInvalid": { "value": 0 },
+   "PHInvalidAssetResourceDataRequestID": { "value": 0 },
+   "PHAuthorizationStatusNotDetermined": { "value": 0 },
+   "PHAuthorizationStatusRestricted": { "value": 1 },
+   "PHAuthorizationStatusDenied": { "value": 2 },
+   "PHAuthorizationStatusAuthorized": { "value": 3 },
+   "PHInvalidImageRequestID": { "value": 0 },
+   "PHImageRequestOptionsResizeModeNone": { "value": 0 },
+   "PHImageRequestOptionsResizeModeFast": { "value": 1 },
+   "PHImageRequestOptionsResizeModeExact": { "value": 2 },
+   "PHImageRequestOptionsVersionCurrent": { "value": 0 },
+   "PHImageRequestOptionsVersionUnadjusted": { "value": 1 },
+   "PHImageRequestOptionsVersionOriginal": { "value": 2 },
+   "PHImageRequestOptionsDeliveryModeOpportunistic": { "value": 0 },
+   "PHImageRequestOptionsDeliveryModeHighQualityFormat": { "value": 1 },
+   "PHImageRequestOptionsDeliveryModeFastFormat": { "value": 2 },
+   "PHCollectionEditOperationDeleteContent": { "value": 1 },
+   "PHCollectionEditOperationRemoveContent": { "value": 2 },
+   "PHCollectionEditOperationAddContent": { "value": 3 },
+   "PHCollectionEditOperationCreateContent": { "value": 4 },
+   "PHCollectionEditOperationRearrangeContent": { "value": 5 },
+   "PHCollectionEditOperationDelete": { "value": 6 },
+   "PHCollectionEditOperationRename": { "value": 7 },
+   "PHAssetCollectionTypeAlbum": { "value": 1 },
+   "PHAssetCollectionTypeSmartAlbum": { "value": 2 },
+   "PHAssetCollectionTypeMoment": { "value": 3 },
+   "PHAssetCollectionSubtypeAlbumRegular": { "value": 2 },
+   "PHAssetCollectionSubtypeAlbumSyncedEvent": { "value": 3 },
+   "PHAssetCollectionSubtypeAlbumSyncedFaces": { "value": 4 },
+   "PHAssetCollectionSubtypeAlbumSyncedAlbum": { "value": 5 },
+   "PHAssetCollectionSubtypeAlbumImported": { "value": 6 },
+   "PHAssetCollectionSubtypeSmartAlbumDepthEffect": { "value": 212 },
+   "PHAssetCollectionSubtypeSmartAlbumLivePhotos": { "value": 213 },
+   "PHAssetPlaybackStyleUnsupported": { "value": 0 },
+   "PHAssetPlaybackStyleImage": { "value": 1 },
+   "PHAssetPlaybackStyleImageAnimated": { "value": 2 },
+   "PHAssetPlaybackStyleLivePhoto": { "value": 3 },
+   "PHAssetPlaybackStyleVideo": { "value": 4 },
+   "PHAssetPlaybackStyleVideoLooping": { "value": 5 },
+   "PHAssetCollectionSubtypeAlbumMyPhotoStream": { "value": 100 },
+   "PHAssetCollectionSubtypeAlbumCloudShared": { "value": 101 },
+   "PHAssetCollectionSubtypeSmartAlbumGeneric": { "value": 200 },
+   "PHAssetCollectionSubtypeSmartAlbumPanoramas": { "value": 201 },
+   "PHAssetCollectionSubtypeSmartAlbumVideos": { "value": 202 },
+   "PHAssetCollectionSubtypeSmartAlbumFavorites": { "value": 203 },
+   "PHAssetCollectionSubtypeSmartAlbumTimelapses": { "value": 204 },
+   "PHAssetCollectionSubtypeSmartAlbumAllHidden": { "value": 205 },
+   "PHAssetCollectionSubtypeSmartAlbumRecentlyAdded": { "value": 206 },
+   "PHAssetCollectionSubtypeSmartAlbumBursts": { "value": 207 },
+   "PHAssetCollectionSubtypeSmartAlbumSlomoVideos": { "value": 208 },
+   "PHAssetCollectionSubtypeSmartAlbumUserLibrary": { "value": 209 },
+   "PHAssetCollectionSubtypeSmartAlbumSelfPortraits": { "value": 210 },
+   "PHAssetCollectionSubtypeSmartAlbumScreenshots": { "value": 211 },
+   "PHAssetEditOperationDelete": { "value": 1 },
+   "PHAssetEditOperationContent": { "value": 2 },
+   "PHAssetEditOperationProperties": { "value": 3 },
+   "PHImageContentModeAspectFit": { "value": 0 },
+   "PHImageContentModeAspectFill": { "value": 1 },
+   "PHCollectionListTypeMomentList": { "value": 1 },
+   "PHCollectionListTypeFolder": { "value": 2 },
+   "PHCollectionListTypeSmartFolder": { "value": 3 },
+   "PHCollectionListSubtypeMomentListCluster": { "value": 1 },
+   "PHCollectionListSubtypeMomentListYear": { "value": 2 },
+   "PHCollectionListSubtypeRegularFolder": { "value": 100 },
+   "PHCollectionListSubtypeSmartFolderEvents": { "value": 200 },
+   "PHCollectionListSubtypeSmartFolderFaces": { "value": 201 },
+   "PHAssetMediaTypeUnknown": { "value": 0 },
+   "PHAssetMediaTypeImage": { "value": 1 },
+   "PHAssetMediaTypeVideo": { "value": 2  },
+   "PHAssetMediaTypeAudio": { "value": 3  },
+   "PHAssetMediaSubtypeNone": { "value": 0 },
+   "PHAssetMediaSubtypePhotoPanorama": { "value": 1 },
+   "PHAssetMediaSubtypePhotoHDR": { "value": 2 },
+   "PHAssetMediaSubtypePhotoScreenshot": { "value": 4 },
+   "PHAssetMediaSubtypeVideoStreamed": { "value": 65536 },
+   "PHAssetMediaSubtypeVideoHighFrameRate": { "value": 131072 },
+   "PHAssetMediaSubtypeVideoTimelapse": { "value": 262144 },
+   "PHLivePhotoFrameTypePhoto": { "value": 0 },
+   "PHLivePhotoFrameTypeVideo": { "value": 1 },
+   "PHLivePhotoEditingErrorCodeUnknown": { "value": 0 },
+   "PHLivePhotoEditingErrorCodeAborted": { "value": 1 },
+   "PHAssetMediaSubtypePhotoLive": { "value": 8 },
+   "PHAssetMediaSubtypePhotoDepthEffect": { "value": 16 },
+   "PHAssetBurstSelectionTypeNone": { "value": 0 },
+   "PHAssetBurstSelectionTypeAutoPick": { "value": 1 },
+   "PHAssetBurstSelectionTypeUserPick": { "value": 2 },
+   "PHAssetSourceTypeNone": { "value": 0 },
+   "PHAssetSourceTypeUserLibrary": { "value": 1 },
+   "PHAssetSourceTypeCloudShared": { "value": 2 },
+   "PHAssetSourceTypeiTunesSynced": { "value": 4 },
+   "PHAssetResourceTypePhoto": { "value": 1 },
+   "PHAssetResourceTypeVideo": { "value": 2 },
+   "PHAssetResourceTypeAudio": { "value": 3 },
+   "PHAssetResourceTypeAlternatePhoto": { "value": 4 },
+   "PHAssetResourceTypeFullSizePhoto": { "value": 5 },
+   "PHAssetResourceTypeFullSizeVideo": { "value": 6 },
+   "PHAssetResourceTypeAdjustmentData": { "value": 7 },
+   "PHAssetResourceTypeAdjustmentBasePhoto": { "value": 8 },
+   "PHAssetResourceTypePairedVideo": { "value": 9 }
+  },
+  "classes": {
+   "PHAssetResourceManager": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "requestDataForAssetResource:options:dataReceivedHandler:completionHandler:",
+      "args": {
+       "2": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       },
+       "3": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "writeDataForAssetResource:toFile:options:completionHandler:",
+      "args": {
+       "3": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHContentEditingInputRequestOptions": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "progressHandler",
+      "retval": {
+       "callable": {
+        "arguments": {
+	 "0": { "typestr": "^v" },
+	 "1": { "typestr": "d" },
+	 "2": { "typestr": "o^Z" }
+	},
+	"retval": { "typestr": "v" }
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "setProgressHandler:",
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "d" },
+	  "2": { "typestr": "o^Z" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHVideoRequestOptions": {
+    "methods": [
+     {
+      "comment": "XXX",
+      "class_method": false,
+      "selector": "progressHandler",
+      "retval": {
+       "callable": {
+        "arguments": {
+	 "0": { "typestr": "^v" },
+	 "1": { "typestr": "d" },
+	 "2": { "typestr": "@" },
+	 "3": { "typestr": "o^Z" },
+	 "4": { "typestr": "@" }
+	},
+	"retval": { "typestr": "v" }
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "setProgressHandler:",
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "d" },
+	  "2": { "typestr": "@" },
+	  "3": { "typestr": "o^Z" },
+	  "4": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHLivePhotoRequestOptions": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "progressHandler",
+      "retval": {
+       "callable": {
+        "arguments": {
+	 "0": { "typestr": "^v" },
+	 "1": { "typestr": "d" },
+	 "2": { "typestr": "@" },
+	 "3": { "typestr": "o^Z" },
+	 "4": { "typestr": "@" }
+	},
+	"retval": { "typestr": "v" }
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "setProgressHandler:",
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "d" },
+	  "2": { "typestr": "@" },
+	  "3": { "typestr": "o^Z" },
+	  "4": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHPhotoLibrary": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "requestAuthorizationForAccessLevel:handler:",
+      "args": {
+       "1": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "q" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "requestAuthorization:",
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "q"}
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "performChanges:completionHandler:",
+      "args": {
+       "1": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "Z" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "performChangesAndWait:error:",
+      "class_method": false,
+      "retval": { "type_override": "Z" },
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     }
+    ]
+   },
+   "PHImageManager": {
+    "methods": [
+     {
+      "selector": "requestAVAssetForVideo:options:resultHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" },
+	  "3": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "requestExportSessionForVideo:options:exportPreset:resultHandler:",
+      "class_method": false,
+      "args": {
+       "3": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "requestPlayerItemForVideo:options:resultHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:",
+      "class_method": false,
+      "args": {
+       "4": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "requestImageDataAndOrientationForAsset:options:resultHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" },
+	  "3": { "typestr": "I" },
+	  "4": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "requestImageForAsset:targetSize:contentMode:options:resultHandler:",
+      "args": {
+       "4": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "requestImageDataForAsset:options:resultHandler:",
+      "args": {
+       "2": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" },
+	  "3": { "typestr": "I" },
+	  "4": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHProject": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "hasProjectPreview",
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "PHImageRequestOptions": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "isNetworkAccessAllowed",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector": "setNetworkAccessAllowed:",
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "isSynchronous",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector": "setSynchronous:",
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "progressHandler",
+      "retval": {
+       "callable": {
+        "arguments": {
+	 "0": { "typestr": "^v" },
+	 "1": { "typestr": "d" },
+	 "2": { "typestr": "@" },
+	 "3": { "typestr": "o^Z" },
+	 "4": { "typestr": "@" }
+	},
+	"retval": { "typestr": "v" }
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector": "setProgressHandler:",
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "d" },
+	  "2": { "typestr": "@" },
+	  "3": { "typestr": "o^Z" },
+	  "4": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHObjectChangeDetails": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector":  "assetContentChanged",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "objectWasDeleted",
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "PHFetchOptions": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector":  "includeHiddenAssets",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector": "setIncludeHiddenAssets:",
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "class_method": false,
+      "selector":  "wantsIncrementalChangeDetails",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "setWantsIncrementalChangeDetails:",
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     }
+    ]
+   },
+   "PHFetchResultChangeDetails": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector":  "hasIncrementalChanges",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "hasMoves",
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "PHAsset": {
+    "methods": [
+     {
+      "selector": "requestContentEditingInputWithOptions:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "class_method": false,
+      "selector":  "canPerformEditOperation:",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "representsBurst",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "isSyncFailureHidden",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "isHidden",
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "class_method": false,
+      "selector":  "isFavorite",
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "NSObject": {
+    "methods": [
+     {
+      "class_method": false,
+      "selector": "renderScale",
+      "retval": { "type_override": "d" }
+     },
+     {
+      "class_method": false,
+      "selector": "type",
+      "retval": { "type_override": "q" }
+     },
+     {
+      "class_method": false,
+      "selector": "time",
+      "retval": { "type_override": "{CMTime=qiIq}" }
+     }
+    ]
+   },
+   "PHFetchResult": {
+    "methods": [
+     {
+      "selector": "enumerateObjectsUsingBlock:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "Q"},
+	  "3": { "typestr": "o^Z" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "enumerateObjectsWithOptions:usingBlock:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "Q"},
+	  "3": { "typestr": "o^Z" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "containsObject:",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "enumerateObjectsAtIndexes:options:usingBlock:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "Q"},
+	  "3": { "typestr": "o^Z" }
+	 }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHLivePhoto": {
+    "methods": [
+     {
+      "selector": "requestLivePhotoWithResourceFileURLs:placeholderImage:targetSize:contentMode:resultHandler:",
+      "class_method": false,
+      "args": {
+       "4": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	  "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "PHLivePhotoEditingContext": {
+    "methods": [
+     {
+      "selector": "frameProcessor",
+      "class_method": false,
+      "retval": {
+       "callable": {
+        "retval": { "typestr": "@" },
+	"arguments": {
+	 "0": { "typestr": "^v" },
+	 "1": { "typestr": "@" },
+	 "2": { "typestr": "o^@" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "setFrameProcessor:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+         "retval": { "typestr": "@" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" },
+	  "2": { "typestr": "o^@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "prepareLivePhotoForPlaybackWithTargetSize:options:completionHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "Z" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "saveLivePhotoToOutput:options:completionHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+         "retval": { "typestr": "v" },
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "Z" },
+	  "2": { "typestr": "@" }
+	 }
+	}
+       }
+      }
+     }
+    ]
+   }
+  }
+ }
+}

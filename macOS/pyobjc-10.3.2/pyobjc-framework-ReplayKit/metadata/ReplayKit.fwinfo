@@ -1,0 +1,74 @@
+// objective.metadata exceptions file, see its document
+// for information on how to update this file.
+{
+ "definitions": {
+  "enums": {
+   "RPRecordingErrorExportClipToURLInProgress": { "value": -5836 }
+  },
+  "classes": {
+   "RPScreenRecorder": {
+    "methods": [
+     {
+      "selector": "startClipBufferingWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "stopClipBufferingWithCompletionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      }
+     },
+     {
+      "selector": "exportClipToURL:duration:completionHandler:",
+      "class_method": false,
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      }
+     }
+    ]
+   },
+   "RPBroadcastSampleHandler": {
+    "methods": [
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "processSampleBuffer:withType:"
+     }
+    ]
+   }
+  },
+  "formal_protocols": {},
+  "functions": {},
+  "informal_protocols": {}
+ }
+}

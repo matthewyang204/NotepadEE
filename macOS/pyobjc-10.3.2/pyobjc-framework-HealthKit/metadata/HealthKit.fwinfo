@@ -1,0 +1,351 @@
+{
+ "definitions": {
+  "typed_enum": {
+   "HKDocumentTypeIdentifier": { "type": "@", "type_name": "NSString" },
+   "HKCorrelationTypeIdentifier": { "type": "@", "type_name": "NSString" },
+   "HKCharacteristicTypeIdentifier": { "type": "@", "type_name": "NSString" },
+   "HKCategoryTypeIdentifier": { "type": "@", "type_name": "NSString" },
+   "HKVerifiableClinicalRecordCredentialType": { "type": "@", "type_name": "NSString" },
+   "HKQuantityTypeIdentifier": { "type": "@", "type_name": "NSString" },
+   "HKVerifiableClinicalRecordSourceType": { "type": "@", "type_name": "NSString" },
+   "HKClinicalTypeIdentifier": { "type": "@", "type_name": "NSString" },
+   "HKFHIRRelease": { "type": "@", "type_name": "NSString" },
+   "HKFHIRResourceType": { "type": "@", "type_name": "NSString" }
+  },
+  "enum": {
+   "HKObjectQueryNoLimit": { "value": 0 }
+  },
+  "classes": {
+   "HKAudiogramSensitivityPoint": {
+    "methods": [
+     {
+      "args": {
+       "3": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": true,
+      "selector": "sensitivityPointWithFrequency:leftEarSensitivity:rightEarSensitivity:error:"
+     }
+    ]
+   },
+   "HKStatisticsCollectionQuery": {
+    "methods": [
+     {
+      "retval": {
+       "callable": {
+        "arguments": {
+         "0": { "type": "^v" },
+         "1": { "type": "@" },
+         "2": { "type": "@" },
+         "3": { "type": "@" }
+        },
+        "retval": { "type": "v" }
+       }
+      },
+      "class_method": false,
+      "selector": "initialResultsHandler"
+     },
+     {
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" },
+          "2": { "type": "@" },
+          "3": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      },
+      "class_method": false,
+      "selector": "setInitialResultsHandler:"
+     },
+     {
+      "retval": {
+       "callable": {
+        "arguments": {
+         "0": { "type": "^v" },
+         "1": { "type": "@" },
+         "2": { "type": "@" },
+         "3": { "type": "@" },
+         "4": { "type": "@" }
+        },
+        "retval": { "type": "v" }
+       }
+      },
+      "class_method": false,
+      "selector": "statisticsUpdateHandler"
+     },
+     {
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" },
+          "2": { "type": "@" },
+          "3": { "type": "@" },
+          "4": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      },
+      "class_method": false,
+      "selector": "setStatisticsUpdateHandler:"
+     }
+    ]
+   },
+   "HKActivitySummaryQuery": {
+    "methods": [
+     {
+      "retval": {
+       "callable": {
+        "arguments": {
+         "0": { "type": "^v" },
+         "1": { "type": "@" },
+         "2": { "type": "@" },
+         "3": { "type": "@" }
+        },
+        "retval": { "type": "v" }
+       }
+      },
+      "class_method": false,
+      "selector": "updateHandler"
+     },
+     {
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" },
+          "2": { "type": "@" },
+          "3": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      },
+      "class_method": false,
+      "selector": "setUpdateHandler:"
+     }
+    ]
+   },
+   "HKAnchoredObjectQuery": {
+    "methods": [
+     {
+      "retval": {
+       "callable": {
+        "arguments": {
+         "0": { "type": "^v" },
+         "1": { "type": "@" },
+         "2": { "type": "@" },
+         "3": { "type": "@" },
+         "4": { "type": "@" },
+         "5": { "type": "@" }
+        },
+        "retval": { "type": "v" }
+       }
+      },
+      "class_method": false,
+      "selector": "updateHandler"
+     },
+     {
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" },
+          "2": { "type": "@" },
+          "3": { "type": "@" },
+          "4": { "type": "@" },
+          "5": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      },
+      "class_method": false,
+      "selector": "setUpdateHandler:"
+     }
+    ]
+   },
+   "HKCDADocumentSample": {
+    "methods": [
+     {
+      "args": {
+       "4": { "type_modifier": "o" }
+      },
+      "class_method": true,
+      "selector": "CDADocumentSampleWithData:startDate:endDate:metadata:validationError:"
+     }
+    ]
+   },
+   "HKFHIRVersion": {
+    "methods": [
+     {
+      "args": {
+       "1": { "type_modifier": "o" }
+      },
+      "class_method": true,
+      "selector": "versionFromVersionString:error:"
+     }
+    ]
+   },
+   "HKHealthStore": {
+    "methods": [
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "dateOfBirthWithError:"
+     },
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "dateOfBirthComponentsWithError:"
+     },
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "biologicalSexWithError:"
+     },
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "bloodTypeWithError:"
+     },
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "fitzpatrickSkinTypeWithError:"
+     },
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "wheelchairUseWithError:"
+     },
+     {
+      "args": {
+       "0": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "activityMoveModeWithError:"
+     },
+     {
+      "retval": {
+       "callable": {
+        "arguments": {
+         "0": { "type": "^v" },
+         "1": { "type": "@" }
+        },
+        "retval": { "type": "v" }
+       }
+      },
+      "class_method": false,
+      "selector": "workoutSessionMirroringStartHandler"
+     },
+     {
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+          "1": { "type": "@" }
+         },
+         "retval": { "type": "v" }
+        }
+       }
+      },
+      "class_method": false,
+      "selector": "setWorkoutSessionMirroringStartHandler:"
+     }
+    ]
+   },
+   "HKQuantitySeriesSampleBuilder": {
+    "methods": [
+     {
+      "args": {
+       "2": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "insertQuantity:dateInterval:error:"
+     },
+     {
+      "args": {
+       "2": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "insertQuantity:date:error:"
+     }
+    ]
+   },
+   "HKWorkoutSession": {
+    "methods": [
+     {
+      "args": {
+       "1": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "initWithConfiguration:error:"
+     },
+     {
+      "args": {
+       "2": {
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "initWithHealthStore:configuration:error:"
+     }
+    ]
+   }
+  },
+  "formal_protocols": {},
+  "functions": {
+   "HKAppleWalkingSteadinessClassificationForQuantity": {
+    "args": {
+     "1": { "type_modifier": "o" },
+     "2": { "type_modifier": "o" }
+    }
+   }
+  },
+  "informal_protocols": {}
+ }
+}

@@ -1,0 +1,215 @@
+// objective.metadata exceptions file, see its document
+// for information on how to update this file.
+{
+ "definitions": {
+  "enum": {
+   "MLCReductionTypeL1Norm": { "value": 7 },
+   "MLCReductionTypeAny": { "value": 8 },
+   "MLCReductionTypeAll": { "value": 9 },
+   "MLCReductionTypeCount": { "ignore": true },
+   "MLCComparisonOperationEqual": { "value": 0 },
+   "MLCComparisonOperationNotEqual": { "value": 1 },
+   "MLCComparisonOperationLess": { "value": 2 },
+   "MLCComparisonOperationGreater": { "value": 3 },
+   "MLCComparisonOperationLessOrEqual": { "value": 4 },
+   "MLCComparisonOperationGreaterOrEqual": { "value": 5 },
+   "MLCComparisonOperationLogicalAND": { "value": 6 },
+   "MLCComparisonOperationLogicalOR": { "value": 7 },
+   "MLCComparisonOperationLogicalNOT": { "value": 8 },
+   "MLCComparisonOperationLogicalNAND": { "value": 9 },
+   "MLCComparisonOperationLogicalNOR": { "value": 10 },
+   "MLCComparisonOperationLogicalXOR": { "value": 11 },
+   "MLCComparisonOperationCount": { "ignore": true },
+   "MLCActivationTypeHardSwish": { "value": 19 },
+   "MLCActivationTypeClamp": { "value": 20 },
+   "MLCActivationTypeCount": { "ignore": true },
+   "MLCPoolingTypeCount": { "ignore": true },
+   "MLCLossTypeCount": { "ignore": true },
+   "MLCDataTypeCount": { "ignore": true },
+   "MLCLSTMResultModeOutput": { "value": 0 },
+   "MLCLSTMResultModeOutputAndStates": { "value": 1 },
+   "MLCRandomInitializerTypeCount": { "ignore": true },
+   "MLCDeviceTypeCount": { "ignore": true },
+   "MLCExecutionOptionsForwardForInference": { "value": 8 },
+   "MLCDataTypeInt32": { "value": 7 },
+   "MLCArithmeticOperationMultiplyNoNaN": { "value": 26 },
+   "MLCArithmeticOperationDivideNoNaN": { "value": 27 },
+   "MLCArithmeticOperationMin": { "value": 28 },
+   "MLCArithmeticOperationMax": { "value": 29 },
+   "MLCArithmeticOperationCount": { "ignore": true }
+  },
+  "classes": {
+   "MLCInferenceGraph": {
+    "methods": [
+     {
+      "selector": "compileWithOptions:device:inputTensors:inputTensorsData:",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "MLCDevice": {
+    "methods": [
+     {
+      "selector": "deviceWithType:selectsMultipleComputeDevices:",
+      "class_method": false,
+      "args": {
+       "1": { "type_override": "Z" }
+      }
+     }
+    ]
+   },
+   "MLCTrainingGraph": {
+    "methods": [
+     {
+      "selector": "bindOptimizerData:deviceData:withTensor:",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "compileWithOptions:device:inputTensors:inputTensorsData:",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "MLCLayer": {
+    "methods": [
+     {
+      "selector": "supportsDataType:onDevice:",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "MLCLSTMDescriptor": {
+    "methods": [
+     {
+      "selector": "descriptorWithInputSize:hiddenSize:layerCount:usesBiases:batchFirst:isBidirectional:returnsSequences:dropout:resultMode:",
+      "class_method": false,
+      "args": {
+       "3": { "type_override": "Z" },
+       "4": { "type_override": "Z" },
+       "5": { "type_override": "Z" },
+       "6": { "type_override": "Z" }
+      }
+     }
+    ]
+   },
+   "MLCGraph": {
+    "methods": [
+     {
+      "selector": "bindAndWriteData:forInputs:toDevice:synchronous:",
+      "class_method": false,
+      "args": {
+       "3": { "type_override": "Z" }
+      },
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "MLCSGDOptimizer": {
+    "methods": [
+     {
+      "selector": "usesNesterovMomentum",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "optimizerWithDescriptor:momentumScale:usesNesterovMomentum:",
+      "class_method": false,
+      "args": {
+       "2": { "type_override": "Z" }
+      }
+     }
+    ]
+   },
+   "MLCTensor": {
+    "methods": [
+     {
+      "selector": "bindOptimizerData:deviceData:",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "synchronizeOptimizerData",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "copyDataFromDeviceMemoryToBytes:length:synchronizeWithDevice:"
+     }
+    ]
+   },
+   "MLCTensorData": {
+    "methods": [
+     {
+      "args": {
+       "0": { "type_modifier": "n", "c_array_length_in_arg": 1 },
+       "2": {
+        "callable": {
+	 "arguments": {
+	  "0": { "type": "^v" },
+	  "1": { "type": "n^v", "c_array_length_in_arg": 2 },
+	  "2": { "type": "Q" }
+	 },
+	 "retval": { "type": "v" }
+	}
+       }
+      },
+      "class_method": true,
+      "selector": "dataWithBytesNoCopy:length:deallocator:"
+     },
+     {
+      "args": {
+       "0": { "type_modifier": "n", "c_array_length_in_arg": 1 }
+      },
+      "class_method": true,
+      "selector": "dataWithBytesNoCopy:length:"
+     },
+     {
+      "args": {
+       "0": { "type_modifier": "n", "c_array_length_in_arg": 1 }
+      },
+      "class_method": true,
+      "selector": "dataWithImmutableBytesNoCopy:length:"
+     },
+     {
+      "class_method": false,
+      "retval": { "c_array_of_variable_size": true },
+      "selector": "bytes"
+     }
+    ],
+    "properties": [
+     {
+      "attributes": [
+       "nonatomic",
+       "readonly"
+      ],
+      "name": "bytes"
+     }
+    ]
+   }
+  },
+  "formal_protocols": {},
+  "functions": {
+   "MLCLSTMResultModeDebugDescription": {
+    "retval": { "type_override": "@" },
+    "args": {
+     "0": { "type_override": "Q" }
+    }
+   },
+   "MLCComparisonOperationDebugDescription": {
+    "retval": { "type_override": "@" },
+    "args": {
+     "0": { "type_override": "i" }
+    }
+   }
+  },
+  "informal_protocols": {}
+ }
+}

@@ -1,0 +1,69 @@
+# objective.metada exceptions file, see its document
+# for information on how to update this file.
+{
+ "definitions": {
+  "classes": {},
+  "formal_protocols": {
+   "QLPreviewPanelDelegate": {
+    "methods": [
+     {
+      "args": {
+       "2": {}
+      },
+      "class_method": false,
+      "selector": "previewPanel:transitionImageForPreviewItem:contentRect:"
+     }
+    ]
+   }
+  },
+  "classes": {
+   "NSObject": {
+    "methods": [
+     {
+      "selector": "previewPanel:transitionImageForPreviewItem:contentRect:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "type_modifier": "n"
+       }
+      }
+     },
+     {
+      "selector": "preparePreviewOfFileAtURL:completionHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "type_override": "@?",
+	"callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     },
+     {
+      "selector": "preparePreviewOfSearchableItemWithIdentifier:queryString:completionHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "type_override": "@?",
+	"callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" },
+	  "1": { "typestr": "@" }
+	 },
+	 "retval": { "typestr": "v" }
+	}
+       }
+      }
+     }
+    ]
+   }
+  },
+  "functions": {},
+  "informal_protocols": {}
+ }
+}

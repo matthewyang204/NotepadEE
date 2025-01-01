@@ -1,0 +1,3025 @@
+# objective.metada exceptions file, see its document
+# for information on how to update this file.
+{
+ "definitions": {
+  "typed_enum": {
+   "CAScrollLayerScrollMode": { "type": "@", "type_name": "NSString" },
+   "CALayerContentsGravity": { "type": "@", "type_name": "NSString" },
+   "CALayerContentsFormat": { "type": "@", "type_name": "NSString" },
+   "CALayerContentsFilter": { "type": "@", "type_name": "NSString" },
+   "CALayerCornerCurve": { "type": "@", "type_name": "NSString" },
+   "CAMediaTimingFunctionName": { "type": "@", "type_name": "NSString" },
+   "CATextLayerTruncationMode": { "type": "@", "type_name": "NSString" },
+   "CATextLayerAlignmentMode": { "type": "@", "type_name": "NSString" },
+   "CAEmitterLayerEmitterShape": { "type": "@", "type_name": "NSString" },
+   "CAEmitterLayerEmitterMode": { "type": "@", "type_name": "NSString" },
+   "CAEmitterLayerRenderMode": { "type": "@", "type_name": "NSString" },
+   "CAMediaTimingFillMode": { "type": "@", "type_name": "NSString" },
+   "CAShapeLayerFillRule": { "type": "@", "type_name": "NSString" },
+   "CAShapeLayerLineJoin": { "type": "@", "type_name": "NSString" },
+   "CAShapeLayerLineCap": { "type": "@", "type_name": "NSString" },
+   "CAValueFunctionName": { "type": "@", "type_name": "NSString" },
+   "CAGradientLayerType": { "type": "@", "type_name": "NSString" },
+   "CAAnimationCalculationMode": { "type": "@", "type_name": "NSString" },
+   "CAAnimationRotationMode": { "type": "@", "type_name": "NSString" },
+   "CATransitionType": { "type": "@", "type_name": "NSString" },
+   "CATransitionSubtype": { "type": "@", "type_name": "NSString" }
+  },
+  "enum": {
+   "CIDataMatrixCodeECCVersion000": { "value":   0 },
+   "CIDataMatrixCodeECCVersion050": { "value":  50 },
+   "CIDataMatrixCodeECCVersion080": { "value":  80 },
+   "CIDataMatrixCodeECCVersion100": { "value": 100 },
+   "CIDataMatrixCodeECCVersion140": { "value": 140 },
+   "CIDataMatrixCodeECCVersion200": { "value": 200 },
+   "CIQRCodeErrorCorrectionLevelL": { "value": 76 },
+   "CIQRCodeErrorCorrectionLevelM": { "value": 77 },
+   "CIQRCodeErrorCorrectionLevelQ": { "value": 81 },
+   "CIQRCodeErrorCorrectionLevelH": { "value": 72 },
+   "kCALayerMinXMinYCorner": { "value": 1 },
+   "kCALayerMaxXMinYCorner": { "value": 2 },
+   "kCALayerMinXMaxYCorner": { "value": 4 },
+   "kCALayerMaxXMaxYCorner": { "value": 8 },
+   "CIRenderDestinationAlphaNone": { "value": 0 },
+   "CIRenderDestinationAlphaPremultiplied": { "value": 1 },
+   "CIRenderDestinationAlphaUnpremultiplied": { "value": 2 }
+  },
+  "externs": {
+   "CIRAWDecoderVersionNone": { "typestr": "@" },
+   "CIRAWDecoderVersion8": { "typestr": "@" },
+   "CIRAWDecoderVersion8DNG": { "typestr": "@" },
+   "CIRAWDecoderVersion7": { "typestr": "@" },
+   "CIRAWDecoderVersion7DNG": { "typestr": "@" },
+   "CIRAWDecoderVersion6": { "typestr": "@" },
+   "CIRAWDecoderVersion6DNG": { "typestr": "@" },
+   "kCIContextName": { "typestr": "@" },
+   "kCIInputEnableEDRModeKey": { "typestr": "@" },
+   "kCIContextAllowLowPower": { "typestr": "@" },
+   "kCARendererMetalCommandQueue": { "typestr": "@" },
+   "kCAContentsFormatRGBA8Uint": { "typestr": "@" },
+   "kCAContentsFormatRGBA16Float": { "typestr": "@" },
+   "kCAContentsFormatGray8Uint": { "typestr": "@" },
+   "kCAGradientLayerConic": { "typestr": "@" },
+   "kCAGradientLayerRadial": { "typestr": "@" },
+   "kCIImageRepresentationAVSemanticSegmentationMattes": { "typestr": "@" },
+   "kCIImageRepresentationSemanticSegmentationSkinMatteImage": { "typestr": "@" },
+   "kCIImageRepresentationSemanticSegmentationHairMatteImage": { "typestr": "@" },
+   "kCIImageRepresentationSemanticSegmentationTeethMatteImage": { "typestr": "@" },
+   "kCIImageAuxiliarySemanticSegmentationSkinMatte": { "typestr": "@" },
+   "kCIImageAuxiliarySemanticSegmentationHairMatte": { "typestr": "@" },
+   "kCIImageAuxiliarySemanticSegmentationTeethMatte": { "typestr": "@" },
+   "kCIImageApplyOrientationProperty": { "typestr": "@" },
+   "kCIInputDepthImageKey": { "typestr": "@" },
+   "kCIInputDisparityImageKey": { "typestr": "@" },
+   "kCIImageNearestSampling": { "typestr": "@" },
+   "kCIInputMoireAmountKey": { "typestr": "@" },
+   "kCIImageAuxiliaryDepth": { "typestr": "@" },
+   "kCIImageAuxiliaryDisparity": { "typestr": "@" },
+   "kCIImageRepresentationAVDepthData": { "typestr": "@" },
+   "kCIImageRepresentationDepthImage": { "typestr": "@" },
+   "kCIImageRepresentationDisparityImage": { "typestr": "@" },
+   "kCIImageRepresentationAVPortraitEffectsMatte": { "typestr": "@" },
+   "kCIImageRepresentationPortraitEffectsMatteImage": { "typestr": "@" },
+   "kCARendererColorSpace": { "typestr": "@" },
+   "CIDetectorMaxFeatureCount": { "typestr": "@" },
+   "kCIInputBaselineExposureKey": { "typestr": "@" },
+   "kCIInputAmountKey": { "typestr": "@" },
+   "kCIInputMatteImageKey": { "typestr": "@" },
+   "kCIImageAuxiliaryPortraitEffectsMatte": { "typestr": "@" },
+   "kCIInputDisableGamutMapKey": { "typestr": "@" },
+   "kCIContextCacheIntermediates": { "typestr": "@" },
+   "kCIContextPriorityRequestLow": { "typestr": "@" },
+   "kCIContextMemoryLimit": { "typestr": "@" },
+   "kCIContextOutputPremultiplied": { "typestr": "@" },
+   "kCAEmitterBehaviorSimpleAttractor": { "typestr": "@" },
+   "kCIContextHighQualityDownsample": { "typestr": "@" },
+   "CIDetectorReturnSubFeatures": { "typestr": "@" },
+   "kCIInputWeightsKey": { "typestr": "@" },
+   "kCIAttributeFilterAvailable_Mac": { "typestr": "@" },
+   "kCIAttributeFilterAvailable_iOS": { "typestr": "@" },
+   "kCIContextWorkingFormat": { "typestr": "@" },
+   "CIFeatureTypeQRCode": { "typestr": "@" },
+   "CIFeatureTypeText": { "typestr": "@" },
+   "kCIAttributeTypeColor": { "typestr": "@" },
+   "kCIAttributeTypeImage": { "typestr": "@" },
+   "kCIAttributeTypeTransform": { "typestr": "@" },
+   "kCIInputVersionKey": { "typestr": "@" },
+   "CIDetectorTypeText": { "typestr": "@" },
+   "CIDetectorNumberOfAngles": { "typestr": "@" },
+   "kCIImageExpandToHDR": { "typestr": "@" },
+   "kCIImageCacheImmediately": { "typestr": "@" },
+   "kCIImageAuxiliaryHDRGainMap": { "typestr": "@" },
+   "kCIFormatL8": { "typestr": "i" },
+   "kCIFormatRGBX16": { "typestr": "i" },
+   "kCIFormatRGBXh": { "typestr": "i" },
+   "kCIFormatRGBXf": { "typestr": "i" },
+   "kCIFormatRGB10": { "typestr": "i" },
+   "kCIFormatL16": { "typestr": "i" },
+   "kCIFormatLh": { "typestr": "i" },
+   "kCIFormatLf": { "typestr": "i" },
+   "kCIFormatLA8": { "typestr": "i" },
+   "kCIFormatLA16": { "typestr": "i" },
+   "kCIFormatLAh": { "typestr": "i" },
+   "kCIFormatLAf": { "typestr": "i" },
+   "kCIFormatBGRA8": { "typestr": "i" },
+   "kCIFormatABGR8": { "typestr": "i" },
+   "kCIFormatRGBA8": { "typestr": "i" },
+   "kCIFormatA8": { "typestr": "i" },
+   "kCIFormatA16": { "typestr": "i" },
+   "kCIFormatAh": { "typestr": "i" },
+   "kCIFormatAf": { "typestr": "i" },
+   "kCIFormatR8": { "typestr": "i" },
+   "kCIFormatR16": { "typestr": "i" },
+   "kCIFormatRh": { "typestr": "i" },
+   "kCIFormatRf": { "typestr": "i" },
+   "kCIFormatRG8": { "typestr": "i" },
+   "kCIFormatRG16": { "typestr": "i" },
+   "kCIFormatRGh": { "typestr": "i" },
+   "kCIFormatRGf": { "typestr": "i" }
+  },
+  "classes": {
+   "CIRAWFilter": {
+    "methods": [
+     {
+      "selector": "isLocalToneMapSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setLocalToneMapSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isMoireReductionSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setMoireReductionSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isDetailSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setDetailSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isContrastSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setContrastSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isSharpnessSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setSharpnessSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isColorNoiseReductionSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setColorNoiseReductionSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isLuminanceNoiseReductionSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setLuminanceNoiseReductionSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isLensCorrectionEnabled",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setLensCorrectionEnabled:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isLensCorrectionSupported",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setLensCorrectionSupported:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isGamutMappingEnabled",
+      "class_method": true,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setGamutMappingEnabled:",
+      "class_method": true,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     }
+    ]
+   },
+   "CADisplayLink": {
+    "methods": [
+     {
+      "selector": "displayLinkWithTarget:selector",
+      "class_method": true,
+      "args": {
+       "1": { "sel_of_type": "v@:@" }
+      }
+     }
+    ]
+   },
+   "CIRenderTask": {
+    "methods": [
+     {
+      "selector": "waitUntilCompletedAndReturnError:",
+      "class_method": false,
+      "args": {
+       "0": { "type_modifier": "o" }
+      }
+     }
+    ]
+   },
+   "CIRenderDestination": {
+    "methods": [
+     {
+      "selector": "blendsInDestinationColorSpace",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setBlendsInDestinationColorSpace:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isClamped",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setClamped:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isDithered",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setDithered:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "isFlipped",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "setFlipped:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "initWithWidth:height:pixelFormat:commandBuffer:mtlTextureProvider:",
+      "class_method": false,
+      "args": {
+       "4": {
+        "callable": {
+	 "arguments": {
+	  "0": { "typestr": "^v" }
+	 },
+	 "retval": { "typestr": "@" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "CAEmitterCell": {
+    "methods": [],
+    "properties": [
+     {
+      "attributes": [],
+      "name": "color"
+     }
+    ]
+   },
+   "CAKeyframeAnimation": {
+    "methods": [],
+    "properties": [
+     {
+      "attributes": [],
+      "name": "path"
+     }
+    ]
+   },
+   "CAAnimation": {
+    "methods": [
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setEnabled:"
+     }
+    ]
+   },
+   "CALayer": {
+    "methods": [
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setAllowsEdgeAntialiasing:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "allowsEdgeAntialiasing"
+     },
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setAllowsGroupOpacity:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "allowsGroupOpacity"
+     },
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setWantsExtendedDynamicRangeContent:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "wantsExtendedDynamicRangeContent"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "drawInContext:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "renderInContext:"
+     }
+    ],
+    "properties": [
+     {
+      "attributes": [],
+      "name": "backgroundColor"
+     },
+     {
+      "attributes": [],
+      "name": "borderColor"
+     },
+     {
+      "attributes": [],
+      "name": "shadowColor"
+     },
+     {
+      "attributes": [],
+      "name": "shadowPath"
+     }
+    ]
+   },
+   "CAOpenGLLayer": {
+    "methods": [
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setWantsExtendedDynamicRangeContent:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "wantsExtendedDynamicRangeContent"
+     },
+     {
+      "args": {
+       "0": {},
+       "1": {},
+       "3": {
+        "type_modifier": "n"
+       }
+      },
+      "class_method": false,
+      "selector": "canDrawInCGLContext:pixelFormat:forLayerTime:displayTime:"
+     },
+     {
+      "args": {
+       "0": {},
+       "1": {},
+       "3": {
+        "type_modifier": "n"
+       }
+      },
+      "class_method": false,
+      "selector": "drawInCGLContext:pixelFormat:forLayerTime:displayTime:"
+     },
+     {
+      "class_method": false,
+      "retval": {},
+      "selector": "copyCGLPixelFormatForDisplayMask:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "releaseCGLPixelFormat:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "retval": {},
+      "selector": "copyCGLContextForPixelFormat:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "releaseCGLContext:"
+     }
+    ]
+   },
+   "CARenderer": {
+    "methods": [
+     {
+      "args": {
+       "0": {
+        "type_override": "^{_CGLContextObject=}"
+       }
+      },
+      "class_method": true,
+      "selector": "rendererWithCGLContext:options:"
+     },
+     {
+      "args": {
+       "1": {
+        "type_modifier": "n"
+       }
+      },
+      "class_method": false,
+      "selector": "beginFrameAtTime:timeStamp:"
+     }
+    ]
+   },
+   "CAReplicatorLayer": {
+    "methods": [],
+    "properties": [
+     {
+      "attributes": [],
+      "name": "instanceColor"
+     }
+    ]
+   },
+   "CAShapeLayer": {
+    "methods": [],
+    "properties": [
+     {
+      "attributes": [],
+      "name": "path"
+     },
+     {
+      "attributes": [],
+      "name": "fillColor"
+     },
+     {
+      "attributes": [],
+      "name": "strokeColor"
+     }
+    ]
+   },
+   "CATextLayer": {
+    "methods": [
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setAllowsFontSubpixelQuantization:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "allowsFontSubpixelQuantization"
+     }
+    ],
+    "properties": [
+     {
+      "attributes": [],
+      "name": "foregroundColor"
+     }
+    ]
+   },
+   "CAMetalLayer": {
+    "methods": [
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setAllowsNextDrawableTimeout:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "allowsNextDrawableTimeout"
+     },
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setDisplaySyncEnabled:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "displaySyncEnabled"
+     },
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setWantsExtendedDynamicRangeContent:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "wantsExtendedDynamicRangeContent"
+     },
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setFramebufferOnly:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "framebufferOnly"
+     },
+     {
+      "args": {
+       "0": { "type_override": "Z" }
+      },
+      "class_method": false,
+      "selector": "setPresentsWithTransaction:"
+     },
+     {
+      "retval": { "type_override": "Z" },
+      "class_method": false,
+      "selector": "presentsWithTransaction"
+     }
+    ]
+   },
+   "CATransaction": {
+    "methods": [
+     {
+      "class_method": false,
+      "retval": {
+       "callable": {
+        "arguments": {
+         "0": {
+          "type": "^v"
+         }
+        },
+        "retval": {
+         "type": "v"
+        }
+       }
+      },
+      "selector": "completionBlock"
+     },
+     {
+      "args": {
+       "0": {
+        "callable": {
+         "arguments": {
+          "0": {
+           "typestr": "^v"
+          }
+         },
+         "retval": {
+          "type": "v"
+         }
+        }
+       }
+      },
+      "class_method": false,
+      "selector": "setCompletionBlock:"
+     }
+    ]
+   },
+   "CIAztecCodeDescriptor": {
+    "methods": [
+     {
+      "selector": "isCompact",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "CIPDF417CodeDescriptor": {
+    "methods": [
+     {
+      "selector": "isCompact",
+      "class_method": false,
+      "retval": { "type_override": "Z" }
+     }
+    ]
+   },
+   "CIColor": {
+    "methods": [
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "colorWithCGColor:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCGColor:"
+     },
+     {
+      "class_method": false,
+      "retval": {
+       "c_array_of_variable_length": true
+      },
+      "selector": "components"
+     },
+     {
+      "class_method": false,
+      "retval": {},
+      "selector": "colorSpace"
+     }
+    ]
+   },
+   "CIImageProcessorKernel": {
+    "methods": [
+     {
+      "class_method": true,
+      "selector": "processWithInputs:arguments:output:error:",
+      "args": {
+       "3": { "type_modifier": "o" }
+      },
+      "retval": {
+       "type_override": "Z"
+      }
+     },
+     {
+      "class_method": true,
+      "selector": "applyWithExtent:inputs:arguments:error:",
+      "args": {
+       "3": { "type_modifier": "o" }
+      }
+     }
+    ]
+   },
+   "CIContext": {
+    "methods": [
+     {
+      "selector": "writeOpenEXRRepresentationOfImage:toURL:options:error:",
+      "class_method": false,
+      "args": {
+       "3": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "OpenEXRRepresentationOfImage:options:error:",
+      "class_method": false,
+      "args": {
+       "2": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "HEIF10RepresentationOfImage:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "3": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "writePNGRepresentationOfImage:toURL:format:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "5": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "writeHEIF10RepresentationOfImage:toURL:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "4": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "writeHEIFRepresentationOfImage:toURL:format:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "5": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "writeJPEGRepresentationOfImage:toURL:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "4": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "writeHEIFRepresentationOfImage:toURL:format:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "5": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "startTaskToRender:fromRect:toDestination:atPoint:error:",
+      "class_method": false,
+      "args": {
+       "4": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "startTaskToRender:toDestination:error:",
+      "class_method": false,
+      "args": {
+       "2": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "startTaskToClear:error:",
+      "class_method": false,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "prepareRender:fromRect:toDestination:atPoint:error:",
+      "class_method": false,
+      "args": {
+       "4": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "args": {
+       "4": { "type_override": "Z" }
+      },
+      "retval": {
+       "already_cfretained": true
+      },
+      "class_method": false,
+      "selector": "createCGImage:fromRect:format:colorSpace:deferred:"
+     },
+     {
+      "args": {
+       "0": {},
+       "1": {},
+       "2": {}
+      },
+      "class_method": true,
+      "selector": "contextWithCGLContext:pixelFormat:colorSpace:options:"
+     },
+     {
+      "args": {
+       "0": {},
+       "1": {}
+      },
+      "class_method": true,
+      "selector": "contextWithCGLContext:pixelFormat:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "contextWithCGContext:options:"
+     },
+     {
+      "class_method": false,
+      "retval": {},
+      "selector": "createCGImage:fromRect:"
+     },
+     {
+      "args": {
+       "3": {}
+      },
+      "class_method": false,
+      "retval": {},
+      "selector": "createCGImage:fromRect:format:colorSpace:"
+     },
+     {
+      "args": {
+       "1": {}
+      },
+      "class_method": false,
+      "retval": { "already_cfretained": true },
+      "selector": "createCGLayerWithSize:info:"
+     },
+     {
+      "args": {
+       "1": {
+        "c_array_of_variable_length": true,
+        "type_modifier": "o"
+       },
+       "5": {}
+      },
+      "class_method": false,
+      "selector": "render:toBitmap:rowBytes:bounds:format:colorSpace:"
+     },
+     {
+      "args": {
+       "1": {},
+       "3": {}
+      },
+      "class_method": false,
+      "selector": "render:toIOSurface:bounds:colorSpace:"
+     }
+    ]
+   },
+   "CIFilter": {
+    "methods": [
+     {
+      "selector": "filterArrayFromSerializedXMP:inputImageExtent:error:",
+      "class_method": false,
+      "args": {
+       "2": { "type_modifier": "o" }
+      }
+     },
+     {
+      "c_array_delimited_by_null": true,
+      "class_method": false,
+      "selector": "apply:",
+      "variadic": true
+     },
+     {
+      "c_array_delimited_by_null": true,
+      "class_method": true,
+      "selector": "filterWithName:keysAndValues:",
+      "variadic": true
+     }
+    ]
+   },
+   "CIImage": {
+    "methods": [
+     {
+      "selector": "imageByApplyingTransform:highQualityDownsample:",
+      "class_method": false,
+      "args": {
+       "1": { "type_override": "Z" }
+      }
+     },
+     {
+      "selector": "writeJPEGRepresentationOfImage:toURL:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "4": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "writePNGRepresentationOfImage:toURL:format:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "5": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "selector": "writeHEIFRepresentationOfImage:toURL:format:colorSpace:options:error:",
+      "class_method": false,
+      "args": {
+       "5": { "type_modifier": "o" }
+      },
+      "retval": { "type_override": "Z" }
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCGImage:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCGImage:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCGLayer:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCGLayer:options:"
+     },
+     {
+      "args": {
+       "4": {}
+      },
+      "class_method": true,
+      "selector": "imageWithBitmapData:bytesPerRow:size:format:colorSpace:"
+     },
+     {
+      "args": {
+       "3": {}
+      },
+      "class_method": true,
+      "selector": "imageWithTexture:size:flipped:colorSpace:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCVImageBuffer:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCVImageBuffer:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithIOSurface:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithIOSurface:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCGImage:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCGImage:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCGLayer:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCGLayer:options:"
+     },
+     {
+      "args": {
+       "4": {}
+      },
+      "class_method": false,
+      "selector": "initWithBitmapData:bytesPerRow:size:format:colorSpace:"
+     },
+     {
+      "args": {
+       "3": {}
+      },
+      "class_method": false,
+      "selector": "initWithTexture:size:flipped:colorSpace:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithIOSurface:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithIOSurface:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCVImageBuffer:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCVImageBuffer:options:"
+     },
+     {
+      "class_method": false,
+      "retval": {},
+      "selector": "colorSpace"
+     },
+     {
+      "args": {
+       "4": {}
+      },
+      "class_method": true,
+      "selector": "imageWithImageProvider:size::format:colorSpace:options:"
+     },
+     {
+      "args": {
+       "4": {}
+      },
+      "class_method": false,
+      "selector": "initWithImageProvider:size::format:colorSpace:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCVPixelBuffer:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": true,
+      "selector": "imageWithCVPixelBuffer:options:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCVPixelBuffer:"
+     },
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "initWithCVPixelBuffer:options:"
+     }
+    ]
+   },
+   "CIImageAccumulator": {
+    "methods": [
+     {
+      "args": {
+       "2": {}
+      },
+      "class_method": true,
+      "selector": "imageAccumulatorWithExtent:format:colorSpace:"
+     },
+     {
+      "args": {
+       "2": {}
+      },
+      "class_method": false,
+      "selector": "initWithExtent:format:colorSpace:"
+     }
+    ]
+   },
+   "CIWarpKernel": {
+    "methods": [
+     {
+      "selector": "applyWithExtent:roiCallback:inputImage:arguments:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+	  "1": { "type": "i" },
+	  "2": { "type": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+	 },
+	 "retval": { "type": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+	}
+       }
+      }
+     }
+    ]
+   },
+   "CIKernel": {
+    "methods": [
+     {
+      "selector": "kernelsWithMetalString:error:",
+      "class_method": true,
+      "args": {
+       "1": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "kernelWithFunctionName:fromMetalLibraryData:error:",
+      "class_method": true,
+      "args": {
+       "2": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:",
+      "class_method": true,
+      "args": {
+       "3": { "type_modifier": "o" }
+      }
+     },
+     {
+      "selector": "applyWithExtent:roiCallback:arguments:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+         "arguments": {
+          "0": { "type": "^v" },
+	  "1": { "type": "i" },
+	  "2": { "type": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+	 },
+	 "retval": { "type": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+	}
+       }
+      }
+     },
+     {
+      "args": {
+       "0": {
+        "sel_of_type": "{CGRect={CGPoint=dd}{CGSize=dd}}@:i{CGRect={CGPoint=dd}{CGSize=dd}}@"
+       }
+      },
+      "class_method": false,
+      "selector": "setROISelector:"
+     }
+    ]
+   },
+   "CISampler": {
+    "methods": [
+     {
+      "c_array_delimited_by_null": true,
+      "class_method": true,
+      "selector": "samplerWithImage:keysAndValues:",
+      "variadic": true
+     },
+     {
+      "c_array_delimited_by_null": true,
+      "class_method": false,
+      "selector": "initWithImage:keysAndValues:",
+      "variadic": true
+     }
+    ]
+   },
+   "CIVector": {
+    "methods": [
+     {
+      "args": {
+       "0": {
+        "c_array_length_in_arg": 1,
+        "type_modifier": "n"
+       }
+      },
+      "class_method": true,
+      "selector": "vectorWithValues:count:"
+     },
+     {
+      "args": {
+       "0": {
+        "c_array_length_in_arg": 1,
+        "type_modifier": "n"
+       }
+      },
+      "class_method": false,
+      "selector": "initWithValues:count:"
+     }
+    ]
+   },
+   "NSObject": {
+    "methods": [
+     {
+      "selector": "thresholdLow",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setThresholdLow:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "thresholdHigh",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setThresholdHigh:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "sigma",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSigma:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "hysteresisPasses",
+      "class_method": false,
+      "retval": { "type_override": "q" }
+     },
+     {
+      "selector": "setHysteresisPasses:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "q" }
+      }
+     },
+     {
+      "selector": "gaussianSigma",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setGaussianSigma:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "retval": { "type_override": "{CGRect={CGPoint=dd}{CGSize=dd}}" },
+      "selector": "region",
+      "class_method": false
+     },
+     {
+      "retval": { "type_override": "L" },
+      "selector": "bytesPerRow",
+      "class_method": false
+     },
+     {
+      "retval": { "type_override": "q" },
+      "selector": "format",
+      "class_method": false
+     },
+     {
+      "retval": { "type_override": "^v", "c_array_of_variable_length": true },
+      "selector": "baseAddress",
+      "class_method": false
+     },
+     {
+      "args": {
+       "0": {
+        "c_array_of_variable_length": true,
+        "type_modifier": "o"
+       }
+      },
+      "class_method": false,
+      "selector": "provideImageData:bytesPerRow:origin::size::userInfo:"
+     },
+     {
+      "args": {
+       "1": {}
+      },
+      "class_method": false,
+      "selector": "drawLayer:inContext:"
+     },
+     {
+      "selector": "transform",
+      "class_method": false,
+      "retval": { "type_override": "{CGAffineTransform=dddddd}" }
+     },
+     {
+      "selector": "setTransform:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGAffineTransform=dddddd}" }
+      }
+     },
+     {
+      "selector": "bottomRight",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setBottomRight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "bottomLeft",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setBottomLeft:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "topRight",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setTopRight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "topLeft",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setTopLeft:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "point",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setPoint:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "point0",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setPoint0:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "point1",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setPoint1:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "point2",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setPoint2:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "point3",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setPoint3:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "point4",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setPoint4:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "insetPoint0",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setInsetPoint0:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "insetPoint1",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setInsetPoint1:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "breakpoint0",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setBreakpoint0:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "breakpoint1",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setBreakpoint1:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "growAmount",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setGrowAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "roll",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRoll:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "alwaysSpecifyCompaction",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setAlwaysSpecifyCompaction:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "decay",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setDecay:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "yaw",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setYaw:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "compression",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCompression:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "shadowOffset",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setShadowOffset:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "shadowSize",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setShadowSize:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "opacity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setOpacity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "saturation",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSaturation:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "EV",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setEV:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "power",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setPower:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "targetNeutral",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setTargetNeutral:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "neutral",
+      "class_method": false,
+      "retval": { "type_override": "{CGPoint=dd}" }
+     },
+     {
+      "selector": "setNeutral:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGPoint=dd}" }
+      }
+     },
+     {
+      "selector": "softness",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSoftness:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "strands",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setStrands:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "falloff",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setFalloff:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "scaleFactor",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setScaleFactor:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "correctionLevel",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCorrectionLevel:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "quietSpace",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setQuietSpace:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "compactionMode",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCompactionMode:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "compactStyle",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCompactStyle:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "haloOverlap",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHaloOverlap:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "haloRadius",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHaloRadius:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "minWidth",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setMinWidth:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "parameterB",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setParameterB:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "parameterC",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setParameterC:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "preferredAspectRatio",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setPreferredAspectRatio:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "dither",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setDither:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "underColorRemoval",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setUnderColorRemoval:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "value",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setValue:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "grayComponentReplacement",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setGrayComponentReplacement:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "lumaSigma",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setLumaSigma:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "pitch",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setPitch:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "foldShadowAmount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setFoldShadowAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "shadowDensity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setShadowDensity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "fadeThreshold",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setFadeThreshold:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "layers",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setLayers:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "barcodeHeight",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setBarcodeHeight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "haloWidth",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHaloWidth:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "minHeight",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setMinHeight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "maxHeight",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setMaxHeight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "maxWidth",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setMaxWidth:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "crossAngle",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCrossAngle:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "maxStriationRadius",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setMaxStriationRadius:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "acuteAngle",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setAcuteAngle:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "softmaxNormalization",
+      "class_method": false,
+      "retval": { "type_override": "B" }
+     },
+     {
+      "selector": "setSoftmaxNormalization:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "B" }
+      }
+     },
+     {
+      "selector": "highlightAmount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHighlightAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "edgeIntensity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setEdgeIntensity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "dataColumns",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setDataColumns:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "epsilon",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setEpsilon:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "unsharpMaskIntensity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setUnsharpMaskIntensity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "closeness3",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCloseness3:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "periodicity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setPeriodicity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "zoom",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setZoom:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "lowLimit",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setLowLimit:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "highLimit",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHighLimit:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "passes",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setPasses:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "crossOpacity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCrossOpacity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "numberOfFolds",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setNumberOfFolds:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "striationContrast",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setStriationContrast:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "striationStrength",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setStriationStrength:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "softmaxNormalization",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSftmaxNormalization:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "saturation",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSaturation:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "unsharpMaskRadius",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setUnsharpMaskRadius:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "rows",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRows:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "contrast",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setContrast:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "contrast1",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setContrast1:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "contrast2",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setContrast2:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "contrast3",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setContrast3:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "ringSize",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRingSize:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "sunRadius",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSunRadius:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "fontSize",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setFontSize:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "bias",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setBias:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "headIndex",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHeadIndex:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "intensity",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setIntensity:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "focalLength",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setFocalLength:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "bottomHeight",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setBottomHeight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "barOffset",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setBarOffset:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "shadowExtent",
+      "class_method": false,
+      "retval": { "type_override": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+     },
+     {
+      "selector": "setShadowExtent:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+      }
+     },
+     {
+      "selector": "shadowRadius",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setShadowRadius:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "shadowAmount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setShadowAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "NRSharpness",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setNRSharpness:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "NRNoiseLevel",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setNRNoiseLevel:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "closeness1",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCloseness1:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "closeness2",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCloseness2:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "brightness",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setBrightness:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "noiseLevel",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setNoiseLevel:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "amount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "threshold",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setThreshold:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "rotation",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRotation:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "cropAmount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCropAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "refraction",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRefraction:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "concentration",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setConcentration:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "cubeDimension",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCubeDimension:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "levels",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setLevels:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "ringAmount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRingAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "crop",
+      "class_method": false,
+      "retval": { "type_override": "B" }
+     },
+     {
+      "selector": "setCrop:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "B" }
+      }
+     },
+     {
+      "selector": "perceptual",
+      "class_method": false,
+      "retval": { "type_override": "B" }
+     },
+     {
+      "selector": "setPerceptual:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "B" }
+      }
+     },
+     {
+      "selector": "flipYTiles",
+      "class_method": false,
+      "retval": { "type_override": "B" }
+     },
+     {
+      "selector": "setFlipYTiles:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "B" }
+      }
+     },
+     {
+      "selector": "spatialSigma",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSpatialSigma:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "focalLength",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setFocalLength:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "aspectRatio",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setAspectRatio:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "centerStretchAmount",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCenterStretchAmount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "crossWidth",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCrossWidth:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "crossScale",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setCrossScale:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "sharpness",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setSharpness:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "angle",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setAngle:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "radius",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRadius:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "radius0",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRadius0:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "radius1",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setRadius1:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "extent",
+      "class_method": false,
+      "retval": { "type_override": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+     },
+     {
+      "selector": "setExtent:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "{CGRect={CGPoint=dd}{CGSize=dd}}" }
+      }
+     },
+     {
+      "selector": "count",
+      "class_method": false,
+      "retval": { "type_override": "q" }
+     },
+     {
+      "selector": "setCount:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "q" }
+      }
+     },
+     {
+      "selector": "height",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setHeight:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     },
+     {
+      "selector": "width",
+      "class_method": false,
+      "retval": { "type_override": "f" }
+     },
+     {
+      "selector": "setWidth:",
+      "class_method": false,
+      "args": {
+       "0": { "type_override": "f" }
+      }
+     }
+    ]
+   }
+  },
+  "formal_protocols": {
+   "CIPlugInRegistration": {
+    "methods": [
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "load:"
+     }
+    ]
+   }
+  },
+  "functions": {},
+  "informal_protocols": {
+   "CALayerDelegate": {
+    "methods": [
+     {
+      "args": {
+       "1": {}
+      },
+      "class_method": false,
+      "selector": "drawLayer:inContext:"
+     }
+    ]
+   },
+   "CIImageProvider": {
+    "methods": [
+     {
+      "args": {
+       "0": {}
+      },
+      "class_method": false,
+      "selector": "provideImageData:bytesPerRow:origin::size::userInfo:"
+     }
+    ]
+   }
+  },
+  "structs": {
+   "CATransform3D": {
+    "fieldnames": [
+     "m11",
+     "m12",
+     "m13",
+     "m14",
+     "m21",
+     "m22",
+     "m23",
+     "m24",
+     "m31",
+     "m32",
+     "m33",
+     "m34",
+     "m41",
+     "m42",
+     "m43",
+     "m44"
+    ]
+   }
+  }
+ }
+}

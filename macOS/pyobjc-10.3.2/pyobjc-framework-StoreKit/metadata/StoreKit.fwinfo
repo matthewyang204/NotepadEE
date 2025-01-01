@@ -1,0 +1,91 @@
+// objective.metadata exceptions file, see its document
+// for information on how to update this file.
+{
+ "definitions": {
+  "expressions": {
+   "StoreKitBundle": { "value": "NSBundle.bundleWithPath_('/System/Library/Frameworks/StoreKit.framework')" }
+  },
+  "classes": {
+   "SKArcadeService": {
+    "methods": [
+     {
+      "selector": "registerArcadeAppWithRandomFromLib:randomFromLibLength:resultHandler:",
+      "class_method": false,
+      "args": {
+       "2": {
+        "callable": {
+	 "retval": { "type": "v" },
+	 "arguments": {
+	  "0": { "type": "^v" },
+	  "1": { "type": "@" },
+	  "2": { "type": "I" },
+	  "3": { "type": "@" },
+	  "4": { "type": "I" },
+	  "5": { "type": "@" }
+	 }
+	}
+       }
+      }
+     },
+     {
+      "selector": "arcadeSubscriptionStatusWithNonce:resultHandler:",
+      "class_method": false,
+      "args": {
+       "1": {
+        "callable": {
+	 "retval": { "type": "@" },
+	 "arguments": {
+	  "0": { "type": "^v" },
+	  "1": { "type": "@" },
+	  "2": { "type": "I" },
+	  "3": { "type": "@" },
+	  "4": { "type": "I" },
+	  "5": { "type": "@" }
+	 }
+	}
+       }
+      }
+     }
+    ]
+   }
+  },
+  "enum": {
+   "SKErrorOverlayCancelled": { "value": 15 },
+   "SKErrorOverlayInvalidConfiguration": { "value": 16 },
+   "SKErrorOverlayTimeout": { "value": 17 },
+   "SKErrorIneligibleForOffer": { "value": 18 },
+   "SKProductDiscountPaymentModeFreeTrial": {
+    "value": 2
+   },
+   "SKProductDiscountPaymentModePayAsYouGo": {
+    "value": 0
+   },
+   "SKProductDiscountPaymentModePayUpFront": {
+    "value": 1
+   },
+   "SKProductPeriodUnitDay": {
+    "value": 0
+   },
+   "SKProductPeriodUnitMonth": {
+    "value": 2
+   },
+   "SKProductPeriodUnitWeek": {
+    "value": 1
+   },
+   "SKProductPeriodUnitYear": {
+    "value": 3
+   }
+  },
+  "externs": {
+   "SKStoreProductParameterCustomProductPageIdentifier": {
+    "typestr": "d"
+   },
+   "SKDownloadTimeRemainingUnknown": {
+    "typestr": "d"
+   }
+  },
+  "formal_protocols": {},
+  "functions": {},
+  "informal_protocols": {}
+ }
+}
