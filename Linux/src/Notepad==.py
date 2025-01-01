@@ -78,13 +78,14 @@ if platform.system() == "Darwin":
                     openFile = 1
                     debug_NS_var()
                     printlog("File was passed through Finder, opening file...")
+                
+                NSApplication.sharedApplication().terminate_(None)
 
         def cocoa_thread():
             global fileToBeOpened, openFile
             app_delegate = AppDelegate()
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
-            app.run()
             printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
             printlog("done")
 
