@@ -7,8 +7,6 @@ import sys
 import time
 import platform
 import subprocess
-from Cocoa import NSApplications, NSApp
-from Foundation import NSURL
 
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
@@ -16,6 +14,8 @@ if not os.path.exists(cache_path):
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
+    from Cocoa import NSApplications, NSApp
+    from Foundation import NSURL
     # Tell the user in the console that it is running from macOS
     print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
     # macOS logic to fetch the Finder file path
