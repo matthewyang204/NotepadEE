@@ -36,10 +36,10 @@ if platform.system() == "Darwin":
     # from AppKit import NSApplication
     # import AppKit
 
-    # # Dummy monkey patch functions
-    # def dummy_macOSVersion(self):
-    #     printlog("Intercepted call to macOSVersion!")
-    #     return None
+    # Dummy monkey patch functions
+    def dummy_macOSVersion(self):
+        printlog("Intercepted call to macOSVersion!")
+        return None
 
     # def patched_setup(self, arg):
     #     printlog("Intercepted _setup method call!")
@@ -49,8 +49,8 @@ if platform.system() == "Darwin":
     #         printlog(f"Error in patched _setup: {e}")
     #         return None
 
-    # # Set monkey patches to run
-    # objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
+    # Set monkey patches to run
+    objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
     # AppKit.NSApplication._setup_ = patched_setup
 
     from Cocoa import NSApplication, NSApp, NSObject
