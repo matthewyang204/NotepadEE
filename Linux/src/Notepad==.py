@@ -8,27 +8,6 @@ import time
 import platform
 import subprocess
 
-import objc
-from AppKit import NSApplication
-import AppKit
-
-# Dummy monkey patch functions
-def dummy_macOSVersion(self):
-    print("Intercepted call to macOSVersion!")
-    return None
-
-def patched_setup(self, *args, **kwargs):
-    print("Intercepted _setup method call!")
-    try:
-        return original_setup(self)
-    except Exception as e:
-        print(f"Error in patched _setup: {e}")
-        return None
-
-# Set monkey patches to run
-objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
-AppKit.NSApplication._setup_ = patched_setup
-
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
     os.makedirs(cache_path)
@@ -52,6 +31,27 @@ def debug_NS_var():
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
+    import objc
+    from AppKit import NSApplication
+    import AppKit
+
+    # Dummy monkey patch functions
+    def dummy_macOSVersion(self):
+        print("Intercepted call to macOSVersion!")
+        return None
+
+    def patched_setup(self, *args, **kwargs):
+        print("Intercepted _setup method call!")
+        try:
+            return original_setup(self)
+        except Exception as e:
+            print(f"Error in patched _setup: {e}")
+            return None
+
+    # Set monkey patches to run
+    objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
+    AppKit.NSApplication._setup_ = patched_setup
+
     from Cocoa import NSApplication, NSApp, NSObject
     from Foundation import NSURL
     # Tell the user in the console that it is running from macOS
