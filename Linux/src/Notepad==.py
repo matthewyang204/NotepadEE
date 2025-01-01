@@ -32,26 +32,26 @@ def debug_NS_var():
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
-    import objc
-    from AppKit import NSApplication
-    import AppKit
+    # import objc
+    # from AppKit import NSApplication
+    # import AppKit
 
-    # Dummy monkey patch functions
-    def dummy_macOSVersion(self):
-        printlog("Intercepted call to macOSVersion!")
-        return None
+    # # Dummy monkey patch functions
+    # def dummy_macOSVersion(self):
+    #     printlog("Intercepted call to macOSVersion!")
+    #     return None
 
-    def patched_setup(self, arg):
-        printlog("Intercepted _setup method call!")
-        try:
-            return original_setup(self)
-        except Exception as e:
-            printlog(f"Error in patched _setup: {e}")
-            return None
+    # def patched_setup(self, arg):
+    #     printlog("Intercepted _setup method call!")
+    #     try:
+    #         return original_setup(self)
+    #     except Exception as e:
+    #         printlog(f"Error in patched _setup: {e}")
+    #         return None
 
-    # Set monkey patches to run
-    objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
-    AppKit.NSApplication._setup_ = patched_setup
+    # # Set monkey patches to run
+    # objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
+    # AppKit.NSApplication._setup_ = patched_setup
 
     from Cocoa import NSApplication, NSApp, NSObject
     from Foundation import NSURL
@@ -63,7 +63,7 @@ if platform.system() == "Darwin":
             def applicationDidFinishLaunching_(self, notification):
                 pass
 
-            def applicationOpenFile_(self, filePath):
+            def application_openFile_(self, application, filePath):
                 global fileToBeOpened, openFile
                 if not str(filePath): # no file path provided
                     # Handle the case where no file is passed, like launching from dock
