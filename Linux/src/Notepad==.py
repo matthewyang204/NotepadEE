@@ -7,6 +7,8 @@ import sys
 import time
 import platform
 import subprocess
+from Cocoa import NSApplications, NSApp
+from Foundation import NSURL
 
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
@@ -15,35 +17,20 @@ if not os.path.exists(cache_path):
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
     # Tell the user in the console that it is running from macOS
-    print("Detected that we are running on macOS, retrieving filepath through AppleScript...")
+    print("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
     # macOS logic to fetch the Finder file path
     try:
-        # Define the AppleScript code
-        apple_script = """
-        tell application "Finder"
-            set filePath to the POSIX path of (selection as alias)
-        end tell
-        """
-
-        # Get the Finder file path from AppleScript (returns file path of selected file in Finder)
-        result = subprocess.run(
-            ["/usr/bin/osascript", "-e", apple_script],
-            text=True,
-            capture_output=True,
-            check=True,
-            env=os.environ
-        )
-        print(f"stdout: {result.stdout}")
-        if result.returncode != 0:
-            print(f"osascript failed with return code {result.returncode}")
-        if result.stdout.strip():
-            fileToBeOpened = result.stdout.strip()  # Extract the file path
-            openFile = 1
-            print(f"Loading file from Finder at {fileToBeOpened}...")
-        else:
-            print("No file selected in Finder, loading program with last known file...")
-            fileToBeOpened = None
-            openFile = 0
+        class AppDelegate_(self, sender, filePath):
+            if not filePath: # no file path provided
+                # Handle the case where no file is passed, like launching from dock
+                fileToBeOpened = None
+                openFile = 0
+                print("No file selected in Finder, loading program with last known file...")
+            else:
+                # File path is passed, take the file
+                fileToBeOpened = filePath
+                openFile = 1
+                print("File was passed through Finder, opening file...")
     except Exception as e:
         fileToBeOpened = None
         openFile = 0
