@@ -8,6 +8,15 @@ import time
 import platform
 import subprocess
 
+import objc
+from AppKit import NSApplication
+
+def dummy_macOSVersion(self):
+    print("Intercepted call to macOSVersion!")
+    return None
+
+objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
+
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
     os.makedirs(cache_path)
@@ -40,7 +49,7 @@ if platform.system() == "Darwin":
         class AppDelegate(NSObject):
             def applicationDidFinishLaunching_(self, notification):
                 pass
-            
+
             def applicationOpenFile_(self, filePath):
                 global fileToBeOpened, openFile
                 if not str(filePath): # no file path provided
