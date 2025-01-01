@@ -78,8 +78,7 @@ if platform.system() == "Darwin":
                     debug_NS_var()
                     printlog("File was passed through Finder, opening file...")
 
-                self.exit_event_loop()                
-                return True
+                self.exit_event_loop()
                 
             def exit_event_loop(self):
                 printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
@@ -91,7 +90,9 @@ if platform.system() == "Darwin":
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
             app.run()
+            printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
             app.stop_(None)
+            printlog("done")
         
         retrieve()
 
