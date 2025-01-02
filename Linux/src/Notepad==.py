@@ -108,22 +108,21 @@ if platform.system() == "Darwin":
             def doOpenFile(*args):
                 global fileToBeOpened, openFile
                 if args:
-                    with open(fileToBeOpenedPath, "w") as file:
-                        file.write(str(args[0]))
-                    with open(openFilePath, "w") as file:
-                        file.write("1")
+                    fileToBeOpened = str(args[0]))
+                    openFile = 1
                     printlog("File was passed from Finder, loading file...")
                 
                 else:
-                    with open(fileToBeOpenedPath, "w") as file:
-                        file.write(str(args[0]))
-                    with open(openFilePath, "w") as file:
-                        file.write("1")
+                    fileToBeOpened = ""
+                    openFile = 0
                     printlog("No file passed from Finder, loading program with last known file...")
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
 
         addOpenEventSupport(root)
+
+        root.after(1000, printlog("fileToBeOpened: " + str(fileToBeOpened)))
+        root.after(1000, printlog("openFile: " + str(openFile)))
 
     except Exception as e:
         fileToBeOpened = ""
@@ -519,7 +518,7 @@ def runonfilearg(file_path):
         printlog("Because the file doesn't exist, it was created as a blank new file instead")
 
 if openFile == 1:
-    runonfilearg(fileToBeOpened)
+    root.after(1000, runonfilearg(fileToBeOpened))
 else:
     printlog("Program loaded")
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
