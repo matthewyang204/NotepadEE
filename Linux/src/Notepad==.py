@@ -169,7 +169,7 @@ else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
-        runonfilearg(filearg)
+        runonfilearg(fileToBeOpened)
 
 
 def debug_var(event=None):
