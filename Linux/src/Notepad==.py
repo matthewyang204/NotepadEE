@@ -99,12 +99,14 @@ printlog("Program loaded")
 if platform.system() == "Darwin":
     try:
         def addOpenEventSupport(root):
-            global fileToBeOpened, openFile
             """
             Enable the application to handle macOS 'Open with' events.
             """
+            fileToBeOpened = ""
+            openFile = 0
+
             def doOpenFile(*args):
-                global fileToBeOpened, openFile
+                nonlocal fileToBeOpened, openFile
                 if args:
                     fileToBeOpened = str(args[0])
                     openFile = 1
@@ -116,8 +118,9 @@ if platform.system() == "Darwin":
                     printlog("No file passed from Finder, loading program with last known file...")
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
+            return fileToBeOpened, openFile
 
-        addOpenEventSupport(root)
+        fileToBeOpened, openFile = addOpenEventSupport(root)
 
     except Exception as e:
         fileToBeOpened = ""
