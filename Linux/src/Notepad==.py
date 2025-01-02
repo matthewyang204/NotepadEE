@@ -103,7 +103,6 @@ def runonfilearg(file_path):
             current_file = os.path.abspath(file_path)
             with open(file_path, 'r') as file:
                 text_area.insert(1.0, file.read())
-            write_prefs()
             file_open = 1
             #printlog("Current file path: " + current_file)
             #printlog("File open: " + str(file_open))
@@ -117,8 +116,9 @@ def runonfilearg(file_path):
             current_file = os.path.abspath(file_path)
             #printlog("Current file path: " + current_file)
             #printlog("File open: " + str(file_open))
-            write_prefs()
             printlog("Because the file doesn't exist, it was created as a blank new file instead")
+        
+        root.after(200, write_prefs)
     except Exception as e:
         printlog("Exception " + str(e) + " caught!")
 
