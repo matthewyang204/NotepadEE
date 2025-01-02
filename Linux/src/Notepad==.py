@@ -113,8 +113,8 @@ if platform.system() == "Darwin":
                 else:
                     fileToBeOpened = ""
                     openFile = 0
-                    print("No file passed from Finder, loading program with last known file...")
-                    
+                    printlog("No file passed from Finder, loading program with last known file...")
+
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
 
