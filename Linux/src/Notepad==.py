@@ -563,5 +563,4 @@ text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
 write_prefs()
-thread_tk = threading.Thread(target=root.mainloop, daemon=True)
-thread_tk.start()
+root.mainloop()
