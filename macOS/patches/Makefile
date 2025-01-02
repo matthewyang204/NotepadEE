@@ -4,13 +4,7 @@ all: build-pyinstaller
 
 configure: ./configure
 
-build-pyinstaller:
-	echo "Building with PyInstaller..."
-	pyinstaller --windowed --hidden-import=tkinter -i Notepad.png src/Notepad==.py
-	sed -i '' 's/0\.0\.0/4\.7\.5/g' dist/Notepad==.app/Contents/Info.plist
-	echo "Build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
-
-build-nuitka:
+build:
 	echo "Building with Nuitka..."
 	echo "Please select an architecture to build for:"
 	echo "1. 'x86_64' (Intel)"
@@ -40,11 +34,6 @@ clean:
 	rm -rf build
 	rm -f Notepad==.spec
 	echo "Cleaned all temp files used"
-
-clean-nuitka:
-	rm -rf dist
-	rm -rf build
-	echo "Cleaned all temp files used in Nuitka build"
 
 dist: clean
 	mkdir ../temp
