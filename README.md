@@ -49,7 +49,6 @@ Prebuild requirements:
 
 Build instructions:
 1. Clone the repository and navigate to the macOS folder inside of it
-2. Run `sh autogen.sh` to automatically configure and build
-3. Select a compiler. You can type `pyinstaller` or `nuitka`.
-4. You need to select the architecture that you want if you select nuitka. Note that you cannot cross compile unless you are running the universal version of Python obtained from Python.org's download page.
-5. After you're done compiling, you can use `sudo make install` to install.
+2. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build
+3. You need to select the architecture that you want if you select nuitka. Note that you cannot cross compile unless you are running the universal version of Python obtained from Python.org's download page.
+4. After you're done compiling, you can use `sudo make install` to install.
