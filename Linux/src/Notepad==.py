@@ -102,25 +102,37 @@ if platform.system() == "Darwin":
             """
             Enable the application to handle macOS 'Open with' events.
             """
-            fileToBeOpened = ""
-            openFile = 0
+            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
+            openFilePath = os.path.join(cache_path, "openFile.txt")
 
             def doOpenFile(*args):
-                nonlocal fileToBeOpened, openFile
                 if args:
-                    fileToBeOpened = str(args[0])
-                    openFile = 1
+                    with open(fileToBeOpenedPath, "w") as file:
+                        file.write(str(args[0]))
+                    with open(openFilePath, "w") as file:
+                        file.write("1")
                     printlog("File was passed from Finder, loading file...")
                 
                 else:
-                    fileToBeOpened = ""
-                    openFile = 0
+                    with open(fileToBeOpenedPath, "w") as file:
+                        file.write(str(args[0]))
+                    with open(openFilePath, "w") as file:
+                        file.write("1")
                     printlog("No file passed from Finder, loading program with last known file...")
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
-            return fileToBeOpened, openFile
 
-        fileToBeOpened, openFile = addOpenEventSupport(root)
+        addOpenEventSupport(root)
+
+        while fileToBeOpened == None:
+            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
+            openFilePath = os.path.join(cache_path, "openFile.txt")
+
+            with open(fileToBeOpenedPath, "r") as file:
+                fileToBeOpened = str(file.read().strip())
+            
+            with open(openFilePath, "r") as file:
+                openFile = str(file.read().strip())
 
     except Exception as e:
         fileToBeOpened = ""
