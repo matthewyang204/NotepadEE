@@ -84,9 +84,7 @@ if platform.system() == "Darwin":
             app_delegate = AppDelegate()
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
-            printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
             app.run()
-            printlog("done")
         
         retrieve()
 
@@ -603,5 +601,5 @@ text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
 write_prefs()
-thread_tk = threading.Thread(target=root.mainloop)
+thread_tk = threading.Thread(target=root.mainloop, daemon=True)
 thread_tk.start()
