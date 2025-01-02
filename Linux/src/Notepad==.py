@@ -164,10 +164,13 @@ else:
     if len(filearg) <= 1:
         openFile = 0
         printlog("No arguments provided. Proceeding to load program with last known file...")
+        print("Program loaded")
     else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
+        runonfilearg(filearg)
+
 
 def debug_var(event=None):
     global file_open, current_file
