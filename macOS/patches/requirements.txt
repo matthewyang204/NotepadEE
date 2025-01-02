@@ -3,5 +3,3 @@ pillow
 tk
 nuitka
 imageio
-pyobjc
-thread6

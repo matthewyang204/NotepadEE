@@ -18,7 +18,7 @@ log_file = os.path.join(cache_path, "notepadee_log.txt")
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
     with open(log_file, 'a') as file:
-        file.write(message + '\n')
+        file.write(str(message) + '\n')
     print(message)
 
 global fileToBeOpened
