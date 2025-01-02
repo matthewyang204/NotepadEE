@@ -106,6 +106,7 @@ if platform.system() == "Darwin":
             openFilePath = os.path.join(cache_path, "openFile.txt")
 
             def doOpenFile(*args):
+                global fileToBeOpened, openFile
                 if args:
                     with open(fileToBeOpenedPath, "w") as file:
                         file.write(str(args[0]))
@@ -123,27 +124,6 @@ if platform.system() == "Darwin":
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
 
         addOpenEventSupport(root)
-
-        def readDiskCache():
-            global fileToBeOpened, openFile
-            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
-            openFilePath = os.path.join(cache_path, "openFile.txt")
-            counter = 0
-
-            def checkCache():
-                global fileToBeOpened, openFile
-                nonlocal fileToBeOpenedPath, openFilePath
-                with open(fileToBeOpenedPath, "r") as file:
-                    fileToBeOpened = str(file.read().strip())
-                
-                with open(openFilePath, "r") as file:
-                    openFile = str(file.read().strip())
-            
-            checkCache()
-
-            return True
-        
-        root.after(100, readDiskCache)
 
     except Exception as e:
         fileToBeOpened = ""
@@ -539,7 +519,7 @@ def runonfilearg(file_path):
         printlog("Because the file doesn't exist, it was created as a blank new file instead")
 
 if openFile == 1:
-    root.after(300, runonfilearg(fileToBeOpened))
+    runonfilearg(fileToBeOpened)
 else:
     printlog("Program loaded")
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
