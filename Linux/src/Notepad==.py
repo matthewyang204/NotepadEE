@@ -78,8 +78,6 @@ if platform.system() == "Darwin":
                     openFile = 1
                     debug_NS_var()
                     printlog("File was passed through Finder, opening file...")
-                
-                NSApp().stop_(None)
 
         def retrieve():
             global fileToBeOpened, openFile
@@ -90,8 +88,7 @@ if platform.system() == "Darwin":
             app.run()
             printlog("done")
         
-        cocoa_thread_instance = threading.Thread(target=retrieve)
-        cocoa_thread_instance.start()
+        retrieve()
 
     except Exception as e:
         fileToBeOpened = ""
@@ -606,4 +603,5 @@ text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
 write_prefs()
-root.mainloop()
+thread_tk = threading.Thread(target=root.mainloop)
+thread_tk.start()
