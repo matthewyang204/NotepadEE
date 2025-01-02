@@ -87,9 +87,11 @@ if platform.system() == "Darwin":
             app = NSApplication.sharedApplication()
             app.setDelegate_(app_delegate)
             printlog("Retrieved filepath, exiting Cocoa event loop to proceed...")
+            app.run()
             printlog("done")
         
-        retrieve()
+        cocoa_thread_instance = threading.Thread(target=retrieve)
+        cocoa_thread_instance.start()
 
     except Exception as e:
         fileToBeOpened = ""
