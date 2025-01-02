@@ -138,6 +138,8 @@ if platform.system() == "Darwin":
                 
                 with open(openFilePath, "r") as file:
                     openFile = str(file.read().strip())
+            
+            checkCache()
 
             return True
         
