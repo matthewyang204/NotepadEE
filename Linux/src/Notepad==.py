@@ -97,27 +97,30 @@ printlog("Program loaded")
 
 def runonfilearg(file_path):
     global file_open, current_file
-    if os.path.exists(file_path):
-        text_area.delete(1.0, "end")
-        current_file = os.path.abspath(file_path)
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-        write_prefs()
-        file_open = 1
-        #printlog("Current file path: " + current_file)
-        #printlog("File open: " + str(file_open))
-        printlog("File loaded")
-    else:
-        text_area.delete(1.0, "end")
-        with open(file_path, 'w') as file:
-            text = text_area.get(1.0, "end-1c")
-            file.write(text)
-        file_open = 1
-        current_file = os.path.abspath(file_path)
-        #printlog("Current file path: " + current_file)
-        #printlog("File open: " + str(file_open))
-        write_prefs()
-        printlog("Because the file doesn't exist, it was created as a blank new file instead")
+    try:
+        if os.path.exists(file_path):
+            text_area.delete(1.0, "end")
+            current_file = os.path.abspath(file_path)
+            with open(file_path, 'r') as file:
+                text_area.insert(1.0, file.read())
+            write_prefs()
+            file_open = 1
+            #printlog("Current file path: " + current_file)
+            #printlog("File open: " + str(file_open))
+            printlog("File loaded")
+        else:
+            text_area.delete(1.0, "end")
+            with open(file_path, 'w') as file:
+                text = text_area.get(1.0, "end-1c")
+                file.write(text)
+            file_open = 1
+            current_file = os.path.abspath(file_path)
+            #printlog("Current file path: " + current_file)
+            #printlog("File open: " + str(file_open))
+            write_prefs()
+            printlog("Because the file doesn't exist, it was created as a blank new file instead")
+    except Exception as e:
+        printlog("Exception " + str(e) + " caught!")
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
