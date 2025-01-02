@@ -26,9 +26,74 @@ global openFile
 fileToBeOpened = None
 openFile = None
 
-def debug_NS_var():
-    printlog("fileToBeOpened = " + str(fileToBeOpened))
-    printlog("openFile = " + str(openFile))
+global file_open
+file_open = 0
+last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
+                              'last_file_path')
+if os.path.exists(last_file_path):
+    with open(last_file_path, 'r') as file:
+        current_file = file.read()
+        if current_file.strip() == '':  # Check if the file is empty
+            file_open = 0
+        else:
+            file_open = 1
+
+else:
+    current_file = ""
+    file_open = 0
+
+folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+
+global last_write
+last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
+if not os.path.exists(last_write):
+    with open(last_write, 'w'):
+        pass
+
+file_written = 0
+printlog("file_written set to " + str(file_written))
+
+root = tk.Tk()
+ask_quit = False
+root.title("Notepad==")
+root.minsize(800, 600)
+root.pack_propagate(False)
+
+status_frame = tk.Frame(root)
+status_frame.pack()
+
+line_var = tk.StringVar()
+line_label = tk.Label(status_frame, textvariable=line_var)
+line_label.pack(side=tk.LEFT)
+
+column_var = tk.StringVar()
+column_label = tk.Label(status_frame, textvariable=column_var)
+column_label.pack(side=tk.LEFT)
+
+word_count_var = tk.StringVar()
+word_count_label = tk.Label(status_frame, textvariable=word_count_var)
+word_count_label.pack(side=tk.LEFT)
+
+
+def get_font_for_platform():
+    if os.name == 'nt':
+        return font.Font(family="Consolas", size=12)
+    elif os.uname().sysname == 'Darwin':
+        return font.Font(family="Menlo", size=12)
+    else:
+        return font.Font(family="DejaVu Sans Mono", size=12)
+
+
+text_font = get_font_for_platform()
+text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
+text_area.config(font=text_font)
+
+text_area.delete(1.0, "end")
+with open(last_write, 'r') as file:
+    text_area.insert(1.0, file.read())
+printlog("Program loaded")
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
@@ -106,75 +171,6 @@ else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
-
-global file_open
-file_open = 0
-last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
-                              'last_file_path')
-if os.path.exists(last_file_path):
-    with open(last_file_path, 'r') as file:
-        current_file = file.read()
-        if current_file.strip() == '':  # Check if the file is empty
-            file_open = 0
-        else:
-            file_open = 1
-
-else:
-    current_file = ""
-    file_open = 0
-
-folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
-if not os.path.exists(folder_path):
-    os.makedirs(folder_path)
-
-global last_write
-last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
-if not os.path.exists(last_write):
-    with open(last_write, 'w'):
-        pass
-
-file_written = 0
-printlog("file_written set to " + str(file_written))
-
-root = tk.Tk()
-ask_quit = False
-root.title("Notepad==")
-root.minsize(800, 600)
-root.pack_propagate(False)
-
-status_frame = tk.Frame(root)
-status_frame.pack()
-
-line_var = tk.StringVar()
-line_label = tk.Label(status_frame, textvariable=line_var)
-line_label.pack(side=tk.LEFT)
-
-column_var = tk.StringVar()
-column_label = tk.Label(status_frame, textvariable=column_var)
-column_label.pack(side=tk.LEFT)
-
-word_count_var = tk.StringVar()
-word_count_label = tk.Label(status_frame, textvariable=word_count_var)
-word_count_label.pack(side=tk.LEFT)
-
-
-def get_font_for_platform():
-    if os.name == 'nt':
-        return font.Font(family="Consolas", size=12)
-    elif os.uname().sysname == 'Darwin':
-        return font.Font(family="Menlo", size=12)
-    else:
-        return font.Font(family="DejaVu Sans Mono", size=12)
-
-
-text_font = get_font_for_platform()
-text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
-text_area.config(font=text_font)
-
-text_area.delete(1.0, "end")
-with open(last_write, 'r') as file:
-    text_area.insert(1.0, file.read())
-printlog("Program loaded")
 
 def debug_var(event=None):
     global file_open, current_file
