@@ -70,6 +70,7 @@ if [ $? -eq 0 ]; then
     else
         echo "Building with default host architecture, $HOSTARCH..."
         yes "$HOST_ARCH" | make
+    fi
     echo "done"
 else
     echo "Configuration failed. Exiting."
