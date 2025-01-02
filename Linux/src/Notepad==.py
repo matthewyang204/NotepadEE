@@ -109,16 +109,11 @@ if platform.system() == "Darwin":
                     fileToBeOpened = str(args[0])
                     openFile = 1
                     printlog("File was passed from Finder, loading file...")
-                    printlog("fileToBeOpened: " + str(fileToBeOpened))
-                    printlog("openFile: " + str(openFile))
                 
                 else:
                     fileToBeOpened = ""
                     openFile = 0
                     printlog("No file passed from Finder, loading program with last known file...")
-                    printlog("fileToBeOpened: " + str(fileToBeOpened))
-                    printlog("openFile: " + str(openFile))
-
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
 
@@ -129,8 +124,9 @@ if platform.system() == "Darwin":
         openFile = 0
         printlog(str(e))
         printlog("fileToBeOpened: " + str(fileToBeOpened))
-        printlog("openFile: " + str(openFile))
-        printlog("No file passed from Finder, loading program with last known file...")
+    
+    printlog("fileToBeOpened: " + str(fileToBeOpened))
+    printlog("openFile: " + str(openFile))
 else:
     # Tell the user through the console that we are running on Linux
     printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
