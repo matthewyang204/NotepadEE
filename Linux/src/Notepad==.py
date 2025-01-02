@@ -124,23 +124,31 @@ if platform.system() == "Darwin":
 
         addOpenEventSupport(root)
 
-        fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
-        openFilePath = os.path.join(cache_path, "openFile.txt")
+        def readDiskCache():
+            global fileToBeOpened, openFile
+            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
+            openFilePath = os.path.join(cache_path, "openFile.txt")
+            counter = 0
 
-        with open(fileToBeOpenedPath, "r") as file:
-            fileToBeOpened = str(file.read().strip())
+            def checkCache():
+                global fileToBeOpened, openFile
+                nonlocal fileToBeOpenedPath, openFilePath
+                with open(fileToBeOpenedPath, "r") as file:
+                    fileToBeOpened = str(file.read().strip())
+                
+                with open(openFilePath, "r") as file:
+                    openFile = str(file.read().strip())
+
+            return True
         
-        with open(openFilePath, "r") as file:
-            openFile = str(file.read().strip())
+        root.after(100, readDiskCache)
 
     except Exception as e:
         fileToBeOpened = ""
         openFile = 0
         printlog(str(e))
         printlog("fileToBeOpened: " + str(fileToBeOpened))
-    
-    printlog("fileToBeOpened: " + str(fileToBeOpened))
-    printlog("openFile: " + str(openFile))
+
 else:
     # Tell the user through the console that we are running on Linux
     printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
@@ -529,7 +537,7 @@ def runonfilearg(file_path):
         printlog("Because the file doesn't exist, it was created as a blank new file instead")
 
 if openFile == 1:
-    runonfilearg(fileToBeOpened)
+    root.after(300, runonfilearg(fileToBeOpened))
 else:
     printlog("Program loaded")
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
