@@ -1,6 +1,6 @@
 .SILENT:
 
-all: build-pyinstaller
+all: build
 
 configure: ./configure
 
