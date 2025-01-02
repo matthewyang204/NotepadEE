@@ -95,6 +95,30 @@ with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
 printlog("Program loaded")
 
+def runonfilearg(file_path):
+    global file_open, current_file
+    if os.path.exists(file_path):
+        text_area.delete(1.0, "end")
+        current_file = os.path.abspath(file_path)
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+        write_prefs()
+        file_open = 1
+        #printlog("Current file path: " + current_file)
+        #printlog("File open: " + str(file_open))
+        printlog("File loaded")
+    else:
+        text_area.delete(1.0, "end")
+        with open(file_path, 'w') as file:
+            text = text_area.get(1.0, "end-1c")
+            file.write(text)
+        file_open = 1
+        current_file = os.path.abspath(file_path)
+        #printlog("Current file path: " + current_file)
+        #printlog("File open: " + str(file_open))
+        write_prefs()
+        printlog("Because the file doesn't exist, it was created as a blank new file instead")
+
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
     try:
@@ -111,18 +135,20 @@ if platform.system() == "Darwin":
                     fileToBeOpened = str(args[0])
                     openFile = 1
                     printlog("File was passed from Finder, loading file...")
+                    runonfilearg(fileToBeOpened)
                 
                 else:
                     fileToBeOpened = ""
                     openFile = 0
                     printlog("No file passed from Finder, loading program with last known file...")
+                    printlog("Program loaded")
+                
+                printlog("fileToBeOpened: " + str(fileToBeOpened))
+                printlog("openFile: " + str(openFile))
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
 
         addOpenEventSupport(root)
-
-        root.after(1000, printlog("fileToBeOpened: " + str(fileToBeOpened)))
-        root.after(1000, printlog("openFile: " + str(openFile)))
 
     except Exception as e:
         fileToBeOpened = ""
@@ -493,34 +519,6 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
-def runonfilearg(file_path):
-    global file_open, current_file
-    if os.path.exists(file_path):
-        text_area.delete(1.0, "end")
-        current_file = os.path.abspath(file_path)
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-        write_prefs()
-        file_open = 1
-        #printlog("Current file path: " + current_file)
-        #printlog("File open: " + str(file_open))
-        printlog("File loaded")
-    else:
-        text_area.delete(1.0, "end")
-        with open(file_path, 'w') as file:
-            text = text_area.get(1.0, "end-1c")
-            file.write(text)
-        file_open = 1
-        current_file = os.path.abspath(file_path)
-        #printlog("Current file path: " + current_file)
-        #printlog("File open: " + str(file_open))
-        write_prefs()
-        printlog("Because the file doesn't exist, it was created as a blank new file instead")
-
-if openFile == 1:
-    root.after(1000, runonfilearg(fileToBeOpened))
-else:
-    printlog("Program loaded")
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
