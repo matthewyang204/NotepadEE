@@ -98,7 +98,7 @@ printlog("Program loaded")
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
     try:
-        def addOpenEventSupport(root, file_handler):
+        def addOpenEventSupport(root):
             global fileToBeOpened, openFile
             """
             Enable the application to handle macOS 'Open with' events.
