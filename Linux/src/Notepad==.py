@@ -124,15 +124,14 @@ if platform.system() == "Darwin":
 
         addOpenEventSupport(root)
 
-        while fileToBeOpened == None:
-            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
-            openFilePath = os.path.join(cache_path, "openFile.txt")
+        fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
+        openFilePath = os.path.join(cache_path, "openFile.txt")
 
-            with open(fileToBeOpenedPath, "r") as file:
-                fileToBeOpened = str(file.read().strip())
-            
-            with open(openFilePath, "r") as file:
-                openFile = str(file.read().strip())
+        with open(fileToBeOpenedPath, "r") as file:
+            fileToBeOpened = str(file.read().strip())
+        
+        with open(openFilePath, "r") as file:
+            openFile = str(file.read().strip())
 
     except Exception as e:
         fileToBeOpened = ""
