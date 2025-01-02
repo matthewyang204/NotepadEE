@@ -97,68 +97,35 @@ printlog("Program loaded")
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
-    # import objc
-    # from AppKit import NSApplication
-    # import AppKit
-
-    # Dummy monkey patch functions
-    # def dummy_macOSVersion(self):
-    #     printlog("Intercepted call to macOSVersion!")
-    #     return None
-
-    # def patched_setup(self, arg):
-    #     printlog("Intercepted _setup method call!")
-    #     try:
-    #         return original_setup(self)
-    #     except Exception as e:
-    #         printlog(f"Error in patched _setup: {e}")
-    #         return None
-
-    # Set monkey patches to run
-    # objc.classAddMethod(NSApplication, b"macOSVersion", dummy_macOSVersion)
-    # AppKit.NSApplication._setup_ = patched_setup
-
-    from Cocoa import NSApplication, NSApp, NSObject
-    from Foundation import NSURL
-    import threading
-    # Tell the user in the console that it is running from macOS
-    printlog("Detected that we are running on macOS, retrieving filepath through Finder's proprietary Cocoa APIs...")
-    # macOS logic to fetch the Finder file path
     try:
-        class AppDelegate(NSObject):
-            def applicationDidFinishLaunching_(self, notification):
-                pass
-
-            def application_openFile_(self, application, fileName):
+        def addOpenEventSupport(root, file_handler):
+            global fileToBeOpened, openFile
+            """
+            Enable the application to handle macOS 'Open with' events.
+            """
+            def doOpenFile(*args):
                 global fileToBeOpened, openFile
-                if not str(fileName): # no file path provided
-                    # Handle the case where no file is passed, like launching from dock
+                if args:
+                    fileToBeOpened = str(args[0])
+                    openFile = 1
+                    printlog("File was passed from Finder, loading file...")
+                
+                else:
                     fileToBeOpened = ""
                     openFile = 0
-                    debug_NS_var()
-                    printlog("No file selected in Finder, loading program with last known file...")
-                else:
-                    # File path is passed, take the file
-                    fileToBeOpened = str(fileName)
-                    openFile = 1
-                    debug_NS_var()
-                    printlog("File was passed through Finder, opening file...")
+                    print("No file passed from Finder, loading program with last known file...")
 
-        def retrieve():
-            global fileToBeOpened, openFile
-            app_delegate = AppDelegate()
-            app = NSApplication.sharedApplication()
-            app.setDelegate_(app_delegate)
-            app.run()
-        
-        retrieve()
+
+        # Hook into macOS-specific file open event
+        root.createcommand("::tk::mac::OpenDocument", doOpenFile)
+
+        addOpenEventSupport(root)
 
     except Exception as e:
         fileToBeOpened = ""
         openFile = 0
-        debug_NS_var()
         printlog(str(e))
-        printlog("No file selected in Finder, loading program with last known file...")
+        printlog("No file passed from Finder, loading program with last known file...")
 else:
     # Tell the user through the console that we are running on Linux
     printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
