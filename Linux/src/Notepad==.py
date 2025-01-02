@@ -108,7 +108,7 @@ if platform.system() == "Darwin":
             def doOpenFile(*args):
                 global fileToBeOpened, openFile
                 if args:
-                    fileToBeOpened = str(args[0]))
+                    fileToBeOpened = str(args[0])
                     openFile = 1
                     printlog("File was passed from Finder, loading file...")
                 
