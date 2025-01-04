@@ -35,6 +35,7 @@ OutputBaseFilename=notepadee-x86-setup
 SetupIconFile=Notepad.ico
 Compression=lzma
 SolidCompression=yes
+WizardStyle=modern
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
