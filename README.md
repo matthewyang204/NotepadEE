@@ -25,8 +25,8 @@ Windows
 - Binaries are next to all other binaries
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
-- Windows 7 x64 or later
-- Windows 11 ARM64 or later
+- x86 version - Windows XP or later
+- x64 version - Windows 7 x64 or later; ARM64 systems need Win11 ARM64 or later
 
 Upgrading:
 - You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
