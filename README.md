@@ -23,7 +23,7 @@ Windows
 -----
 - Download the latest dev source code from the Windows section of this repository: https://github.com/matthewyang204/NotepadEE/tree/main/Windows
 - Binaries are next to all other binaries
-- x64 binaries are provided for users, however, they are not signed
+- x64 & x86 binaries are provided for users, however, they are not signed
 - Version compatibility:
 - x86 version - Windows XP or later
 - x64 version - Windows 10 x64 or later; ARM64 systems need Win11 ARM64 or later

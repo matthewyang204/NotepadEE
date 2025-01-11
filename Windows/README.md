@@ -20,7 +20,7 @@ Build instructions:
 
 Installing from the precompiled binaries:
 - Binaries are next to all other binaries
-- x64 binaries are provided for users, however, they are not signed
+- x64 & x86 binaries are provided for users, however, they are not signed
 - Version compatibility:
 - x86 version - Windows XP or later
 - x64 version - Windows 10 x64 or later; ARM64 systems need Win11 ARM64 or later
