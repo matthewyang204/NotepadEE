@@ -6,15 +6,14 @@ configure: ./configure
 
 build:
 	echo "Building with Nuitka..."
-	echo "Please select an architecture to build for:"
-	echo "1. 'x86_64' (Intel)"
-	echo "2. 'arm64' (Apple Silicon)"
-	# echo "3. 'universal' (Intel and Apple Silicon in a single fat binary, not currently supported)"
-	echo "Enter an architecture and press ENTER:"
-	@read NUITKA_ARCH && \
-	echo "Building for architecture $$NUITKA_ARCH..." && \
-	export NUITKA_ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$NUITKA_ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.8.1 src/Notepad==.py
+	# echo "Please select an architecture to build for:"
+	# echo "1. 'x86_64' (Intel)"
+	# echo "2. 'arm64' (Apple Silicon)"
+	# # echo "3. 'universal' (Intel and Apple Silicon in a single fat binary, not currently supported)"
+	# echo "Enter an architecture and press ENTER:"
+	echo "Building for architecture $$ARCH..." && \
+	export ARCH && \
+	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.8.1 src/Notepad==.py
 	echo "Nuitka build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 install:
