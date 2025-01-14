@@ -60,16 +60,16 @@ if [ $? -eq 0 ]; then
     HOST_ARCH=$(uname -m)
     if [ "$1" == "--arch=x86_64" ]; then
         echo "Building with selected architecture x86_64..."
-        yes x86_64 | make
+        make ARCH=x86_64
     elif [ "$1" == "--arch=arm64" ]; then
         echo "Building with selected architecture arm64..."
-        yes arm64 | make
+        make ARCH=arm64
     elif [ "$1" == "--arch=universal" ]; then
         echo "Building with selected architecture universal..."
-        yes universal | make
+        make ARCH=universal
     else
         echo "Building with default host architecture, $HOSTARCH..."
-        yes "$HOST_ARCH" | make
+        make
     fi
     echo "done"
 else
