@@ -45,6 +45,8 @@ I have separate binaries for Intel and Apple Silicon macs. Please download the c
 
 Alternatively, you may want to use homebrew. First, tap my homebrew repo by running `brew tap matthewyang204/homebrew-formulae-casks`. After this, you can install the cask. On an Intel Mac, you need to install the x86_64 version. Run `brew install --cask --no-quarantine notepadee-x86_64`. On an Apple Silicon Mac, you need to install the arm64 version, so run `brew install --cask --no-quarantine notepadee-arm64`. You can update the cask by running `brew update && brew upgrade notepadee-x86_64` on an Intel Mac or `brew update && brew upgrade notepadee-arm64` on an Apple Silicon Mac.
 
+All of the prebuilt binaries provided in the README support macOSX Mavericks or better.
+
 Prebuild requirements:
 - Python 3.4 to 3.12
 - make installed
