@@ -1,3 +1,5 @@
+ARCH ?= $(shell uname -m)
+
 .SILENT:
 
 all: build
@@ -11,6 +13,7 @@ build:
 	# echo "2. 'arm64' (Apple Silicon)"
 	# # echo "3. 'universal' (Intel and Apple Silicon in a single fat binary, not currently supported)"
 	# echo "Enter an architecture and press ENTER:"
+	ARCH="$(ARCH)" && \
 	echo "Building for architecture $$ARCH..." && \
 	export ARCH && \
 	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.8.1 src/Notepad==.py
