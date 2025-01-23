@@ -3,6 +3,15 @@ from tkinter import messagebox, font, filedialog
 import os
 import sys
 
+versionInfo = """Notepad==, version 4.8.1
+(C) 2024-2025, Matthew Yang"""
+
+arg = sys.argv
+if len(arg) <= 1:
+    if arg[1] == "--version":
+        print(versionInfo)
+        sys.exit()
+
 # define the variables required for the program to start
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
