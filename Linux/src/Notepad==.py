@@ -8,6 +8,15 @@ import time
 import platform
 import subprocess
 
+versionInfo = """Notepad==, version 4.8.1
+(C) 2024-2025, Matthew Yang"""
+
+arg = sys.argv
+if len(arg) <= 1:
+    if arg[1] == "--version":
+        print(versionInfo)
+        sys.exit()
+
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
     os.makedirs(cache_path)
@@ -95,13 +104,14 @@ with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
 printlog("Program loaded")
 
-def runonfilearg(file_path):
+def runonarg(arg):
     global file_open, current_file
+        
     try:
-        if os.path.exists(file_path):
+        if os.path.exists(arg):
             text_area.delete(1.0, "end")
-            current_file = os.path.abspath(file_path)
-            with open(file_path, 'r') as file:
+            current_file = os.path.abspath(arg)
+            with open(arg, 'r') as file:
                 text_area.insert(1.0, file.read())
             file_open = 1
             #printlog("Current file path: " + current_file)
@@ -109,11 +119,11 @@ def runonfilearg(file_path):
             printlog("File loaded")
         else:
             text_area.delete(1.0, "end")
-            with open(file_path, 'w') as file:
+            with open(arg, 'w') as file:
                 text = text_area.get(1.0, "end-1c")
                 file.write(text)
             file_open = 1
-            current_file = os.path.abspath(file_path)
+            current_file = os.path.abspath(arg)
             #printlog("Current file path: " + current_file)
             #printlog("File open: " + str(file_open))
             printlog("Because the file doesn't exist, it was created as a blank new file instead")
@@ -138,7 +148,7 @@ if platform.system() == "Darwin":
                     fileToBeOpened = str(args[0])
                     openFile = 1
                     printlog("File was passed from Finder, loading file...")
-                    runonfilearg(fileToBeOpened)
+                    runonarg(fileToBeOpened)
                 
                 else:
                     fileToBeOpened = ""
@@ -172,7 +182,7 @@ else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
-        runonfilearg(fileToBeOpened)
+        runonarg(fileToBeOpened)
 
 
 def debug_var(event=None):
