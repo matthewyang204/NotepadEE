@@ -47,7 +47,7 @@ Alternatively, you may want to use homebrew. First, tap my homebrew repo by runn
 All of the prebuilt binaries provided in the README support macOSX Mavericks or better.
 
 Prebuild requirements:
-- Python 3.4 to 3.12
+- Python 3.6 to 3.12
 - make installed
 - `configure` script will automatically install Python packages
 
