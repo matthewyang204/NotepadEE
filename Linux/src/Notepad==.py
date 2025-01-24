@@ -13,6 +13,8 @@ versionInfo = """Notepad==, version 4.8.1
 
 arg = sys.argv
 if len(arg) <= 1:
+    pass
+else:
     if arg[1] == '--version':
         print(versionInfo)
         sys.exit()
