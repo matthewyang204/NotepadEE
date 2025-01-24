@@ -11,7 +11,7 @@ import subprocess
 versionInfo = """Notepad==, version 4.8.1
 (C) 2024-2025, Matthew Yang"""
 
-helpInfo = f"""{versioninfo}
+helpInfo = f"""{versionInfo}
 
 Usage: notepadee [OPTIONS] [<filepath>]
 
