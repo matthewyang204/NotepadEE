@@ -38,6 +38,9 @@ sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
 echo "Patching the requirements..."
 rm requirements.txt
 cp patches/requirements.txt ./
+echo "Patching the README..."
+rm README.md
+cp patches/README.md ./
 echo "done"
 
 
