@@ -3,6 +3,31 @@ from tkinter import messagebox, font, filedialog
 import os
 import sys
 
+versionInfo = """Notepad==, version 4.8.2
+(C) 2024-2025, Matthew Yang"""
+
+helpInfo = """{}
+
+Usage: notepadee [OPTIONS] [<filepath>]
+
+Options:
+--version, -v     Display version info and exit
+--help, -h        Display this help message and exit
+
+Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
+""".format(versionInfo)
+
+arg = sys.argv
+if len(arg) <= 1:
+    pass
+else:
+    if arg[1] == '--version' or arg[1] == '-v':
+        print(versionInfo)
+        sys.exit()
+    elif arg[1] == '--help' or arg[1] == '-h':
+        print(helpInfo)
+        sys.exit()
+
 # define the variables required for the program to start
 local_app_data_path = os.getenv('LOCALAPPDATA')
 
