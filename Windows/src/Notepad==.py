@@ -8,7 +8,7 @@ versionInfo = """Notepad==, version 4.8.2
 
 helpInfo = f"""{versionInfo}
 
-Usage: notepadee [OPTIONS] [<filepath>]
+Usage: "notepad==" [OPTIONS] [<filepath>]
 
 Options:
 --version, -v     Display version info and exit
