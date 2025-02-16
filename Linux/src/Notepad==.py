@@ -8,6 +8,19 @@ import time
 import platform
 import subprocess
 
+cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
+if not os.path.exists(cache_path):
+    os.makedirs(cache_path)
+
+# Open a log file in write mode
+log_file = os.path.join(cache_path, "notepadee_log.txt")
+
+# Special printlog statement to print stuff that doesn't belong in a console to the log file
+def printlog(message):
+    with open(log_file, 'a') as file:
+        file.write(str(message) + '\n')
+    printlog(message)
+
 versionInfo = """Notepad==, version 4.8.2
 (C) 2024-2025, Matthew Yang"""
 
