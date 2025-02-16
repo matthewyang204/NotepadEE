@@ -20,7 +20,7 @@ log_file = os.path.join(cache_path, "notepadee_log.txt")
 def printlog(message):
     with open(log_file, 'a') as file:
         file.write(str(message) + '\n')
-    printlog(message)
+    print(message)
 
 versionInfo = """Notepad==, version 4.8.2
 (C) 2024-2025, Matthew Yang"""
