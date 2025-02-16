@@ -16,7 +16,7 @@ build:
 	ARCH="$(ARCH)" && \
 	echo "Building for architecture $$ARCH..." && \
 	export ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.8.2 src/Notepad==.py
+	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=4.9.1 src/Notepad==.py
 	echo "Build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 install:

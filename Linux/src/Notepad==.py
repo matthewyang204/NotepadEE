@@ -22,7 +22,7 @@ def printlog(message):
         file.write(str(message) + '\n')
     print(message)
 
-versionInfo = """Notepad==, version 4.8.2
+versionInfo = """Notepad==, version 4.9.1
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
