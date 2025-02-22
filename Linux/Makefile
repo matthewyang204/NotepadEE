@@ -51,7 +51,7 @@ uninstall-no-desktop-file-upgrade:
 	sudo rm -rf /opt/matthewyang/$(APP_NAME)
 	sudo rm -f $(BIN_LINK)
 
-clean: clean-dist
+clean: clean-dist clean-bin-dist
 	rm -rf dist
 	rm -rf build
 	rm -rf $(APP_NAME).spec
