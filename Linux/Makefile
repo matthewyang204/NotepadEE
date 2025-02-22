@@ -67,9 +67,10 @@ clean-dist:
 	rm -rf NotepadEE-Linux-src.tar.gz
 	rm -rf ../temp
 
-bin-dist: clean
+bin-dist:
 	mkdir ../temp
 	cp -R dist build *.spec notepadee.desktop ../temp/
+	cp resources/dist.mak ../temp/Makefile
 	tar -czvf NotepadEE-Linux-$(shell uname -m).tar.gz -C ../temp .
 	rm -rf ../temp
 
