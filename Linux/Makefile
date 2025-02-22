@@ -67,6 +67,12 @@ clean-dist: clean
 	rm -rf NotepadEE-Linux-src.tar.gz
 	rm -rf ../temp
 
+bin-dist: clean
+	mkdir ../temp
+	cp -R dist build *.spec notepadee.desktop ../temp/
+	tar -czvf NotepadEE-Linux-$(shell uname -m) -C ../temp .
+	rm -rf ../temp
+
 upgrade: uninstall-upgrade install
 
 upgrade-no-desktop-file: uninstall-no-desktop-file-upgrade install-no-desktop-file
