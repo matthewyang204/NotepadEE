@@ -63,7 +63,7 @@ dist: clean
 	tar -czvf NotepadEE-Linux-src.tar.gz -C ../temp .
 	rm -rf ../temp
 
-clean-dist: clean
+clean-dist:
 	rm -rf NotepadEE-Linux-src.tar.gz
 	rm -rf ../temp
 
@@ -72,6 +72,10 @@ bin-dist: clean
 	cp -R dist build *.spec notepadee.desktop ../temp/
 	tar -czvf NotepadEE-Linux-$(shell uname -m).tar.gz -C ../temp .
 	rm -rf ../temp
+
+clean-bin-dist: 
+	rm -rf ../temp
+	rm -rf NotepadEE-Linux-$(shell uname -m).tar.gz
 
 upgrade: uninstall-upgrade install
 
