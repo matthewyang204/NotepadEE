@@ -8,7 +8,21 @@ import time
 import platform
 import subprocess
 
-versionInfo = """Notepad==, version 4.8.2
+# Define and create, if applicable, a cache folder
+cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
+if not os.path.exists(cache_path):
+    os.makedirs(cache_path)
+
+# Open a log file in write mode
+log_file = os.path.join(cache_path, "notepadee_log.txt")
+
+# Special printlog statement to print stuff that doesn't belong in a console to the log file
+def printlog(message):
+    with open(log_file, 'a') as file:
+        file.write(str(message) + '\n')
+    print(message)
+
+versionInfo = """Notepad==, version 4.9.1
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
@@ -28,24 +42,11 @@ if len(arg) <= 1:
     pass
 else:
     if arg[1] == '--version' or arg[1] == '-v':
-        print(versionInfo)
+        printlog(versionInfo)
         sys.exit()
     elif arg[1] == '--help' or arg[1] == '-h':
-        print(helpInfo)
+        printlog(helpInfo)
         sys.exit()
-
-cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
-if not os.path.exists(cache_path):
-    os.makedirs(cache_path)
-
-# Open a log file in write mode
-log_file = os.path.join(cache_path, "notepadee_log.txt")
-
-# Special printlog statement to print stuff that doesn't belong in a console to the log file
-def printlog(message):
-    with open(log_file, 'a') as file:
-        file.write(str(message) + '\n')
-    print(message)
 
 global fileToBeOpened
 global openFile
@@ -191,7 +192,7 @@ else:
     if len(filearg) <= 1:
         openFile = 0
         printlog("No arguments provided. Proceeding to load program with last known file...")
-        print("Program loaded")
+        printlog("Program loaded")
     else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
