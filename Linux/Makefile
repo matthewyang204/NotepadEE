@@ -51,7 +51,7 @@ uninstall-no-desktop-file-upgrade:
 	sudo rm -rf /opt/matthewyang/$(APP_NAME)
 	sudo rm -f $(BIN_LINK)
 
-clean:
+clean: clean-dist
 	rm -rf dist
 	rm -rf build
 	rm -rf $(APP_NAME).spec
@@ -70,7 +70,7 @@ clean-dist: clean
 bin-dist: clean
 	mkdir ../temp
 	cp -R dist build *.spec notepadee.desktop ../temp/
-	tar -czvf NotepadEE-Linux-$(shell uname -m) -C ../temp .
+	tar -czvf NotepadEE-Linux-$(shell uname -m).tar.gz -C ../temp .
 	rm -rf ../temp
 
 upgrade: uninstall-upgrade install
