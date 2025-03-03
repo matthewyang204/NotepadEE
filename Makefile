@@ -3,6 +3,7 @@
 clean:
 	cd Linux && make clean && cd ..
 	cd macOS && ./autogen.sh clean && cd ..
+	rm -rf build.txt
 
 macos:
 	cd macOS && ./configure && make -j$(nproc) && cd ..
