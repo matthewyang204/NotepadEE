@@ -548,7 +548,7 @@ edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
 edit_menu.add_command(label="Find and Replace", command=find_and_replace)
-edit_menu.add_command(lable="Go To Line", command=go_to_line)
+edit_menu.add_command(label="Go To Line", command=go_to_line)
 
 accessibility_menu = tk.Menu(menu)
 menu.add_cascade(label="Accessibility", menu=accessibility_menu)
