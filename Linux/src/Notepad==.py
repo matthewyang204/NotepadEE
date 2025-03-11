@@ -511,6 +511,7 @@ def find_and_replace():
     replace_button.pack()
 
 
+
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
@@ -524,7 +525,6 @@ def increase_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size + 1)
     printlog("Font size increased by 1 pt")
-
 
 def decrease_font_size(event=None):
     current_size = text_font['size']
@@ -592,6 +592,7 @@ text_area.bind('<Control-v>', paste_text)
 text_area.bind('<Control-a>', select_all_text)
 text_area.bind('<Control-z>', undo)
 text_area.bind('<Control-y>', redo)
+text_area.bind('<Control-r', find_and_replace)
 
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
