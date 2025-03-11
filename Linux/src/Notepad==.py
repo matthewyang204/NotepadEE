@@ -510,7 +510,23 @@ def find_and_replace():
     replace_button = tk.Button(popup, text="Replace", command=perform_replace)
     replace_button.pack()
 
+def go_to_line(event=None):
+    popup = tk.Toplevel(root)
+    popup.title("Go To Line")
+    
+    line_number_label = tk.label(popup, text="Enter the line that you want to go to:")
+    line_number_label.pack()
+    entrybox = tk.Entry(popup)
+    entrybox.pack()
 
+    def go(event=None):
+        line_number = entrybox.get()
+        text_area.mark_set("insert", f"{line_number}.0")
+
+        popup.destroy()
+    
+    go_to_line_button = tk.Button(popup, text="Go", command=go)
+    go_to_line_button.pack()
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
