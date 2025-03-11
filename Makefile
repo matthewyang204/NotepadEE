@@ -7,10 +7,8 @@ clean:
 
 macos:
 	cd macOS && ./configure && make -j$(nproc) && cd ..
-	echo "export build = "macOS"" > build.txt
-	chmod +x build.txt
+	echo "macOS" > build.txt
 
 linux:
 	cd Linux && ./configure && make -j$(nproc) && cd ..
-	echo "export build = "linux"" > build.txt
-	chmod +x build.txt
+	echo "linux" > build.txt
