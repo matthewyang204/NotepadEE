@@ -22,7 +22,7 @@ def printlog(message):
         file.write(str(message) + '\n')
     print(message)
 
-versionInfo = """Notepad==, version 4.9.2
+versionInfo = """Notepad==, version 4.9.3
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
@@ -591,6 +591,7 @@ edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
 edit_menu.add_command(label="Find and Replace", command=find_and_replace)
+edit_menu.add_command(lable="Go To Line", command=go_to_line)
 
 accessibility_menu = tk.Menu(menu)
 menu.add_cascade(label="Accessibility", menu=accessibility_menu)
