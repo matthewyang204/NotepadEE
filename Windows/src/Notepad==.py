@@ -431,6 +431,8 @@ def find_and_replace(event=None):
 
     replace_button = tk.Button(popup, text="Replace", command=perform_replace)
     replace_button.pack()
+    find_entry.bind('<Return>', perform_replace)
+    replace_entry.bind('<Return>', perform_replace)
 
 def go_to_line(event=None):
     popup = tk.Toplevel(root)
