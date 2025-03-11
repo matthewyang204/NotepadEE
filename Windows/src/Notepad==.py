@@ -449,6 +449,7 @@ def go_to_line(event=None):
     
     go_to_line_button = tk.Button(popup, text="Go", command=go)
     go_to_line_button.pack()
+    entrybox.bind('<Return>', go)
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
