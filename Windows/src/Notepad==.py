@@ -436,7 +436,7 @@ def go_to_line(event=None):
     popup = tk.Toplevel(root)
     popup.title("Go To Line")
     
-    line_number_label = tk.label(popup, text="Enter the line that you want to go to:")
+    line_number_label = tk.Label(popup, text="Enter the line that you want to go to:")
     line_number_label.pack()
     entrybox = tk.Entry(popup)
     entrybox.pack()
