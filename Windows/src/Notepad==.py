@@ -403,7 +403,7 @@ def redo(event=None):
         pass
     print("Edit redone")
 
-def find_and_replace():
+def find_and_replace(event=None):
     popup = tk.Toplevel(root)
     popup.title("Find and Replace")
 
@@ -412,13 +412,12 @@ def find_and_replace():
     find_entry = tk.Entry(popup)
     find_entry.pack()
 
-    replace_label = tk.Label(
-        popup, text="Enter the text you want to it replace with:")
+    replace_label = tk.Label(popup, text="Enter the text you want to it replace with:")
     replace_label.pack()
     replace_entry = tk.Entry(popup)
     replace_entry.pack()
 
-    def perform_replace():
+    def perform_replace(event=None):
         find_text = find_entry.get()
         replace_text = replace_entry.get()
 
@@ -433,6 +432,23 @@ def find_and_replace():
     replace_button = tk.Button(popup, text="Replace", command=perform_replace)
     replace_button.pack()
 
+def go_to_line(event=None):
+    popup = tk.Toplevel(root)
+    popup.title("Go To Line")
+    
+    line_number_label = tk.label(popup, text="Enter the line that you want to go to:")
+    line_number_label.pack()
+    entrybox = tk.Entry(popup)
+    entrybox.pack()
+
+    def go(event=None):
+        line_number = entrybox.get()
+        text_area.mark_set("insert", f"{line_number}.0")
+
+        popup.destroy()
+    
+    go_to_line_button = tk.Button(popup, text="Go", command=go)
+    go_to_line_button.pack()
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
