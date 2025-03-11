@@ -495,7 +495,7 @@ def find_and_replace():
     replace_entry = tk.Entry(popup)
     replace_entry.pack()
 
-    def perform_replace():
+    def perform_replace(event=None):
         find_text = find_entry.get()
         replace_text = replace_entry.get()
 
