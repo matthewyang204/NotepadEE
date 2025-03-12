@@ -480,7 +480,7 @@ def redo(event=None):
     printlog("Edit redone")
 
 
-def find_and_replace():
+def find_and_replace(event=None):
     popup = tk.Toplevel(root)
     popup.title("Find and Replace")
 
