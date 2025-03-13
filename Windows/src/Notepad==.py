@@ -250,6 +250,7 @@ def save_as(event=None):
             ("Perl module (.pm)", ".pm"),
             ("Python script (.py)", ".py"),
             ("Inno Setup script (.iss)", ".iss"),
+            ("Makefile", ".mak"),
 
             # Property scripts
             ("Resource file (.rc)", ".rc"),
@@ -266,8 +267,7 @@ def save_as(event=None):
             ("SQL file (.sql)", ".sql"),
 
             # Miscellaneous files
-            ("NFO file (.nfo)", ".nfo"),
-            ("Makefile (.mak)", ".mak")))
+            ("NFO file (.nfo)", ".nfo")))
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
