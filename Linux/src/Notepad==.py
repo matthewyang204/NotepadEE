@@ -277,11 +277,15 @@ def save_as(event=None):
 
             # Java, C#, Pascal
             ("Java file", ".java"),
-            ("C# file", ".cs"),
             ("Pascal file", ".pas"),
             ("Pascal file", ".pp"),
             ("Include file", ".inc"),
 
+            # .NET code
+            ("Visual Basic (.vb)", ".vb"),
+            ("Visual Basic script (.vbs)", ".vbs"),
+            ("C# file (.cs)", ".cs"),
+            
             # Web script files
             ("HTML file", ".html"),
             ("HTML file", ".htm"),
@@ -329,8 +333,6 @@ def save_as(event=None):
             ("Resource file", ".rc"),
             ("ActionScript", ".as"),
             ("MaxScript", ".mx"),
-            ("Visual Basic", ".vb"),
-            ("Visual Basic script", ".vbs"),
 
             # Fortran, TeX, SQL
             ("Fortran file", ".f"),
