@@ -20,6 +20,13 @@ else
     echo "pip3 is installed."
 fi
 
+if ! command -v python3 -c 'import tkinter' &> /dev/null
+then
+    echo "Tkinter not available. It is a core framework and required for compilation. Please compile python with tkinter or install a package containing tkinter to continue."
+else
+    echo "Tkinter is available."
+fi
+
 if ! command -v tar &> /dev/null
 then
     echo "Tar not found. Install it before continuing."
