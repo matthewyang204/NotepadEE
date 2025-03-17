@@ -452,10 +452,13 @@ def go_to_line(event=None):
         line_number = entrybox.get()
         text_area.mark_set("insert", f"{line_number}.0")
 
+    def close(event=None):
         popup.destroy()
     
     go_to_line_button = tk.Button(popup, text="Go", command=go)
+    close_button = tk.Button(popup, text="Close", command=close)
     go_to_line_button.pack()
+    close_button.pack()
     entrybox.bind('<Return>', go)
 
 def update_line_number(event=None):
