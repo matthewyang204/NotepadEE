@@ -429,10 +429,13 @@ def find_and_replace(event=None):
             text_area.delete("1.0", tk.END)
             text_area.insert(tk.END, text_widget)
 
+    def close(event=None):
         popup.destroy()
 
     replace_button = tk.Button(popup, text="Replace", command=perform_replace)
+    close_button = tk.Button(popup, text="Close", command=close)
     replace_button.pack()
+    close_button.pack()
     find_entry.bind('<Return>', perform_replace)
     replace_entry.bind('<Return>', perform_replace)
 
