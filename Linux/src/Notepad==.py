@@ -539,6 +539,56 @@ def go_to_line(event=None):
     close_button.pack()
     entrybox.bind('<Return>', go)
 
+def cPos(index):
+    line, column = text_area.index("insert").split(".")
+
+    if index == "both":
+        return line, column
+    elif index == "line":
+        return line
+    elif index == "column":
+        return column
+    else:
+        print("invalidArg")
+        return "invalidArg"
+
+def findNext(text):
+    try:
+        last_highlight = text_area.index("highlight.last")
+        start = last_highlight
+    except tk.TclError:
+        cPos_line, cpos_column = cPos("both")
+        start = f"{cPos_line}.{cpos_column}"
+
+    text_area.tag_remove("highlight", "1.0", "end")
+    start = text_area.search(text, start, stopindex="end")
+    end = f"{start} + {len(text)}c"
+    text_area.tag_add("highlight", start, end)
+    
+    text_area.tag_config("highlight", background="yellow")
+
+def find_text(event=None):
+    popup = tk.Toplevel(root)
+    popup.title("Find")
+    
+    line_number_label = tk.Label(popup, text="Enter the text that you want to find:")
+    line_number_label.pack()
+    entrybox = tk.Entry(popup)
+    entrybox.pack()
+
+    def findNext_wrapper(event=None):
+        findNext(entrybox.get())
+
+    def close(event=None):
+        text_area.tag_remove("highlight", "1.0", "end")
+        popup.destroy()
+    
+    find_button = tk.Button(popup, text="Find", command = findNext_wrapper)
+    close_button = tk.Button(popup, text="Close", command=close)
+    find_button.pack()
+    close_button.pack()
+    entrybox.bind('<Return>', findNext_wrapper)
+
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
@@ -601,6 +651,7 @@ edit_menu.add_command(label="Paste", command=paste_text)
 edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
+edit_menu.add_command(label="Find", command=find_text)
 edit_menu.add_command(label="Find and Replace", command=find_and_replace)
 edit_menu.add_command(label="Go To Line", command=go_to_line)
 
@@ -620,6 +671,7 @@ text_area.bind('<Control-v>', paste_text)
 text_area.bind('<Control-a>', select_all_text)
 text_area.bind('<Control-z>', undo)
 text_area.bind('<Control-y>', redo)
+text_area.bind('<Control-F>', find_text)
 text_area.bind('<Control-R>', find_and_replace)
 text_area.bind('<Control-G>', go_to_line)
 
