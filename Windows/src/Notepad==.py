@@ -3,7 +3,7 @@ from tkinter import messagebox, font, filedialog
 import os
 import sys
 
-versionInfo = """Notepad==, version 5.0.2
+versionInfo = """Notepad==, version 5.0.3
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
