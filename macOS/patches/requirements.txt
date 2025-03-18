@@ -1,5 +1,5 @@
 pyinstaller
 pillow
 tk
-nuitka==2.5.9
+nuitka==2.6.8
 imageio
