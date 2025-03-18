@@ -26,7 +26,7 @@ Windows
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
 - Windows 10 x64 or later; ARM64 systems need Win11 ARM64 or later
-- Note: 64-bit Windows 7 - 8.1 systems must build the 64-bit version from source using Python 3.8, as Python 3.13, which the binaries are built with, doesn't support anything older than Windows 10. However, the python file still works on Windows 7-8.1 systems alongside the 10+ versions.
+- Note: 64-bit Windows 7 - 8.1 systems must build the 64-bit version from source using Python 3.8, as Python 3.12, which the binaries are built with, doesn't support anything older than Windows 10. However, the python file still works on Windows 7-8.1 systems alongside the 10+ versions.
 
 Upgrading:
 - You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
