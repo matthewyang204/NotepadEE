@@ -7,7 +7,6 @@ import sys
 import time
 import platform
 import subprocess
-import atexit
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -408,7 +407,7 @@ def save_file(warn):
             if platform.system() == "Darwin":
                 pass
             else:
-                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved.")
+                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
                 if response:
                     if save_as():
                         printlog("File saved")
@@ -644,6 +643,12 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
+def exit_handler(event=None):
+    print("Telling user to save file before exit...")
+    save_file("w")
+    print("Exiting...")
+    sys.exit()
+
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
@@ -694,6 +699,8 @@ text_area.bind('<Control-G>', go_to_line)
 
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
+
+root.protocol("WM_DELETE_WINDOW", exit_handler)
 
 write_prefs()
 root.mainloop()

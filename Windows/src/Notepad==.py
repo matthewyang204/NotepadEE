@@ -3,7 +3,7 @@ from tkinter import messagebox, font, filedialog
 import os
 import sys
 import platform
-import atexit
+
 
 versionInfo = """Notepad==, version 5.0.3
 (C) 2024-2025, Matthew Yang"""
@@ -317,7 +317,7 @@ def save_file(warn):
             if platform.system() == "Darwin":
                 pass
             else:
-                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved.")
+                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
                 if response:
                     if save_as():
                         printlog("File saved")
@@ -595,6 +595,12 @@ def runonfilearg(file_path):
         write_prefs()
         print("Because the file doesn't exist, it was created as a blank new file instead")
 
+def exit_handler(event=None):
+    print("Telling user to save file before exit...")
+    save_file("w")
+    print("Exiting...")
+    sys.exit()
+
 if openFile == 1:
     runonfilearg(fileToBeOpened)
 else:
@@ -652,6 +658,8 @@ text_area.bind('<Control-G>', go_to_line)
 
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
+
+root.protocol("WM_DELETE_WINDOW", exit_handler)
 
 write_prefs()
 root.mainloop()
