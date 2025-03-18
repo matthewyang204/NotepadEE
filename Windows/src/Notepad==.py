@@ -311,6 +311,17 @@ def save_file(warn):
                     return True
             else:
                 return True
+        elif warn == "w":
+            if platform.system() == "Darwin":
+                pass
+            else:
+                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved.")
+                if response:
+                    if save_as():
+                        printlog("File saved")
+                        return True
+                else:
+                    return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
