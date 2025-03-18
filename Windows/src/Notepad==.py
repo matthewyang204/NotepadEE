@@ -501,14 +501,19 @@ def find_text(event=None):
     def findNext_wrapper(event=None):
         findNext(entrybox.get())
 
-    def close(event=None):
+    def clear(event=None):
         text_area.tag_remove("highlight", "1.0", "end")
+
+    def close(event=None):
+        clear()
         popup.destroy()
     
     find_button = tk.Button(popup, text="Find", command = findNext_wrapper)
     close_button = tk.Button(popup, text="Close", command=close)
+    clear_button = tk.Button(popup, text="Clear", command=clear)
     find_button.pack()
     close_button.pack()
+    clear_button.pack()
     entrybox.bind('<Return>', findNext_wrapper)
 
 def update_line_number(event=None):
