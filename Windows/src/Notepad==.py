@@ -293,7 +293,7 @@ def save_as(event=None):
         return False
 
 def save_file(warn):
-    global current_file, file_open
+    global current_file, file_open, file_written
     if file_open == 1:
         try:
             debug_var()
@@ -317,13 +317,14 @@ def save_file(warn):
             if platform.system() == "Darwin":
                 pass
             else:
-                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
-                if response:
-                    if save_as():
-                        printlog("File saved")
+                if file_written == 1:
+                    response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
+                    if response:
+                        if save_as():
+                            printlog("File saved")
+                            return True
+                    else:
                         return True
-                else:
-                    return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
             if response:
