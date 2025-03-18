@@ -590,8 +590,8 @@ def find_text(event=None):
     close_button = tk.Button(popup, text="Close", command=close)
     clear_button = tk.Button(popup, text="Clear", command=clear)
     find_button.pack()
-    close_button.pack()
     clear_button.pack()
+    close_button.pack()
     entrybox.bind('<Return>', findNext_wrapper)
 
 def update_line_number(event=None):
