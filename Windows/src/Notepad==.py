@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox, font, filedialog
 import os
 import sys
+import platform
+import atexit
 
 versionInfo = """Notepad==, version 5.0.3
 (C) 2024-2025, Matthew Yang"""
