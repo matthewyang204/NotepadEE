@@ -671,7 +671,7 @@ text_area.bind('<Control-v>', paste_text)
 text_area.bind('<Control-a>', select_all_text)
 text_area.bind('<Control-z>', undo)
 text_area.bind('<Control-y>', redo)
-text_area.bind('<Control-F>', find_text)
+text_area.bind('<Control-f>', find_text)
 text_area.bind('<Control-R>', find_and_replace)
 text_area.bind('<Control-G>', go_to_line)
 
