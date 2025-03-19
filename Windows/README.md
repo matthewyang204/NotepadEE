@@ -8,7 +8,7 @@ This is the Windows version's source code
 
 The Windows binaries can be downloaded from the releases
 
-Any PC running Windows 7 x64 or later works for building, otherwise, Windows 10 x64 or later can be used with the binaries
+Any PC running Windows 7 x64 or later works
 
 Build instructions:
 - Run the command prompt as admin and navigate to the cloned repository.
@@ -22,7 +22,7 @@ Installing from the precompiled binaries:
 - Binaries are next to all other binaries
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
-- Windows 10 x64 or later; ARM64 systems need Win11 ARM64 or later
+- Windows 7 x64 or later; ARM64 systems need Win11 ARM64 or later
 - Note: 64-bit Windows 7 - 8.1 systems must build from source using Python 3.8, as Python 3.12, which the binaries are built with, doesn't support anything older than Windows 10. However, the python file still is compatible with Windows 7-8.1 as well as the modern 10+ versions.
 
 Upgrading:
