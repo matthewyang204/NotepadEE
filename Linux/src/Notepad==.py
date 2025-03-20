@@ -20,7 +20,7 @@ log_file = os.path.join(cache_path, "notepadee_log.txt")
 def printlog(message):
     with open(log_file, 'a') as file:
         file.write(str(message) + '\n')
-    print(message)
+    printlog(message)
 
 versionInfo = """Notepad==, version 5.0.3
 (C) 2024-2025, Matthew Yang"""
@@ -561,7 +561,7 @@ def cPos(index):
     elif index == "column":
         return column
     else:
-        print("invalidArg")
+        printlog("invalidArg")
         return "invalidArg"
 
 def findNext(text):
@@ -645,9 +645,9 @@ def runinbackground(event=None):
     debug_var()
 
 def exit_handler(event=None):
-    print("Telling user to save file before exit...")
+    printlog("Telling user to save file before exit...")
     save_file("w")
-    print("Exiting...")
+    printlog("Exiting...")
     sys.exit()
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
