@@ -5,7 +5,7 @@ import sys
 import platform
 
 
-versionInfo = """Notepad==, version 5.0.3
+versionInfo = """Notepad==, version 5.0.4
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
