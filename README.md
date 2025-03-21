@@ -13,7 +13,7 @@ Linux build instructions:
 - Please clone the repo and cd into it
 - If you haven't yet, please run the `dpinstall` script to install dependencies to your system
 - Type `./configure && make && sudo make install` to build from source and install
-- If the configure script needs to install stuff, enter your password if prompted
+- If the `./configure` script needs to install stuff, enter your password if prompted
 - You can use `sudo make upgrade` instead of `sudo make install` to directly update your existing installation
 - Requires Debian-based distro to build
 - Source code is in the Linux folder; Windows source code is in separate Windows folder
@@ -47,8 +47,8 @@ Alternatively, you may want to use homebrew. First, tap my homebrew repo by runn
 All of the prebuilt binaries provided in the README support macOSX Mavericks or better.
 
 Prebuild requirements:
-- Python 3.6 to 3.12
-- make installed
+- Any Python version from 3.6 to 3.12 installed
+- `make` installed
 - `configure` script will automatically install Python packages
 
 Build instructions:
