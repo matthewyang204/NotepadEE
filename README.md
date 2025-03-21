@@ -49,7 +49,6 @@ All of the prebuilt binaries provided in the README support macOSX Mavericks or 
 Prebuild requirements:
 - Any Python version from 3.6 to 3.12 installed
 - `make` installed
-- `configure` script will automatically install Python packages
 
 Build instructions:
 1. Clone the repository and navigate to the macOS folder inside of it
