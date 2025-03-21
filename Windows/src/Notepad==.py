@@ -541,6 +541,10 @@ def update_line_number(event=None):
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
+    if current_file:
+        root.title("Notepad== - " + current_file)
+    else:
+        root.title("Notepad==")
     # print("Status bar updated")
     root.after(100, update_line_number)
 
