@@ -321,7 +321,7 @@ def save_file(warn):
                     response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
                     if response:
                         if save_as():
-                            printlog("File saved")
+                            print("File saved")
                             return True
                     else:
                         return True
