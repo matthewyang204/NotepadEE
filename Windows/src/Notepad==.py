@@ -109,6 +109,10 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
+file_var = tk.StringVar()
+file_label = tk.Label(status_frame, textvariable=file_var)
+file_label.pack(side=tk.LEFT)
+
 # define the userland functions
 def get_font_for_platform():
     if os.name == 'nt':
@@ -536,6 +540,7 @@ def update_line_number(event=None):
     column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
+    file_var.set("File: " + os.path.basename(current_file))
     # print("Status bar updated")
     root.after(100, update_line_number)
 
