@@ -31,7 +31,7 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=notepadee-x64-setup
+OutputBaseFilename=notepadee-{#MyAppVersion}-x64-setup
 SetupIconFile=Notepad.ico
 Compression=lzma
 SolidCompression=yes
