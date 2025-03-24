@@ -710,7 +710,7 @@ text_area.bind('<Control-G>', go_to_line)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
-root.protocol("WM_DELETE_WINDOW", exit_handler)
+root.protocol('WM_DELETE_WINDOW', exit_handler)
 
 write_prefs()
 root.mainloop()
