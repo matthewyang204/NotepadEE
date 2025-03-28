@@ -675,7 +675,9 @@ root.config(menu=menu)
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
-# file_menu.add_command(label="New Window", command=newWindow_macOS)
+if platform.system() == "Darwin":
+    pass
+    # file_menu.add_command(label="New Window", command=newWindow_macOS)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
