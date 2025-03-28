@@ -653,6 +653,10 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
+def newWindow_macOS(event=None):
+    printlog("Feature not finished, please do not enable link in file menu")
+    return False
+
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
     save_file("w")
@@ -671,6 +675,7 @@ root.config(menu=menu)
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
+# file_menu.add_command(label="New Window", command=newWindow_macOS)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
