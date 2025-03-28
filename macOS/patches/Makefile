@@ -55,5 +55,3 @@ sign:
 	echo "Signing..." && \
 	sudo codesign --force --deep --sign "$$CERTIFICATE" dist/Notepad==.app
 	echo "done"
-
-.PHONY: configure build install uninstall uninstall-upgrade clean dist clean-dist upgrade

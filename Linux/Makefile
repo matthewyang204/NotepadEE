@@ -82,5 +82,3 @@ clean-bin-dist:
 upgrade: uninstall-upgrade install
 
 upgrade-no-desktop-file: uninstall-no-desktop-file-upgrade install-no-desktop-file
-
-.PHONY: configure build install clean dist clean-dist
