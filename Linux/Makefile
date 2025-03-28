@@ -77,7 +77,7 @@ bin-dist:
 
 clean-bin-dist: 
 	rm -rf ../temp
-	rm -rf NotepadEE-Linux-$(shell uname -m).tar.gz
+	rm -rf NotepadEE-Linux-*.tar.gz
 
 upgrade: uninstall-upgrade install
 
