@@ -650,15 +650,11 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
-def newWindow_macOS(event=None):
-    printlog("Feature not finished, please do not enable link in file menu")
-    # return False
-    
-    run_path = os.path.realpath(__file__)
+def newWindow_macOS(event=None):run_path = os.path.realpath(__file__)
     cwd = os.getcwd()
-    printlog(f"Script path is {run_path}")
-    printlog(f"Current working directory is {cwd}")
-    printlog(f"App is located at {cwd}/Notepad==.app")
+    # printlog(f"Script path is {run_path}")
+    # printlog(f"Current working directory is {cwd}")
+    # printlog(f"App is located at {cwd}/Notepad==.app")
     
     printlog("Launching new instance...")
     subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
