@@ -704,7 +704,7 @@ accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 
 root.bind_all('<Control-n>', new_file)
 if platform.system() == "Darwin":
-    root.bind_all('<Control-N>'), newWindow_macOS)
+    root.bind_all('<Control-N>', newWindow_macOS)
 root.bind_all('<Control-o>', open_file)
 root.bind_all('<Control-s>', save_file)
 root.bind_all('<Control-S>', save_as)
