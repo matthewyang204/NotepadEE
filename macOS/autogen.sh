@@ -28,6 +28,8 @@ echo "done"
 echo "Patching files..."
 echo "Removing dpinstall..."
 rm dpinstall
+echo "Removing resources"
+rm -rf resources
 echo "Patching configure script..."
 rm configure
 cp patches/configure ./
