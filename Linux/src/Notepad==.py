@@ -650,7 +650,8 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
-def newWindow_macOS(event=None):run_path = os.path.realpath(__file__)
+def newWindow_macOS(event=None):
+    run_path = os.path.realpath(__file__)
     cwd = os.getcwd()
     # printlog(f"Script path is {run_path}")
     # printlog(f"Current working directory is {cwd}")

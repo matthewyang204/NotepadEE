@@ -15,6 +15,19 @@ if [ "$1" == "clean" ]; then
     exit
 fi
 
+if [ "$1" == "rebuild" ]; then
+    echo "Received 'rebuild' argument, removing everything copied over for building and then doing a fresh build..."
+    make clean
+    rm -f Makefile
+    rm -f Notepad.png
+    rm -f configure
+    rm -f notepadee.desktop
+    rm -f requirements.txt
+    rm -rf src
+	rm -rf resources
+    echo "done"
+fi
+
 # First copy files from the Linux section of the repository
 echo "Copying files..."
 cp -R -v ../Linux/* ./
