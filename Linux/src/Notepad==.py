@@ -82,6 +82,9 @@ if not os.path.exists(last_write):
 file_written = 0
 printlog("file_written set to " + str(file_written))
 
+class platformError(Exception):
+    pass
+
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
