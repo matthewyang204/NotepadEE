@@ -10,6 +10,7 @@ if [ "$1" == "clean" ]; then
     rm -f notepadee.desktop
     rm -f requirements.txt
     rm -rf src
+	rm -rf resources
     echo "done"
     exit
 fi
