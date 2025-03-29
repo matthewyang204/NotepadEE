@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Notepad=="
-#define MyAppVersion "5.0.5"
+#define MyAppVersion "5.0.6"
 #define MyAppPublisher "Matthew Yang"
 #define MyAppURL "https://www.github.com/matthewyang204/NotepadEE"
 #define MyAppExeName "Notepad==.exe"
@@ -31,7 +31,7 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=notepadee-x64-setup
+OutputBaseFilename=notepadee-{#MyAppVersion}-x64-setup
 SetupIconFile=Notepad.ico
 Compression=lzma
 SolidCompression=yes

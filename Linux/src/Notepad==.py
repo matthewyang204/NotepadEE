@@ -22,7 +22,7 @@ def printlog(message):
         file.write(str(message) + '\n')
     print(message)
 
-versionInfo = """Notepad==, version 5.0.5
+versionInfo = """Notepad==, version 5.0.6
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
@@ -408,17 +408,14 @@ def save_file(warn):
             else:
                 return True
         elif warn == "w":
-            if platform.system() == "Darwin":
-                pass
-            else:
-                if file_written == 1:
-                    response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
-                    if response:
-                        if save_as():
-                            printlog("File saved")
-                            return True
-                    else:
+            if file_written == 1:
+                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
+                if response:
+                    if save_as():
+                        printlog("File saved")
                         return True
+                else:
+                    return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file before proceeding?")
             if response:
@@ -653,6 +650,10 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
+def newWindow_macOS(event=None):
+    printlog("Feature not finished, please do not enable link in file menu")
+    return False
+
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
     save_file("w")
@@ -671,6 +672,9 @@ root.config(menu=menu)
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
+if platform.system() == "Darwin":
+    pass
+    # file_menu.add_command(label="New Window", command=newWindow_macOS)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)

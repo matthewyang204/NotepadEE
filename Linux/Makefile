@@ -4,6 +4,7 @@ BUILD_DIR = dist
 INSTALL_DIR = /opt/matthewyang
 BIN_LINK = /usr/local/bin/notepadee
 DESKTOP_FILE = /usr/share/applications/notepadee.desktop
+VERSION_NUMBER = 5.0.6
 
 .SILENT:
 
@@ -71,15 +72,13 @@ bin-dist:
 	mkdir ../temp
 	cp -R dist build *.spec notepadee.desktop ../temp/
 	cp resources/dist.mak ../temp/Makefile
-	tar -czvf NotepadEE-Linux-$(shell uname -m).tar.gz -C ../temp .
+	tar -czvf NotepadEE-Linux-$(VERSION_NUMBER)-$(shell uname -m).tar.gz -C ../temp .
 	rm -rf ../temp
 
 clean-bin-dist: 
 	rm -rf ../temp
-	rm -rf NotepadEE-Linux-$(shell uname -m).tar.gz
+	rm -rf NotepadEE-Linux-*.tar.gz
 
 upgrade: uninstall-upgrade install
 
 upgrade-no-desktop-file: uninstall-no-desktop-file-upgrade install-no-desktop-file
-
-.PHONY: configure build install clean dist clean-dist
