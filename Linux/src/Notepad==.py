@@ -654,15 +654,18 @@ def runinbackground(event=None):
     debug_var()
 
 def newWindow_macOS(event=None):
-    run_path = os.path.realpath(__file__)
-    cwd = os.getcwd()
-    # printlog(f"Script path is {run_path}")
-    # printlog(f"Current working directory is {cwd}")
-    # printlog(f"App is located at {cwd}/Notepad==.app")
-    
-    printlog("Launching new instance...")
-    subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
-    printlog("done")
+    if platform.system() == "Darwin":
+        run_path = os.path.realpath(__file__)
+        cwd = os.getcwd()
+        # printlog(f"Script path is {run_path}")
+        # printlog(f"Current working directory is {cwd}")
+        # printlog(f"App is located at {cwd}/Notepad==.app")
+        
+        printlog("Launching new instance...")
+        subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
+        printlog("done")
+    else:
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. However, this function is practically useless because the other platforms, Linux and Windows, both allow you to run other instances of the editor by running the executable again.")
 
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
