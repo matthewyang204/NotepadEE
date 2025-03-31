@@ -8,5 +8,16 @@
     "6080": {
       "label": "desktop"
     }
+  },
+  "customizations": {
+    "codespaces": {
+      "repositories": {
+        "matthewyang204/homebrew-formulae-casks": {
+          "permissions": {
+            "issues": "write-all"
+          }
+        }
+      }
+    }
   }
 }
