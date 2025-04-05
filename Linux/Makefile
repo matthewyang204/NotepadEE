@@ -4,7 +4,7 @@ BUILD_DIR = dist
 INSTALL_DIR = /opt/matthewyang
 BIN_LINK = /usr/local/bin/notepadee
 DESKTOP_FILE = /usr/share/applications/notepadee.desktop
-VERSION_NUMBER = 5.0.6
+VERSION_NUMBER = 5.0.7
 
 .SILENT:
 
