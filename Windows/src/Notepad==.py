@@ -534,6 +534,31 @@ def find_text(event=None):
     close_button.pack()
     entrybox.bind('<Return>', findNext_wrapper)
 
+def mark_text(event=None):
+    selectStart = text_area.index("sel.first")
+    selectEnd = text_area.index("sel.last")
+    printlog(f"Current selection is {selectStart}, {selectEnd}")
+    printlog("Clearing all current highlights in selection...")
+    text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
+    printlog("Configuring highlight_permanent tags to selection...")
+    text_area.tag_add("highlight_permanent", selectStart, selectEnd)
+    printlog("Configuring tagged text to highlight...")
+    text_area.tag_config("highlight_permanent", background="green")
+    printlog("done")
+    
+def unmark_text(event=None):
+    selectStart = text_area.index("sel.first")
+    selectEnd = text_area.index("sel.last")
+    printlog(f"Current selection is {selectStart}, {selectEnd}")
+    printlog("Clearing all current highlights in selection...")
+    text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
+    printlog("done")
+
+def unmark_all_text(event=None):
+    printlog("Clearing all current highlights...")
+    text_area.tag_remove("highlight_permanent", "1.0", "end")
+    printlog("done")
+
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
     line_var.set("Line: " + line)
@@ -643,6 +668,9 @@ edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
 edit_menu.add_command(label="Find", command=find_text)
+edit_menu.add_command(label="Mark Text", command=mark_text)
+edit_menu.add_command(label="Unmark Text", command=unmark_text)
+edit_menu.add_command(label="Unmark All Text", command=unmark_all_text)
 edit_menu.add_command(label="Find and Replace", command=find_and_replace)
 edit_menu.add_command(label="Go To Line", command=go_to_line)
 
