@@ -537,27 +537,27 @@ def find_text(event=None):
 def mark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
-    printlog(f"Current selection is {selectStart}, {selectEnd}")
-    printlog("Clearing all current highlights in selection...")
+    print(f"Current selection is {selectStart}, {selectEnd}")
+    print("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
-    printlog("Configuring highlight_permanent tags to selection...")
+    print("Configuring highlight_permanent tags to selection...")
     text_area.tag_add("highlight_permanent", selectStart, selectEnd)
-    printlog("Configuring tagged text to highlight...")
+    print("Configuring tagged text to highlight...")
     text_area.tag_config("highlight_permanent", background="green")
-    printlog("done")
+    print("done")
     
 def unmark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
-    printlog(f"Current selection is {selectStart}, {selectEnd}")
-    printlog("Clearing all current highlights in selection...")
+    print(f"Current selection is {selectStart}, {selectEnd}")
+    print("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
-    printlog("done")
+    print("done")
 
 def unmark_all_text(event=None):
-    printlog("Clearing all current highlights...")
+    print("Clearing all current highlights...")
     text_area.tag_remove("highlight_permanent", "1.0", "end")
-    printlog("done")
+    print("done")
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
