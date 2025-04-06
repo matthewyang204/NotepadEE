@@ -697,6 +697,7 @@ def newWindow_macOS(event=None):
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
         subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
+        printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
             pass
         printlog(f"Writing cache back to prefs folder at {folder_path}...")
