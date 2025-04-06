@@ -679,15 +679,20 @@ def runinbackground(event=None):
     debug_var()
 
 def newWindow_macOS(event=None):
+    global folder_path
     if platform.system() == "Darwin":
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
+        freeze_time = 1
         # printlog(f"Script path is {run_path}")
         # printlog(f"Current working directory is {cwd}")
         # printlog(f"App is located at {cwd}/Notepad==.app")
-        
+        printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
         subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
+        printlog(f"Writing cache back to prefs folder at {folder_path}...")
+        write_prefs()
         printlog("done")
     else:
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. However, this function is practically useless because the other platforms, Linux and Windows, both allow you to run other instances of the editor by running the executable again.")
