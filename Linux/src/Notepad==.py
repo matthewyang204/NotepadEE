@@ -16,11 +16,14 @@ if not os.path.exists(cache_path):
 # Open a log file in write mode
 log_file = os.path.join(cache_path, "notepadee_log.txt")
 
+# Get current PID
+pid = os.getpid()
+
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
     with open(log_file, 'a') as file:
-        file.write(str(message) + '\n')
-    print(message)
+        file.write(str(f"Notepad== at {pid}: {message}") + '\n')
+    print(f"Notepad== at {pid}: {message}")
 
 versionInfo = """Notepad==, version 5.0.8
 (C) 2024-2025, Matthew Yang"""
