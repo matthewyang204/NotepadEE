@@ -125,6 +125,8 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
+printlog("Clearing any locks")
+subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
 
 def runonarg(arg):
     global file_open, current_file
@@ -684,13 +686,19 @@ def newWindow_macOS(event=None):
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
         freeze_time = 1
+        emptyString = ""
         # printlog(f"Script path is {run_path}")
         # printlog(f"Current working directory is {cwd}")
         # printlog(f"App is located at {cwd}/Notepad==.app")
+        printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+            file.write(emptyString)
         printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
         subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
+        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+            pass
         printlog(f"Writing cache back to prefs folder at {folder_path}...")
         write_prefs()
         printlog("done")
