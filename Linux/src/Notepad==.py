@@ -755,7 +755,10 @@ text_area.bind('<Control-c>', copy_text)
 text_area.bind('<Control-v>', paste_text)
 text_area.bind('<Control-a>', select_all_text)
 text_area.bind('<Control-z>', undo)
-text_area.bind('<Control-y>', redo)
+if platform.system() == "Darwin":
+    text_area.bind('<Command-Z>', redo)
+else:
+    text_area.bind('<Control-y>', redo)
 text_area.bind('<Control-m>', mark_text)
 text_area.bind('<Control-M>', unmark_text)
 text_area.bind('<Control-U>', unmark_all_text)
