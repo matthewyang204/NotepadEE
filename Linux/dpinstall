@@ -7,7 +7,7 @@ echo "Updating apt first..."
 yes | sudo apt-get update
 
 echo "Installing packages..."
-yes | sudo apt-get install python3 python3-tk python3-pip python3-dev patchelf tar
+yes | sudo apt-get install python3.12 python3.12-tk python3.12-pip python3.12-dev patchelf tar
 
 echo "done"
 
