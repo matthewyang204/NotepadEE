@@ -44,14 +44,14 @@ else
     echo "installed"
 fi
 
-printf "Checking if python3-tk is installed..."
-if ! dpkg -l | grep python3-tk >/dev/null 2>&1; then
-    echo "not installed"
-    echo "python3-tk is not installed. Please install it to continue."
-    exit 1
-else
-    echo "installed"
-fi
+# printf "Checking if python3-tk is installed..."
+# if ! dpkg -l | grep python3-tk >/dev/null 2>&1; then
+#     echo "not installed"
+#     echo "python3-tk is not installed. Please install it to continue."
+#     exit 1
+# else
+#     echo "installed"
+# fi
 
 printf "Checking if python3-dev is installed..."
 if ! dpkg -l | grep python3-dev >/dev/null 2>&1; then
