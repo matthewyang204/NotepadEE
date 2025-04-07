@@ -37,7 +37,7 @@ macOS
 -----
 Source code located in the [macOS section](https://github.com/matthewyang204/NotepadEE/tree/main/macOS).
 
-Any Mac capable of running Python 3.6 or later works for building. Therefore, your Mac must be capable of running macOSX 10.9 Mavericks or later in order to build, as it is the earliest version of macOS capable of running Python 3.12.
+Any Mac capable of running Python 3.12 works for building. Therefore, your Mac must be capable of running macOSX 10.9 Mavericks or later in order to build, as it is the earliest version of macOS capable of running Python 3.12.
 
 Hackintoshes are supported.
 

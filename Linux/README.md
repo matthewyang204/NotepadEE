@@ -10,6 +10,8 @@ The Linux binaries can be downloaded from the releases
 
 Any Debian-based distro works for building, otherwise, any distro can be used with the binaries
 
+Python 3.12 is required for building due to syntax reasons.
+
 Build instructions:
 - Please clone the repo and then cd into the Linux folder within the cloned repo in a terminal
 - If you haven't yet, please run the `dpinstall` script to install dependencies if you haven't yet
