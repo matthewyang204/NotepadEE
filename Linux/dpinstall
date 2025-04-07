@@ -11,7 +11,7 @@ if ! command -v yes | sudo apt-get install python3.12 python3.12-tk python3.12-p
 then
     echo "done"
 else
-    echo "Command failed, probably because Deadsnakes PPA is not installed. Please add the deadsnakes PPA to continue.
+    echo "Command failed, probably because Deadsnakes PPA is not installed. Please add the deadsnakes PPA to continue."
     exit 1
 fi
 
