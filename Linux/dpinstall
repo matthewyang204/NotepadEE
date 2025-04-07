@@ -15,8 +15,6 @@ else
     exit 1
 fi
 
-echo "done"
-
 echo "Installing python packages with pip..."
 if python3 -m pip install -r requirements.txt --break-system-packages &> /dev/null; then
     echo "Required python packages installed"
