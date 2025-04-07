@@ -8,6 +8,7 @@ Linux
 - These binaries are next to the Windows binaries
 - Any Debian-based distro should work for building
 - Any GUI distro from the last 10-15 years should work for running binaries
+- You need Python 3.12 from the Deadsnakes PPA to build
 
 Linux build instructions:
 - Please clone the repo and cd into it
@@ -26,7 +27,7 @@ Windows
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
 - Windows 7 x64 or later; ARM64 systems need Win11 ARM64 or later
-- Note: The Windows binaries are compiled with a special [build](https://github.com/adang1345/PythonWin7) of Python 3.12 that supports 64-bit Windows 7 - 8.1 alongside 10 and 11. 64-bit Windows Vista systems must build the 64-bit version from source using Python 3.8, as even the mod doesn't support Vista.
+- Note: The Windows binaries are compiled with a special [build](https://github.com/adang1345/PythonWin7) of Python 3.12 that supports 64-bit Windows 7 - 8.1 alongside 10 and 11.
 
 Upgrading:
 - You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
@@ -36,7 +37,7 @@ macOS
 -----
 Source code located in the [macOS section](https://github.com/matthewyang204/NotepadEE/tree/main/macOS).
 
-Any Mac capable of running Python 3.6 or later works for building. Therefore, your Mac must be capable of running macOS 10.12 Sierra or later in order to build, as it is the earliest version of macOS capable of running Python 3.6.
+Any Mac capable of running Python 3.6 or later works for building. Therefore, your Mac must be capable of running macOSX 10.9 Mavericks or later in order to build, as it is the earliest version of macOS capable of running Python 3.12.
 
 Hackintoshes are supported.
 
@@ -51,7 +52,7 @@ Signing info for prebuilt binaries:
 - Name of signature is "Matthew Yang"
 
 Prebuild requirements:
-- Any Python version from 3.6 to 3.12 installed
+- Python 3.12
 - `make` installed
 
 Build instructions:
