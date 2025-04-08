@@ -53,7 +53,7 @@ fi
 #     echo "installed"
 # fi
 
-printf "Checking if python3-dev is installed..."
+printf "Checking if python3.12-dev is installed..."
 if ! dpkg -l | grep python3-dev >/dev/null 2>&1; then
     echo "not installed"
     echo "python3-dev is not installed. Please install it to continue."
