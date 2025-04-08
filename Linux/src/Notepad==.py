@@ -580,11 +580,18 @@ def findNext(text):
     except tk.TclError:
         cPos_line, cpos_column = cPos("both")
         start = f"{cPos_line}.{cpos_column}"
+        # start= "1.0"
 
     text_area.tag_remove("highlight", "1.0", "end")
-    start = text_area.search(text, start, stopindex="end")
-    end = f"{start} + {len(text)}c"
-    text_area.tag_add("highlight", start, end)
+    try:
+        start = text_area.search(text, start, stopindex="end")
+        end = f"{start} + {len(text)}c"
+        text_area.tag_add("highlight", start, end)
+    except Exception as e:
+        start = "1.0"
+        start = text_area.search(text, start, stopindex="end")
+        end = f"{start} + {len(text)}c"
+        text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
 
