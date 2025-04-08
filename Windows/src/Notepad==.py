@@ -574,7 +574,7 @@ def update_line_number(event=None):
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
     if current_file:
-        root.title("Notepad== - " + current_file)
+        root.title(f"Notepad== - {current_file}")
     else:
         root.title("Notepad==")
     # print("Status bar updated")
