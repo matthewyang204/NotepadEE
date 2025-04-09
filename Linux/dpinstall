@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "This script needs to install some packages as root, so please enter your password if prompted."
+echo "This script needs to install some packages as root, so please enter your password if prompted..."
 echo "Installing system-level packages..."
 
 echo "Updating apt first..."
