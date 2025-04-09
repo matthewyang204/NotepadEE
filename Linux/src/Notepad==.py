@@ -25,7 +25,7 @@ def printlog(message):
         file.write(str(f"Notepad== at {pid}: {message}") + '\n')
     print(f"Notepad== at {pid}: {message}")
 
-versionInfo = """Notepad==, version 5.0.8
+versionInfo = """Notepad==, version 5.0.9
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
@@ -580,11 +580,18 @@ def findNext(text):
     except tk.TclError:
         cPos_line, cpos_column = cPos("both")
         start = f"{cPos_line}.{cpos_column}"
+        # start= "1.0"
 
     text_area.tag_remove("highlight", "1.0", "end")
-    start = text_area.search(text, start, stopindex="end")
-    end = f"{start} + {len(text)}c"
-    text_area.tag_add("highlight", start, end)
+    try:
+        start = text_area.search(text, start, stopindex="end")
+        end = f"{start} + {len(text)}c"
+        text_area.tag_add("highlight", start, end)
+    except Exception as e:
+        start = "1.0"
+        start = text_area.search(text, start, stopindex="end")
+        end = f"{start} + {len(text)}c"
+        text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
 
@@ -648,7 +655,7 @@ def update_line_number(event=None):
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
     if current_file:
-        root.title("Notepad== - " + current_file)
+        root.title(f"{current_file} - Notepad==")
     else:
         root.title("Notepad==")
     # printlog("Status bar updated")

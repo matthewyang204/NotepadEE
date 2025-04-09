@@ -5,7 +5,7 @@ import sys
 import platform
 
 
-versionInfo = """Notepad==, version 5.0.8
+versionInfo = """Notepad==, version 5.0.9
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
@@ -93,6 +93,12 @@ ask_quit = False
 root.title("Notepad==")
 root.minsize(800, 600)
 root.pack_propagate(False)
+
+if platform.system() == "Windows":
+    run_path = os.path.realpath(__file__)
+    runDir = os.path.dirname(run_path)
+    app_icon = os.path.join(runDir, 'Notepad.ico')
+    root.iconbitmap(app_icon)
 
 status_frame = tk.Frame(root)
 status_frame.pack()
@@ -499,11 +505,18 @@ def findNext(text):
     except tk.TclError:
         cPos_line, cpos_column = cPos("both")
         start = f"{cPos_line}.{cpos_column}"
+        # start= "1.0"
 
     text_area.tag_remove("highlight", "1.0", "end")
-    start = text_area.search(text, start, stopindex="end")
-    end = f"{start} + {len(text)}c"
-    text_area.tag_add("highlight", start, end)
+    try:
+        start = text_area.search(text, start, stopindex="end")
+        end = f"{start} + {len(text)}c"
+        text_area.tag_add("highlight", start, end)
+    except Exception as e:
+        start = "1.0"
+        start = text_area.search(text, start, stopindex="end")
+        end = f"{start} + {len(text)}c"
+        text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
 
@@ -567,7 +580,7 @@ def update_line_number(event=None):
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
     if current_file:
-        root.title("Notepad== - " + current_file)
+        root.title(f"{current_file} - Notepad==")
     else:
         root.title("Notepad==")
     # print("Status bar updated")
