@@ -16,9 +16,11 @@ yes | sudo apt-get install python3.12 python3.12-tk python3.12-venv python3.12-d
 #     exit 1
 # fi
 
-echo "Configuring pip..."
+echo "Configuring symlinks..."
 sudo ln -sf $(which python3.12) /usr/bin/python3
 sudo ln -sf $(which python3.12) /usr/bin/python
+
+echo "Configuring pip..."
 sudo python3 -m ensurepip --upgrade
 
 echo "Installing python packages with pip..."
@@ -26,7 +28,7 @@ if python3 -m pip install -r requirements.txt --break-system-packages
 then
     echo "Required python packages installed"
 else
-    echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages"
+    echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages..."
     python3 -m pip install -r requirements.txt
 fi
 echo "done"
