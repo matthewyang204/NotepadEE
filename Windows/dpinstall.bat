@@ -25,6 +25,3 @@ if %errorLevel% NEQ 0 (
     echo Exiting...
     exit /b 1
 )
-
-echo Installation completed successfully.
-pause
