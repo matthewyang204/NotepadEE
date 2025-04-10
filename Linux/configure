@@ -11,6 +11,20 @@ else
     echo "found"
 fi
 
+# Check if Python 3 version is correct
+printf "Checking if python3 version is correct..."
+version = $(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+# version = 3.11.5
+# version = 3.13.2
+# version = 3.12
+if [[ $version == 3.12.* ]]; then
+    echo "correct"
+else
+    echo "incorrect"
+    echo "The version of Python 3 currently installed is not a 3.12 release. Please install a 3.12 release to continue."
+    exit 1
+fi
+
 # Check for pip3
 printf "Checking for pip3..."
 if ! command -v pip3 &> /dev/null
