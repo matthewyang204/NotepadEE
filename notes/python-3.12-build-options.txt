@@ -1,0 +1,37 @@
+# Dependencies
+brew install openssl readline sqlite3 xz zlib gdbm tcl-tk gettext
+
+# Configure options
+../configure \
+  --prefix="/opt/python312" \
+  --enable-ipv6 \
+  --datarootdir="$(brew --prefix)/share" \
+  --datadir="$(brew --prefix)/share" \
+  --without-ensurepip \
+  --enable-loadable-sqlite-extensions \
+  --with-openssl="$(brew --prefix openssl@3)" \
+  --enable-optimizations \
+  --with-system-expat \
+  --with-system-libmpdec \
+  --with-readline=editline
+
+# Make options
+make -s -j16
+
+# Install stuff
+sudo /opt/python312/bin/python3 -m ensurepip --upgrade
+
+# Compiler options
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+
+# Other variables
+export CFLAGS="-DCONFIG_64=1 -D_PyHASH_BITS=64"
+
+LDFLAGS="-L$(brew --prefix gettext)/lib"
+CPPFLAGS="-I$(brew --prefix gettext)/include"
+
+# Nuitka caveats
+Make sure to do this with Nuitka:
+export LDFLAGS="-L$(brew --prefix gettext)/lib -lintl"
+export CPPFLAGS="-I$(brew --prefix gettext)/include"
