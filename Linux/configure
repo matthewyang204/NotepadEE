@@ -19,6 +19,8 @@ version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3]))
 # version=3.12
 if [[ $version == 3.12.* ]]; then
     echo "correct"
+elif [[ $version == 3.13.* ]]; then
+    echo "correct"
 else
     echo "incorrect"
     echo "The version of Python 3 currently installed is not a 3.12 release. Please install a 3.12 release to continue."
