@@ -119,6 +119,10 @@ file_var = tk.StringVar()
 file_label = tk.Label(status_frame, textvariable=file_var)
 file_label.pack(side=tk.LEFT)
 
+text_size_indicator = tk.StringVar()
+size_label = tk.Label(status_frame, textvariable=text_size_indicator)
+size_label.pack(side=tk.LEFT)
+
 # define the userland functions
 def get_font_for_platform():
     if os.name == 'nt':
@@ -583,6 +587,8 @@ def update_line_number(event=None):
         root.title(f"{current_file} - Notepad==")
     else:
         root.title("Notepad==")
+    text_size = text_font['size']
+    text_size_indicator.set(f"Size: {text_size}")
     # print("Status bar updated")
     root.after(100, update_line_number)
 
