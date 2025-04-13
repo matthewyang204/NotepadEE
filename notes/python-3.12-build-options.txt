@@ -31,6 +31,17 @@ export CFLAGS="-DCONFIG_64=1 -D_PyHASH_BITS=64"
 LDFLAGS="-L$(brew --prefix gettext)/lib"
 CPPFLAGS="-I$(brew --prefix gettext)/include"
 
+export CFLAGS="-I$(brew --prefix mpdecimal)/include $CFLAGS"
+export LDFLAGS="-L$(brew --prefix mpdecimal)/lib $LDFLAGS"
+export CPPFLAGS="-I$(brew --prefix mpdecimal)/include $CPPFLAGS"
+
+export CFLAGS="-I$(brew --prefix gdbm)/include $CFLAGS"
+export LDFLAGS="-L$(brew --prefix gdbm)/lib $LDFLAGS"
+export CPPFLAGS="-I$(brew --prefix gdbm)/include $CPPFLAGS"
+
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+export MACOSX_DEPLOYMENT_TARGET=10.15
+
 # Nuitka caveats
 Make sure to do this with Nuitka:
 export LDFLAGS="-L$(brew --prefix gettext)/lib -lintl"
