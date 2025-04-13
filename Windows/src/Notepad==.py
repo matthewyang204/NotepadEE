@@ -124,7 +124,7 @@ def get_font_for_platform():
     if os.name == 'nt':
         return font.Font(family="Consolas", size=12)
     elif os.uname().sysname == 'Darwin':
-        return font.Font(family="Menlo", size=12)
+        return font.Font(family="Menlo", size=10)
     else:
         return font.Font(family="DejaVu Sans Mono", size=12)
 
