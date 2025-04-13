@@ -42,6 +42,9 @@ export CPPFLAGS="-I$(brew --prefix gdbm)/include $CPPFLAGS"
 export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
 export MACOSX_DEPLOYMENT_TARGET=10.15
 
+# You can use this gist to get older SDKs like the MacOSX10.15.sdk running on modern macOS
+https://gist.github.com/kenji21/25a65a7161793bdc4b7b2641ac67b22a
+
 # Nuitka caveats
 Make sure to do this with Nuitka:
 export LDFLAGS="-L$(brew --prefix gettext)/lib -lintl"
