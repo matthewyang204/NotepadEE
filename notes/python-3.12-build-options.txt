@@ -44,6 +44,10 @@ export MACOSX_DEPLOYMENT_TARGET=10.15
 
 # You can use this gist to get older SDKs like the MacOSX10.15.sdk running on modern macOS
 https://gist.github.com/kenji21/25a65a7161793bdc4b7b2641ac67b22a
+- You can download Xcode 11.7 from Apple and extract the SDK
+- Download the Xcode 11.5 Command Line Tools from Apple, extract, and copy 10.15's CLTools SDK package's payload contents manually
+	- To do this, open all the way down to SDKs, and then copy the MacOSX{something}.sdk to clipboard
+	- Then navigate down /Library/Developer all the way to the SDKs, and then paste
 
 # Nuitka caveats
 Make sure to do this with Nuitka:
