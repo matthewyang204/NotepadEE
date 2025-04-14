@@ -25,7 +25,7 @@ def printlog(message):
         file.write(str(f"Notepad== at {pid}: {message}") + '\n')
     print(f"Notepad== at {pid}: {message}")
 
-versionInfo = """Notepad==, version 5.0.9
+versionInfo = """Notepad==, version 5.0.10
 (C) 2024-2025, Matthew Yang"""
 
 helpInfo = f"""{versionInfo}
