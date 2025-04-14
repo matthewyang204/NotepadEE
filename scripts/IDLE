@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/opt/python312/bin/python3 -m idlelib
