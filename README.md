@@ -45,7 +45,7 @@ I have separate binaries for Intel and Apple Silicon macs. Please download the c
 
 To use it, first, tap my homebrew repo by running `brew tap matthewyang204/homebrew-formulae-casks`. After this, you can install the cask with `brew install --cask --no-quarantine notepadee`.
 
-All of the prebuilt binaries provided in the README support macOS Sierra or newer.
+All of the prebuilt binaries provided in the README support macOS Catalina or newer.
 
 Signing info for prebuilt binaries:
 - Self-signed signature
