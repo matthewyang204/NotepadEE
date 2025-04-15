@@ -178,3 +178,6 @@ cython_debug/
 
 # Ignore all __pycache__ directories, they are cache folders created by python
 __pycache__/
+
+# macOS annoyances
+.DS_Store
