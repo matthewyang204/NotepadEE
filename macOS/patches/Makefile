@@ -23,7 +23,17 @@ build:
 	export ARCH && \
 	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$(shell brew --prefix tcl-tk)/lib --tk-library-dir=$(shell brew --prefix tcl-tk)/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.0.10 src/Notepad==.py
 	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$(shell brew --prefix tcl-tk)/lib --tk-library-dir=$(shell brew --prefix tcl-tk)/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.0.10 src/Notepad==.py
-	echo "Build completed. To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
+	echo "Build completed. Patching the app bundle..."
+	cd dist/Notepad==.app/Contents && \
+	mv MacOS/tk Resources/tk && \
+	mv MacOS/tcl Resources/tcl && \
+	cd MacOS && \
+	ln -s ../Resources/tk ./tk && \
+	ln -s ../Resources/tcl ./tcl && \
+	ln -s ../Resources/tcl/tcl9.0 ./tcl9.0 && \
+	ln -s ../Resources/tk/tk9.0 ./tk9.0
+	echo "done"
+	echo "To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
 install:
 	sudo mv "dist/Notepad==.app" /Applications/
