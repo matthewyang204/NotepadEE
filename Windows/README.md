@@ -23,6 +23,7 @@ Installing from the precompiled binaries:
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
 - Windows XP or later; ARM64 systems need Win10 ARM64 or later
+- Python 3.4 or later
 
 Upgrading:
 - You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
