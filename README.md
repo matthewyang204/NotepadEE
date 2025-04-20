@@ -30,8 +30,7 @@ Windows
 - Binaries are next to all other binaries
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
-- Windows 7 x64 or later; ARM64 systems need Win11 ARM64 or later
-- Note: The Windows binaries are compiled with a special [build](https://github.com/adang1345/PythonWin7) of Python 3.12 that supports 64-bit Windows 7 - 8.1 alongside 10 and 11.
+- Windows XP or later; ARM64 systems need Win10 ARM64 or later
 
 Upgrading:
 - You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
