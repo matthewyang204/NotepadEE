@@ -4,11 +4,13 @@ import os
 import sys
 import platform
 
+class platformError(Exception):
+    pass
 
 versionInfo = """Notepad==, version 5.0.10
 (C) 2024-2025, Matthew Yang"""
 
-helpInfo = f"""{versionInfo}
+helpInfo = """{}
 
 Usage: "notepad==" [OPTIONS] [<filepath>]
 
@@ -17,7 +19,7 @@ Options:
 --help, -h        Display this help message and exit
 
 Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
-"""
+""".format(versionInfo)
 
 
 arg = sys.argv
@@ -33,6 +35,18 @@ else:
 
 # define the variables required for the program to start
 local_app_data_path = os.getenv('LOCALAPPDATA')
+platformVersion = str(platform.version())
+platformVersionList = platformVersion.split(".", 1)
+platformVersion = int(platformVersionList[0])
+if local_app_data_path is None:
+    if platformVersion == 5:
+        print("Failed retrieving AppData path on a system running Windows 2000, Windows XP, or Windows Server 2003, falling back...")
+        local_app_data_path = os.path.join(os.path.expanduser('~'), 'Local Settings', 'Application Data')
+    else:
+        print("Unhandled system configuration, crashing...")
+        raise platformError("This system is running Windows in an unsupported configuration, with neither a LOCALAPPDATA variable nor a valid WinNT 5.x application data folder.")
+else:
+    print("Successfully retrieved AppData path")
 
 # for debugging on Linux
 # local_app_data_path = os.path.expanduser('~')
@@ -50,8 +64,7 @@ else:
 
 global file_open
 file_open = 0
-last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs',
-                              'last_file_path')
+last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_file_path')
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
         current_file = file.read()
@@ -478,7 +491,7 @@ def go_to_line(event=None):
 
     def go(event=None):
         line_number = entrybox.get()
-        text_area.mark_set("insert", f"{line_number}.0")
+        text_area.mark_set("insert", str(line_number) + ".0") # f"{line_number}.0"
 
     def close(event=None):
         popup.destroy()
@@ -508,18 +521,18 @@ def findNext(text):
         start = last_highlight
     except tk.TclError:
         cPos_line, cpos_column = cPos("both")
-        start = f"{cPos_line}.{cpos_column}"
+        start = str(cPos_line) + "." + str(cPos_column) # f"{cPos_line}.{cpos_column}"
         # start= "1.0"
 
     text_area.tag_remove("highlight", "1.0", "end")
     try:
         start = text_area.search(text, start, stopindex="end")
-        end = f"{start} + {len(text)}c"
+        end = str(start) + " + " + str(len(text)) + "c" # f"{start} + {len(text)}c"
         text_area.tag_add("highlight", start, end)
     except Exception as e:
         start = "1.0"
         start = text_area.search(text, start, stopindex="end")
-        end = f"{start} + {len(text)}c"
+        end = str(start) + " + " + str(len(text)) + "c" # f"{start} + {len(text)}c"
         text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
@@ -554,7 +567,8 @@ def find_text(event=None):
 def mark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
-    print(f"Current selection is {selectStart}, {selectEnd}")
+    # DO NOT enable this
+    # print(f"Current selection is {selectStart}, {selectEnd}")
     print("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
     print("Configuring highlight_permanent tags to selection...")
@@ -566,7 +580,8 @@ def mark_text(event=None):
 def unmark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
-    print(f"Current selection is {selectStart}, {selectEnd}")
+    # DO NOT enable this
+    # print(f"Current selection is {selectStart}, {selectEnd}")
     print("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
     print("done")
@@ -584,11 +599,11 @@ def update_line_number(event=None):
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
     if current_file:
-        root.title(f"{current_file} - Notepad==")
+        root.title(str(current_file) + " - Notepad==") # f"{current_file} - Notepad=="
     else:
         root.title("Notepad==")
     text_size = text_font['size']
-    text_size_indicator.set(f"Size: {text_size}")
+    text_size_indicator.set("Size: " + str(text_size)) # f"Size: {text_size}"
     # print("Status bar updated")
     root.after(100, update_line_number)
 
