@@ -27,4 +27,3 @@ if %errorLevel% NEQ 0 (
 )
 
 echo Installation completed successfully.
-pause
