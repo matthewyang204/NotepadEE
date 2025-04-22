@@ -28,7 +28,7 @@ def printlog(message):
 versionInfo = """Notepad==, version 5.0.10
 (C) 2024-2025, Matthew Yang"""
 
-helpInfo = f"""{versionInfo}
+helpInfo = versionInfo + """
 
 Usage: notepadee [OPTIONS] [<filepath>]
 
