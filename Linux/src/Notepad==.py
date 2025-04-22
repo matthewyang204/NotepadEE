@@ -22,8 +22,8 @@ pid = os.getpid()
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
     with open(log_file, 'a') as file:
-        file.write(str(f"Notepad== at {pid}: {message}") + '\n')
-    print(f"Notepad== at {pid}: {message}")
+        file.write("Notepad== at " + str(pid) + ": " + str(message))
+    print("Notepad== at " + str(pid) + ": " + str(message))
 
 versionInfo = """Notepad==, version 5.0.10
 (C) 2024-2025, Matthew Yang"""
