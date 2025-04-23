@@ -132,8 +132,11 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
-printlog("Clearing any locks")
-subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
+if platform.system() == "Darwin":
+    printlog("Clearing any locks...")
+    subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
+else:
+    printlog("We are on a system that does not need or use file locks, skipping...")
 
 def runonarg(arg):
     global file_open, current_file
