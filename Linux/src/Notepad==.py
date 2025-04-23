@@ -22,13 +22,13 @@ pid = os.getpid()
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
     with open(log_file, 'a') as file:
-        file.write(str(f"Notepad== at {pid}: {message}") + '\n')
-    print(f"Notepad== at {pid}: {message}")
+        file.write("Notepad== at " + str(pid) + ": " + str(message))
+    print("Notepad== at " + str(pid) + ": " + str(message))
 
 versionInfo = """Notepad==, version 5.0.10
 (C) 2024-2025, Matthew Yang"""
 
-helpInfo = f"""{versionInfo}
+helpInfo = versionInfo + """
 
 Usage: notepadee [OPTIONS] [<filepath>]
 
@@ -132,8 +132,11 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
-printlog("Clearing any locks")
-subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
+if platform.system() == "Darwin":
+    printlog("Clearing any locks...")
+    subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
+else:
+    printlog("We are on a system that does not need or use file locks, skipping...")
 
 def runonarg(arg):
     global file_open, current_file
@@ -553,7 +556,7 @@ def go_to_line(event=None):
 
     def go(event=None):
         line_number = entrybox.get()
-        text_area.mark_set("insert", f"{line_number}.0")
+        text_area.mark_set("insert", str(line_number) + ".0")
 
     def close(event=None):
         popup.destroy()
@@ -583,18 +586,18 @@ def findNext(text):
         start = last_highlight
     except tk.TclError:
         cPos_line, cpos_column = cPos("both")
-        start = f"{cPos_line}.{cpos_column}"
+        start = str(cPos_line) + "." + str(cPos_column)
         # start= "1.0"
 
     text_area.tag_remove("highlight", "1.0", "end")
     try:
         start = text_area.search(text, start, stopindex="end")
-        end = f"{start} + {len(text)}c"
+        end = str(start) + " + " + str(len(text)) + "c"
         text_area.tag_add("highlight", start, end)
     except Exception as e:
         start = "1.0"
         start = text_area.search(text, start, stopindex="end")
-        end = f"{start} + {len(text)}c"
+        end = str(start) + " + " + str(len(text)) + "c"
         text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
@@ -629,7 +632,8 @@ def find_text(event=None):
 def mark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
-    printlog(f"Current selection is {selectStart}, {selectEnd}")
+    # DO NOT enable this
+    # printlog(f"Current selection is {selectStart}, {selectEnd}")
     printlog("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
     printlog("Configuring highlight_permanent tags to selection...")
@@ -641,7 +645,8 @@ def mark_text(event=None):
 def unmark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
-    printlog(f"Current selection is {selectStart}, {selectEnd}")
+    # DO NOT enable this
+    # printlog(f"Current selection is {selectStart}, {selectEnd}")
     printlog("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
     printlog("done")
@@ -659,12 +664,12 @@ def update_line_number(event=None):
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
     if current_file:
-        root.title(f"{current_file} - Notepad==")
+        root.title(str(current_file) + " - Notepad==") # f"{current_file} - Notepad=="
     else:
         root.title("Notepad==")
     text_size = text_font['size']
-    text_size_indicator.set(f"Size: {text_size}")
-    # printlog("Status bar updated")
+    text_size_indicator.set("Size: " + str(text_size)) # f"Size: {text_size}"
+    # print("Status bar updated")
     root.after(100, update_line_number)
 
 def increase_font_size(event=None):
@@ -706,17 +711,21 @@ def newWindow_macOS(event=None):
         # printlog(f"Script path is {run_path}")
         # printlog(f"Current working directory is {cwd}")
         # printlog(f"App is located at {cwd}/Notepad==.app")
-        printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        # DO NOT enable this
+        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
             file.write(emptyString)
-        printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        # DO NOT enable this
+        # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
-        subprocess.call(["/usr/bin/open", "-n", "-a", f"{cwd}/Notepad==.app"])
-        printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app"])
+        # DO NOT enable this
+        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
             pass
-        printlog(f"Writing cache back to prefs folder at {folder_path}...")
+        # DO NOT enable this
+        # printlog(f"Writing cache back to prefs folder at {folder_path}...")
         write_prefs()
         printlog("done")
     else:

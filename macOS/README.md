@@ -3,7 +3,7 @@ This is the repository for the macOS version of this software.
 
 Main repository: https://www.github.com/matthewyang204/NotepadEE
 
-Any Mac capable of running Python 3.12 works for building. Therefore, your Mac must be capable of running macOSX 10.9 Mavericks or later in order to build, as it is the earliest version of macOS capable of running Python 3.12.
+Any Mac capable of running Python 3.4 works for building. Therefore, your Mac must be capable of running OS X 10.5 Leopard or later, as it is the earliest version of macOS supported by Python 3.4.
 
 Hackintoshes are supported.
 
@@ -18,7 +18,7 @@ All of the prebuilt binaries provided in the README support macOS Catalina or ne
 - Name of signature is "Matthew Yang"
 
 # Prebuild requirements
-- Python 3.12
+- Python 3.4 - 3.12
 - make installed
 - `configure` script will automatically install Python packages
 
