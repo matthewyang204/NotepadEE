@@ -8,7 +8,7 @@ Linux
 - These binaries are next to the Windows binaries
 - Any Debian-based distro should work for building
 - Any GUI distro from the last 10-15 years should work for running binaries
-- You need Python 3.12 from the Deadsnakes PPA to build
+- You need Python 3.4 or later
 
 Linux build instructions:
 - Please clone the repo and cd into it
@@ -37,7 +37,7 @@ macOS
 -----
 Source code located in the [macOS section](https://github.com/matthewyang204/NotepadEE/tree/main/macOS).
 
-Any Mac capable of running Python 3.12 works for building. Therefore, your Mac must be capable of running macOSX 10.9 Mavericks or later in order to build, as it is the earliest version of macOS capable of running Python 3.12.
+Any Mac capable of running Python 3.4 works for building. Therefore, your Mac must be capable of running OS X 10.5 Leopard or later, as it is the earliest version of macOS supported by Python 3.4.
 
 Hackintoshes are supported.
 
@@ -52,7 +52,7 @@ Signing info for prebuilt binaries:
 - Name of signature is "Matthew Yang"
 
 Prebuild requirements:
-- Python 3.12
+- Python 3.4 - 3.12
 - `make` installed
 
 Build instructions:
