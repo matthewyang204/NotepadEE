@@ -17,7 +17,7 @@ if %errorLevel% NEQ 0 (
 
 :: Install requirements from requirements.txt
 echo Installing Python requirements from requirements.txt...
-python -m pip install -r requirements-x86.txt
+python -m pip install -r requirements-3.4.txt
 
 :: Check if pip install was successful
 if %errorLevel% NEQ 0 (
