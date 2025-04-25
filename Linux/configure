@@ -30,7 +30,13 @@ echo $version
 # fi
 
 # Set requirements file
-
+printf "Setting requirements.txt..."
+if [[ $version == 3.4.* ]]; then
+    $requirements=requirements-3.4.txt
+else
+    $requirements=requirements.txt
+fi
+echo "done"
 
 # Check for pip3
 printf "Checking for pip3..."
@@ -96,11 +102,11 @@ fi
 
 # Install required python packages
 echo "Installing required packages"
-if python3 -m pip install -r requirements.txt --break-system-packages &> /dev/null; then
+if python3 -m pip install -r $requirements --break-system-packages &> /dev/null; then
     echo "Required python packages installed"
 else
     echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages"
-    python3 -m pip install -r requirements.txt
+    python3 -m pip install -r $requirements
 fi
 echo "done"
 
