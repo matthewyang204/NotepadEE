@@ -32,11 +32,11 @@ echo $version
 # Set requirements file
 printf "Setting requirements.txt..."
 if [[ $version == 3.4.* ]]; then
-    $requirements=requirements-3.4.txt
+    requirements=requirements-3.4.txt
 elif [[ $version == 3.5.x ]]; then
-    $requirements=requirements-3.4.txt
+    requirements=requirements-3.4.txt
 else
-    $requirements=requirements.txt
+    requirements=requirements.txt
 fi
 echo "done"
 
