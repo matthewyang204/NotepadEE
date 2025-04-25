@@ -11,21 +11,34 @@ else
     echo "found"
 fi
 
-# Check if Python 3 version is correct
-printf "Checking if python3 version is correct..."
+# Check Python 3 version
+printf "Checking python3 version..."
 version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+echo $version
+
 # version=3.11.5
 # version=3.13.2
 # version=3.12
-if [[ $version == 3.12.* ]]; then
-    echo "correct"
+# if [[ $version == 3.12.* ]]; then
+#     echo "correct"
 # elif [[ $version == 3.13.* ]]; then
     # echo "correct"
+# else
+#     echo "incorrect"
+#     echo "The version of Python 3 currently installed is not a 3.12 release. Please install a 3.12 release to continue."
+#     exit 1
+# fi
+
+# Set requirements file
+printf "Setting requirements.txt..."
+if [[ $version == 3.4.* ]]; then
+    $requirements=requirements-3.4.txt
+elif [[ $version == 3.5.x ]]; then
+    $requirements=requirements-3.4.txt
 else
-    echo "incorrect"
-    echo "The version of Python 3 currently installed is not a 3.12 release. Please install a 3.12 release to continue."
-    exit 1
+    $requirements=requirements.txt
 fi
+echo "done"
 
 # Check for pip3
 printf "Checking for pip3..."
@@ -58,7 +71,7 @@ fi
 
 # Install required python packages
 echo "Installing required packages"
-pip3 install --upgrade -r requirements.txt --break-system-packages
+pip3 install --upgrade -r $requirements --break-system-packages
 echo "done"
 
 echo "Now run 'make' to build."
