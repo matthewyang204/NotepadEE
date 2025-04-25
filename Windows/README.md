@@ -18,6 +18,9 @@ Build instructions:
 - Download and install Inno Setup if you haven't already. Then, open the .iss setup script and build by clicking Build>Compile. Note that you need to use Inno Setup 5 on Windows Vista or earlier.
 - Run the installer and you've successfully installed.
 
+Python 3.4 compatibility scripts:
+- There are scripts with `-3.4` appended to their filenames that are compatible with Python 3.4
+
 Installing from the precompiled binaries:
 - Binaries are next to all other binaries
 - x64 binaries are provided for users, however, they are not signed
