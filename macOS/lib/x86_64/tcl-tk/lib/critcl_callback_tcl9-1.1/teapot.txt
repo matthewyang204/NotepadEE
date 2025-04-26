@@ -1,0 +1,15 @@
+Package critcl::callback 1.1
+Meta platform macosx14.5-x86_64
+Meta build::date 2024-12-21
+Meta generated::by {critcl 3.3.1} brew
+Meta generated::date critcl
+Meta build::require critcl::cutil
+Meta license Under a BSD license.
+Meta author {Andreas Kupries}
+Meta summary Critcl utility package providing functions and structures
+Meta summary to manage callbacks into Tcl, from C
+Meta description Part of Critcl
+Meta subject critcl callbacks {management of callbacks}
+Meta subject {Tcl callbacks from C}
+Meta entrytclcommand {eval "[list proc __critcl_load__ {dir} { ;     source [file join $dir critcl-rt.tcl] ;     set path [file join $dir [::critcl::runtime::MapPlatform]] ;     set ext [info sharedlibextension] ;     set lib [file join $path "callback$ext"] ;     load $lib Callback ;     package provide critcl::callback 1.1 ;     catch {rename __critcl_load__ {}}}] ; [list __critcl_load__ $dir]"}
+Meta included critcl-rt.tcl macosx-x86_64/callback.dylib
