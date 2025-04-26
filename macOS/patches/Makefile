@@ -3,8 +3,20 @@ $(error You must run `./configure` before you can build.)
 endif
 
 ARCH ?= $(shell uname -m)
-LDFLAGS := -L$(shell brew --prefix gettext)/lib -lintl
-CPPFLAGS := -I$(shell brew --prefix gettext)/include
+
+# LDFLAGS := -L$(shell brew --prefix gettext)/lib -lintl
+# CPPFLAGS := -I$(shell brew --prefix gettext)/include
+
+# export LDFLAGS
+# export CPPFLAGS
+
+PKGCONF := $(shell which pkgconf)
+
+GETTEXT_CFLAGS := $(shell $(PKGCONF) --cflags gettext)
+GETTEXT_LIBS := $(shell $(PKGCONF) --libs gettext)
+
+CPPFLAGS += $(GETTEXT_CFLAGS)
+LDFLAGS += $(GETTEXT_LIBS)
 
 export LDFLAGS
 export CPPFLAGS
