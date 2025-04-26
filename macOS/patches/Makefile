@@ -3,10 +3,10 @@ ifeq ($(wildcard .configured),)
 endif
 
 ARCH ?= $(shell uname -m)
-LIB := lib/$$ARCH
+LIB := lib/$(ARCH)
 
-LDFLAGS := -L$$LIB/gettext/lib -lintl
-CPPFLAGS := -I$$LIB/gettext/include
+LDFLAGS := -L$(LIB)/gettext/lib -lintl
+CPPFLAGS := -I$(LIB)/gettext/include
 
 export LDFLAGS
 export CPPFLAGS
@@ -35,11 +35,11 @@ build:
 	# echo "2. 'arm64' (Apple Silicon)"
 	# # echo "3. 'universal' (Intel and Apple Silicon in a single fat binary, not currently supported)"
 	# echo "Enter an architecture and press ENTER:"
-	ARCH="$$ARCH" && \
-	echo "Building for architecture $$ARCH..." && \
+	ARCH="$(ARCH)" && \
+	echo "Building for architecture $(ARCH)..." && \
 	export ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$$LIB/tcl-tk/lib --tk-library-dir=$$LIB/tcl-tk/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.1.0 src/Notepad==.py
-	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$$LIB/tcl-tk/lib --tk-library-dir=$$LIB/tcl-tk/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.1.0 src/Notepad==.py
+	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$(LIB)/tcl-tk/lib --tk-library-dir=$(LIB)/tcl-tk/lib --macos-create-app-bundle --macos-target-arch="$(ARCH)" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.1.0 src/Notepad==.py
+	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$(LIB)/tcl-tk/lib --tk-library-dir=$(LIB)/tcl-tk/lib --macos-create-app-bundle --macos-target-arch="$(ARCH)" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.1.0 src/Notepad==.py
 	echo "Build completed. Patching the app bundle..."
 	cd dist/Notepad==.app/Contents && \
 	mv MacOS/tk Resources/tk && \
