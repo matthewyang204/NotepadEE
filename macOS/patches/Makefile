@@ -1,3 +1,7 @@
+ifeq ($(wildcard .configured),)
+$(error You must run `./configure` before you can build.)
+endif
+
 ARCH ?= $(shell uname -m)
 LDFLAGS := -L$(shell brew --prefix gettext)/lib -lintl
 CPPFLAGS := -I$(shell brew --prefix gettext)/include
