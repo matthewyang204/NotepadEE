@@ -1,5 +1,5 @@
 ifeq ($(wildcard .configured),)
-$(error You must run `./configure` before you can build.)
+	$(error You must run `./configure` before you can build.)
 endif
 
 ARCH ?= $(shell uname -m)
