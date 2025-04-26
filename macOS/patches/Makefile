@@ -3,7 +3,7 @@ ifeq ($(wildcard .configured),)
 endif
 
 ARCH ?= $(shell uname -m)
-LIB := lib/$(ARCH)
+LIB := ./lib/$(ARCH)
 
 LDFLAGS := -L$(LIB)/gettext/lib -lintl
 CPPFLAGS := -I$(LIB)/gettext/include
