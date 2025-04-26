@@ -74,6 +74,7 @@ echo "Installing required packages"
 pip3 install --upgrade -r $requirements --break-system-packages
 echo "done"
 
+touch .configured
 echo "Now run 'make' to build."
 
 # Force a failure at the end of the script for testing purposes; uncomment these lines to purposely crash the configure script
