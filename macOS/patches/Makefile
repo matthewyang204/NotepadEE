@@ -5,7 +5,7 @@ endif
 ARCH ?= $(shell uname -m)
 LIB := lib/$(ARCH)
 
-LDFLAGS := -L$(LIB)/tcl-tk/lib -lintl
+LDFLAGS := -L$(LIB)/gettext/lib -lintl
 CPPFLAGS := -I$(LIB)/gettext/include
 
 export LDFLAGS
