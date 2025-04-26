@@ -3,9 +3,10 @@ $(error You must run `./configure` before you can build.)
 endif
 
 ARCH ?= $(shell uname -m)
+LIB := lib/$$ARCH/
 
-LDFLAGS := -L$(shell brew --prefix gettext)/lib -lintl
-CPPFLAGS := -I$(shell brew --prefix gettext)/include
+LDFLAGS := -L$$LIB/tcl-tk/lib -lintl
+CPPFLAGS := -I$$LIB/gettext/include
 
 export LDFLAGS
 export CPPFLAGS
