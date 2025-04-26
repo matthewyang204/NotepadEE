@@ -3,7 +3,7 @@ $(error You must run `./configure` before you can build.)
 endif
 
 ARCH ?= $(shell uname -m)
-LIB := lib/$(ARCH)/
+LIB := lib/$(ARCH)
 
 LDFLAGS := -L$(LIB)/tcl-tk/lib -lintl
 CPPFLAGS := -I$(LIB)/gettext/include
