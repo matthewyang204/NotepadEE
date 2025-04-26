@@ -9,8 +9,9 @@ if [ "$1" == "clean" ]; then
     rm -f configure
     rm -f notepadee.desktop
     rm -f requirements.txt
+    rm -f requirements-3.4.txt
     rm -rf src
-	rm -rf resources
+    rm -rf resources
     echo "done"
     exit
 fi
@@ -23,8 +24,9 @@ if [ "$1" == "rebuild" ]; then
     rm -f configure
     rm -f notepadee.desktop
     rm -f requirements.txt
+    rm -f requirements-3.4.txt
     rm -rf src
-	rm -rf resources
+    rm -rf resources
     echo "done"
 fi
 
