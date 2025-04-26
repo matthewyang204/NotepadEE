@@ -1,6 +1,6 @@
 ARCH ?= $(shell uname -m)
-LDFLAGS := -L$(brew --prefix gettext)/lib -lintl
-CPPFLAGS := -I$(brew --prefix gettext)/include
+LDFLAGS := -L$(shell brew --prefix gettext)/lib -lintl
+CPPFLAGS := -I$(shell brew --prefix gettext)/include
 
 export LDFLAGS
 export CPPFLAGS
