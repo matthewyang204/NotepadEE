@@ -1,2 +1,0 @@
-if {![package vsatisfies [package provide Tcl] 9.0]} {return}
-package ifneeded critcl_md5c 0.12 "[list proc __critcl_load__ {dir} { ;     source [file join $dir critcl-rt.tcl] ;     set path [file join $dir [::critcl::runtime::MapPlatform]] ;     set ext [info sharedlibextension] ;     set lib [file join $path "md5c$ext"] ;     load $lib Md5c ;     package provide critcl_md5c 0.12 ;     catch {rename __critcl_load__ {}}}] ; [list __critcl_load__ $dir]"
