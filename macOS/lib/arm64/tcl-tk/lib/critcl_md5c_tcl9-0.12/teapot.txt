@@ -1,0 +1,7 @@
+Package critcl_md5c 0.12
+Meta platform macosx15.1-arm
+Meta build::date 2025-01-12
+Meta generated::by {critcl 3.3.1} brew
+Meta generated::date critcl
+Meta entrytclcommand {eval "[list proc __critcl_load__ {dir} { ;     source [file join $dir critcl-rt.tcl] ;     set path [file join $dir [::critcl::runtime::MapPlatform]] ;     set ext [info sharedlibextension] ;     set lib [file join $path "md5c$ext"] ;     load $lib Md5c ;     package provide critcl_md5c 0.12 ;     catch {rename __critcl_load__ {}}}] ; [list __critcl_load__ $dir]"}
+Meta included critcl-rt.tcl macosx-arm/md5c.dylib
