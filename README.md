@@ -54,6 +54,7 @@ Signing info for prebuilt binaries:
 Prebuild requirements:
 - Python 3.4 - 3.12
 - `make` installed
+- `gettext` and `tcl-tk` installed with Homebrew
 
 Build instructions:
 1. Clone the repository and navigate to the macOS folder inside of it
