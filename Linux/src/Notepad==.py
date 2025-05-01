@@ -732,7 +732,7 @@ def newWindow_macOS(event=None):
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def newWindow_Linux(event=None):
-    if platform.system() == "Linux":
+    def main(event=None):
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
         pyexe = sys.executable
@@ -743,19 +743,25 @@ def newWindow_Linux(event=None):
         printlog(f"Executable is located at {pyexe}")
         emptyString = ""
 
-        printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        # DO NOT enable, this is only compatible with Python 3.12 and later
+        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
             file.write(emptyString)
         printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
-        subprocess.call([pyexe, run_path])
-        printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
-            pass
-        printlog(f"Writing cache back to prefs folder at {folder_path}...")
-        write_prefs()
+        root.after(0, subprocess.call([pyexe, run_path]))
+        # DO NOT enable, this is only compatible with Python 3.12 and later
+        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        def write(event=None):
+            while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+                pass
+            printlog(f"Writing cache back to prefs folder at {folder_path}...")
+            write_prefs()
+        root.after(0, write)
         printlog("done")
+    if platform.system() == "Linux":
+        root.after(0, main)
     else:
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
