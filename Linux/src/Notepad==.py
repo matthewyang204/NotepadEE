@@ -734,6 +734,17 @@ def newWindow_macOS(event=None):
 def newWindow_Linux(event=None):
     pass
 
+    if platform.system() == "Linux":
+        run_path = os.path.realpath(__file__)
+        cwd = os.getcwd()
+        pyexe = sys.executable
+        freeze_time = 1
+
+        printlog(f"Script path is {run_path}")
+        printlog(f"Current working directory is {cwd}")
+        printlog(f"Executable is located at {pyexe}")
+        emptyString = ""
+
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
     save_file("w")
