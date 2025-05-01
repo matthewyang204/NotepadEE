@@ -7,6 +7,7 @@ import sys
 import time
 import platform
 import subprocess
+import threading
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -132,7 +133,7 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
-if platform.system() == "Darwin":
+if platform.system() == "Darwin" or platform.system() == "Linux":
     printlog("Clearing any locks...")
     subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
 else:
@@ -750,18 +751,20 @@ def newWindow_Linux(event=None):
         printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
-        root.after(0, subprocess.call([pyexe, run_path]))
+        def launcher():
+            subprocess.call([pyexe, run_path])
+        new_thread = threading.Thread(target=launcher)
+        new_thread.start()
+        new_thread.join()
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        def write(event=None):
-            while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
-                pass
-            printlog(f"Writing cache back to prefs folder at {folder_path}...")
-            write_prefs()
-        root.after(0, write)
+        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+            pass
+        printlog(f"Writing cache back to prefs folder at {folder_path}...")
+        write_prefs()
         printlog("done")
     if platform.system() == "Linux":
-        root.after(0, main)
+        main()
     else:
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
