@@ -732,7 +732,12 @@ def newWindow_macOS(event=None):
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. However, this function is practically useless because the other platforms, Linux and Windows, both allow you to run other instances of the editor by running the executable again.")
 
 def newWindow_Linux(event=None):
-    pass
+    run_path = os.path.realpath(__file__)
+    cwd = os.getcwd()
+    freeze_time = 1
+    emptyString = ""
+
+    printlog(f"Script path is {run_path}")
 
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
@@ -754,8 +759,6 @@ menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 if platform.system() == "Darwin":
     file_menu.add_command(label="New Window", command=newWindow_macOS)
-elif platform.system() == "Linux":
-    file_menu.add_command(label="New Window", command=newWindow_Linux)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
@@ -790,8 +793,6 @@ if platform.system() == "Darwin":
 root.bind_all('<Control-n>', new_file)
 if platform.system() == "Darwin":
     root.bind_all('<Command-N>', newWindow_macOS)
-elif platform.system() == "Linux":
-    root.bind_all('<Control-N>', newWindow_Linux)
 root.bind_all('<Control-o>', open_file)
 root.bind_all('<Control-s>', save_file)
 root.bind_all('<Control-S>', save_as)
