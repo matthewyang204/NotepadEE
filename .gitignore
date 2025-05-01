@@ -184,3 +184,7 @@ __pycache__/
 
 # Nuitka annoyances
 nuitka-crash-report.xml
+
+# GNU nano annoyances
+*.swp
+*.save
