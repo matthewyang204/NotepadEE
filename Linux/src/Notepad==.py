@@ -732,8 +732,6 @@ def newWindow_macOS(event=None):
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. However, this function is practically useless because the other platforms, Linux and Windows, both allow you to run other instances of the editor by running the executable again.")
 
 def newWindow_Linux(event=None):
-    pass
-
     if platform.system() == "Linux":
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
