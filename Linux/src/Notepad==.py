@@ -729,7 +729,7 @@ def newWindow_macOS(event=None):
         write_prefs()
         printlog("done")
     else:
-        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. However, this function is practically useless because the other platforms, Linux and Windows, both allow you to run other instances of the editor by running the executable again.")
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def newWindow_Linux(event=None):
     if platform.system() == "Linux":
@@ -756,6 +756,8 @@ def newWindow_Linux(event=None):
         printlog(f"Writing cache back to prefs folder at {folder_path}...")
         write_prefs()
         printlog("done")
+    else:
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
