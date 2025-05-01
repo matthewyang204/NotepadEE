@@ -755,7 +755,6 @@ def newWindow_Linux(event=None):
             subprocess.call([pyexe, run_path])
         new_thread = threading.Thread(target=launcher)
         new_thread.start()
-        new_thread.join()
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
