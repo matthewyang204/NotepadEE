@@ -743,6 +743,20 @@ def newWindow_Linux(event=None):
         printlog(f"Executable is located at {pyexe}")
         emptyString = ""
 
+        printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+            file.write(emptyString)
+        printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        subprocess.call(["/bin/rm", "-rf", folder_path])
+        printlog("Launching new instance...")
+        subprocess.call([""])
+        printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+            pass
+        printlog(f"Writing cache back to prefs folder at {folder_path}...")
+        write_prefs()
+        printlog("done")
+
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
     save_file("w")
