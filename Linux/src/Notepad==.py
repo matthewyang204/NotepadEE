@@ -749,7 +749,7 @@ def newWindow_Linux(event=None):
         printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
-        subprocess.call([""])
+        subprocess.call([pyexe, run_path])
         printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
             pass
