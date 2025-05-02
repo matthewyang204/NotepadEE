@@ -250,12 +250,9 @@ def autosave_file(event=None):
 
 def write_prefs(event=None):
     global current_file, file_open
-    with open(
-            os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
-                         'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee',
-                                  'prefs', 'last_file_path')
+    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(str(current_file))
     autosave_file()
