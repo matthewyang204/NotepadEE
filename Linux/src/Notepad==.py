@@ -258,6 +258,14 @@ def write_prefs(event=None):
     autosave_file()
     printlog("Wrote prefs successfully")
 
+def spoof_prefs(event=None):
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+        file.write(text_area.get('1.0', 'end-1c'))
+    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
+    with open(last_file_path, 'w') as file:
+        file.write(str(current_file))
+    autosave_file()
+    printlog("Wrote prefs successfully")
 
 # save_as provides the dialog
 def save_as(event=None):
