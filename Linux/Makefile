@@ -16,6 +16,7 @@ configure:
 build:
 	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
 	cp Notepad.png dist/Notepad==/
+	touch dist/Notepad==/.pyinstaller
 	echo "Build completed. To install, run 'sudo make install'"
 
 install:

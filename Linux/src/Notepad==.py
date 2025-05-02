@@ -7,6 +7,7 @@ import sys
 import time
 import platform
 import subprocess
+import threading
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -109,13 +110,13 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
-file_var = tk.StringVar()
-file_label = tk.Label(status_frame, textvariable=file_var)
-file_label.pack(side=tk.LEFT)
-
 text_size_indicator = tk.StringVar()
 size_label = tk.Label(status_frame, textvariable=text_size_indicator)
 size_label.pack(side=tk.LEFT)
+
+file_var = tk.StringVar()
+file_label = tk.Label(status_frame, textvariable=file_var)
+file_label.pack(side=tk.LEFT)
 
 def get_font_for_platform():
     if os.name == 'nt':
@@ -132,7 +133,7 @@ text_area.config(font=text_font)
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
-if platform.system() == "Darwin":
+if platform.system() == "Darwin" or platform.system() == "Linux":
     printlog("Clearing any locks...")
     subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
 else:
@@ -249,17 +250,22 @@ def autosave_file(event=None):
 
 def write_prefs(event=None):
     global current_file, file_open
-    with open(
-            os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
-                         'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee',
-                                  'prefs', 'last_file_path')
+    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(str(current_file))
     autosave_file()
     printlog("Wrote prefs successfully")
 
+def spoof_prefs(event=None):
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+        file.write(text_area.get('1.0', 'end-1c'))
+    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
+    with open(last_file_path, 'w') as file:
+        file.write(str(current_file))
+    autosave_file()
+    printlog("Wrote prefs successfully")
 
 # save_as provides the dialog
 def save_as(event=None):
@@ -269,7 +275,7 @@ def save_as(event=None):
         filetypes=(
             ("All Files", "*.*"),
 
-            # Notepad files
+            # Plain text files
             ("Plain text file", ".txt"),
             ("Log file", ".log"),
 
@@ -729,7 +735,49 @@ def newWindow_macOS(event=None):
         write_prefs()
         printlog("done")
     else:
-        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. However, this function is practically useless because the other platforms, Linux and Windows, both allow you to run other instances of the editor by running the executable again.")
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+
+def newWindow_Linux(event=None):
+    def main(event=None):
+        run_path = os.path.realpath(__file__)
+        cwd = os.getcwd()
+        pyexe = sys.executable
+        pyexe_dir = os.path.dirname(pyexe)
+        pyInstFile = os.path.join(pyexe_dir, '.pyinstaller')
+        freeze_time = 1
+
+        printlog(f"Script path is {run_path}")
+        printlog(f"Current working directory is {cwd}")
+        printlog(f"Executable is located at {pyexe}")
+        emptyString = ""
+
+        # DO NOT enable, this is only compatible with Python 3.12 and later
+        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+            file.write(emptyString)
+        printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        subprocess.call(["/bin/rm", "-rf", folder_path])
+        printlog("Launching new instance...")
+        def launcher():
+            if os.path.exists(pyInstFile):
+                printlog("We are running in PyInstaller mode, running only the executable...")
+                subprocess.Popen([pyexe], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            else:
+                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+        new_thread = threading.Thread(target=launcher)
+        new_thread.start()
+        # DO NOT enable, this is only compatible with Python 3.12 and later
+        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+            pass
+        printlog(f"Writing cache back to prefs folder at {folder_path}...")
+        write_prefs()
+        printlog("done")
+    if platform.system() == "Linux":
+        main()
+    else:
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
@@ -751,6 +799,8 @@ menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=new_file)
 if platform.system() == "Darwin":
     file_menu.add_command(label="New Window", command=newWindow_macOS)
+elif platform.system() == "Linux":
+    file_menu.add_command(label="New Window", command=newWindow_Linux)
 file_menu.add_command(label="Open...", command=open_file)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
@@ -785,6 +835,8 @@ if platform.system() == "Darwin":
 root.bind_all('<Control-n>', new_file)
 if platform.system() == "Darwin":
     root.bind_all('<Command-N>', newWindow_macOS)
+elif platform.system() == "Linux":
+    root.bind_all('<Control-N>', newWindow_Linux)
 root.bind_all('<Control-o>', open_file)
 root.bind_all('<Control-s>', save_file)
 root.bind_all('<Control-S>', save_as)
