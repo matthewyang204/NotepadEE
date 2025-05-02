@@ -110,13 +110,13 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
-file_var = tk.StringVar()
-file_label = tk.Label(status_frame, textvariable=file_var)
-file_label.pack(side=tk.LEFT)
-
 text_size_indicator = tk.StringVar()
 size_label = tk.Label(status_frame, textvariable=text_size_indicator)
 size_label.pack(side=tk.LEFT)
+
+file_var = tk.StringVar()
+file_label = tk.Label(status_frame, textvariable=file_var)
+file_label.pack(side=tk.LEFT)
 
 def get_font_for_platform():
     if os.name == 'nt':
