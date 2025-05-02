@@ -267,7 +267,7 @@ def save_as(event=None):
         filetypes=(
             ("All Files", "*.*"),
 
-            # Notepad files
+            # Plain text files
             ("Plain text file", ".txt"),
             ("Log file", ".log"),
 
