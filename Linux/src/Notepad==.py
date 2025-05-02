@@ -737,6 +737,8 @@ def newWindow_Linux(event=None):
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
         pyexe = sys.executable
+        pyexe_dir = os.path.dirname(pyexe)
+        pyInstFile = os.path.join(pyexe_dir, '.pyinstaller')
         freeze_time = 1
 
         printlog(f"Script path is {run_path}")
@@ -752,7 +754,12 @@ def newWindow_Linux(event=None):
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
         def launcher():
-            subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            if os.path.exists(pyInstFile):
+                printlog("We are running in PyInstaller mode, running only the executable...")
+                subprocess.Popen([pyexe], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            else:
+                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
         new_thread = threading.Thread(target=launcher)
         new_thread.start()
         # DO NOT enable, this is only compatible with Python 3.12 and later
