@@ -752,7 +752,7 @@ def newWindow_Linux(event=None):
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
         def launcher():
-            subprocess.call([pyexe, run_path])
+            subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
         new_thread = threading.Thread(target=launcher)
         new_thread.start()
         # DO NOT enable, this is only compatible with Python 3.12 and later
