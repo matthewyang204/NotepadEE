@@ -746,16 +746,18 @@ def newWindow_Linux(event=None):
         pyInstFile = os.path.join(pyexe_dir, '.pyinstaller')
         freeze_time = 1
 
-        printlog(f"Script path is {run_path}")
-        printlog(f"Current working directory is {cwd}")
-        printlog(f"Executable is located at {pyexe}")
+        # DO NOT enable
+        # printlog(f"Script path is {run_path}")
+        # printlog(f"Current working directory is {cwd}")
+        # printlog(f"Executable is located at {pyexe}")
         emptyString = ""
 
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
             file.write(emptyString)
-        printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        # DO NOT enable
+        # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
         def launcher():
@@ -771,7 +773,8 @@ def newWindow_Linux(event=None):
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
             pass
-        printlog(f"Writing cache back to prefs folder at {folder_path}...")
+        # DO NOT enable
+        # printlog(f"Writing cache back to prefs folder at {folder_path}...")
         write_prefs()
         printlog("done")
     if platform.system() == "Linux":
