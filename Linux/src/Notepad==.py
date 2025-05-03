@@ -8,7 +8,7 @@ import time
 import platform
 import subprocess
 import threading
-import atexit
+# import atexit
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -904,7 +904,7 @@ text_area.bind('<Control-G>', go_to_line)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
-atexit.register(exit_handler)
+# atexit.register(exit_handler)
 root.protocol('WM_DELETE_WINDOW', exit_handler)
 
 write_prefs()
