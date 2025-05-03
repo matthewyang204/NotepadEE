@@ -8,6 +8,7 @@ import time
 import platform
 import subprocess
 import threading
+import atexit
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -258,7 +259,7 @@ def write_prefs(event=None):
     autosave_file()
     printlog("Wrote prefs successfully")
 
-def spoof_prefs(event=None):
+def spoof_prefs(current_file="", file_open=""):
     with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
@@ -405,7 +406,19 @@ def open_file(event=None):
         file_open = 1
         printlog("New file opened")
     write_prefs()
-
+    
+def open_file_v2(event=None):
+    global current_file, file_open
+    save_file("y")
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file = file_path
+        with open(file_path, 'r') as file:
+            newWindow_macOS(openFile=file)
+        file_open = 1
+        printlog("New file opened")
+    # write_prefs()
 
 def save_file(warn):
     global current_file, file_open, file_written
@@ -866,6 +879,7 @@ text_area.bind('<Control-G>', go_to_line)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
+atexit.register(exit_handler)
 root.protocol('WM_DELETE_WINDOW', exit_handler)
 
 write_prefs()
