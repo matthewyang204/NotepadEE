@@ -756,7 +756,7 @@ def newWindow_macOS(openFile=""):
     else:
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
-def newWindow_Linux(event=None):
+def newWindow_Linux(openFile=""):
     def main(event=None):
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
@@ -779,6 +779,7 @@ def newWindow_Linux(event=None):
         # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
+        # Regular launcher with no open file support
         def launcher():
             if os.path.exists(pyInstFile):
                 printlog("We are running in PyInstaller mode, running only the executable...")
@@ -786,7 +787,18 @@ def newWindow_Linux(event=None):
             else:
                 printlog("We are probably running in standard interpreted mode, launching executable with python file...")
                 subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
-        new_thread = threading.Thread(target=launcher)
+        # launcher with open file support
+        def launcher2():
+            if os.path.exists(pyInstFile):
+                printlog("We are running in PyInstaller mode, running only the executable...")
+                subprocess.Popen([pyexe, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            else:
+                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                subprocess.Popen([pyexe, run_path, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+        if openFile:
+            new_thread = threading.Thread(target=launcher2)
+        else:
+            new_thread = threading.Thread(target=launcher)
         new_thread.start()
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
