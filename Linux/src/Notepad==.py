@@ -766,6 +766,7 @@ def newWindow_macOS(openFile=""):
 
 def newWindow_Linux(openFile=""):
     def main(event=None):
+        global folder_path
         run_path = os.path.realpath(__file__)
         cwd = os.getcwd()
         pyexe = sys.executable
