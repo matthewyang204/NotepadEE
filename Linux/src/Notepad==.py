@@ -725,7 +725,10 @@ def newWindow_macOS(openFile=""):
         # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
         subprocess.call(["/bin/rm", "-rf", folder_path])
         printlog("Launching new instance...")
-        subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app", openFile])
+        if openFile:
+            subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app", openFile])
+        else:
+            subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app"])
         # DO NOT enable this
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
