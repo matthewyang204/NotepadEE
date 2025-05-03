@@ -412,11 +412,14 @@ def open_file_v2(event=None):
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
-        text_area.delete(1.0, "end")
-        current_file = file_path
         with open(file_path, 'r') as file:
-            newWindow_macOS(openFile=file)
-        file_open = 1
+            if file_open == 1:
+                newWindow_macOS(openFile=file)
+            else:
+                text_area.delete(1.0, "end")
+                current_file = file_path
+                text_area.insert(1.0, file.read())
+                file_open = 1
         printlog("New file opened")
     # write_prefs()
 
