@@ -414,7 +414,7 @@ def open_file_v2(event=None):
     if file_path:
         with open(file_path, 'r') as file:
             if file_open == 1:
-                newWindow_macOS(openFile=file)
+                newWindow_macOS(openFile=str(file))
             else:
                 text_area.delete(1.0, "end")
                 current_file = file_path
