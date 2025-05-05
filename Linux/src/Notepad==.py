@@ -8,7 +8,7 @@ import time
 import platform
 import subprocess
 import threading
-# import atexit
+import atexit
 import signal
 
 # Define and create, if applicable, a cache folder
@@ -925,7 +925,7 @@ text_area.bind('<Control-G>', go_to_line)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
-# atexit.register(exit_handler)
+atexit.register(exit_handler)
 signal.signal(signal.SIGINT, exit_on_keyboardInterrupt)
 signal.signal(signal.SIGTERM, exit_on_keyboardInterrupt)
 root.protocol('WM_DELETE_WINDOW', exit_handler)
