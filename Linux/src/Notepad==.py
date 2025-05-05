@@ -157,14 +157,14 @@ def runonarg(arg):
                         current_file = arg
                         text_area.insert(1.0, file.read())
                         file_open = 1
-            else:
-                text_area.delete(1.0, "end")
-                current_file = file_path
-                text_area.insert(1.0, file.read())
-                file_open = 1
-            #printlog("Current file path: " + current_file)
-            #printlog("File open: " + str(file_open))
-            printlog("File loaded")
+                else:
+                    text_area.delete(1.0, "end")
+                    current_file = file_path
+                    text_area.insert(1.0, file.read())
+                    file_open = 1
+                #printlog("Current file path: " + current_file)
+                #printlog("File open: " + str(file_open))
+                printlog("File loaded")
         else:
             text_area.delete(1.0, "end")
             with open(arg, 'w') as file:
