@@ -1,8 +1,3 @@
-# Check for a .configured
-ifeq ($(wildcard .configured),)
-$(error You must run `./configure` before you can build.)
-endif
-
 # Variables
 APP_NAME = Notepad==
 BUILD_DIR = dist
@@ -13,10 +8,13 @@ VERSION_NUMBER = 5.1.0
 
 .SILENT:
 
-all: build
+all: check_if_configured build
 
 configure:
 	./configure
+
+check_if_configured:
+	@test -f .configured || { echo "Error: You must run ./configure before building."; exit 1; }
 
 build:
 	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
