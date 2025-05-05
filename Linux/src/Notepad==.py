@@ -167,15 +167,17 @@ def runonarg(arg):
                 #printlog("File open: " + str(file_open))
                 printlog("File loaded")
         else:
-            text_area.delete(1.0, "end")
-            with open(arg, 'w') as file:
-                text = text_area.get(1.0, "end-1c")
-                file.write(text)
-            file_open = 1
-            current_file = os.path.abspath(arg)
-            #printlog("Current file path: " + current_file)
-            #printlog("File open: " + str(file_open))
-            printlog("Because the file doesn't exist, it was created as a blank new file instead")
+            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
+            
+            # text_area.delete(1.0, "end")
+            # with open(arg, 'w') as file:
+                # text = text_area.get(1.0, "end-1c")
+                # file.write(text)
+            # file_open = 1
+            # current_file = os.path.abspath(arg)
+            # #printlog("Current file path: " + current_file)
+            # #printlog("File open: " + str(file_open))
+            # printlog("Because the file doesn't exist, it was created as a blank new file instead")
         
         root.after(200, write_prefs)
     except Exception as e:
