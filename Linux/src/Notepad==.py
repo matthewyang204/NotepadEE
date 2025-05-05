@@ -146,11 +146,22 @@ def runonarg(arg):
         
     try:
         if os.path.exists(arg):
-            text_area.delete(1.0, "end")
-            current_file = os.path.abspath(arg)
             with open(arg, 'r') as file:
+                if file_open == 1:
+                    if platform.system() == "Darwin":
+                        newWindow_macOS(openFile=arg)
+                    elif platform.system() == "Linux":
+                        newWindow_Linux(openFile=arg)
+                    else:
+                        text_area.delete(1.0, "end")
+                        current_file = arg
+                        text_area.insert(1.0, file.read())
+                        file_open = 1
+            else:
+                text_area.delete(1.0, "end")
+                current_file = file_path
                 text_area.insert(1.0, file.read())
-            file_open = 1
+                file_open = 1
             #printlog("Current file path: " + current_file)
             #printlog("File open: " + str(file_open))
             printlog("File loaded")
