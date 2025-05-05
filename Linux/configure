@@ -112,4 +112,5 @@ else
 fi
 echo "done"
 
+touch .configured
 echo "Now run 'make' to build."

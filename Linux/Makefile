@@ -1,3 +1,8 @@
+# Check for a .configured
+ifeq ($(wildcard .configured),)
+$(error You must run `./configure` before you can build.)
+endif
+
 # Variables
 APP_NAME = Notepad==
 BUILD_DIR = dist
