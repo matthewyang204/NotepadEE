@@ -12,6 +12,7 @@ if [ "$1" == "clean" ]; then
     rm -f requirements-3.4.txt
     rm -rf src
     rm -rf resources
+    rm -rf .configured
     echo "done"
     exit
 fi
@@ -27,6 +28,7 @@ if [ "$1" == "rebuild" ]; then
     rm -f requirements-3.4.txt
     rm -rf src
     rm -rf resources
+    rm -rf .configured
     echo "done"
 fi
 
