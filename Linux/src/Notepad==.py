@@ -9,6 +9,7 @@ import platform
 import subprocess
 import threading
 # import atexit
+import signal
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -840,6 +841,10 @@ def exit_handler(event=None):
     printlog("Exiting...")
     sys.exit()
 
+def exit_on_keyboardInterrupt(signum, frame):
+    printlog("Received KeyboardInterrupt, running exit handler...")
+    exit_handler()
+
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
@@ -921,6 +926,8 @@ text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
 # atexit.register(exit_handler)
+signal.signal(signal.SIGINT, exit_on_keyboardInterrupt)
+signal.signal(signal.SIGTERM, exit_on_keyboardInterrupt)
 root.protocol('WM_DELETE_WINDOW', exit_handler)
 
 write_prefs()
