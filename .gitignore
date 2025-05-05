@@ -188,3 +188,6 @@ nuitka-crash-report.xml
 # GNU nano annoyances
 *.swp
 *.save
+
+# Configure files
+.configured
