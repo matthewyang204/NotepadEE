@@ -177,8 +177,7 @@ def runonarg(arg):
         # #printlog("Current file path: " + current_file)
         # #printlog("File open: " + str(file_open))
         # printlog("Because the file doesn't exist, it was created as a blank new file instead")
-    
-    root.after(200, write_prefs)
+        
     # except Exception as e:
     #     printlog("Exception " + str(e) + " caught!")
 
