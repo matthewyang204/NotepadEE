@@ -930,5 +930,9 @@ signal.signal(signal.SIGINT, exit_on_keyboardInterrupt)
 signal.signal(signal.SIGTERM, exit_on_keyboardInterrupt)
 root.protocol('WM_DELETE_WINDOW', exit_handler)
 
+# Implement quit event if macOS
+if platform.system() == "Darwin":
+    root.createcommand('::tk::mac::Quit', exit_handler)
+
 write_prefs()
 root.mainloop()
