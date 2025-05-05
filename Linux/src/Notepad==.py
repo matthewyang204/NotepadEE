@@ -159,7 +159,7 @@ def runonarg(arg):
                         file_open = 1
                 else:
                     text_area.delete(1.0, "end")
-                    current_file = file_path
+                    current_file = arg
                     text_area.insert(1.0, file.read())
                     file_open = 1
                 #printlog("Current file path: " + current_file)
