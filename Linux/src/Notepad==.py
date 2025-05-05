@@ -884,8 +884,13 @@ menu.add_cascade(label="Accessibility", menu=accessibility_menu)
 accessibility_menu.add_command(label="Zoom in", command=increase_font_size)
 accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 
+window_menu = tk.Menu(menu)
+menu.add_cascade(label="Window", menu=window_menu)
+window_menu.add_command(label="Close", command=exit_handler)
+
 if platform.system() == "Darwin":
     root.bind_all("<Command-q>", exit_handler)
+root.bind_all("<Control-w>", exit_handler)
 
 root.bind_all('<Control-n>', new_file)
 if platform.system() == "Darwin":
