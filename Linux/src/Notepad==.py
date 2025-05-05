@@ -10,6 +10,7 @@ import subprocess
 import threading
 # import atexit
 import signal
+import errno
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -144,44 +145,42 @@ else:
 
 def runonarg(arg):
     global file_open, current_file
-        
-    try:
-        if os.path.exists(arg):
-            with open(arg, 'r') as file:
-                if file_open == 1:
-                    if platform.system() == "Darwin":
-                        newWindow_macOS(openFile=arg)
-                    elif platform.system() == "Linux":
-                        newWindow_Linux(openFile=arg)
-                    else:
-                        text_area.delete(1.0, "end")
-                        current_file = arg
-                        text_area.insert(1.0, file.read())
-                        file_open = 1
+    if os.path.exists(arg):
+        with open(arg, 'r') as file:
+            if file_open == 1:
+                if platform.system() == "Darwin":
+                    newWindow_macOS(openFile=arg)
+                elif platform.system() == "Linux":
+                    newWindow_Linux(openFile=arg)
                 else:
                     text_area.delete(1.0, "end")
                     current_file = arg
                     text_area.insert(1.0, file.read())
                     file_open = 1
-                #printlog("Current file path: " + current_file)
-                #printlog("File open: " + str(file_open))
-                printlog("File loaded")
-        else:
-            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
-            
-            # text_area.delete(1.0, "end")
-            # with open(arg, 'w') as file:
-                # text = text_area.get(1.0, "end-1c")
-                # file.write(text)
-            # file_open = 1
-            # current_file = os.path.abspath(arg)
-            # #printlog("Current file path: " + current_file)
-            # #printlog("File open: " + str(file_open))
-            # printlog("Because the file doesn't exist, it was created as a blank new file instead")
+            else:
+                text_area.delete(1.0, "end")
+                current_file = arg
+                text_area.insert(1.0, file.read())
+                file_open = 1
+            #printlog("Current file path: " + current_file)
+            #printlog("File open: " + str(file_open))
+            printlog("File loaded")
+    else:
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
         
-        root.after(200, write_prefs)
-    except Exception as e:
-        printlog("Exception " + str(e) + " caught!")
+        # text_area.delete(1.0, "end")
+        # with open(arg, 'w') as file:
+            # text = text_area.get(1.0, "end-1c")
+            # file.write(text)
+        # file_open = 1
+        # current_file = os.path.abspath(arg)
+        # #printlog("Current file path: " + current_file)
+        # #printlog("File open: " + str(file_open))
+        # printlog("Because the file doesn't exist, it was created as a blank new file instead")
+    
+    root.after(200, write_prefs)
+    # except Exception as e:
+    #     printlog("Exception " + str(e) + " caught!")
 
 # Check if the system is macOS (Darwin)
 if platform.system() == "Darwin":
