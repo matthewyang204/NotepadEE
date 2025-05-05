@@ -8,13 +8,10 @@ VERSION_NUMBER = 5.1.0
 
 .SILENT:
 
-all: check_if_configured build
+all: build
 
 configure:
 	./configure
-
-check_if_configured:
-	@test -f .configured || { echo "Error: You must run ./configure before building."; exit 1; }
 
 build:
 	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
