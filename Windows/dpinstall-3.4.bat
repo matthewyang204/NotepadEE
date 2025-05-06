@@ -26,4 +26,9 @@ if %errorLevel% NEQ 0 (
     exit /b 1
 )
 
+echo Creating directories...
+mkdir /p C:\TMP
+echo Exiting...
+exit /b 1
+
 echo Installation completed successfully.
