@@ -62,8 +62,18 @@ else
     echo "available"
 fi
 
-# Check for some dpkg and apt packages
+# Check for idlelib
+printf "Checking if python3 supports idlelib..."
+if ! command -v python3 -c 'import idlelib' &> /dev/null
+then
+    echo "not available"
+    echo "IDLElib is not available. It is required for syntax highlighting. Please install it to continue."
+    exit 1
+else
+    echo "available"
+fi
 
+# Check for some dpkg and apt packages
 printf "Checking if patchelf is installed..."
 if ! command -v patchelf >/dev/null 2>&1; then
     echo "not installed"
