@@ -44,7 +44,6 @@ Options:
 Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
 """
 
-
 arg = sys.argv
 if len(arg) <= 1:
     pass
