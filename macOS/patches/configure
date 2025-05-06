@@ -61,6 +61,17 @@ else
     echo "available"
 fi
 
+# Check for idlelib
+printf "Checking if python3 supports idlelib..."
+if ! command -v python3 -c 'import idlelib' &> /dev/null
+then
+    echo "not available"
+    echo "IDLElib is not available. It is required for syntax highlighting. Please install it to continue."
+    exit 1
+else
+    echo "available"
+fi
+
 if ! command -v tar &> /dev/null
 then
     echo "Tar not found. Install it before continuing."

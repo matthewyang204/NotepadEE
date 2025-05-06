@@ -11,6 +11,7 @@ import threading
 # import atexit
 import signal
 import errno
+import idlelib
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
