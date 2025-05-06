@@ -151,7 +151,7 @@ cdg.idprog = re.compile(r'\s+(\w+)', re.S)
 
 cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
 
-ip.Percolator(text).insertfilter(cdg)
+ip.Percolator(text_area).insertfilter(cdg)
 
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
