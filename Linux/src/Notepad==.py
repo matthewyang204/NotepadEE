@@ -78,7 +78,7 @@ if os.path.exists(last_file_path):
             file_open = 1
 
 else:
-    with open(last_write, 'w'):
+    with open(last_file_path, 'w'):
         pass
     current_file = ""
     file_open = 0
