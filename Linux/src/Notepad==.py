@@ -61,6 +61,10 @@ global openFile
 fileToBeOpened = None
 openFile = None
 
+folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+
 global file_open
 file_open = 0
 last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
@@ -76,10 +80,6 @@ if os.path.exists(last_file_path):
 else:
     current_file = ""
     file_open = 0
-
-folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
-if not os.path.exists(folder_path):
-    os.makedirs(folder_path)
 
 global last_write
 last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
