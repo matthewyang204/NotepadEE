@@ -62,13 +62,10 @@ fileToBeOpened = None
 openFile = None
 
 folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
-if not os.path.exists(folder_path):
-    os.makedirs(folder_path)
 
 global file_open
 file_open = 0
-last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs',
-                              'last_file_path')
+last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
         current_file = file.read()
@@ -76,21 +73,29 @@ if os.path.exists(last_file_path):
             file_open = 0
         else:
             file_open = 1
-
 else:
-    with open(last_file_path, 'w'):
-        pass
     current_file = ""
     file_open = 0
 
 global last_write
 last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
-if not os.path.exists(last_write):
-    with open(last_write, 'w'):
-        pass
 
 file_written = 0
 printlog("file_written set to " + str(file_written))
+
+setup_prefs(event=None):
+    global folder_path last_file_path, last_write
+    
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    if not os.path.exists(last_file_path):
+        with open(last_file_path, 'w'):
+            pass
+
+    if not os.path.exists(last_write):
+        with open(last_write, 'w'):
+            pass
 
 class platformError(Exception):
     pass
@@ -265,6 +270,8 @@ def autosave_file(event=None):
 
 
 def write_prefs(event=None):
+    setup_prefs()
+    
     global current_file, file_open
     with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
