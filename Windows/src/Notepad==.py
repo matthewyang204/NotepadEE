@@ -110,6 +110,12 @@ root.title("Notepad==")
 root.minsize(800, 600)
 root.pack_propagate(False)
 
+if platform.system() == "Windows":
+    run_path = os.path.realpath(__file__)
+    runDir = os.path.dirname(run_path)
+    app_icon = os.path.join(runDir, 'Notepad.ico')
+    root.iconbitmap(app_icon)
+
 status_frame = tk.Frame(root)
 status_frame.pack()
 
