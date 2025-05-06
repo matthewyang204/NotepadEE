@@ -936,12 +936,13 @@ if platform.system() == "Darwin":
     root.bind_all("<Command-q>", exit_handler)
 root.bind_all("<Control-w>", exit_handler)
 
-if platform.system() == "Darwin":
-    root.bind_all('<Command-n>', newWindow)
-    root.bind_all('<Command-N>', newWindow)
-elif platform.system() == "Linux":
-    root.bind_all('<Control-n>', newWindow)
-    root.bind_all('<Control-N>', newWindow)
+root.bind_all('<Control-n>', new_file)
+# if platform.system() == "Darwin":
+#     root.bind_all('<Command-n>', newWindow)
+#     root.bind_all('<Command-N>', newWindow)
+# elif platform.system() == "Linux":
+#     root.bind_all('<Control-n>', newWindow)
+#     root.bind_all('<Control-N>', newWindow)
 root.bind_all('<Control-o>', open_file_v2)
 root.bind_all('<Control-s>', save_file)
 root.bind_all('<Control-S>', save_as)
