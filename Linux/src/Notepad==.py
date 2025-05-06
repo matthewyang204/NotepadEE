@@ -97,6 +97,8 @@ def setup_prefs(event=None):
         with open(last_write, 'w'):
             pass
 
+setup_prefs()
+
 class platformError(Exception):
     pass
 
