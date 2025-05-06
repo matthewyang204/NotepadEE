@@ -146,7 +146,7 @@ text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
 cdg = ic.ColorDelegator()
-cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S
+cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
 cdg.idprog = re.compile(r'\s+(\w+)', re.S)
 
 cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
