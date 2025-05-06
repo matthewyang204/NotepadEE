@@ -22,6 +22,9 @@ python -m pip install -r requirements.txt
 :: Check if pip install was successful
 if %errorLevel% NEQ 0 (
     echo ERROR: Failed to install Python requirements.
-    echo Exiting...
-    exit /b 1
 )
+
+echo Creating directories...
+mkdir /p C:\TMP
+echo Exiting...
+exit /b 1
