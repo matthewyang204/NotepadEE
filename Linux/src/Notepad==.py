@@ -902,7 +902,7 @@ if platform.system() == "Darwin":
 root.bind_all("<Control-w>", exit_handler)
 
 if platform.system() == "Darwin":
-    root.bind_all('<Command-n>', newWindow_Linux)
+    root.bind_all('<Command-n>', newWindow_macOS)
     root.bind_all('<Command-N>', newWindow_macOS)
 elif platform.system() == "Linux":
     root.bind_all('<Control-n>', newWindow_Linux)
