@@ -856,11 +856,15 @@ root.config(menu=menu)
 
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New", command=new_file)
+# file_menu.add_command(label="New", command=new_file)
+# if platform.system() == "Darwin":
+    # file_menu.add_command(label="New Window", command=newWindow_macOS)
+# elif platform.system() == "Linux":
+    # file_menu.add_command(label="New Window", command=newWindow_Linux)
 if platform.system() == "Darwin":
-    file_menu.add_command(label="New Window", command=newWindow_macOS)
+    file_menu.add_command(label="New", command=newWindow_macOS)
 elif platform.system() == "Linux":
-    file_menu.add_command(label="New Window", command=newWindow_Linux)
+    file_menu.add_command(label="New", command=newWindow_Linux)
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
@@ -897,10 +901,11 @@ if platform.system() == "Darwin":
     root.bind_all("<Command-q>", exit_handler)
 root.bind_all("<Control-w>", exit_handler)
 
-root.bind_all('<Control-n>', new_file)
 if platform.system() == "Darwin":
+    root.bind_all('<Command-n>', newWindow_Linux)
     root.bind_all('<Command-N>', newWindow_macOS)
 elif platform.system() == "Linux":
+    root.bind_all('<Control-n>', newWindow_Linux)
     root.bind_all('<Control-N>', newWindow_Linux)
 root.bind_all('<Control-o>', open_file_v2)
 root.bind_all('<Control-s>', save_file)
