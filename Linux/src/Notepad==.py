@@ -50,10 +50,10 @@ if len(arg) <= 1:
     pass
 else:
     if arg[1] == '--version' or arg[1] == '-v':
-        printlog(versionInfo)
+        print(versionInfo)
         sys.exit()
     elif arg[1] == '--help' or arg[1] == '-h':
-        printlog(helpInfo)
+        print(helpInfo)
         sys.exit()
 
 global fileToBeOpened
