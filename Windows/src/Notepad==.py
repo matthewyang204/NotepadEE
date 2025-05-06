@@ -1,26 +1,51 @@
 import tkinter as tk
-from tkinter import messagebox, font, filedialog
+from tkinter import filedialog
 import os
+from tkinter import messagebox
+from tkinter import font
 import sys
+import time
 import platform
+import subprocess
+import threading
+# import atexit
+import signal
+import errno
+import idlelib.colorizer as ic
+import idlelib.percolator as ip
+import re
 
-class platformError(Exception):
-    pass
+# Define and create, if applicable, a cache folder
+cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
+if not os.path.exists(cache_path):
+    os.makedirs(cache_path)
+
+# Open a log file in write mode
+# log_file = os.path.join(cache_path, "notepadee_log.txt")
+log_file = os.path.join('/tmp', "notepadee_log.txt")
+
+# Get current PID
+pid = os.getpid()
+
+# Special printlog statement to print stuff that doesn't belong in a console to the log file
+def printlog(message):
+    with open(log_file, 'a') as file:
+        file.write("Notepad== at " + str(pid) + ": " + str(message))
+    print("Notepad== at " + str(pid) + ": " + str(message))
 
 versionInfo = """Notepad==, version 5.1.0
 (C) 2024-2025, Matthew Yang"""
 
-helpInfo = """{}
+helpInfo = versionInfo + """
 
-Usage: "notepad==" [OPTIONS] [<filepath>]
+Usage: notepadee [OPTIONS] [<filepath>]
 
 Options:
 --version, -v     Display version info and exit
 --help, -h        Display this help message and exit
 
 Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
-""".format(versionInfo)
-
+"""
 
 arg = sys.argv
 if len(arg) <= 1:
@@ -33,38 +58,16 @@ else:
         print(helpInfo)
         sys.exit()
 
-# define the variables required for the program to start
-local_app_data_path = os.getenv('LOCALAPPDATA')
-platformVersion = str(platform.version())
-platformVersionList = platformVersion.split(".", 1)
-platformVersion = int(platformVersionList[0])
-if local_app_data_path is None:
-    if platformVersion == 5:
-        print("Failed retrieving AppData path on a system running Windows 2000, Windows XP, or Windows Server 2003, falling back...")
-        local_app_data_path = os.path.join(os.path.expanduser('~'), 'Local Settings', 'Application Data')
-    else:
-        print("Unhandled system configuration, crashing...")
-        raise platformError("This system is running Windows in an unsupported configuration, with neither a LOCALAPPDATA variable nor a valid WinNT 5.x application data folder.")
-else:
-    print("Successfully retrieved AppData path")
-
-# for debugging on Linux
-# local_app_data_path = os.path.expanduser('~')
-
-filearg = sys.argv
-global openFile
 global fileToBeOpened
-if len(filearg) <= 1:
-    openFile = 0
-    print("No arguments provided. Proceeding to load program with last known file...")
-else:
-    openFile = 1
-    print("Assuming argument is the file to open. Loading file...")
-    fileToBeOpened = filearg[1]
+global openFile
+fileToBeOpened = None
+openFile = None
+
+folder_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs')
 
 global file_open
 file_open = 0
-last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_file_path')
+last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
 if os.path.exists(last_file_path):
     with open(last_file_path, 'r') as file:
         current_file = file.read()
@@ -72,46 +75,40 @@ if os.path.exists(last_file_path):
             file_open = 0
         else:
             file_open = 1
-
 else:
     current_file = ""
     file_open = 0
 
-global folder_path
-folder_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs')
-if not os.path.exists(folder_path):
-    os.makedirs(folder_path)
-
 global last_write
-last_write = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_write')
-if not os.path.exists(last_write):
-    with open(last_write, 'w'):
-        pass
+last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
 
+file_written = 0
+printlog("file_written set to " + str(file_written))
 
-try:
-    from ctypes import windll
-    windll.shcore.SetProcessDpiAwareness(1)
-except:
+def setup_prefs(event=None):
+    global folder_path, last_file_path, last_write
+    
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    if not os.path.exists(last_file_path):
+        with open(last_file_path, 'w'):
+            pass
+
+    if not os.path.exists(last_write):
+        with open(last_write, 'w'):
+            pass
+
+setup_prefs()
+
+class platformError(Exception):
     pass
 
-# useful to avoid overwhelming user when he/she hits File > New
-global file_written
-file_written = 0
-print("file_written set to " + str(file_written))
-
-# load the GUI before defining userland functions
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
 root.minsize(800, 600)
 root.pack_propagate(False)
-
-if platform.system() == "Windows":
-    run_path = os.path.realpath(__file__)
-    runDir = os.path.dirname(run_path)
-    app_icon = os.path.join(runDir, 'Notepad.ico')
-    root.iconbitmap(app_icon)
 
 status_frame = tk.Frame(root)
 status_frame.pack()
@@ -128,15 +125,14 @@ word_count_var = tk.StringVar()
 word_count_label = tk.Label(status_frame, textvariable=word_count_var)
 word_count_label.pack(side=tk.LEFT)
 
-file_var = tk.StringVar()
-file_label = tk.Label(status_frame, textvariable=file_var)
-file_label.pack(side=tk.LEFT)
-
 text_size_indicator = tk.StringVar()
 size_label = tk.Label(status_frame, textvariable=text_size_indicator)
 size_label.pack(side=tk.LEFT)
 
-# define the userland functions
+file_var = tk.StringVar()
+file_label = tk.Label(status_frame, textvariable=file_var)
+file_label.pack(side=tk.LEFT)
+
 def get_font_for_platform():
     if os.name == 'nt':
         return font.Font(family="Consolas", size=12)
@@ -145,33 +141,136 @@ def get_font_for_platform():
     else:
         return font.Font(family="DejaVu Sans Mono", size=12)
 
-
 text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
+cdg = ic.ColorDelegator()
+cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
+cdg.idprog = re.compile(r'\s+(\w+)', re.S)
+
+cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
+
+ip.Percolator(text_area).insertfilter(cdg)
+
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
+if platform.system() == "Darwin" or platform.system() == "Linux":
+    printlog("Clearing any locks...")
+    subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
+else:
+    printlog("We are on a system that does not need or use file locks, skipping...")
+
+def runonarg(arg):
+    global file_written, current_file, file_open
+    if os.path.exists(arg):
+        with open(arg, 'r') as file:
+            if file_written == 1:
+                if platform.system() == "Darwin":
+                    newWindow_macOS(openFile=arg)
+                elif platform.system() == "Linux":
+                    newWindow_Linux(openFile=arg)
+                else:
+                    text_area.delete(1.0, "end")
+                    current_file = arg
+                    text_area.insert(1.0, file.read())
+                    file_open = 1
+            else:
+                text_area.delete(1.0, "end")
+                current_file = arg
+                text_area.insert(1.0, file.read())
+                file_open = 1
+            #printlog("Current file path: " + current_file)
+            #printlog("File open: " + str(file_open))
+            printlog("File loaded")
+    else:
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
+        
+        # text_area.delete(1.0, "end")
+        # with open(arg, 'w') as file:
+            # text = text_area.get(1.0, "end-1c")
+            # file.write(text)
+        # file_open = 1
+        # current_file = os.path.abspath(arg)
+        # #printlog("Current file path: " + current_file)
+        # #printlog("File open: " + str(file_open))
+        # printlog("Because the file doesn't exist, it was created as a blank new file instead")
+        
+    # except Exception as e:
+    #     printlog("Exception " + str(e) + " caught!")
+
+# Check if the system is macOS (Darwin)
+if platform.system() == "Darwin":
+    try:
+        def addOpenEventSupport(root):
+            """
+            Enable the application to handle macOS 'Open with' events.
+            """
+            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
+            openFilePath = os.path.join(cache_path, "openFile.txt")
+
+            def doOpenFile(*args):
+                global fileToBeOpened, openFile
+                if args:
+                    fileToBeOpened = str(args[0])
+                    openFile = 1
+                    printlog("File was passed from Finder, loading file...")
+                    runonarg(fileToBeOpened)
+                
+                else:
+                    fileToBeOpened = ""
+                    openFile = 0
+                    printlog("No file passed from Finder, loading program with last known file...")
+                    printlog("Program loaded")
+                
+                printlog("fileToBeOpened: " + str(fileToBeOpened))
+                printlog("openFile: " + str(openFile))
+            # Hook into macOS-specific file open event
+            root.createcommand("::tk::mac::OpenDocument", doOpenFile)
+
+        addOpenEventSupport(root)
+
+    except Exception as e:
+        fileToBeOpened = ""
+        openFile = 0
+        printlog(str(e))
+        printlog("fileToBeOpened: " + str(fileToBeOpened))
+
+else:
+    # Tell the user through the console that we are running on Linux
+    printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
+    # If not macOS, fallback to command line arguments
+    filearg = sys.argv
+    if len(filearg) <= 1:
+        openFile = 0
+        printlog("No arguments provided. Proceeding to load program with last known file...")
+        printlog("Program loaded")
+    else:
+        openFile = 1
+        printlog("Assuming argument is the file to open. Loading file...")
+        fileToBeOpened = filearg[1]
+        runonarg(fileToBeOpened)
+
 
 def debug_var(event=None):
     global file_open, current_file
     if current_file:
-        print("Current file variable works")
-        print(current_file)
+        printlog("Current file variable works")
+        printlog(current_file)
     else:
-        print("Not intact")
+        printlog("Not intact")
     if file_open:
-        print("File_open variable is intact")
-        print(file_open)
+        printlog("File_open variable is intact")
+        printlog(file_open)
     else:
-        print("Not working")
+        printlog("Not working")
     return 'break'
+
 
 def autosave_file(event=None):
     global current_file
     global file_open
-    # if a file is open, save to the save PATH, otherwise, quit upon known error
     try:
         if file_open == 1:
             with open(current_file, 'w') as file:
@@ -179,19 +278,29 @@ def autosave_file(event=None):
                 file.write(text)
     except FileNotFoundError:
         return 'break'
-    print("Autosaved file")
+    printlog("Autosaved file")
 
 
 def write_prefs(event=None):
+    setup_prefs()
+    
     global current_file, file_open
-    with open(
-            os.path.join(local_app_data_path, 'NotepadEE', 'prefs','last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(local_app_data_path, 'NotepadEE', 'prefs', 'last_file_path')
+    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
     with open(last_file_path, 'w') as file:
         file.write(str(current_file))
     autosave_file()
-    print("Prefs written")
+    printlog("Wrote prefs successfully")
+
+def spoof_prefs(current_file="", file_open=""):
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+        file.write(text_area.get('1.0', 'end-1c'))
+    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
+    with open(last_file_path, 'w') as file:
+        file.write(str(current_file))
+    autosave_file()
+    printlog("Wrote prefs successfully")
 
 # save_as provides the dialog
 def save_as(event=None):
@@ -199,104 +308,104 @@ def save_as(event=None):
     file_path = filedialog.asksaveasfilename(
         defaultextension="",
         filetypes=(
-            ("All Files (*.*)", "*.*"),
+            ("All Files", "*.*"),
 
-            # Notepad files
-            ("Plain text file (.txt)", ".txt"),
-            ("Log file (.log)", ".log"),
+            # Plain text files
+            ("Plain text file", ".txt"),
+            ("Log file", ".log"),
 
             # ms ini/inf
-            ("INI file (.ini)", ".ini"),
+            ("INI file", ".ini"),
             ("INF file (.inf)", ".inf"),
 
             # C, C++, objc
-            ("C, C++, objc header (.h)", ".h"),
-            ("C, C++, objc header (.hh)", ".hh"),
-            ("C, C++, objc header (.hpp)", ".hpp"),
-            ("C, C++, objc header (.hxx)", ".hxx"),
-            ("C, C++, objc source (.c)", ".c"),
-            ("C, C++, objc source (.cpp)", ".cpp"),
-            ("C, C++, objc source (.cxx)", ".cxx"),
-            ("C, C++, objc source (.cc)", ".cc"),
-            ("C, C++, objc source (.m)", ".m"),
-            ("C, C++, objc source (.mm)", ".mm"),
-            ("C, C++, objc project (.vcxproj)", ".vcxproj"),
-            ("C, C++, objc project (.vcproj)", ".vcproj"),
-            ("C, C++, objc properties (.props)", ".props"),
-            ("C, C++, objc properties (.vsprops)", ".vsprops"),
-            ("C, C++, objc manifest (.manifest)", ".manifest"),
+            ("C, C++, objc header", ".h"),
+            ("C, C++, objc header", ".hh"),
+            ("C, C++, objc header", ".hpp"),
+            ("C, C++, objc header", ".hxx"),
+            ("C, C++, objc source", ".c"),
+            ("C, C++, objc source", ".cpp"),
+            ("C, C++, objc source", ".cxx"),
+            ("C, C++, objc source", ".cc"),
+            ("C, C++, objc source", ".m"),
+            ("C, C++, objc source", ".mm"),
+            ("C, C++, objc project", ".vcxproj"),
+            ("C, C++, objc project", ".vcproj"),
+            ("C, C++, objc properties", ".props"),
+            ("C, C++, objc properties", ".vsprops"),
+            ("C, C++, objc manifest", ".manifest"),
 
             # Java, C#, Pascal
-            ("Java file (.java)", ".java"),
-            ("Pascal file (.pas)", ".pas"),
-            ("Pascal file (.pp)", ".pp"),
-            ("Include file (.inc)", ".inc"),
+            ("Java file", ".java"),
+            ("Pascal file", ".pas"),
+            ("Pascal file", ".pp"),
+            ("Include file", ".inc"),
 
             # .NET code
             ("Visual Basic (.vb)", ".vb"),
             ("Visual Basic script (.vbs)", ".vbs"),
             ("C# file (.cs)", ".cs"),
-
+            
             # Web script files
-            ("HTML file (.html)", ".html"),
-            ("HTML file (.htm)", ".htm"),
-            ("Server-side HTML (.shtml)", ".shtml"),
-            ("Server-side HTML (.shtm)", ".shtm"),
-            ("HTML Application (.hta)", ".hta"),
-            ("ASP file (.asp)", ".asp"),
-            ("ASP.NET file (.aspx)", ".aspx"),
-            ("CSS file (.css)", ".css"),
-            ("JavaScript file (.js)", ".js"),
-            ("JSON file (.json)", ".json"),
-            ("JavaScript module (.mjs)", ".mjs"),
-            ("JavaScript module (.jsm)", ".jsm"),
-            ("JSP file (.jsp)", ".jsp"),
-            ("PHP file (.php)", ".php"),
-            ("PHP3 file (.php3)", ".php3"),
-            ("PHP4 file (.php4)", ".php4"),
-            ("PHP5 file (.php5)", ".php5"),
-            ("PHP script (.phps)", ".phps"),
-            ("PHP script (.phpt)", ".phpt"),
-            ("PHP file (.phtml)", ".phtml"),
-            ("XML file (.xml)", ".xml"),
-            ("XHTML file (.xhtml)", ".xhtml"),
-            ("XHTML file (.xht)", ".xht"),
-            ("XUL file (.xul)", ".xul"),
-            ("KML file (.kml)", ".kml"),
-            ("XAML file (.xaml)", ".xaml"),
-            ("XSML file (.xsml)", ".xsml"),
+            ("HTML file", ".html"),
+            ("HTML file", ".htm"),
+            ("Server-side HTML", ".shtml"),
+            ("Server-side HTML", ".shtm"),
+            ("HTML Application", ".hta"),
+            ("ASP file", ".asp"),
+            ("ASP.NET file", ".aspx"),
+            ("CSS file", ".css"),
+            ("JavaScript file", ".js"),
+            ("JSON file", ".json"),
+            ("JavaScript module", ".mjs"),
+            ("JavaScript module", ".jsm"),
+            ("JSP file", ".jsp"),
+            ("PHP file", ".php"),
+            ("PHP3 file", ".php3"),
+            ("PHP4 file", ".php4"),
+            ("PHP5 file", ".php5"),
+            ("PHP script", ".phps"),
+            ("PHP script", ".phpt"),
+            ("PHP file", ".phtml"),
+            ("XML file", ".xml"),
+            ("XHTML file", ".xhtml"),
+            ("XHTML file", ".xht"),
+            ("XUL file", ".xul"),
+            ("KML file", ".kml"),
+            ("XAML file", ".xaml"),
+            ("XSML file", ".xsml"),
 
             # Script files
-            ("Shell script (.sh)", ".sh"),
-            ("Bash script (.bsh)", ".bsh"),
-            ("Bash script (.bash)", ".bash"),
-            ("Batch file (.bat)", ".bat"),
-            ("Command file (.cmd)", ".cmd"),
-            ("NSIS script (.nsi)", ".nsi"),
-            ("NSIS header (.nsh)", ".nsh"),
-            ("Lua script (.lua)", ".lua"),
-            ("Perl script (.pl)", ".pl"),
-            ("Perl module (.pm)", ".pm"),
-            ("Python script (.py)", ".py"),
-            ("Inno Setup script (.iss)", ".iss"),
+            ("Shell script", ".sh"),
+            ("Bash script", ".bsh"),
+            ("Bash script", ".bash"),
+            ("Batch file", ".bat"),
+            ("Command file", ".cmd"),
+            ("NSIS script", ".nsi"),
+            ("NSIS header", ".nsh"),
+            ("Lua script", ".lua"),
+            ("Perl script", ".pl"),
+            ("Perl module", ".pm"),
+            ("Python script", ".py"),
+            ("Inno Setup script", ".iss"),
             ("Makefile", ".mak"),
 
             # Property scripts
-            ("Resource file (.rc)", ".rc"),
-            ("ActionScript (.as)", ".as"),
-            ("MaxScript (.mx)", ".mx"),
+            ("Resource file", ".rc"),
+            ("ActionScript", ".as"),
+            ("MaxScript", ".mx"),
 
             # Fortran, TeX, SQL
-            ("Fortran file (.f)", ".f"),
-            ("Fortran file (.for)", ".for"),
-            ("Fortran 90 file (.f90)", ".f90"),
-            ("Fortran 95 file (.f95)", ".f95"),
-            ("Fortran 2000 file (.f2k)", ".f2k"),
-            ("TeX file (.tex)", ".tex"),
-            ("SQL file (.sql)", ".sql"),
+            ("Fortran file", ".f"),
+            ("Fortran file", ".for"),
+            ("Fortran 90 file", ".f90"),
+            ("Fortran 95 file", ".f95"),
+            ("Fortran 2000 file", ".f2k"),
+            ("TeX file", ".tex"),
+            ("SQL file", ".sql"),
 
             # Miscellaneous files
-            ("NFO file (.nfo)", ".nfo")))
+            ("NFO file", ".nfo")))
     current_file = file_path
     # if file_path doesn't exist, let's stop the function and return False
     if not file_path:
@@ -304,20 +413,57 @@ def save_as(event=None):
     
     # if we get a valid file_path, let's save via dialog
     try:
-        print("Saving file to location:")
-        print(file_path)
+        printlog("Saving file to location:")
+        printlog(file_path)
         with open(file_path, 'w') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
         file_open = 1
-        print("File was saved to different location successfully.")
+        printlog("File was saved to different location successfully.")
         return True
     
     # if any errors manage to get past this, let's do an exception to quit gracefully
     except FileNotFoundError:
         messagebox.showerror("Error", "Location nonexistent")
         return False
+
+def open_file(event=None):
+    global current_file, file_open
+    save_file("y")
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
+        text_area.delete(1.0, "end")
+        current_file = file_path
+        with open(file_path, 'r') as file:
+            text_area.insert(1.0, file.read())
+        file_open = 1
+        printlog("New file opened")
+    write_prefs()
+    
+def open_file_v2(event=None):
+    global current_file, file_written, file_open
+    save_file("y")
+    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+    if file_path:
+        with open(file_path, 'r') as file:
+            if file_written == 1:
+                if platform.system() == "Darwin":
+                    newWindow_macOS(openFile=file_path)
+                elif platform.system() == "Linux":
+                    newWindow_Linux(openFile=file_path)
+                else:
+                    text_area.delete(1.0, "end")
+                    current_file = file_path
+                    text_area.insert(1.0, file.read())
+                    file_open = 1
+            else:
+                text_area.delete(1.0, "end")
+                current_file = file_path
+                text_area.insert(1.0, file.read())
+                file_open = 1
+        printlog("New file opened")
+    # write_prefs()
 
 def save_file(warn):
     global current_file, file_open, file_written
@@ -336,48 +482,32 @@ def save_file(warn):
             response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Do you want to save it to a selected location?")
             if response:
                 if save_as():
-                    print("File saved without warning")
+                    printlog("File saved without warning")
                     return True
             else:
                 return True
         elif warn == "w":
-            if platform.system() == "Darwin":
-                pass
-            else:
-                if file_written == 1:
-                    response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
-                    if response:
-                        if save_as():
-                            print("File saved")
-                            return True
-                    else:
+            if file_written == 1:
+                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
+                if response:
+                    if save_as():
+                        printlog("File saved")
                         return True
+                else:
+                    return True
         else:
-            response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file?")
+            response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file before proceeding?")
             if response:
                 if save_as():
-                    print("File saved after warning user")
+                    printlog("File saved after warning user")
                     return True
             else:
                 return True
 
 def save_file2(event=None):
-    global current_file, file_open
-    print("No-warning wrapper triggered, running save_file with nowarning option")
+    global current_file, file_open, file_written
+    printlog("No-warning wrapper triggered, running save_file with nowarning option")
     save_file("n")
-
-def open_file(event=None):
-    global current_file, file_open
-    save_file("y")
-    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file = file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-        file_open = 1
-        print("File opened successfully.")
-    write_prefs()
 
 def new_file(event=None):
     global current_file, file_open, file_written
@@ -387,47 +517,44 @@ def new_file(event=None):
         # Only run this code if save_file, otherwise, don't force user to clear
         if save_file("y"):
             text_area.delete(1.0, "end")
-            print("Cleared text_area")
+            printlog("Cleared text_area")
             current_file = ""
             write_prefs()
             file_open = 0
-            print("New file created")
+            printlog("New file created")
             file_written = 0
     
     # Otherwise, clear without obstruction
     else:
         text_area.delete(1.0, "end")
-        print("Cleared text_area")
+        printlog("Cleared text_area")
         current_file = ""
-        write_prefs()
-        file_open = 0
-        print("New file created")
 
 
 def cut_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
     text_area.delete("sel.first", "sel.last")
-    print("Cut option ran successfully")
+    printlog("Cut option succeeded")
     return 'break'
 
 
 def copy_text(event=None):
     text_area.clipboard_clear()
     text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
-    print("Text copied to clipboard successfully")
+    printlog("Text copied to clipboard")
     return 'break'
 
 
 def paste_text(event=None):
     text_area.insert("insert", text_area.clipboard_get())
-    print("Text pasted from clipboard successfully")
+    printlog("Text pasted from clipboard")
     return 'break'
 
 
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
-    print("All text selected")
+    printlog("Text selected")
     return 'break'
 
 
@@ -436,7 +563,7 @@ def undo(event=None):
         text_area.edit_undo()
     except tk.TclError:
         pass
-    print("Edit undone")
+    printlog("Edit undone")
 
 
 def redo(event=None):
@@ -444,7 +571,8 @@ def redo(event=None):
         text_area.edit_redo()
     except tk.TclError:
         pass
-    print("Edit redone")
+    printlog("Edit redone")
+
 
 def find_and_replace(event=None):
     popup = tk.Toplevel(root)
@@ -455,7 +583,8 @@ def find_and_replace(event=None):
     find_entry = tk.Entry(popup)
     find_entry.pack()
 
-    replace_label = tk.Label(popup, text="Enter the text you want to it replace with:")
+    replace_label = tk.Label(
+        popup, text="Enter the text you want to replace it with:")
     replace_label.pack()
     replace_entry = tk.Entry(popup)
     replace_entry.pack()
@@ -491,7 +620,7 @@ def go_to_line(event=None):
 
     def go(event=None):
         line_number = entrybox.get()
-        text_area.mark_set("insert", str(line_number) + ".0") # f"{line_number}.0"
+        text_area.mark_set("insert", str(line_number) + ".0")
 
     def close(event=None):
         popup.destroy()
@@ -512,7 +641,7 @@ def cPos(index):
     elif index == "column":
         return column
     else:
-        print("invalidArg")
+        printlog("invalidArg")
         return "invalidArg"
 
 def findNext(text):
@@ -521,18 +650,18 @@ def findNext(text):
         start = last_highlight
     except tk.TclError:
         cPos_line, cpos_column = cPos("both")
-        start = str(cPos_line) + "." + str(cPos_column) # f"{cPos_line}.{cpos_column}"
+        start = str(cPos_line) + "." + str(cPos_column)
         # start= "1.0"
 
     text_area.tag_remove("highlight", "1.0", "end")
     try:
         start = text_area.search(text, start, stopindex="end")
-        end = str(start) + " + " + str(len(text)) + "c" # f"{start} + {len(text)}c"
+        end = str(start) + " + " + str(len(text)) + "c"
         text_area.tag_add("highlight", start, end)
     except Exception as e:
         start = "1.0"
         start = text_area.search(text, start, stopindex="end")
-        end = str(start) + " + " + str(len(text)) + "c" # f"{start} + {len(text)}c"
+        end = str(start) + " + " + str(len(text)) + "c"
         text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
@@ -556,40 +685,40 @@ def find_text(event=None):
         clear()
         popup.destroy()
     
-    find_button = tk.Button(popup, text="Find", command = findNext_wrapper)
+    find_button = tk.Button(popup, text="Find Next", command = findNext_wrapper)
     close_button = tk.Button(popup, text="Close", command=close)
     clear_button = tk.Button(popup, text="Clear", command=clear)
     find_button.pack()
     clear_button.pack()
     close_button.pack()
     entrybox.bind('<Return>', findNext_wrapper)
-
+    
 def mark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
     # DO NOT enable this
-    # print(f"Current selection is {selectStart}, {selectEnd}")
-    print("Clearing all current highlights in selection...")
+    # printlog(f"Current selection is {selectStart}, {selectEnd}")
+    printlog("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
-    print("Configuring highlight_permanent tags to selection...")
+    printlog("Configuring highlight_permanent tags to selection...")
     text_area.tag_add("highlight_permanent", selectStart, selectEnd)
-    print("Configuring tagged text to highlight...")
+    printlog("Configuring tagged text to highlight...")
     text_area.tag_config("highlight_permanent", background="green")
-    print("done")
+    printlog("done")
     
 def unmark_text(event=None):
     selectStart = text_area.index("sel.first")
     selectEnd = text_area.index("sel.last")
     # DO NOT enable this
-    # print(f"Current selection is {selectStart}, {selectEnd}")
-    print("Clearing all current highlights in selection...")
+    # printlog(f"Current selection is {selectStart}, {selectEnd}")
+    printlog("Clearing all current highlights in selection...")
     text_area.tag_remove("highlight_permanent", selectStart, selectEnd)
-    print("done")
+    printlog("done")
 
 def unmark_all_text(event=None):
-    print("Clearing all current highlights...")
+    printlog("Clearing all current highlights...")
     text_area.tag_remove("highlight_permanent", "1.0", "end")
-    print("done")
+    printlog("done")
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
@@ -607,32 +736,28 @@ def update_line_number(event=None):
     # print("Status bar updated")
     root.after(100, update_line_number)
 
-
 def increase_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size + 1)
-    print("Font size increased by 1 pt")
-
+    printlog("Font size increased by 1 pt")
 
 def decrease_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size - 1)
-    print("Font size decreased by 1 pt")
+    printlog("Font size decreased by 1 pt")
 
 # Create a function to check for text in text_area
 def check_file_written(event=None):
     global file_written
-    print("Checking if text_area has been edited by the user to contain text...")
-    current_text = text_area.get(1.0, "end-1c").strip()
-
+    printlog("Checking if text_area has been edited by the user to contain text...")
+    current_text = text_area.get(1.0, "end-1c")
     # if there is text, set it to 1
     if current_text:
-        print("There is text; setting to 1")
+        printlog("There is text; setting to 1")
         file_written = 1
-
     # otherwise, set it to 0
     else:
-        print("No text")
+        printlog("No text")
         file_written = 0
 
 def runinbackground(event=None):
@@ -640,40 +765,114 @@ def runinbackground(event=None):
     check_file_written()
     debug_var()
 
-def runonfilearg(file_path):
-    global file_open, current_file
-    if os.path.exists(file_path):
-        text_area.delete(1.0, "end")
-        current_file = os.path.abspath(file_path)
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
+def newWindow_macOS(openFile=""):
+    global folder_path
+    if platform.system() == "Darwin":
+        run_path = os.path.realpath(__file__)
+        cwd = os.getcwd()
+        freeze_time = 1
+        emptyString = ""
+        # printlog(f"Script path is {run_path}")
+        # printlog(f"Current working directory is {cwd}")
+        # printlog(f"App is located at {cwd}/Notepad==.app")
+        # DO NOT enable this
+        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+            file.write(emptyString)
+        # DO NOT enable this
+        # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        subprocess.call(["/bin/rm", "-rf", folder_path])
+        printlog("Launching new instance...")
+        if openFile:
+            subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app", openFile])
+        else:
+            subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app"])
+        # DO NOT enable this
+        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+            pass
+        # DO NOT enable this
+        # printlog(f"Writing cache back to prefs folder at {folder_path}...")
         write_prefs()
-        file_open = 1
-        #print("Current file path: " + current_file)
-        #print("File open: " + str(file_open))
-        print("File loaded")
+        printlog("done")
     else:
-        text_area.delete(1.0, "end")
-        with open(file_path, 'w') as file:
-            text = text_area.get(1.0, "end-1c")
-            file.write(text)
-        file_open = 1
-        current_file = os.path.abspath(file_path)
-        #print("Current file path: " + current_file)
-        #print("File open: " + str(file_open))
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+
+def newWindow_Linux(openFile=""):
+    def main(event=None):
+        global folder_path
+        run_path = os.path.realpath(__file__)
+        cwd = os.getcwd()
+        pyexe = sys.executable
+        pyexe_dir = os.path.dirname(pyexe)
+        pyInstFile = os.path.join(pyexe_dir, '.pyinstaller')
+        freeze_time = 1
+
+        # DO NOT enable
+        # printlog(f"Script path is {run_path}")
+        # printlog(f"Current working directory is {cwd}")
+        # printlog(f"Executable is located at {pyexe}")
+        emptyString = ""
+
+        # DO NOT enable, this is only compatible with Python 3.12 and later
+        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+            file.write(emptyString)
+        # DO NOT enable
+        # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+        subprocess.call(["/bin/rm", "-rf", folder_path])
+        printlog("Launching new instance...")
+        # Regular launcher with no open file support
+        def launcher():
+            if os.path.exists(pyInstFile):
+                printlog("We are running in PyInstaller mode, running only the executable...")
+                subprocess.Popen([pyexe], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            else:
+                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+        # launcher with open file support
+        def launcher2():
+            if os.path.exists(pyInstFile):
+                printlog("We are running in PyInstaller mode, running only the executable...")
+                subprocess.Popen([pyexe, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            else:
+                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                subprocess.Popen([pyexe, run_path, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+        if openFile:
+            new_thread = threading.Thread(target=launcher2)
+        else:
+            new_thread = threading.Thread(target=launcher)
+        new_thread.start()
+        # DO NOT enable, this is only compatible with Python 3.12 and later
+        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+            pass
+        # DO NOT enable
+        # printlog(f"Writing cache back to prefs folder at {folder_path}...")
         write_prefs()
-        print("Because the file doesn't exist, it was created as a blank new file instead")
+        printlog("done")
+    if platform.system() == "Linux":
+        main()
+    else:
+        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+
+def newWindow(event=None):
+    if platform.system() == "Darwin":
+        newWindow_macOS()
+    elif platform.system() == "Linux":
+        newWindow_Linux()
+    else:
+        raise platformError("There is no newWindow function available for your platform.")
 
 def exit_handler(event=None):
-    print("Telling user to save file before exit...")
+    printlog("Telling user to save file before exit...")
     save_file("w")
-    print("Exiting...")
+    printlog("Exiting...")
     sys.exit()
 
-if openFile == 1:
-    runonfilearg(fileToBeOpened)
-else:
-    print("Program loaded")
+def exit_on_keyboardInterrupt(signum, frame):
+    printlog("Received KeyboardInterrupt, running exit handler...")
+    exit_handler()
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES)
 text_area.bind('<KeyRelease>', runinbackground)
@@ -681,15 +880,21 @@ text_area.bind('<Button-1>', runinbackground)
 runinbackground()
 update_line_number()
 
-check_file_written()
-
 menu = tk.Menu(root)
 root.config(menu=menu)
 
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
-file_menu.add_command(label="New", command=new_file)
-file_menu.add_command(label="Open...", command=open_file)
+# file_menu.add_command(label="New", command=new_file)
+# if platform.system() == "Darwin":
+    # file_menu.add_command(label="New Window", command=newWindow_macOS)
+# elif platform.system() == "Linux":
+    # file_menu.add_command(label="New Window", command=newWindow_Linux)
+if platform.system() == "Darwin":
+    file_menu.add_command(label="New", command=newWindow)
+elif platform.system() == "Linux":
+    file_menu.add_command(label="New", command=newWindow)
+file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
 
@@ -717,8 +922,21 @@ menu.add_cascade(label="Accessibility", menu=accessibility_menu)
 accessibility_menu.add_command(label="Zoom in", command=increase_font_size)
 accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 
-root.bind_all('<Control-n>', new_file)
-root.bind_all('<Control-o>', open_file)
+window_menu = tk.Menu(menu)
+menu.add_cascade(label="Window", menu=window_menu)
+window_menu.add_command(label="Close", command=exit_handler)
+
+if platform.system() == "Darwin":
+    root.bind_all("<Command-q>", exit_handler)
+root.bind_all("<Control-w>", exit_handler)
+
+if platform.system() == "Darwin":
+    root.bind_all('<Command-n>', newWindow)
+    root.bind_all('<Command-N>', newWindow)
+elif platform.system() == "Linux":
+    root.bind_all('<Control-n>', newWindow)
+    root.bind_all('<Control-N>', newWindow)
+root.bind_all('<Control-o>', open_file_v2)
 root.bind_all('<Control-s>', save_file)
 root.bind_all('<Control-S>', save_as)
 
@@ -741,7 +959,14 @@ text_area.bind('<Control-G>', go_to_line)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
+# atexit.register(exit_handler)
+signal.signal(signal.SIGINT, exit_on_keyboardInterrupt)
+signal.signal(signal.SIGTERM, exit_on_keyboardInterrupt)
 root.protocol('WM_DELETE_WINDOW', exit_handler)
+
+# Implement quit event if macOS
+if platform.system() == "Darwin":
+    root.createcommand('::tk::mac::Quit', exit_handler)
 
 write_prefs()
 root.mainloop()
