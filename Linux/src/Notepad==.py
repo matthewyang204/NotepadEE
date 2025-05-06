@@ -11,7 +11,9 @@ import threading
 # import atexit
 import signal
 import errno
-import idlelib
+import idlelib.colorizer as ic
+import idlelib.percolator as ip
+import re
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
