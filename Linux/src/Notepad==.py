@@ -83,7 +83,7 @@ last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_
 file_written = 0
 printlog("file_written set to " + str(file_written))
 
-setup_prefs(event=None):
+def setup_prefs(event=None):
     global folder_path last_file_path, last_write
     
     if not os.path.exists(folder_path):
