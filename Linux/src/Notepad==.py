@@ -153,10 +153,10 @@ else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
 def runonarg(arg):
-    global file_open, current_file
+    global file_written, current_file
     if os.path.exists(arg):
         with open(arg, 'r') as file:
-            if file_open == 1:
+            if file_written == 1:
                 if platform.system() == "Darwin":
                     newWindow_macOS(openFile=arg)
                 elif platform.system() == "Linux":
@@ -432,12 +432,12 @@ def open_file(event=None):
     write_prefs()
     
 def open_file_v2(event=None):
-    global current_file, file_open
+    global current_file, file_written
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         with open(file_path, 'r') as file:
-            if file_open == 1:
+            if file_written == 1:
                 if platform.system() == "Darwin":
                     newWindow_macOS(openFile=file_path)
                 elif platform.system() == "Linux":
