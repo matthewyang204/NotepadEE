@@ -432,7 +432,7 @@ def open_file(event=None):
     write_prefs()
     
 def open_file_v2(event=None):
-    global current_file, file_written
+    global current_file, file_written, file_open
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
