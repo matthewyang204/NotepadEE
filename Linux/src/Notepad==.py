@@ -846,6 +846,14 @@ def newWindow_Linux(openFile=""):
     else:
         raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
+def newWindow(event=None):
+    if platform.system() == "Darwin":
+        newWindow_macOS()
+    elif platform.system() == "Linux":
+        newWindow_Linux()
+    else:
+        raise platformError("There is no newWindow function available for your platform.")
+
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
     save_file("w")
