@@ -145,6 +145,14 @@ text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
+cdg = ic.ColorDelegator()
+cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat(), re.S)
+cdg.idprog = re.compile(r'\s+(\w+)', re.S)
+
+cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
+
+ip.Percolator(text).insertfilter(cdg)
+
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
     text_area.insert(1.0, file.read())
