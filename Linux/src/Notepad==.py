@@ -153,7 +153,7 @@ else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
 def runonarg(arg):
-    global file_written, current_file
+    global file_written, current_file, file_open
     if os.path.exists(arg):
         with open(arg, 'r') as file:
             if file_written == 1:
