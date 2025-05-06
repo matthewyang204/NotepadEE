@@ -4,3 +4,6 @@ Exec=/opt/matthewyang/Notepad==/Notepad==
 Icon=/opt/matthewyang/Notepad==/Notepad.png
 Type=Application
 Terminal=false
+MimeType=text/plain;
+Categories=Application;Utility;TextEditor;
+Keywords=Text;Editor;Plaintext;Write;
