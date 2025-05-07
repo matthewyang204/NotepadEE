@@ -151,6 +151,14 @@ cdg.idprog = re.compile(r'\s+(\w+)', re.S)
 
 cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
 
+# For platforms with malfunctioning idlelibs, force the standard colors
+if platform.system() == "Darwin":
+    cdg.tagdefs['COMMENT'] = {'foreground': '#FF0000', 'background': '#FFFFFF'}
+    cdg.tagdefs['KEYWORD'] = {'foreground': '#007F00', 'background': '#FFFFFF'}
+    cdg.tagdefs['BUILTIN'] = {'foreground': '#7F7F00', 'background': '#FFFFFF'}
+    cdg.tagdefs['STRING'] = {'foreground': '#7F3F00', 'background': '#FFFFFF'}
+    cdg.tagdefs['DEFINITION'] = {'foreground': '#007F7F', 'background': '#FFFFFF'}
+
 ip.Percolator(text_area).insertfilter(cdg)
 
 text_area.delete(1.0, "end")
