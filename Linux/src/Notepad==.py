@@ -154,7 +154,7 @@ cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
 # For platforms with malfunctioning idlelibs, force the standard colors
 if platform.system() == "Darwin":
     cdg.tagdefs['COMMENT']    = {'foreground': '#dd0000', 'background': '#ffffff'}  # red
-    cdg.tagdefs['KEYWORD']    = {'foreground': '#0000ff', 'background': '#ffffff'}  # blue
+    cdg.tagdefs['KEYWORD']    = {'foreground': '#F2A061', 'background': '#ffffff'}  # blue
     cdg.tagdefs['BUILTIN']    = {'foreground': '#900090', 'background': '#ffffff'}  # purple
     cdg.tagdefs['STRING']     = {'foreground': '#00aa00', 'background': '#ffffff'}  # green
     cdg.tagdefs['DEFINITION'] = {'foreground': '#000000', 'background': '#ffffff'}  # black
