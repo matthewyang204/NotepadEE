@@ -149,7 +149,7 @@ cdg = ic.ColorDelegator()
 cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
 cdg.idprog = re.compile(r'\s+(\w+)', re.S)
 
-cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
+cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': ''}
 
 # For platforms with malfunctioning idlelibs, force the standard colors
 if platform.system() == "Darwin":
