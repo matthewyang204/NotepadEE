@@ -153,11 +153,11 @@ cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
 
 # For platforms with malfunctioning idlelibs, force the standard colors
 if platform.system() == "Darwin":
-    cdg.tagdefs['COMMENT']    = {'foreground': '#dd0000', 'background': '#ffffff'}  # red
-    cdg.tagdefs['KEYWORD']    = {'foreground': '#F2A061', 'background': '#ffffff'}  # orange
-    cdg.tagdefs['BUILTIN']    = {'foreground': '#900090', 'background': '#ffffff'}  # purple
-    cdg.tagdefs['STRING']     = {'foreground': '#00aa00', 'background': '#ffffff'}  # green
-    cdg.tagdefs['DEFINITION'] = {'foreground': '#000000', 'background': '#ffffff'}  # black
+    cdg.tagdefs['COMMENT']    = {'foreground': '#dd0000', 'background': ''}  # red
+    cdg.tagdefs['KEYWORD']    = {'foreground': '#F2A061', 'background': ''}  # orange
+    cdg.tagdefs['BUILTIN']    = {'foreground': '#900090', 'background': ''}  # purple
+    cdg.tagdefs['STRING']     = {'foreground': '#00aa00', 'background': ''}  # green
+    cdg.tagdefs['DEFINITION'] = {'foreground': '#000000', 'background': ''}  # black
 
 ip.Percolator(text_area).insertfilter(cdg)
 
