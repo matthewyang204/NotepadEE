@@ -181,6 +181,8 @@ __pycache__/
 
 # macOS annoyances
 .DS_Store
+._*
+*DS_Store
 
 # Nuitka annoyances
 nuitka-crash-report.xml
