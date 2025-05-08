@@ -156,13 +156,22 @@ text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
 if syntaxHighlighting:
-    cdg = ic.ColorDelegator()
-    cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
-    cdg.idprog = re.compile(r'\s+(\w+)', re.S)
+    try:
+        cdg = ic.ColorDelegator()
+        cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
+        cdg.idprog = re.compile(r'\s+(\w+)', re.S)
 
-    cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
+        cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
 
-    ip.Percolator(text_area).insertfilter(cdg)
+        ip.Percolator(text_area).insertfilter(cdg)
+    except AttributeError:
+        cdg = ic.ColorDelegator()
+        cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat(), re.S)
+        cdg.idprog = re.compile(r'\s+(\w+)', re.S)
+
+        cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
+
+        ip.Percolator(text_area).insertfilter(cdg)
 else:
     printlog("Platform does not support newer idlelibs, syntax highlighting is disabled")
 
