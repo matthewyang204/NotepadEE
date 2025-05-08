@@ -1,2 +1,0 @@
-- [x] Test on Windows
-- [x] Test on macOS
