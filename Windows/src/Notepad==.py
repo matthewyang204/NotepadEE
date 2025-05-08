@@ -11,8 +11,12 @@ import threading
 # import atexit
 import signal
 import errno
-import idlelib.colorizer as ic
-import idlelib.percolator as ip
+try:
+    import idlelib.colorizer as ic
+    import idlelib.percolator as ip
+    syntaxHighlighting = True
+except Exception as e:
+    syntaxHighlighting = False
 import re
 
 # Define and create, if applicable, a cache folder
@@ -151,13 +155,16 @@ text_font = get_font_for_platform()
 text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
-cdg = ic.ColorDelegator()
-cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
-cdg.idprog = re.compile(r'\s+(\w+)', re.S)
+if syntaxHighlighting:
+    cdg = ic.ColorDelegator()
+    cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat().pattern, re.S)
+    cdg.idprog = re.compile(r'\s+(\w+)', re.S)
 
-cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
+    cdg.tagdefs['MYGROUP'] = {'foreground': '#7F7F7F', 'background': '#FFFFFF'}
 
-ip.Percolator(text_area).insertfilter(cdg)
+    ip.Percolator(text_area).insertfilter(cdg)
+else:
+    printlog("Platform does not support newer idlelibs, syntax highlighting is disabled")
 
 text_area.delete(1.0, "end")
 with open(last_write, 'r') as file:
