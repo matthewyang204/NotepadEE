@@ -15,7 +15,7 @@ try:
     import idlelib.colorizer as ic
     import idlelib.percolator as ip
     syntaxHighlighting = True
-except Exception as e:
+except ImportError:
     syntaxHighlighting = False
 import re
 
@@ -91,6 +91,11 @@ printlog("file_written set to " + str(file_written))
 
 def setup_prefs(event=None):
     global folder_path, last_file_path, last_write
+    
+    tmp_path = '/tmp'
+    
+    if not os.path.exists(tmp_path):
+        os.makedirs(tmp_path)
     
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -892,7 +897,7 @@ def newWindow_Linux(openFile=""):
     if platform.system() == "Linux":
         main()
     else:
-        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+        raise platformError("This function is only designed to be run on Linux. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def newWindow(event=None):
     if platform.system() == "Darwin":
