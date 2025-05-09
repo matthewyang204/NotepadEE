@@ -15,7 +15,7 @@ try:
     import idlelib.colorizer as ic
     import idlelib.percolator as ip
     syntaxHighlighting = True
-except Exception as e:
+except ImportError:
     syntaxHighlighting = False
 import re
 
