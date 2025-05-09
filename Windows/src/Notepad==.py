@@ -92,6 +92,11 @@ printlog("file_written set to " + str(file_written))
 def setup_prefs(event=None):
     global folder_path, last_file_path, last_write
     
+    tmp_path = '/tmp'
+    
+    if not os.path.exists(tmp_path):
+        os.makedirs(tmp_path)
+    
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
