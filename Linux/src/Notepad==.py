@@ -18,6 +18,7 @@ try:
 except ImportError:
     syntaxHighlighting = False
 import re
+import pathlib
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -164,8 +165,6 @@ if syntaxHighlighting:
             cdg.tagdefs['BUILTIN']    = {'foreground': '#900090', 'background': ''}  # purple
             cdg.tagdefs['STRING']     = {'foreground': '#00aa00', 'background': ''}  # green
             cdg.tagdefs['DEFINITION'] = {'foreground': '#000000', 'background': ''}  # black
-
-        ip.Percolator(text_area).insertfilter(cdg)
     except AttributeError:
         cdg = ic.ColorDelegator()
         cdg.prog = re.compile(r'\b(?P<MYGROUP>tkinter)\b|' + ic.make_pat(), re.S)
@@ -180,8 +179,6 @@ if syntaxHighlighting:
             cdg.tagdefs['BUILTIN']    = {'foreground': '#900090', 'background': ''}  # purple
             cdg.tagdefs['STRING']     = {'foreground': '#00aa00', 'background': ''}  # green
             cdg.tagdefs['DEFINITION'] = {'foreground': '#000000', 'background': ''}  # black
-
-        ip.Percolator(text_area).insertfilter(cdg)
 else:
     printlog("Platform does not support newer idlelibs, syntax highlighting is disabled")
 
@@ -768,6 +765,23 @@ def update_line_number(event=None):
     # print("Status bar updated")
     root.after(100, update_line_number)
 
+def applySyntaxHighlighting(event=None):
+    global current_file, syntaxHighlighting
+    pythonExts = ['.py', '.pyw', '.pyc', '.pyo', '.pyd', '.pyx', '.pxd', '.pxi', '.pyi', '.ipynb', '.pyz']
+    if syntaxHighlighting:
+        try:
+            if pathlib.Path(os.path.basename(current_file)).suffix in pythonExts:
+                ip.Percolator(text_area).insertfilter(cdg)
+            else:
+                if getattr(cdg, 'delegate', None) is not None:
+                    ip.Percolator(text_area).removefilter(cdg)
+        except Exception as e:
+            if getattr(cdg, 'delegate', None) is not None:
+                ip.Percolator(text_area).removefilter(cdg)
+        
+    else:
+        printlog("Python version does not support syntax highlighting")
+
 def increase_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size + 1)
@@ -795,6 +809,7 @@ def check_file_written(event=None):
 def runinbackground(event=None):
     write_prefs()
     check_file_written()
+    applySyntaxHighlighting()
     debug_var()
 
 def newWindow_macOS(openFile=""):
