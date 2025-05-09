@@ -897,7 +897,7 @@ def newWindow_Linux(openFile=""):
     if platform.system() == "Linux":
         main()
     else:
-        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+        raise platformError("This function is only designed to be run on Linux. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def newWindow(event=None):
     if platform.system() == "Darwin":
