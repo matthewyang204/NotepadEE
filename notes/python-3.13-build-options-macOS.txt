@@ -1,0 +1,55 @@
+# Dependencies
+brew install openssl readline sqlite3 xz zlib gdbm tcl-tk gettext
+
+# Configure options
+../configure \
+  --prefix="/opt/python313" \
+  --enable-ipv6 \
+  --datarootdir="$(brew --prefix)/share" \
+  --datadir="$(brew --prefix)/share" \
+  --without-ensurepip \
+  --enable-loadable-sqlite-extensions \
+  --with-openssl="$(brew --prefix openssl@3)" \
+  --enable-optimizations \
+  --with-system-expat \
+  --with-system-libmpdec \
+  --with-readline=editline
+
+# Make options
+make -s -j16
+
+# Install stuff
+sudo /opt/python313/bin/python3 -m ensurepip --upgrade
+
+# Compiler options
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+
+# Other variables
+export CFLAGS="-DCONFIG_64=1 -D_PyHASH_BITS=64"
+
+LDFLAGS="-L$(brew --prefix gettext)/lib"
+CPPFLAGS="-I$(brew --prefix gettext)/include"
+
+export CFLAGS="-I$(brew --prefix mpdecimal)/include $CFLAGS"
+export LDFLAGS="-L$(brew --prefix mpdecimal)/lib $LDFLAGS"
+export CPPFLAGS="-I$(brew --prefix mpdecimal)/include $CPPFLAGS"
+
+export CFLAGS="-I$(brew --prefix gdbm)/include -lgdbm_compat $CFLAGS"
+export LDFLAGS="-L$(brew --prefix gdbm)/lib -lgdbm_compat $LDFLAGS"
+export CPPFLAGS="-I$(brew --prefix gdbm)/include $CPPFLAGS"
+
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
+export MACOSX_DEPLOYMENT_TARGET=10.15
+
+# You can use this gist to get older SDKs like the MacOSX10.15.sdk running on modern macOS
+https://gist.github.com/kenji21/25a65a7161793bdc4b7b2641ac67b22a
+- You can download Xcode 11.7 from Apple and extract the SDK
+- Download the Xcode 11.5 Command Line Tools from Apple, extract, and copy 10.15's CLTools SDK package's payload contents manually
+	- To do this, open all the way down to SDKs, and then copy the MacOSX{something}.sdk to clipboard
+	- Then navigate down /Library/Developer all the way to the SDKs, and then paste
+
+# Nuitka caveats
+Make sure to do this with Nuitka:
+export LDFLAGS="-L$(brew --prefix gettext)/lib -lintl"
+export CPPFLAGS="-I$(brew --prefix gettext)/include"
