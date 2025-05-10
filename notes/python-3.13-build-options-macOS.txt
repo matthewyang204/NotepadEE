@@ -1,5 +1,5 @@
 # Dependencies
-brew install openssl readline sqlite3 xz zlib gdbm tcl-tk gettext
+brew install openssl readline sqlite3 xz zlib gdbm tcl-tk gettext libxml2
 
 # Configure options
 ../configure \
