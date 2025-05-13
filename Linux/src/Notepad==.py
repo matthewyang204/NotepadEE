@@ -950,6 +950,8 @@ elif platform.system() == "Linux":
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
+if platform.system() == "Linux":
+    file_menu.add_command(label="Quit", command=exit_handler)
 
 edit_menu = tk.Menu(menu)
 menu.add_cascade(label="Edit", menu=edit_menu)
