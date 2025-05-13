@@ -526,6 +526,8 @@ def save_file(warn):
                     return False
                 else:
                     return True
+            else:
+                return True
         else:
             response = messagebox.askyesno("Create new file","The file does not exist. Do you want to create it as a new file before proceeding?")
             if response:
