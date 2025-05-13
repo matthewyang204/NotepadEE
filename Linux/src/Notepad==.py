@@ -890,10 +890,10 @@ def newWindow_Linux(openFile=""):
                 printlog("We are probably running in standard interpreted mode, launching executable with python file...")
                 subprocess.Popen([pyexe, run_path, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
         if openFile:
-            new_thread = threading.Thread(target=launcher2)
+            launcher_thread = threading.Thread(target=launcher2)
         else:
-            new_thread = threading.Thread(target=launcher)
-        new_thread.start()
+            launcher_thread = threading.Thread(target=launcher)
+        launcher_thread.start()
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
@@ -943,13 +943,12 @@ menu.add_cascade(label="File", menu=file_menu)
     # file_menu.add_command(label="New Window", command=newWindow_macOS)
 # elif platform.system() == "Linux":
     # file_menu.add_command(label="New Window", command=newWindow_Linux)
-if platform.system() == "Darwin":
-    file_menu.add_command(label="New", command=newWindow)
-elif platform.system() == "Linux":
-    file_menu.add_command(label="New", command=newWindow)
+file_menu.add_command(label="New", command=newWindow)
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
+if platform.system() == "Linux":
+    file_menu.add_command(label="Quit", command=exit_handler)
 
 edit_menu = tk.Menu(menu)
 menu.add_cascade(label="Edit", menu=edit_menu)
@@ -979,8 +978,6 @@ window_menu = tk.Menu(menu)
 menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Close", command=exit_handler)
 
-if platform.system() == "Darwin":
-    root.bind_all("<Command-q>", exit_handler)
 root.bind_all("<Control-w>", exit_handler)
 
 if platform.system() == "Darwin":
@@ -1020,6 +1017,8 @@ root.protocol('WM_DELETE_WINDOW', exit_handler)
 # Implement quit event if macOS
 if platform.system() == "Darwin":
     root.createcommand('::tk::mac::Quit', exit_handler)
+elif platform.system() == "Linux":
+    root.bind_all("<Control-q>", exit_handler)
 
 write_prefs()
 root.mainloop()
