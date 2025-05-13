@@ -517,11 +517,13 @@ def save_file(warn):
                 return True
         elif warn == "w":
             if file_written == 1:
-                response = messagebox.askyesno("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
+                response = messagebox.askyesnocancel("Warning: File is not saved","The current file is not saved. Changes may be lost if they are not saved. Do you want to save before exiting?")
                 if response:
                     if save_as():
                         printlog("File saved")
                         return True
+                elif response == None:
+                    return False
                 else:
                     return True
         else:
@@ -913,9 +915,11 @@ def newWindow(event=None):
 
 def exit_handler(event=None):
     printlog("Telling user to save file before exit...")
-    save_file("w")
-    printlog("Exiting...")
-    sys.exit()
+    if save_file("w"):
+        printlog("Exiting...")
+        sys.exit()
+    else:
+        printlog("User pressed cancel, not exiting...")
 
 def exit_on_keyboardInterrupt(signum, frame):
     printlog("Received KeyboardInterrupt, running exit handler...")
