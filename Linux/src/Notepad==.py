@@ -1018,6 +1018,8 @@ root.protocol('WM_DELETE_WINDOW', exit_handler)
 # Implement quit event if macOS
 if platform.system() == "Darwin":
     root.createcommand('::tk::mac::Quit', exit_handler)
+elif platform.system() == "Linux":
+    root.bind_all("<Control-q>", exit_handler)
 
 write_prefs()
 root.mainloop()
