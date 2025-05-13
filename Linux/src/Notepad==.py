@@ -890,10 +890,10 @@ def newWindow_Linux(openFile=""):
                 printlog("We are probably running in standard interpreted mode, launching executable with python file...")
                 subprocess.Popen([pyexe, run_path, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
         if openFile:
-            new_thread = threading.Thread(target=launcher2)
+            launcher_thread = threading.Thread(target=launcher2)
         else:
-            new_thread = threading.Thread(target=launcher)
-        new_thread.start()
+            launcher_thread = threading.Thread(target=launcher)
+        launcher_thread.start()
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
         while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
