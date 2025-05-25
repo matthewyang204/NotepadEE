@@ -45,12 +45,12 @@ global last_write
 last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write')
 
 file_written = 0
-printlog("file_written set to " + str(file_written))
+print("file_written set to " + str(file_written))
 
 def setup_prefs(event=None):
     global folder_path, last_file_path, last_write
     
-    tmp_path = '/tmp'
+    tmp_path = 'C:\tmp'
     
     if not os.path.exists(tmp_path):
         os.makedirs(tmp_path)
@@ -75,7 +75,7 @@ if not os.path.exists(cache_path):
 
 # Open a log file in write mode
 # log_file = os.path.join(cache_path, "notepadee_log.txt")
-log_file = os.path.join('/tmp', "notepadee_log.txt")
+log_file = os.path.join('C:\tmp', "notepadee_log.txt")
 
 # Get current PID
 pid = os.getpid()
