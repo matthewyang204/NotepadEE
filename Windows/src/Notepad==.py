@@ -20,49 +20,6 @@ except ImportError:
 import re
 import pathlib
 
-# Define and create, if applicable, a cache folder
-cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
-if not os.path.exists(cache_path):
-    os.makedirs(cache_path)
-
-# Open a log file in write mode
-# log_file = os.path.join(cache_path, "notepadee_log.txt")
-log_file = os.path.join('/tmp', "notepadee_log.txt")
-
-# Get current PID
-pid = os.getpid()
-
-# Special printlog statement to print stuff that doesn't belong in a console to the log file
-def printlog(message):
-    with open(log_file, 'a') as file:
-        file.write("Notepad== at " + str(pid) + ": " + str(message))
-    print("Notepad== at " + str(pid) + ": " + str(message))
-
-versionInfo = """Notepad==, version 5.1.0
-(C) 2024-2025 Matthew Yang"""
-
-helpInfo = versionInfo + """
-
-Usage: notepadee [OPTIONS] [<filepath>]
-
-Options:
---version, -v     Display version info and exit
---help, -h        Display this help message and exit
-
-Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
-"""
-
-arg = sys.argv
-if len(arg) <= 1:
-    pass
-else:
-    if arg[1] == '--version' or arg[1] == '-v':
-        print(versionInfo)
-        sys.exit()
-    elif arg[1] == '--help' or arg[1] == '-h':
-        print(helpInfo)
-        sys.exit()
-
 global fileToBeOpened
 global openFile
 fileToBeOpened = None
@@ -110,6 +67,49 @@ def setup_prefs(event=None):
             pass
 
 setup_prefs()
+
+# Define and create, if applicable, a cache folder
+cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
+if not os.path.exists(cache_path):
+    os.makedirs(cache_path)
+
+# Open a log file in write mode
+# log_file = os.path.join(cache_path, "notepadee_log.txt")
+log_file = os.path.join('/tmp', "notepadee_log.txt")
+
+# Get current PID
+pid = os.getpid()
+
+# Special printlog statement to print stuff that doesn't belong in a console to the log file
+def printlog(message):
+    with open(log_file, 'a') as file:
+        file.write("Notepad== at " + str(pid) + ": " + str(message))
+    print("Notepad== at " + str(pid) + ": " + str(message))
+
+versionInfo = """Notepad==, version 5.1.0
+(C) 2024-2025 Matthew Yang"""
+
+helpInfo = versionInfo + """
+
+Usage: notepadee [OPTIONS] [<filepath>]
+
+Options:
+--version, -v     Display version info and exit
+--help, -h        Display this help message and exit
+
+Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
+"""
+
+arg = sys.argv
+if len(arg) <= 1:
+    pass
+else:
+    if arg[1] == '--version' or arg[1] == '-v':
+        print(versionInfo)
+        sys.exit()
+    elif arg[1] == '--help' or arg[1] == '-h':
+        print(helpInfo)
+        sys.exit()
 
 class platformError(Exception):
     pass
