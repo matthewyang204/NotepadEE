@@ -74,8 +74,8 @@ if not os.path.exists(cache_path):
     os.makedirs(cache_path)
 
 # Open a log file in write mode
-# log_file = os.path.join(cache_path, "notepadee_log.txt")
-log_file = os.path.join('/tmp', "notepadee_log.txt")
+log_file = os.path.join(cache_path, "notepadee_log.txt")
+# log_file = os.path.join('/tmp', "notepadee_log.txt")
 
 # Get current PID
 pid = os.getpid()
