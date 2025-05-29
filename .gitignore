@@ -193,3 +193,6 @@ nuitka-crash-report.xml
 
 # Configure files
 .configured
+
+# JetBrains IDE prefs
+.idea/
