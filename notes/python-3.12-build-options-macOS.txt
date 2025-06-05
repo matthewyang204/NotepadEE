@@ -12,8 +12,6 @@ export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
 # Other variables
-# export CFLAGS="-DCONFIG_64=1 -D_PyHASH_BITS=64"
-
 LDFLAGS="-L$(brew --prefix gettext)/lib"
 CPPFLAGS="-I$(brew --prefix gettext)/include"
 
