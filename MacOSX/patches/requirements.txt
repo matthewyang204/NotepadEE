@@ -1,0 +1,5 @@
+tk
+nuitka==2.6.8
+imageio
+setuptools
+pyyaml
