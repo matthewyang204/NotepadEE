@@ -47,7 +47,7 @@ build:
 	echo "Copying files..."
 	cp assets/Info.plist dist/Notepad==.app/Contents/
 	cp Notepad.png dist/Notepad==.app/Contents/Resources/
-	cp src/Notepad==.py dist/Notepad==.app/Contents/Notepad==.py
+	cp src/Notepad==.py dist/Notepad==.app/Contents/MacOS/Notepad==.py
 
 	echo "Patching files..."
 	chmod +x dist/Notepad==.app/Contents/MacOS/Notepad==.py
