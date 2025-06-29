@@ -69,9 +69,9 @@ clean-dist: clean
 
 upgrade: uninstall-upgrade install
 
-sign:
-	echo "Please enter the name of your certificate:"
-	read CERTIFICATE && \
-	echo "Signing..." && \
-	sudo codesign --force --deep --sign "$$CERTIFICATE" dist/Notepad==.app
-	echo "done"
+# sign:
+# 	echo "Please enter the name of your certificate:"
+# 	read CERTIFICATE && \
+# 	echo "Signing..." && \
+# 	sudo codesign --force --deep --sign "$$CERTIFICATE" dist/Notepad==.app
+# 	echo "done"
