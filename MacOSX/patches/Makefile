@@ -51,7 +51,7 @@ build:
 
 	echo "Patching files..."
 	chmod +x dist/Notepad==.app/Contents/MacOS/Notepad==.py
-	{ echo "#!/usr/bin/env python3"; cat dist/Notepad==.app/Contents/MacOS/Notepad==.py } > /tmp/dcd072e14d6380b7f816d171d09d83ca394b554d5bac44a75c8336cac4f096c5 && mv /tmp/dcd072e14d6380b7f816d171d09d83ca394b554d5bac44a75c8336cac4f096c5 dist/Notepad==.app/Contents/MacOS/Notepad==.py
+	{ echo "#!/usr/bin/env python3\n\nimport os\nos.environ["DISPLAY"]\n:0.0\n"; cat dist/Notepad==.app/Contents/MacOS/Notepad==.py; } > /tmp/dcd072e14d6380b7f816d171d09d83ca394b554d5bac44a75c8336cac4f096c5 && mv /tmp/dcd072e14d6380b7f816d171d09d83ca394b554d5bac44a75c8336cac4f096c5 dist/Notepad==.app/Contents/MacOS/Notepad==.py
 
 	echo "done"
 	echo "To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
