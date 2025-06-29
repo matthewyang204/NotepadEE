@@ -55,11 +55,11 @@ rm Makefile
 cp patches/Makefile ./
 echo "Patching the key mappings..."
 sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
-echo "Patching the requirements..."
+echo "Removing the requirements..."
 rm requirements.txt
-cp patches/requirements.txt ./
+# cp patches/requirements.txt ./
 rm requirements-3.4.txt
-cp patches/requirements-3.4.txt ./
+# cp patches/requirements-3.4.txt ./
 echo "Patching the README..."
 rm README.md
 cp patches/README.md ./
