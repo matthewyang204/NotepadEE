@@ -97,6 +97,8 @@ if [ $? -eq 0 ]; then
     #     echo "Building with default host architecture, $HOSTARCH..."
     #     make
     # fi
+    echo "Making executable..."
+    chmod +x dist/Notepad==.app/Contents/MacOS/Notepad==.py
     echo "done"
 else
     echo "Configuration failed. Exiting."
