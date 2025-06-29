@@ -82,20 +82,21 @@ echo "Configuring build..."
 # Check if the configure command was successful
 if [ $? -eq 0 ]; then
     echo "Configuration successful. Proceeding to build..."
-    HOST_ARCH=$(uname -m)
-    if [ "$1" == "--arch=x86_64" ]; then
-        echo "Building with selected architecture x86_64..."
-        make ARCH=x86_64
-    elif [ "$1" == "--arch=arm64" ]; then
-        echo "Building with selected architecture arm64..."
-        make ARCH=arm64
-    elif [ "$1" == "--arch=universal" ]; then
-        echo "Building with selected architecture universal..."
-        make ARCH=universal
-    else
-        echo "Building with default host architecture, $HOSTARCH..."
-        make
-    fi
+    make
+    # HOST_ARCH=$(uname -m)
+    # if [ "$1" == "--arch=x86_64" ]; then
+    #     echo "Building with selected architecture x86_64..."
+    #     make ARCH=x86_64
+    # elif [ "$1" == "--arch=arm64" ]; then
+    #     echo "Building with selected architecture arm64..."
+    #     make ARCH=arm64
+    # elif [ "$1" == "--arch=universal" ]; then
+    #     echo "Building with selected architecture universal..."
+    #     make ARCH=universal
+    # else
+    #     echo "Building with default host architecture, $HOSTARCH..."
+    #     make
+    # fi
     echo "done"
 else
     echo "Configuration failed. Exiting."
