@@ -81,9 +81,9 @@ else
 fi
 
 # Install required python packages
-echo "Installing required packages"
-pip3 install --upgrade -r $requirements --break-system-packages
-echo "done"
+# echo "Installing required packages"
+# pip3 install --upgrade -r $requirements --break-system-packages
+# echo "done"
 
 touch .configured
 echo "Now run 'make' to build."
