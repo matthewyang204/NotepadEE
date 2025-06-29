@@ -51,7 +51,7 @@ build:
 
 	echo "Patching files..."
 	chmod +x dist/Notepad==.app/Contents/MacOS/Notepad==.py
-	{ cat patches/addToTop.txt; cat dist/Notepad==.app/Contents/MacOS/Notepad==.py; } > /tmp/dcd072e14d6380b7f816d171d09d83ca394b554d5bac44a75c8336cac4f096c5 && mv /tmp/dcd072e14d6380b7f816d171d09d83ca394b554d5bac44a75c8336cac4f096c5 dist/Notepad==.app/Contents/MacOS/Notepad==.py
+	{ cat patches/addToTop.txt; cat dist/Notepad==.app/Contents/MacOS/Notepad==.py; } > /tmp/d537ad88e5dfea62d211d6237cf66645dcfc07999af497ea643393ca8ecd8e97 && mv /tmp/d537ad88e5dfea62d211d6237cf66645dcfc07999af497ea643393ca8ecd8e97 dist/Notepad==.app/Contents/MacOS/Notepad==.py
 
 	echo "done"
 	echo "To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
