@@ -19,6 +19,7 @@ except ImportError:
     syntaxHighlighting = False
 import re
 import pathlib
+import builtins
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -32,13 +33,26 @@ log_file = os.path.join('/tmp', "notepadee_log.txt")
 # Get current PID
 pid = os.getpid()
 
+# Redirect output to log file
+log_file = open(log_file, 'a', encoding='utf-8', buffering=1)
+sys.stdout = log_file
+sys.stderr = log_file
+original_print = builtins.print
+def flushed_print(*args, **kwargs):
+    if 'flush' not in kwargs:
+        kwargs['flush'] = True
+    if 'end' not in kwargs:
+        kwargs['end'] = '\n'
+    return original_print(*args, **kwargs)
+builtins.print = flushed_print
+
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
-    with open(log_file, 'a') as file:
-        file.write("Notepad== at " + str(pid) + ": " + str(message))
+    # with open(log_file, 'a', encoding='utf-8') as file:
+    #     file.write("Notepad== at " + str(pid) + ": " + str(message))
     print("Notepad== at " + str(pid) + ": " + str(message))
 
-versionInfo = """Notepad==, version 5.1.0
+versionInfo = """Notepad==, version 5.2.0
 (C) 2024-2025 Matthew Yang"""
 
 helpInfo = versionInfo + """
@@ -97,11 +111,11 @@ def setup_prefs(event=None):
         os.makedirs(folder_path)
 
     if not os.path.exists(last_file_path):
-        with open(last_file_path, 'w'):
+        with open(last_file_path, 'w', encoding='utf-8'):
             pass
 
     if not os.path.exists(last_write):
-        with open(last_write, 'w'):
+        with open(last_write, 'w', encoding='utf-8'):
             pass
 
 setup_prefs()
@@ -194,25 +208,31 @@ else:
 def runonarg(arg):
     global file_written, current_file, file_open
     if os.path.exists(arg):
-        with open(arg, 'r') as file:
-            if file_written == 1:
-                if platform.system() == "Darwin":
-                    newWindow_macOS(openFile=arg)
-                elif platform.system() == "Linux":
-                    newWindow_Linux(openFile=arg)
-                else:
-                    text_area.delete(1.0, "end")
-                    current_file = arg
-                    text_area.insert(1.0, file.read())
-                    file_open = 1
+        try:
+            file = open(arg, 'r')
+        except UnicodeDecodeError:
+            file = open(arg, 'r', encoding='utf-8')
+            print("UnicodeDecodeError caught!")
+        if file_written == 1:
+            if platform.system() == "Darwin":
+                nw.macOS(openFile=arg)
+            elif platform.system() == "Linux":
+                nw.Linux(openFile=arg)
             else:
                 text_area.delete(1.0, "end")
                 current_file = arg
                 text_area.insert(1.0, file.read())
                 file_open = 1
-            #printlog("Current file path: " + current_file)
-            #printlog("File open: " + str(file_open))
-            printlog("File loaded")
+        else:
+            text_area.delete(1.0, "end")
+            current_file = arg
+            text_area.insert(1.0, file.read())
+            file_open = 1
+        #printlog("Current file path: " + current_file)
+        #printlog("File open: " + str(file_open))
+        printlog("File loaded, closing resource...")
+        file.close()
+        printlog("File closed")
     else:
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
         
@@ -281,7 +301,6 @@ else:
         fileToBeOpened = filearg[1]
         runonarg(fileToBeOpened)
 
-
 def debug_var(event=None):
     global file_open, current_file
     if current_file:
@@ -302,7 +321,7 @@ def autosave_file(event=None):
     global file_open
     try:
         if file_open == 1:
-            with open(current_file, 'w') as file:
+            with open(current_file, 'w', encoding='utf-8') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
     except FileNotFoundError:
@@ -314,19 +333,19 @@ def write_prefs(event=None):
     setup_prefs()
     
     global current_file, file_open
-    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
-    with open(last_file_path, 'w') as file:
+    with open(last_file_path, 'w', encoding='utf-8') as file:
         file.write(str(current_file))
     autosave_file()
     printlog("Wrote prefs successfully")
 
 def spoof_prefs(current_file="", file_open=""):
-    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
-    with open(last_file_path, 'w') as file:
+    with open(last_file_path, 'w', encoding='utf-8') as file:
         file.write(str(current_file))
     autosave_file()
     printlog("Wrote prefs successfully")
@@ -444,7 +463,7 @@ def save_as(event=None):
     try:
         printlog("Saving file to location:")
         printlog(file_path)
-        with open(file_path, 'w') as file:
+        with open(file_path, 'w', encoding='utf-8') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
@@ -458,6 +477,8 @@ def save_as(event=None):
         return False
 
 def open_file(event=None):
+    print("This function is deprececated. Please do not use it. It is now disabled.")
+    return
     global current_file, file_open
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
@@ -475,23 +496,27 @@ def open_file_v2(event=None):
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
-        with open(file_path, 'r') as file:
-            if file_written == 1:
-                if platform.system() == "Darwin":
-                    newWindow_macOS(openFile=file_path)
-                elif platform.system() == "Linux":
-                    newWindow_Linux(openFile=file_path)
-                else:
-                    text_area.delete(1.0, "end")
-                    current_file = file_path
-                    text_area.insert(1.0, file.read())
-                    file_open = 1
+        try:
+            file = open(file_path, 'r')
+        except UnicodeDecodeError:
+            file = open(file_path, 'r', encoding='utf-8')
+        if file_written == 1:
+            if platform.system() == "Darwin":
+                nw.macOS(openFile=file_path)
+            elif platform.system() == "Linux":
+                nw.Linux(openFile=file_path)
             else:
                 text_area.delete(1.0, "end")
                 current_file = file_path
                 text_area.insert(1.0, file.read())
                 file_open = 1
+        else:
+            text_area.delete(1.0, "end")
+            current_file = file_path
+            text_area.insert(1.0, file.read())
+            file_open = 1
         printlog("New file opened")
+        file.close()
     # write_prefs()
 
 def save_file(warn):
@@ -499,7 +524,7 @@ def save_file(warn):
     if file_open == 1:
         try:
             debug_var()
-            with open(current_file, 'w') as file:
+            with open(current_file, 'w', encoding='utf-8') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
             write_prefs()
@@ -816,102 +841,103 @@ def runinbackground(event=None):
     applySyntaxHighlighting()
     debug_var()
 
-def newWindow_macOS(openFile=""):
-    global folder_path
-    if platform.system() == "Darwin":
-        run_path = os.path.realpath(__file__)
-        cwd = os.getcwd()
-        freeze_time = 1
-        emptyString = ""
-        # printlog(f"Script path is {run_path}")
-        # printlog(f"Current working directory is {cwd}")
-        # printlog(f"App is located at {cwd}/Notepad==.app")
-        # DO NOT enable this
-        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
-            file.write(emptyString)
-        # DO NOT enable this
-        # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
-        subprocess.call(["/bin/rm", "-rf", folder_path])
-        printlog("Launching new instance...")
-        if openFile:
-            subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app", openFile])
-        else:
-            subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app"])
-        # DO NOT enable this
-        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
-            pass
-        # DO NOT enable this
-        # printlog(f"Writing cache back to prefs folder at {folder_path}...")
-        write_prefs()
-        printlog("done")
-    else:
-        raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
-
-def newWindow_Linux(openFile=""):
-    def main(event=None):
+class nw():
+    def macOS(openFile=""):
         global folder_path
-        run_path = os.path.realpath(__file__)
-        cwd = os.getcwd()
-        pyexe = sys.executable
-        pyexe_dir = os.path.dirname(pyexe)
-        pyInstFile = os.path.join(pyexe_dir, '.pyinstaller')
-        freeze_time = 1
-
-        # DO NOT enable
-        # printlog(f"Script path is {run_path}")
-        # printlog(f"Current working directory is {cwd}")
-        # printlog(f"Executable is located at {pyexe}")
-        emptyString = ""
-
-        # DO NOT enable, this is only compatible with Python 3.12 and later
-        # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
-            file.write(emptyString)
-        # DO NOT enable
-        # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
-        subprocess.call(["/bin/rm", "-rf", folder_path])
-        printlog("Launching new instance...")
-        # Regular launcher with no open file support
-        def launcher():
-            if os.path.exists(pyInstFile):
-                printlog("We are running in PyInstaller mode, running only the executable...")
-                subprocess.Popen([pyexe], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+        if platform.system() == "Darwin":
+            run_path = os.path.realpath(__file__)
+            cwd = os.getcwd()
+            freeze_time = 1
+            emptyString = ""
+            # printlog(f"Script path is {run_path}")
+            # printlog(f"Current working directory is {cwd}")
+            # printlog(f"App is located at {cwd}/Notepad==.app")
+            # DO NOT enable this
+            # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+            with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
+                file.write(emptyString)
+            # DO NOT enable this
+            # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+            subprocess.call(["/bin/rm", "-rf", folder_path])
+            printlog("Launching new instance...")
+            if openFile:
+                subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app", openFile])
             else:
-                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
-                subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
-        # launcher with open file support
-        def launcher2():
-            if os.path.exists(pyInstFile):
-                printlog("We are running in PyInstaller mode, running only the executable...")
-                subprocess.Popen([pyexe, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
-            else:
-                printlog("We are probably running in standard interpreted mode, launching executable with python file...")
-                subprocess.Popen([pyexe, run_path, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
-        if openFile:
-            launcher_thread = threading.Thread(target=launcher2)
+                subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app"])
+            # DO NOT enable this
+            # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+            while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+                pass
+            # DO NOT enable this
+            # printlog(f"Writing cache back to prefs folder at {folder_path}...")
+            write_prefs()
+            printlog("done")
         else:
-            launcher_thread = threading.Thread(target=launcher)
-        launcher_thread.start()
-        # DO NOT enable, this is only compatible with Python 3.12 and later
-        # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
-            pass
-        # DO NOT enable
-        # printlog(f"Writing cache back to prefs folder at {folder_path}...")
-        write_prefs()
-        printlog("done")
-    if platform.system() == "Linux":
-        main()
-    else:
-        raise platformError("This function is only designed to be run on Linux. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+            raise platformError("This function is only designed to be run on macOS. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+
+    def Linux(openFile=""):
+        def main(event=None):
+            global folder_path
+            run_path = os.path.realpath(__file__)
+            cwd = os.getcwd()
+            pyexe = sys.executable
+            pyexe_dir = os.path.dirname(pyexe)
+            pyInstFile = os.path.join(pyexe_dir, '.pyinstaller')
+            freeze_time = 1
+
+            # DO NOT enable
+            # printlog(f"Script path is {run_path}")
+            # printlog(f"Current working directory is {cwd}")
+            # printlog(f"Executable is located at {pyexe}")
+            emptyString = ""
+
+            # DO NOT enable, this is only compatible with Python 3.12 and later
+            # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+            with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
+                file.write(emptyString)
+            # DO NOT enable
+            # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
+            subprocess.call(["/bin/rm", "-rf", folder_path])
+            printlog("Launching new instance...")
+            # Regular launcher with no open file support
+            def launcher():
+                if os.path.exists(pyInstFile):
+                    printlog("We are running in PyInstaller mode, running only the executable...")
+                    subprocess.Popen([pyexe], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+                else:
+                    printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                    subprocess.Popen([pyexe, run_path], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            # launcher with open file support
+            def launcher2():
+                if os.path.exists(pyInstFile):
+                    printlog("We are running in PyInstaller mode, running only the executable...")
+                    subprocess.Popen([pyexe, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+                else:
+                    printlog("We are probably running in standard interpreted mode, launching executable with python file...")
+                    subprocess.Popen([pyexe, run_path, openFile], preexec_fn=os.setsid, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
+            if openFile:
+                launcher_thread = threading.Thread(target=launcher2)
+            else:
+                launcher_thread = threading.Thread(target=launcher)
+            launcher_thread.start()
+            # DO NOT enable, this is only compatible with Python 3.12 and later
+            # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
+            while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
+                pass
+            # DO NOT enable
+            # printlog(f"Writing cache back to prefs folder at {folder_path}...")
+            write_prefs()
+            printlog("done")
+        if platform.system() == "Linux":
+            main()
+        else:
+            raise platformError("This function is only designed to be run on Linux. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
 
 def newWindow(event=None):
     if platform.system() == "Darwin":
-        newWindow_macOS()
+        threading.Thread(target=nw.macOS(), daemon=True).start()
     elif platform.system() == "Linux":
-        newWindow_Linux()
+        nw.Linux()
     else:
         raise platformError("There is no newWindow function available for your platform.")
 
@@ -938,11 +964,6 @@ root.config(menu=menu)
 
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
-# file_menu.add_command(label="New", command=new_file)
-# if platform.system() == "Darwin":
-    # file_menu.add_command(label="New Window", command=newWindow_macOS)
-# elif platform.system() == "Linux":
-    # file_menu.add_command(label="New Window", command=newWindow_Linux)
 file_menu.add_command(label="New", command=newWindow)
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
