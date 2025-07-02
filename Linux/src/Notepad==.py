@@ -52,7 +52,7 @@ def printlog(message):
     #     file.write("Notepad== at " + str(pid) + ": " + str(message))
     print("Notepad== at " + str(pid) + ": " + str(message))
 
-versionInfo = """Notepad==, version 5.1.0
+versionInfo = """Notepad==, version 5.2.0
 (C) 2024-2025 Matthew Yang"""
 
 helpInfo = versionInfo + """
