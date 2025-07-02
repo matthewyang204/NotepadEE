@@ -20,11 +20,6 @@ Linux build instructions:
 - Source code is in the Linux folder; Windows source code is in separate Windows folder
 
 -----
-Windows
------
-[Windows Support Notes (Deprecated)](deprecated/Windows/README.md)
-
------
 macOS
 -----
 Source code located in the [macOS section](https://github.com/matthewyang204/NotepadEE/tree/main/macOS).
