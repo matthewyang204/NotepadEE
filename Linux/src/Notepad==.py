@@ -197,9 +197,9 @@ def runonarg(arg):
         with open(arg, 'r') as file:
             if file_written == 1:
                 if platform.system() == "Darwin":
-                    newWindow_macOS(openFile=arg)
+                    nw.macOS(openFile=arg)
                 elif platform.system() == "Linux":
-                    newWindow_Linux(openFile=arg)
+                    nw.Linux(openFile=arg)
                 else:
                     text_area.delete(1.0, "end")
                     current_file = arg
@@ -480,9 +480,9 @@ def open_file_v2(event=None):
         with open(file_path, 'r') as file:
             if file_written == 1:
                 if platform.system() == "Darwin":
-                    newWindow_macOS(openFile=file_path)
+                    nw.macOS(openFile=file_path)
                 elif platform.system() == "Linux":
-                    newWindow_Linux(openFile=file_path)
+                    nw.Linux(openFile=file_path)
                 else:
                     text_area.delete(1.0, "end")
                     current_file = file_path
@@ -941,11 +941,6 @@ root.config(menu=menu)
 
 file_menu = tk.Menu(menu)
 menu.add_cascade(label="File", menu=file_menu)
-# file_menu.add_command(label="New", command=new_file)
-# if platform.system() == "Darwin":
-    # file_menu.add_command(label="New Window", command=newWindow_macOS)
-# elif platform.system() == "Linux":
-    # file_menu.add_command(label="New Window", command=newWindow_Linux)
 file_menu.add_command(label="New", command=newWindow)
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
