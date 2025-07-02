@@ -1,0 +1,23 @@
+# env vars
+export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk"
+export MACOSX_DEPLOYMENT_TARGET=10.13
+export CFLAGS="-isysroot $SDKROOT -mmacosx-version-min=10.13"
+export CPPFLAGS="$CFLAGS"
+export LDFLAGS="-isysroot $SDKROOT -mmacosx-version-min=10.13"
+
+# Configure & build
+../configure --with-libunistring-prefix=/usr/local/opt/libunistring \
+            --disable-silent-rules \
+            --with-included-glib \
+            --with-included-libcroco \
+            --with-emacs \
+            --with-lispdir=/usr/local/share/emacs/site-lisp \
+            --disable-java \
+            --disable-csharp \
+            --without-git \
+            --without-cvs \
+            --without-xz \
+            --with-included-gettext \
+            --prefix=/opt/gettext
+make -j16
+sudo make install
