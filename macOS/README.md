@@ -18,7 +18,7 @@ All of the prebuilt binaries provided in the README support macOS Catalina or ne
 - Name of signature is "Matthew Yang"
 
 # Prebuild requirements
-- Python 3.4 - 3.12
+- Python 3.4 - 3.13
 - make installed
 - `configure` script will automatically install Python packages
 
