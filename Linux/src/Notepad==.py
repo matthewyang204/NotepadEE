@@ -208,25 +208,30 @@ else:
 def runonarg(arg):
     global file_written, current_file, file_open
     if os.path.exists(arg):
-        with open(arg, 'r') as file:
-            if file_written == 1:
-                if platform.system() == "Darwin":
-                    nw.macOS(openFile=arg)
-                elif platform.system() == "Linux":
-                    nw.Linux(openFile=arg)
-                else:
-                    text_area.delete(1.0, "end")
-                    current_file = arg
-                    text_area.insert(1.0, file.read())
-                    file_open = 1
+        try:
+            file = open(arg, 'r')
+        except UnicodeDecodeError:
+            file = open(arg, 'r', encoding='utf-8')
+        if file_written == 1:
+            if platform.system() == "Darwin":
+                nw.macOS(openFile=arg)
+            elif platform.system() == "Linux":
+                nw.Linux(openFile=arg)
             else:
                 text_area.delete(1.0, "end")
                 current_file = arg
                 text_area.insert(1.0, file.read())
                 file_open = 1
-            #printlog("Current file path: " + current_file)
-            #printlog("File open: " + str(file_open))
-            printlog("File loaded")
+        else:
+            text_area.delete(1.0, "end")
+            current_file = arg
+            text_area.insert(1.0, file.read())
+            file_open = 1
+        #printlog("Current file path: " + current_file)
+        #printlog("File open: " + str(file_open))
+        printlog("File loaded, closing resource...")
+        file.close()
+        printlog("File closed")
     else:
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
         
@@ -294,7 +299,6 @@ else:
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
         runonarg(fileToBeOpened)
-
 
 def debug_var(event=None):
     global file_open, current_file
