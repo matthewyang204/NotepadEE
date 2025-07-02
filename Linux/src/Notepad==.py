@@ -19,6 +19,7 @@ except ImportError:
     syntaxHighlighting = False
 import re
 import pathlib
+import builtins
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -32,10 +33,23 @@ log_file = os.path.join('/tmp', "notepadee_log.txt")
 # Get current PID
 pid = os.getpid()
 
+# Redirect output to log file
+log_file = open(log_file, 'a', encoding='utf-8', buffering=1)
+sys.stdout = log_file
+sys.stderr = log_file
+original_print = builtins.print
+def flushed_print(*args, **kwargs):
+    if 'flush' not in kwargs:
+        kwargs['flush'] = True
+    if 'end' not in kwargs:
+        kwargs['end'] = '\n'
+    return original_print(*args, **kwargs)
+builtins.print = flushed_print
+
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
-    with open(log_file, 'a', encoding='utf-8') as file:
-        file.write("Notepad== at " + str(pid) + ": " + str(message))
+    # with open(log_file, 'a', encoding='utf-8') as file:
+    #     file.write("Notepad== at " + str(pid) + ": " + str(message))
     print("Notepad== at " + str(pid) + ": " + str(message))
 
 versionInfo = """Notepad==, version 5.1.0
