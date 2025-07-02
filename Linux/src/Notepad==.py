@@ -496,23 +496,27 @@ def open_file_v2(event=None):
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
-        with open(file_path, 'r') as file:
-            if file_written == 1:
-                if platform.system() == "Darwin":
-                    nw.macOS(openFile=file_path)
-                elif platform.system() == "Linux":
-                    nw.Linux(openFile=file_path)
-                else:
-                    text_area.delete(1.0, "end")
-                    current_file = file_path
-                    text_area.insert(1.0, file.read())
-                    file_open = 1
+        try:
+            file = open(file_path, 'r')
+        except UnicodeDecodeError:
+            file = open(file_path, 'r', encoding='utf-8')
+        if file_written == 1:
+            if platform.system() == "Darwin":
+                nw.macOS(openFile=file_path)
+            elif platform.system() == "Linux":
+                nw.Linux(openFile=file_path)
             else:
                 text_area.delete(1.0, "end")
                 current_file = file_path
                 text_area.insert(1.0, file.read())
                 file_open = 1
+        else:
+            text_area.delete(1.0, "end")
+            current_file = file_path
+            text_area.insert(1.0, file.read())
+            file_open = 1
         printlog("New file opened")
+        file.close()
     # write_prefs()
 
 def save_file(warn):
