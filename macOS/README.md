@@ -27,3 +27,5 @@ All of the prebuilt binaries provided in the README support macOS Catalina or ne
 2. Run `chmod +x autogen.sh` to give the script execute permissions.
 3. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build. Note that --arch is optional and if you only want to compile for your machine's native architecture, just run `./autogen.sh`.
 4. After you're done compiling, you can use `sudo make install` to install.
+
+If you want to reproduce a High Sierra-compatible build, please visit the `misc` branch.
