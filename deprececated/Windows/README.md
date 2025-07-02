@@ -1,5 +1,7 @@
 # Notepad== Windows Version
 
+**The Windows version is no longer supported as of Release v5.2.0. This is because being primarily a UNIX developer, I don't even have Windows systems. To do any testing or work on it, I have to use Wine, which screws up hours of my time. Additionally, I'm accustomed to using UNIX-only features and paths, which make the primary Linux codebase incredibly incompatible with Windows.**
+
 This is the repository for the Windows version of this software.
 
 Main repository: https://www.github.com/matthewyang204/NotepadEE
