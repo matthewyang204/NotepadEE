@@ -212,6 +212,7 @@ def runonarg(arg):
             file = open(arg, 'r')
         except UnicodeDecodeError:
             file = open(arg, 'r', encoding='utf-8')
+            print("UnicodeDecodeError caught!")
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=arg)
