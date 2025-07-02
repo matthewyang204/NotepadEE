@@ -918,7 +918,7 @@ def newWindow_Linux(openFile=""):
 
 def newWindow(event=None):
     if platform.system() == "Darwin":
-        newWindow_macOS()
+        threading.Thread(target=newWindow_macOS, daemon=True).start()
     elif platform.system() == "Linux":
         newWindow_Linux()
     else:
