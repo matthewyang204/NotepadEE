@@ -4,6 +4,11 @@ export MACOSX_DEPLOYMENT_TARGET=10.13
 export CFLAGS="-isysroot $SDKROOT -mmacosx-version-min=10.13"
 export CPPFLAGS="$CFLAGS"
 export LDFLAGS="-isysroot $SDKROOT -mmacosx-version-min=10.13"
+export CFLAGS="-DHAVE_ICONV=1 $CFLAGS"
+
+export ac_cv_func_iconv_works=no
+export LIBS="-liconv"
+export LDFLAGS="-liconv $LDFLAGS"
 
 # Configure & build
 ../configure --with-libunistring-prefix=/usr/local/opt/libunistring \
