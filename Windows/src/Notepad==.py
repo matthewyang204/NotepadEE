@@ -469,6 +469,8 @@ def save_as(event=None):
         return False
 
 def open_file(event=None):
+    print("This function is deprececated. Please do not use it. It is now disabled.")
+    return
     global current_file, file_open
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
