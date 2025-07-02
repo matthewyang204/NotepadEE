@@ -208,19 +208,14 @@ def runonarg(arg):
         with open(arg, 'r') as file:
             if file_written == 1:
                 if platform.system() == "Darwin":
-                    newWindow_macOS(openFile=arg)
-                elif platform.system() == "Linux":
-                    newWindow_Linux(openFile=arg)
-                else:
-                    text_area.delete(1.0, "end")
-                    current_file = arg
-                    text_area.insert(1.0, file.read())
-                    file_open = 1
-            else:
-                text_area.delete(1.0, "end")
-                current_file = arg
-                text_area.insert(1.0, file.read())
-                file_open = 1
+                    nw.macOS(openFile=arg)
+        elif platform.system() == "Linux":(
+            nw.Linux(openFile=arg))
+        else:
+            text_area.delete(1.0, "end")
+            current_file = arg
+            text_area.insert(1.0, file.read())
+            file_open = 1
             #printlog("Current file path: " + current_file)
             #printlog("File open: " + str(file_open))
             printlog("File loaded")
