@@ -59,11 +59,11 @@ def setup_prefs(event=None):
         os.makedirs(folder_path)
 
     if not os.path.exists(last_file_path):
-        with open(last_file_path, 'w'):
+        with open(last_file_path, 'w', encoding='utf-8'):
             pass
 
     if not os.path.exists(last_write):
-        with open(last_write, 'w'):
+        with open(last_write, 'w', encoding='utf-8'):
             pass
 
 setup_prefs()
@@ -82,7 +82,7 @@ pid = os.getpid()
 
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
 def printlog(message):
-    with open(log_file, 'a') as file:
+    with open(log_file, 'a', encoding='utf-8') as file:
         file.write("Notepad== at " + str(pid) + ": " + str(message))
     print("Notepad== at " + str(pid) + ": " + str(message))
 
@@ -313,7 +313,7 @@ def autosave_file(event=None):
     global file_open
     try:
         if file_open == 1:
-            with open(current_file, 'w') as file:
+            with open(current_file, 'w', encoding='utf-8') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
     except FileNotFoundError:
@@ -325,19 +325,19 @@ def write_prefs(event=None):
     setup_prefs()
     
     global current_file, file_open
-    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
-    with open(last_file_path, 'w') as file:
+    with open(last_file_path, 'w', encoding='utf-8') as file:
         file.write(str(current_file))
     autosave_file()
     printlog("Wrote prefs successfully")
 
 def spoof_prefs(current_file="", file_open=""):
-    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w') as file:
+    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
         file.write(text_area.get('1.0', 'end-1c'))
     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
-    with open(last_file_path, 'w') as file:
+    with open(last_file_path, 'w', encoding='utf-8') as file:
         file.write(str(current_file))
     autosave_file()
     printlog("Wrote prefs successfully")
@@ -455,7 +455,7 @@ def save_as(event=None):
     try:
         printlog("Saving file to location:")
         printlog(file_path)
-        with open(file_path, 'w') as file:
+        with open(file_path, 'w', encoding='utf-8') as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
@@ -510,7 +510,7 @@ def save_file(warn):
     if file_open == 1:
         try:
             debug_var()
-            with open(current_file, 'w') as file:
+            with open(current_file, 'w', encoding='utf-8') as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
             write_prefs()
@@ -835,7 +835,7 @@ def newWindow_macOS(openFile=""):
         # printlog(f"App is located at {cwd}/Notepad==.app")
         # DO NOT enable this
         # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
             file.write(emptyString)
         # DO NOT enable this
         # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
@@ -874,7 +874,7 @@ def newWindow_Linux(openFile=""):
 
         # DO NOT enable, this is only compatible with Python 3.12 and later
         # printlog(f"Creating a lock file at {os.path.join(cache_path, "loadPreviousSave.lock")}...")
-        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w") as file:
+        with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
             file.write(emptyString)
         # DO NOT enable
         # printlog(f"Clearing the prefs folder at {folder_path} to ensure new instance loads up with new file...")
