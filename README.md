@@ -49,4 +49,4 @@ Build instructions:
 3. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build. Note that --arch is optional and if you only want to compile for your machine's native architecture, just run `./autogen.sh`.
 4. After you're done compiling, you can use `sudo make install` to install.
 
-If you want to reproduce a High Sierra-compatible build, please visit the `misc` branch.
+If you want to reproduce a High Sierra-compatible build, please first install gettext according to what is found in the `misc` branch, and then pass a `--use-opt-gettext` to `./autogen.sh`.
