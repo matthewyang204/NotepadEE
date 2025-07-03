@@ -69,7 +69,6 @@ rm README.md
 cp patches/README.md ./
 echo "done"
 
-
 # Debugging exit to check if files have been properly patched
 # Only enable if you need it
 # exit 0
