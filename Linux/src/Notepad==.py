@@ -77,6 +77,44 @@ else:
         print(helpInfo)
         sys.exit()
 
+encodings = [
+    # Common
+    "ascii",
+    "utf-8",
+    "utf-16",
+    "utf-32",
+
+    # Western European
+    "latin-1",
+    "cp1252",
+
+    # East Asian
+    "shift_jis",
+    "euc_jp",
+    "iso2022_jp",
+    "gb2312",
+    "gbk",
+    "big5",
+
+    # Korean
+    "euc_kr",
+
+    # Cyrillic
+    "cp1251",
+    "koi8_r",
+
+    # Mac / DOS / legacy
+    "mac_roman",
+    "cp437",
+
+    # Others / fallback
+    "utf-8-sig",
+    "utf-7",
+    "iso8859_2",
+    "iso8859_15",
+    "cp850",
+]
+
 global fileToBeOpened
 global openFile
 fileToBeOpened = None
