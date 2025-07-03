@@ -163,6 +163,7 @@ class platformError(Exception):
 
 class UnsupportedEncodingError(Exception):
     def __init__(self, *args):
+        super().__init__(message)
         sys.exit(1)
 
 root = tk.Tk()
