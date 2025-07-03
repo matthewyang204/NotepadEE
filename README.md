@@ -24,7 +24,7 @@ macOS
 -----
 Source code located in the [macOS section](https://github.com/matthewyang204/NotepadEE/tree/main/macOS).
 
-Any Mac capable of running Python 3.4 works for building. Therefore, your Mac must be capable of running OS X 10.5 Leopard or later, as it is the earliest version of macOS supported by Python 3.4.
+Any Mac capable of running Python 3.4 works for building. Your Mac must be capable of running OS X 10.4 Tiger or later. OS X 10.5 Leopard is the earliest version of OS X supported by Python 3.4, so it is the earliest officially supported version. However, Tiger is also fine because it can actually run a very modern version of Python (3.10.16) via [Tigerbrew](https://github.com/mistydemeo/Tigerbrew).
 
 Hackintoshes are supported.
 
