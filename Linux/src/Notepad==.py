@@ -251,8 +251,9 @@ def retrieve_file(input):
     global encodings
     for enc in encodings[:]:
         try:
-            file = open(input, 'r', encoding=enc)
-            return file
+            with open(input, 'r', encoding=enc) as file:
+                fileContent = file.read()
+            return fileContent
         except UnicodeDecodeError:
             print("UnicodeDecodeError caught!")
             print("File is not " + str(enc) + ", trying next encoding...")
@@ -266,7 +267,7 @@ def retrieve_file(input):
 def runonarg(arg):
     global file_written, current_file, file_open
     if os.path.exists(arg):
-        file = retrieve_file(arg)
+        content = retrieve_file(arg)
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=arg)
@@ -275,12 +276,12 @@ def runonarg(arg):
             else:
                 text_area.delete(1.0, "end")
                 current_file = arg
-                text_area.insert(1.0, file.read())
+                text_area.insert(1.0, content)
                 file_open = 1
         else:
             text_area.delete(1.0, "end")
             current_file = arg
-            text_area.insert(1.0, file.read())
+            text_area.insert(1.0, content)
             file_open = 1
         #printlog("Current file path: " + current_file)
         #printlog("File open: " + str(file_open))
@@ -550,8 +551,7 @@ def open_file_v2(event=None):
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
-        file = retrieve_file(file_path)
-        content = file.read()
+        content = retrieve_file(file_path)
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=file_path)
