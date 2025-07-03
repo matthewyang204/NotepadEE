@@ -209,10 +209,14 @@ def runonarg(arg):
     global file_written, current_file, file_open
     if os.path.exists(arg):
         try:
-            file = open(arg, 'r')
+            file = open(arg, 'r', encoding='ascii')
         except UnicodeDecodeError:
-            file = open(arg, 'r', encoding='utf-8')
-            print("UnicodeDecodeError caught!")
+            try:
+                file = open(arg, 'r', encoding='utf-8')
+                print("UnicodeDecodeError caught!")
+            except UnicodDecodeError:
+                file = open(arg, 'r', encoding='utf-16')
+                print("UnicodeDecodeError caught!")
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=arg)
@@ -497,9 +501,14 @@ def open_file_v2(event=None):
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         try:
-            file = open(file_path, 'r')
+            file = open(arg, 'r', encoding='ascii')
         except UnicodeDecodeError:
-            file = open(file_path, 'r', encoding='utf-8')
+            try:
+                file = open(arg, 'r', encoding='utf-8')
+                print("UnicodeDecodeError caught!")
+            except UnicodDecodeError:
+                file = open(arg, 'r', encoding='utf-16')
+                print("UnicodeDecodeError caught!")tf-8')
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=file_path)
