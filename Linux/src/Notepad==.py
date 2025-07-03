@@ -243,6 +243,23 @@ if platform.system() == "Darwin" or platform.system() == "Linux":
 else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
+def retrieve_file(input):
+    global encodings
+    for enc in encodings[:]:
+        try:
+            file = open(input, 'r', encoding=enc)
+            return file
+        except UnicodeDecodeError:
+            print("UnicodeDecodeError caught!")
+            print("File is not " + str(enc) + ", trying next encoding...")
+        except LookupError:
+            print("LookupError caught!")
+            print("Encoding not supported in this copy of Python, removing from list to avoid future clashes...")
+            encodings.remove(enc)
+    messagebox.showinfo("The program crashed due to an error", "The program has crashed due to an error. Please relaunch the program; any unsaved work will be recovered automatically on relaunch.")
+    print("The file could not be opened due to its encoding not being supported. The program has crashed itself to avoid further problems.")
+    sys.exit(1)
+
 def runonarg(arg):
     global file_written, current_file, file_open
     if os.path.exists(arg):
