@@ -21,15 +21,24 @@ import re
 import pathlib
 import builtins
 import traceback
+import hashlib
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
 if not os.path.exists(cache_path):
     os.makedirs(cache_path)
 
+username = os.path.expanduser('~').encode()
+unSHA256 = hashlib.sha256()
+unSHA256.update(username)
+unDigest = unSHA256.hexdigest()
+logDir = os.path.join('/tmp', str(unDigest) + '-log')
+if not os.path.exists(logDir):
+    os.makedirs(logDir)
+
 # Open a log file in write mode
 # log_file = os.path.join(cache_path, "notepadee_log.txt")
-log_file = os.path.join('/tmp', "notepadee_log.txt")
+log_file = os.path.join(logDir, "notepadee_log.txt")
 
 # Get current PID
 pid = os.getpid()
