@@ -4,7 +4,7 @@ This branch hosts platforms that are no longer being actively maintained. Patche
 -----
 Windows
 -----
-- Download the latest dev source code from the Windows section of this repository: https://github.com/matthewyang204/NotepadEE/tree/main/Windows
+- Download the latest dev source code from the Windows section of this repository: https://github.com/matthewyang204/NotepadEE/tree/deprecated/Windows
 - Binaries are next to all other binaries
 - x64 binaries are provided for users, however, they are not signed
 - Version compatibility:
