@@ -165,7 +165,7 @@ class platformError(Exception):
 class UnsupportedEncodingError(Exception):
     def __init__(self, message):
         super().__init__(message)
-        sys.exit(1)
+        # sys.exit(1)
 
 root = tk.Tk()
 ask_quit = False
