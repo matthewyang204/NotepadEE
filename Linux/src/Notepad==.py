@@ -161,6 +161,10 @@ setup_prefs()
 class platformError(Exception):
     pass
 
+class UnsupportedEncodingError(Exception):
+    def __init__(self, *args):
+        sys.exit(1)
+
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
@@ -257,7 +261,7 @@ def retrieve_file(input):
             print("Encoding not supported in this copy of Python, removing from list to avoid future clashes...")
             encodings.remove(enc)
     messagebox.showinfo("The program crashed due to an error", "The program has crashed due to an error. Please relaunch the program; any unsaved work will be recovered automatically on relaunch.")
-    print("The file could not be opened due to its encoding not being supported. The program has crashed itself to avoid further problems.")
+    raise UnsupportedEncodingError("The file at " + str(input) + " could not be opened due to its encoding not being supported. The program has crashed itself to avoid further problems.")
     sys.exit(1)
 
 def runonarg(arg):
