@@ -266,15 +266,7 @@ def retrieve_file(input):
 def runonarg(arg):
     global file_written, current_file, file_open
     if os.path.exists(arg):
-        try:
-            file = open(arg, 'r', encoding='ascii')
-        except UnicodeDecodeError:
-            try:
-                file = open(arg, 'r', encoding='utf-8')
-                print("UnicodeDecodeError caught!")
-            except UnicodDecodeError:
-                file = open(arg, 'r', encoding='utf-16')
-                print("UnicodeDecodeError caught!")
+        retrieve_file(arg)
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=arg)
@@ -558,15 +550,7 @@ def open_file_v2(event=None):
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
-        try:
-            file = open(arg, 'r', encoding='ascii')
-        except UnicodeDecodeError:
-            try:
-                file = open(arg, 'r', encoding='utf-8')
-                print("UnicodeDecodeError caught!")
-            except UnicodDecodeError:
-                file = open(arg, 'r', encoding='utf-16')
-                print("UnicodeDecodeError caught!")tf-8')
+        retrieve_file(file_path)
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=file_path)
