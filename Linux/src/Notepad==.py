@@ -20,6 +20,7 @@ except ImportError:
 import re
 import pathlib
 import builtins
+import traceback
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -263,9 +264,12 @@ def retrieve_file(input):
             print("LookupError caught!")
             print("Encoding not supported in this copy of Python, removing from list to avoid future clashes...")
             encodings.remove(enc)
-
     messagebox.showinfo("The program crashed due to an error", "The program has crashed due to an error. Please relaunch the program; any unsaved work will be recovered automatically on relaunch.")
-    raise UnsupportedEncodingError("The file at " + str(input) + " could not be opened due to its encoding not being supported. The program has crashed itself to avoid further problems.")
+    try:
+        raise UnsupportedEncodingError("The file at " + str(input) + " could not be opened due to its encoding not being supported. The program has crashed itself to avoid further problems.")
+    except UnsupportedEncodingError:
+        traceback.print_exc()
+        sys.exit(1)
 
 def runonarg(arg):
     global file_written, current_file, file_open
