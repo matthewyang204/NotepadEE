@@ -52,7 +52,11 @@ rm configure
 cp patches/configure ./
 echo "Patching Makefile..."
 rm Makefile
-cp patches/Makefile ./
+if printf '%s\n' "$@" | grep -q -- '--use-opt-gettext'; then
+    cp patches/use-opt-gettext.mak ./Makefile
+else
+    cp patches/Makefile ./
+fi
 echo "Patching the key mappings..."
 sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
 echo "Patching the requirements..."
