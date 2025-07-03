@@ -96,7 +96,7 @@ if [ $? -eq 0 ]; then
         echo "Building with selected architecture universal..."
         make ARCH=universal
     else
-        echo "Building with default host architecture, $HOSTARCH..."
+        echo "Building with default host architecture, $HOST_ARCH..."
         make
     fi
     echo "done"
