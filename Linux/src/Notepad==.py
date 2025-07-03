@@ -551,6 +551,7 @@ def open_file_v2(event=None):
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
         file = retrieve_file(file_path)
+        content = file.read()
         if file_written == 1:
             if platform.system() == "Darwin":
                 nw.macOS(openFile=file_path)
@@ -559,12 +560,12 @@ def open_file_v2(event=None):
             else:
                 text_area.delete(1.0, "end")
                 current_file = file_path
-                text_area.insert(1.0, file.read())
+                text_area.insert(1.0, content)
                 file_open = 1
         else:
             text_area.delete(1.0, "end")
             current_file = file_path
-            text_area.insert(1.0, file.read())
+            text_area.insert(1.0, content)
             file_open = 1
         printlog("New file opened")
         file.close()
