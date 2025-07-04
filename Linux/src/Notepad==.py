@@ -77,15 +77,15 @@ Note that [<filepath>] is not required and if not given, the file that was previ
 """
 
 arg = sys.argv
-if len(arg) <= 1:
-    pass
-else:
-    if arg[1] == '--version' or arg[1] == '-v':
-        print(versionInfo)
-        sys.exit()
-    elif arg[1] == '--help' or arg[1] == '-h':
-        print(helpInfo)
-        sys.exit()
+# if len(arg) <= 1:
+#     pass
+# else:
+#     if arg[1] == '--version' or arg[1] == '-v':
+#         print(versionInfo)
+#         sys.exit()
+#     elif arg[1] == '--help' or arg[1] == '-h':
+#         print(helpInfo)
+#         sys.exit()
 
 encodings = [
     # Common
