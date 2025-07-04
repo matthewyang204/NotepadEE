@@ -412,14 +412,14 @@ def write_prefs(event=None):
     autosave_file()
     printlog("Wrote prefs successfully")
 
-def spoof_prefs(current_file="", file_open=""):
-    with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
-        file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
-    with open(last_file_path, 'w', encoding='utf-8') as file:
-        file.write(str(current_file))
-    autosave_file()
-    printlog("Wrote prefs successfully")
+# def spoof_prefs(current_file="", file_open=""):
+#     with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
+#         file.write(text_area.get('1.0', 'end-1c'))
+#     last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
+#     with open(last_file_path, 'w', encoding='utf-8') as file:
+#         file.write(str(current_file))
+#     autosave_file()
+#     printlog("Wrote prefs successfully")
 
 # save_as provides the dialog
 def save_as(event=None):
@@ -547,20 +547,20 @@ def save_as(event=None):
         messagebox.showerror("Error", "Location nonexistent")
         return False
 
-def open_file(event=None):
-    print("This function is deprececated. Please do not use it. It is now disabled.")
-    return
-    global current_file, file_open
-    save_file("y")
-    file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
-    if file_path:
-        text_area.delete(1.0, "end")
-        current_file = file_path
-        with open(file_path, 'r') as file:
-            text_area.insert(1.0, file.read())
-        file_open = 1
-        printlog("New file opened")
-    write_prefs()
+# def open_file(event=None):
+#     print("This function is deprececated. Please do not use it. It is now disabled.")
+#     return
+#     global current_file, file_open
+#     save_file("y")
+#     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
+#     if file_path:
+#         text_area.delete(1.0, "end")
+#         current_file = file_path
+#         with open(file_path, 'r') as file:
+#             text_area.insert(1.0, file.read())
+#         file_open = 1
+#         printlog("New file opened")
+#     write_prefs()
     
 def open_file_v2(event=None):
     global current_file, file_written, file_open
