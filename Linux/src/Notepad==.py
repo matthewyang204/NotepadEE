@@ -62,19 +62,19 @@ def printlog(message):
     #     file.write("Notepad== at " + str(pid) + ": " + str(message))
     print("Notepad== at " + str(pid) + ": " + str(message))
 
-versionInfo = """Notepad==, version 5.2.0
-(C) 2024-2025 Matthew Yang"""
+# versionInfo = """Notepad==, version 5.2.0
+# (C) 2024-2025 Matthew Yang"""
 
-helpInfo = versionInfo + """
+# helpInfo = versionInfo + """
 
-Usage: notepadee [OPTIONS] [<filepath>]
+# Usage: notepadee [OPTIONS] [<filepath>]
 
-Options:
---version, -v     Display version info and exit
---help, -h        Display this help message and exit
+# Options:
+# --version, -v     Display version info and exit
+# --help, -h        Display this help message and exit
 
-Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
-"""
+# Note that [<filepath>] is not required and if not given, the file that was previously opened will be opened in the new instance.
+# """
 
 arg = sys.argv
 # if len(arg) <= 1:
