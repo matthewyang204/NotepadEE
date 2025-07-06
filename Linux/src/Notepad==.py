@@ -775,7 +775,7 @@ def findNext(text):
         last_highlight = text_area.index("highlight.last")
         start = last_highlight
     except tk.TclError:
-        cPos_line, cpos_column = cPos("both")
+        cPos_line, cPos_column = cPos("both")
         start = str(cPos_line) + "." + str(cPos_column)
         # start= "1.0"
 
