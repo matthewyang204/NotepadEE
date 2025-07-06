@@ -19,7 +19,20 @@ https://gist.github.com/kenji21/25a65a7161793bdc4b7b2641ac67b22a
 
 # Configure & build tcl first before anything else
 ./configure --prefix=/opt/tcl-tk --includedir=/opt/tcl-tk --enable-threads --enable-64bit
-make -j16
+make -j$(sysctl -n hw.ncpu)
 sudo make install
 sudo make install-private-headers
 
+# Configure & build tk
+export CPPFLAGS="$CPPFLAGS -I/opt/tcl-tk" # This is required to add the freshly built tcl to header search path
+
+# Need to comment out following lines in configure:
+if test -d "/System/Library/Frameworks/UniformTypeIdentifiers.framework"; then
+    LIBS="$LIBS -weak_framework UniformTypeIdentifiers"
+fi
+
+# Now build:
+./configure --prefix=/opt/tcl-tk --includedir=/opt/tcl-tk --enable-threads --enable-64bit --enable-aqua=yes --without-x --with-tcl=/opt/tcl-tk/lib
+make -j$(sysctl -n hw.ncpu)
+sudo make install
+sudo make install-private-headers
