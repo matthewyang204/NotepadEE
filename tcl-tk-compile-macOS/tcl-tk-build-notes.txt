@@ -18,3 +18,8 @@ https://gist.github.com/kenji21/25a65a7161793bdc4b7b2641ac67b22a
 	- Then navigate down /Library/Developer all the way to the SDKs, and then paste
 
 # Configure & build tcl first before anything else
+./configure --prefix=/opt/tcl-tk --includedir=/opt/tcl-tk --enable-threads --enable-64bit
+make -j16
+sudo make install
+sudo make install-private-headers
+
