@@ -121,6 +121,11 @@ echo "Installing required packages"
 pip3 install --upgrade -r $requirements --break-system-packages
 echo "done"
 
+# Patch the files
+echo "Creating a usable Makefile..."
+sed -i '' "s#@gettext@#$gettext_path#g" Makefile
+sed -i '' "s#@tcl-tk8@#$tcltk_path#g" Makefile
+
 touch .configured
 echo "Now run 'make' to build."
 
