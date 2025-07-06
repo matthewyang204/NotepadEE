@@ -87,7 +87,7 @@ if printf '%s\n' "$@" | grep -q -- "^--tcl-tk="; then
 elif [ -f "/opt/tcl-tk/bin/tclsh8.6" ]; then
     tcltk_path="/opt/tcl-tk"
 elif command -v brew >/dev/null 2>&1 && [ -d "$(brew --prefix tcl-tk)" ]; then
-    tcltk_path="$(brew --prefix tcl-tk)"
+    tcltk_path="$(brew --prefix tcl-tk@8)"
 elif [ -f "/usr/local/bin/tclsh8.6" ]; then
     tcltk_path="/usr/local"
 else
