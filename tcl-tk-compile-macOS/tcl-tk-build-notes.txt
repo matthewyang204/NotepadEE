@@ -47,7 +47,7 @@ sudo make critcl -j$(sysctl -n hw.ncpu)
 sudo cp -R modules/tcllibc /opt/tcl-tk/lib/
 sudo ln -s /opt/tcl-tk/lib/tcllibc/macosx-x86_64-clang /opt/tcl-tk/lib/tcllibc/macosx-x86_64
 
-# Configure, build, nd install tcltls
+# Configure, build, and install tcltls
 ./configure --with-ssl=openssl --with-openssl-dir=$(brew --prefix openssl@3) --prefix=/opt/tcl-tk
 make -j$(sysctl -n hw.ncpu)
 sudo make install
