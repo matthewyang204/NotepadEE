@@ -17,4 +17,4 @@ https://gist.github.com/kenji21/25a65a7161793bdc4b7b2641ac67b22a
 	- To do this, open all the way down to SDKs, and then copy the MacOSX{something}.sdk to clipboard
 	- Then navigate down /Library/Developer all the way to the SDKs, and then paste
 
-# Configure & build
+# Configure & build tcl first before anything else
