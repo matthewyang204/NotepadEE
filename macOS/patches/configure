@@ -67,17 +67,35 @@ if printf '%s\n' "$@" | grep -q -- "^--gettext="; then
     gettext_arg=$(printf '%s\n' "$@" | grep -m1 '^--gettext=')
     gettext_path="${gettext_arg#--gettext=}"
 elif [ -f "/opt/gettext/bin/gettext" ]; then
-    gettext_path="/opt/gettext/bin/gettext"
+    gettext_path="/opt/gettext"
 elif [ -f "/usr/local/bin/gettext" ]; then
-    gettext_path="/usr/local/bin/gettext"
+    gettext_path="/usr/local"
 elif command -v brew >/dev/null 2>&1 && [ -d "$(brew --prefix gettext)" ]; then
-    gettext_path="$(brew --prefix gettext)/bin/gettext"
+    gettext_path="$(brew --prefix gettext)"
 else
     echo "not found"
     echo "gettext not found. Install it to continue."
     exit 1
 fi
 echo "$gettext_path"
+
+# Check for tcl-tk 8.6
+printf "Checking for tcl-tk 8.6..."
+if printf '%s\n' "$@" | grep -q -- "^--tcl-tk="; then
+    tcltk_arg=$(printf '%s\n' "$@" | grep -m1 '^--tcl-tk=')
+    tcltk_path="${tcltk_arg#--tcl-tk=}"
+elif [ -f "/opt/tcl-tk/bin/tclsh8.6" ]; then
+    tcltk_path="/opt/tcl-tk"
+elif [ -f "/usr/local/bin/tclsh8.6" ]; then
+    tcltk_path="/usr/local"
+elif command -v brew >/dev/null 2>&1 && [ -d "$(brew --prefix tcl-tk)" ]; then
+    tcltk_path="$(brew --prefix tcl-tk)"
+else
+    echo "not found"
+    echo "tcl-tk 8.6 not found. Install it to continue."
+    exit 1
+fi
+echo "$tcltk_path"
 
 # Check for idlelib
 printf "Checking if python3 supports idlelib..."
