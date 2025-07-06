@@ -3,8 +3,8 @@ $(error You must run `./configure` before you can build.)
 endif
 
 ARCH ?= $(shell uname -m)
-LDFLAGS := -L$(shell brew --prefix gettext)/lib -lintl
-CPPFLAGS := -I$(shell brew --prefix gettext)/include
+LDFLAGS := -L@gettext@/lib -lintl
+CPPFLAGS := -I@gettext@/include
 
 export LDFLAGS
 export CPPFLAGS
@@ -25,8 +25,8 @@ build:
 	ARCH="$(ARCH)" && \
 	echo "Building for architecture $$ARCH..." && \
 	export ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$(shell brew --prefix tcl-tk@8)/lib --tk-library-dir=$(shell brew --prefix tcl-tk@8)/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.0 src/Notepad==.py
-	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=$(shell brew --prefix tcl-tk)/lib --tk-library-dir=$(shell brew --prefix tcl-tk)/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.0 src/Notepad==.py
+	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.0 src/Notepad==.py
+	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.0 src/Notepad==.py
 	echo "Build completed. Patching the app bundle..."
 	cd dist/Notepad==.app/Contents && \
 	mv MacOS/tk-files Resources/tk-files && \
