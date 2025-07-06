@@ -76,7 +76,7 @@ echo "done"
 
 # Configure the build
 echo "Configuring build..."
-./configure
+./configure "$@"
 
 # Check if the configure command was successful
 if [ $? -eq 0 ]; then
