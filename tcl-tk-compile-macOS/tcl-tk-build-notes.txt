@@ -37,5 +37,7 @@ make -j$(sysctl -n hw.ncpu)
 sudo make install
 sudo make install-private-headers
 
-# Install critctl
+# Install critcl
 sudo /opt/tcl-tk/bin/tclsh8.6 build.tcl install
+
+# Configure, build, and install tcllib
