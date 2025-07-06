@@ -73,7 +73,7 @@ elif [ -f /opt/gettext/bin/gettext ]; then
 elif [ -f /usr/local/bin/gettext ]; then
     gettext_path="/usr/local/bin/gettext"
     echo "$gettext_path"
-elif [ -d $(brew --prefix gettext) ]; then
+elif command -v brew >/dev/null 2>&1 && [ -d $(brew --prefix gettext) ]; then
     gettext_path="$(brew --prefix gettext)/bin/gettext"
     echo "$gettext_path"
 else
