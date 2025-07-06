@@ -41,12 +41,10 @@ Signing info for prebuilt binaries:
 Prebuild requirements:
 - Python 3.4 - 3.13 (must be official installer)
 - `make` installed
-- `gettext` and `tcl-tk@8` installed with Homebrew
+- `gettext` and `tcl-tk@8` installed
 
 Build instructions:
 1. Clone the repository and navigate to the macOS folder inside of it
 2. Run `chmod +x autogen.sh` to give the script execute permissions.
-3. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build. Note that --arch is optional and if you only want to compile for your machine's native architecture, just run `./autogen.sh`.
+3. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build. Note that --arch is optional and if you only want to compile for your machine's native architecture, just run `./autogen.sh`. You can also use `--gettext=<yourgettext>` to specify a gettext install root dir and `--tcl-tk=<yourtcltk>` to specify custom tcl-tk install root dir, assuming both are installed in the same prefix. They *must* be installed in the same prefix.
 4. After you're done compiling, you can use `sudo make install` to install.
-
-If you want to reproduce a High Sierra-compatible build, please first install gettext according to what is found in the `misc` branch, and then pass a `--use-opt-gettext` to `./autogen.sh`.
