@@ -18,7 +18,7 @@ All of the prebuilt binaries provided in the README support macOS Catalina or ne
 - Name of signature is "Matthew Yang"
 
 # Prebuild requirements
-- Python 3.4 - 3.13 in PATH, built with tcl-tk
+- Python 3.4 - 3.13 in PATH, built with tkinter support
 - make installed
 - `configure` script will automatically install Python packages
 - `gettext` and `tcl-tk@8` installed

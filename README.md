@@ -39,7 +39,7 @@ Signing info for prebuilt binaries:
 - Name of signature is "Matthew Yang"
 
 Prebuild requirements:
-- Python 3.4 - 3.13 in PATH
+- Python 3.4 - 3.13 in PATH, built with tkinter support
 - `make` installed
 - `gettext` and `tcl-tk@8` installed
 
