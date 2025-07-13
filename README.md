@@ -48,3 +48,10 @@ Build instructions:
 2. Run `chmod +x autogen.sh` to give the script execute permissions.
 3. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build. Note that `--arch` is optional and if you only want to compile for your machine's native architecture, just run `./autogen.sh`. You can also use `--gettext=<yourgettext>` to specify a gettext install root dir and `--tcl-tk=<yourtcltk>` to specify custom tcl-tk install root dir, assuming both are installed in the same prefix. They *must* be installed in the same prefix.
 4. After you're done compiling, you can use `sudo make install` to install.
+
+-------
+License
+-------
+This project is licensed under the GNU General Public License v3.0 (GPLv3).  
+All past and future versions of Notepad== are covered by this license.  
+See the LICENSE file for full details.
