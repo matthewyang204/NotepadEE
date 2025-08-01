@@ -1,3 +1,17 @@
 #!/bin/bash
 
-open -n -a Notepad== "$@"
+pgrep -x Notepad== > /dev/null && running="True" || running="False"
+
+backupDir=/tmp/$USER-d537ad88e5dfea62d211d6237cf66645dcfc07999af497ea643393ca8ecd8e97
+if [ "$running" = "True" ]; then
+    mkdir -p $backupDir
+    [ -e ~/.notepadee ] && cp -R ~/.notepadee $backupDir/notepadee.bak
+    rm -rf ~/.notepadee
+    open -n -a Notepad== "$@"
+    sleep 5
+    rm -rf ~/.notepadee
+    cp -R $backupDir/notepadee.bak ~/.notepadee
+else
+    open -a Notepad== "$@"
+fi
+rm -rf $backupDir
