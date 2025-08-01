@@ -36,6 +36,7 @@ build:
 	ln -s ../Resources/tcl-files ./tcl-files && \
 	ln -s ../Resources/tcl-files/tcl8.6 ./tcl8.6 && \
 	ln -s ../Resources/tk-files/tk8.6 ./tk8.6
+	cp -R scripts dist/Notepad==.app/Contents/Resources/
 	echo "done"
 	echo "To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
 
