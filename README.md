@@ -30,7 +30,7 @@ Hackintoshes are supported.
 
 I have separate binaries for Intel and Apple Silicon macs. Please download the correct one. I have signed it with a self-signed signature and can't afford the full Apple Developer notarization. On macOS Sonoma or below, you can bypass the warnings by right-clicking the app and selecting "Open". On macOS Sequioa or later, you will need to disable Gatekeeper entirely by running `sudo spctl --master-disable` and then selecting "Anywhere" at the bottom of the Privacy & Security section of the settings in the "Allow apps from" setting. Alternatively, you may want to use homebrew, which is capable of bypassing Gatekeeper on installation with a single flag.
 
-To use it, first, tap my homebrew repo by running `brew tap matthewyang204/homebrew-formulae-casks`. After this, you can install the cask with `brew install --cask --no-quarantine notepadee`.
+To use it, first, tap my homebrew repo by running `brew tap matthewyang204/homebrew-formulae-casks`. After this, you can install the cask with `brew install --cask --no-quarantine notepadee`. Also, installing with Homebrew will add a convenient `notepadee` command that launches the app from the terminal. Simply run `notepadee` for a new blank editor, or run `notepadee <yourfile>` to open a file.
 
 All of the prebuilt binaries provided in the Releases support macOS Catalina or newer.
 
