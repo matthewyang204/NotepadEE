@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$1" == "--help" ]; then
+if [ "$1" = "--help" ]; then
     echo "Usage: notepadee <file>"
     echo "Options:"
     echo "  --help      Show this help message"
