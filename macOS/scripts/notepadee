@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [ "$1" == "--help" ]; then
+    echo "Usage: notepadee <file>"
+    echo "Options:"
+    echo "  --help      Show this help message"
+    echo "  <file>      Opens <file> in Notepad=="
+    exit
+else if [ "$1" == "--version" ]; then
+    echo "Notepad== Launch Script version 1.0.0"
+    exit
+fi
+
 pgrep -x Notepad== > /dev/null && running="True" || running="False"
 
 backupDir=/tmp/$USER-d537ad88e5dfea62d211d6237cf66645dcfc07999af497ea643393ca8ecd8e97
