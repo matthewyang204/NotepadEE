@@ -6,7 +6,7 @@ if [ "$1" == "--help" ]; then
     echo "  --help      Show this help message"
     echo "  <file>      Opens <file> in Notepad=="
     exit
-else if [ "$1" == "--version" ]; then
+elif [ "$1" == "--version" ]; then
     echo "Notepad== Launch Script version 1.0.0"
     exit
 fi
