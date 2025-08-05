@@ -206,6 +206,9 @@ file_var = tk.StringVar()
 file_label = tk.Label(status_frame, textvariable=file_var)
 file_label.pack(side=tk.LEFT)
 
+text_frame = tk.Frame(root)
+text_frame.pack(fill=tk.BOTH, expand=True)
+
 def get_font_for_platform():
     if os.name == 'nt':
         return font.Font(family="Consolas", size=12)
@@ -215,7 +218,7 @@ def get_font_for_platform():
         return font.Font(family="DejaVu Sans Mono", size=12)
 
 text_font = get_font_for_platform()
-text_area = tk.Text(root, width=100, height=80, wrap=tk.WORD, undo=True)
+text_area = tk.Text(text_frame, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 
 if syntaxHighlighting:
