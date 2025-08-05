@@ -1021,7 +1021,11 @@ def exit_on_keyboardInterrupt(signum, frame):
     printlog("Received KeyboardInterrupt, running exit handler...")
     exit_handler()
 
-text_area.pack(fill=tk.BOTH, expand=tk.YES)
+scrollbar = tk.Scrollbar(text_frame, orient="vertical", command=text_area.yview)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+text_area.config(yscrollcommand=scrollbar.set)
+
+text_area.pack(fill=tk.BOTH, expand=tk.YES, side=tk.LEFT)
 text_area.bind('<KeyRelease>', runinbackground)
 text_area.bind('<Button-1>', runinbackground)
 runinbackground()
