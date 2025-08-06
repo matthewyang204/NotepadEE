@@ -25,8 +25,8 @@ build:
 	ARCH="$(ARCH)" && \
 	echo "Building for architecture $$ARCH..." && \
 	export ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.0 src/Notepad==.py
-	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.0 src/Notepad==.py
+	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.1 src/Notepad==.py
+	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.1 src/Notepad==.py
 	echo "Build completed. Patching the app bundle..."
 	cd dist/Notepad==.app/Contents && \
 	mv MacOS/tk-files Resources/tk-files && \
