@@ -1024,6 +1024,12 @@ def exit_on_keyboardInterrupt(signum, frame):
     printlog("Received KeyboardInterrupt, running exit handler...")
     exit_handler()
 
+class edit_menu_funcs():
+    def show_edit_context_menu(event=None):
+        edit_context_menu.tk_popup(event.x_root, event.y_root)
+    def hide_edit_context_menu(event=None):
+        edit_context_menu.unpost()
+
 scrollbar = tk.Scrollbar(text_frame, orient="vertical", command=text_area.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 text_area.config(yscrollcommand=scrollbar.set)
