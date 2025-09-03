@@ -1074,6 +1074,20 @@ window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Close", command=exit_handler)
 
+# Separate context menus not linked to menu bar
+edit_context_menu = tk.Menu(root, tearoff=0)
+edit_context_menu.add_command(label="Cut", command=cut_text)
+edit_context_menu.add_command(label="Copy", command=copy_text)
+edit_context_menu.add_command(label="Paste", command=paste_text)
+edit_context_menu.add_command(label="Select All", command=select_all_text)
+edit_context_menu.add_separator()
+edit_context_menu.add_command(label="Undo", command=undo)
+edit_context_menu.add_command(label="Redo", command=redo)
+edit_context_menu.add_separator()
+edit_context_menu.add_command(label="Mark Text", command=mark_text)
+edit_context_menu.add_command(label="Unmark Text", command=unmark_text)
+edit_context_menu.add_command(label="Unmark All Text", command=unmark_all_text)
+
 root.bind_all("<Control-w>", exit_handler)
 
 if platform.system() == "Darwin":
