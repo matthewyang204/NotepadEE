@@ -1125,6 +1125,9 @@ text_area.bind('<Control-G>', go_to_line)
 text_area.bind('<Control-equal>', increase_font_size)
 text_area.bind('<Control-minus>', decrease_font_size)
 
+text_area.bind('<Button-3>', edit_menu_funcs.show_edit_context_menu)
+# text_area.bind('<Button-1>', edit_menu_funcs.hide_edit_context_menu)
+
 # atexit.register(exit_handler)
 signal.signal(signal.SIGINT, exit_on_keyboardInterrupt)
 signal.signal(signal.SIGTERM, exit_on_keyboardInterrupt)
