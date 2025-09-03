@@ -1037,7 +1037,7 @@ update_line_number()
 menu = tk.Menu(root)
 root.config(menu=menu)
 
-file_menu = tk.Menu(menu)
+file_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="File", menu=file_menu)
 file_menu.add_command(label="New", command=newWindow)
 file_menu.add_command(label="Open...", command=open_file_v2)
@@ -1046,7 +1046,7 @@ file_menu.add_command(label="Save as...", command=save_as)
 if platform.system() == "Linux":
     file_menu.add_command(label="Quit", command=exit_handler)
 
-edit_menu = tk.Menu(menu)
+edit_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Edit", menu=edit_menu)
 edit_menu.add_command(label="Cut", command=cut_text)
 edit_menu.add_command(label="Copy", command=copy_text)
@@ -1065,12 +1065,12 @@ edit_menu.add_command(label="Find and Replace", command=find_and_replace)
 edit_menu.add_separator()
 edit_menu.add_command(label="Go To Line", command=go_to_line)
 
-accessibility_menu = tk.Menu(menu)
+accessibility_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Accessibility", menu=accessibility_menu)
 accessibility_menu.add_command(label="Zoom in", command=increase_font_size)
 accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 
-window_menu = tk.Menu(menu)
+window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Close", command=exit_handler)
 
