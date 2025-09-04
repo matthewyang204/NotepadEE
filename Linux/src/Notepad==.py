@@ -659,6 +659,8 @@ def new_file(event=None):
         printlog("Cleared text_area")
         current_file = ""
 
+def scroll_to_cursor(event=None):
+    text_area.see("insert")
 
 def cut_text(event=None):
     text_area.clipboard_clear()
@@ -666,7 +668,6 @@ def cut_text(event=None):
     text_area.delete("sel.first", "sel.last")
     printlog("Cut option succeeded")
     return 'break'
-
 
 def copy_text(event=None):
     text_area.clipboard_clear()
@@ -1061,6 +1062,7 @@ if platform.system() == "Linux":
 
 edit_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Edit", menu=edit_menu)
+# edit_menu.add_command(label="Jump To Cursor [Debug]", command=scroll_to_cursor)
 edit_menu.add_command(label="Cut", command=cut_text)
 edit_menu.add_command(label="Copy", command=copy_text)
 edit_menu.add_command(label="Paste", command=paste_text)
