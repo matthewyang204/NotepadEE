@@ -62,8 +62,8 @@ def printlog(message):
     #     file.write("Notepad== at " + str(pid) + ": " + str(message))
     print("Notepad== at " + str(pid) + ": " + str(message))
 
-# versionInfo = """Notepad==, version 5.2.1
-# (C) 2024-2025 Matthew Yang"""
+versionInfo = """Notepad==, version 5.2.1
+(C) 2024-2025 Matthew Yang"""
 
 # helpInfo = versionInfo + """
 
@@ -1030,6 +1030,9 @@ class edit_menu_funcs():
     def hide_edit_context_menu(event=None):
         edit_context_menu.unpost()
 
+def about(event=None):
+    messagebox.showinfo("About Notepad==", versionInfo)
+
 scrollbar = tk.Scrollbar(text_frame, orient="vertical", command=text_area.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 text_area.config(yscrollcommand=scrollbar.set)
@@ -1079,6 +1082,10 @@ accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Close", command=exit_handler)
+
+about_menu = tk.Menu(menu, tearoff=0)
+menu.add_cascade(label="About", menu=about_menu)
+about_menu.add_command(label="About Notepad==", command=about)
 
 # Separate context menus not linked to menu bar
 edit_context_menu = tk.Menu(root, tearoff=0)
