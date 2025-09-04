@@ -659,8 +659,12 @@ def new_file(event=None):
         printlog("Cleared text_area")
         current_file = ""
 
-def scroll_to_cursor(event=None):
-    text_area.see("insert")
+class text_scroll():
+    def to_cursor(event=None):
+        text_area.see("insert")
+    
+    def to_position(position):
+        text_area.see(position)
 
 def cut_text(event=None):
     text_area.clipboard_clear()
