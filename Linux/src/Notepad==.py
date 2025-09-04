@@ -755,6 +755,7 @@ def go_to_line(event=None):
     def go(event=None):
         line_number = entrybox.get()
         text_area.mark_set("insert", str(line_number) + ".0")
+        text_scroll.to_cursor()
 
     def close(event=None):
         popup.destroy()
@@ -799,6 +800,7 @@ def findNext(text):
         text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
+    text_scroll.to_position(start)
 
 def find_text(event=None):
     popup = tk.Toplevel(root)
@@ -1066,7 +1068,7 @@ if platform.system() == "Linux":
 
 edit_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Edit", menu=edit_menu)
-# edit_menu.add_command(label="Jump To Cursor [Debug]", command=scroll_to_cursor)
+# edit_menu.add_command(label="Jump To Cursor [Debug]", command=text_scroll.to_cursor)
 edit_menu.add_command(label="Cut", command=cut_text)
 edit_menu.add_command(label="Copy", command=copy_text)
 edit_menu.add_command(label="Paste", command=paste_text)
