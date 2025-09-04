@@ -800,6 +800,7 @@ def findNext(text):
         text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
+    text_area.mark_set("insert", end)
     text_scroll.to_position(start)
 
 def find_text(event=None):
