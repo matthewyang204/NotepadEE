@@ -1030,11 +1030,12 @@ class edit_menu_funcs():
     def hide_edit_context_menu(event=None):
         edit_context_menu.unpost()
 
-def about(event=None):
-    messagebox.showinfo("About Notepad==", versionInfo)
+class about():
+    def about(event=None):
+        messagebox.showinfo("About Notepad==", versionInfo)
 
-def show_license(event=None):
-    messagebox.showinfo("License", "This program is licensed under the GNU GPLv3. If you did not receive a copy with this program, go to https://github.com/matthewyang204/NotepadEE or read the LICENSE file in your copy of the source code.")
+    def show_license(event=None):
+        messagebox.showinfo("License", "This program is licensed under the GNU GPLv3. If you did not receive a copy with this program, go to https://github.com/matthewyang204/NotepadEE or read the LICENSE file in your copy of the source code.")
 
 scrollbar = tk.Scrollbar(text_frame, orient="vertical", command=text_area.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
@@ -1088,8 +1089,8 @@ window_menu.add_command(label="Close", command=exit_handler)
 
 about_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="About", menu=about_menu)
-about_menu.add_command(label="About Notepad==", command=about)
-about_menu.add_command(label="License", command=show_license)
+about_menu.add_command(label="About Notepad==", command=about.about)
+about_menu.add_command(label="License", command=about.show_license)
 
 # Separate context menus not linked to menu bar
 edit_context_menu = tk.Menu(root, tearoff=0)
