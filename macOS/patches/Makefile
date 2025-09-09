@@ -56,8 +56,10 @@ uninstall-upgrade:
 clean:
 	rm -rf dist
 	rm -rf build
-	rm -f Notepad==.spec
+	rm -f Notepad==.
 	echo "Cleaned all temp files used"
+	rm -rf nuitka-crash-report*.xml
+	echo "Removed all old logs"
 
 dist: clean
 	mkdir ../temp
