@@ -1021,7 +1021,7 @@ class nw():
             if openFile:
                 launcher_thread = threading.Thread(target=launcher2, daemon=True)
             else:
-                launcher_thread = threading.Thread(target=launcher, daemon=)
+                launcher_thread = threading.Thread(target=launcher, daemon=True)
             launcher_thread.start()
             # DO NOT enable, this is only compatible with Python 3.12 and later
             # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
