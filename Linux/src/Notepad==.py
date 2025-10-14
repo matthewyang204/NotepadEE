@@ -1016,10 +1016,12 @@ class nw():
                     else:
                         printlog("We are probably running in standard interpreted mode, launching executable with python file...")
                         subprocess.Popen([pyexe, run_path, openFile], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS)
-            if openFile:
-                launcher_thread = threading.Thread(target=launcher2)
             else:
-                launcher_thread = threading.Thread(target=launcher)
+                raise platformError("No launcher available for your platform.")
+            if openFile:
+                launcher_thread = threading.Thread(target=launcher2, daemon=True)
+            else:
+                launcher_thread = threading.Thread(target=launcher, daemon=)
             launcher_thread.start()
             # DO NOT enable, this is only compatible with Python 3.12 and later
             # printlog(f"Waiting for {os.path.join(cache_path, "loadPreviousSave.lock")}...")
