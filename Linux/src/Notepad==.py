@@ -1017,6 +1017,8 @@ def newWindow(event=None):
         threading.Thread(target=nw.macOS(), daemon=True).start()
     elif platform.system() == "Linux":
         nw.Linux()
+    elif platform.system() == "Windows":
+        new_file()
     else:
         raise platformError("There is no newWindow function available for your platform.")
 
