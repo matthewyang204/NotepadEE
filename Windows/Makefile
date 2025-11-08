@@ -71,23 +71,23 @@ clean: clean-dist clean-bin-dist
 dist: clean
 	mkdir ../temp
 	cp -R ./* ../temp/
-	tar -czvf NotepadEE-Linux-src.tar.gz -C ../temp .
+	tar -czvf NotepadEE-Windows-src.tar.gz -C ../temp .
 	rm -rf ../temp
 
 clean-dist:
-	rm -rf NotepadEE-Linux-src.tar.gz
+	rm -rf NotepadEE-Windows-src.tar.gz
 	rm -rf ../temp
 
 bin-dist:
 	mkdir ../temp
 	cp -R dist build *.spec notepadee.desktop ../temp/
 	cp resources/dist.mak ../temp/Makefile
-	tar -czvf NotepadEE-Linux-$(VERSION_NUMBER)-$(shell uname -m).tar.gz -C ../temp .
+	tar -czvf NotepadEE-Windows-$(VERSION_NUMBER)-$(shell uname -m).tar.gz -C ../temp .
 	rm -rf ../temp
 
 clean-bin-dist: 
 	rm -rf ../temp
-	rm -rf NotepadEE-Linux-*.tar.gz
+	rm -rf NotepadEE-Windows-*.tar.gz
 
 upgrade: uninstall-upgrade install
 
