@@ -19,7 +19,7 @@ configure:
 	./configure
 
 build:
-	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
+	pyinstaller --hidden-import=tkinter --windowed -i Notepad.png src/$(APP_NAME).py
 	cp Notepad.png dist/Notepad==/
 	touch dist/Notepad==/.pyinstaller
 	$(MAKE) windows-app-icon
