@@ -196,3 +196,6 @@ nuitka-crash-report.xml
 
 # JetBrains IDE prefs
 .idea/
+
+# Copies of source code
+/Windows/src/
