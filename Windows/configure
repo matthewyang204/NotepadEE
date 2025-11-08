@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# Check for Python 3
+printf "Checking for python3..."
+if ! command -v python3 &> /dev/null
+then
+    echo "not found"
+    echo "Python 3 not found. Please install it to continue."
+    exit 1
+else
+    echo "found"
+fi
+
+# Check Python 3 version
+printf "Checking python3 version..."
+version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+echo $version
+
+# version=3.11.5
+# version=3.13.2
+# version=3.12
+# if [[ $version == 3.12.* ]]; then
+#     echo "correct"
+# elif [[ $version == 3.13.* ]]; then
+    # echo "correct"
+# else
+#     echo "incorrect"
+#     echo "The version of Python 3 currently installed is not a 3.12 release. Please install a 3.12 release to continue."
+#     exit 1
+# fi
+
+# Set requirements file
+printf "Setting requirements.txt..."
+if [[ $version == 3.4.* ]]; then
+    requirements=requirements-3.4.txt
+elif [[ $version == 3.5.x ]]; then
+    requirements=requirements-3.4.txt
+else
+    requirements=requirements.txt
+fi
+echo "done"
+
+# Check for pip3
+printf "Checking for pip3..."
+if ! command -v pip3 &> /dev/null
+then
+    echo "not found"
+    echo "pip3 was not found. Please install it to your respective Python 3 installation to continue."
+    exit 1
+else
+    echo "found"
+fi
+
+# Check if tkinter is available
+printf "Checking if python3 supports tkinter..."
+if ! command -v python3 -c 'import tkinter' &> /dev/null
+then
+    echo "not available"
+    echo "Tkinter not available. It is a core framework and required for compilation. Please compile python with tkinter or install a package containing tkinter to continue."
+    exit 1
+else
+    echo "available"
+fi
+
+# Check for idlelib
+printf "Checking if python3 supports idlelib..."
+if ! command -v python3 -c 'import idlelib' &> /dev/null
+then
+    echo "not available"
+    echo "IDLElib is not available. It is required for syntax highlighting. Please install it to continue."
+    exit 1
+else
+    echo "available"
+fi
+
+# Check for some dpkg and apt packages
+printf "Checking if patchelf is installed..."
+if ! command -v patchelf >/dev/null 2>&1; then
+    echo "not installed"
+    echo "patchelf is not installed. Please install it to continue."
+    exit 1
+else
+    echo "installed"
+fi
+
+# printf "Checking if python3-tk is installed..."
+# if ! dpkg -l | grep python3-tk >/dev/null 2>&1; then
+#     echo "not installed"
+#     echo "python3-tk is not installed. Please install it to continue."
+#     exit 1
+# else
+#     echo "installed"
+# fi
+
+printf "Checking if python3-dev is installed..."
+if ! dpkg -l | grep python3-dev >/dev/null 2>&1; then
+    echo "not installed"
+    echo "python3-dev is not installed. Please install it to continue."
+    exit 1
+else
+    echo "installed"
+fi
+
+# Check for tar
+printf "Checking for tar..."
+if ! command -v tar &> /dev/null
+then
+    echo "not found"
+    echo "Tar not found. Install it before continuing."
+    exit 1
+else
+    echo "found"
+fi
+
+# Install required python packages
+echo "Installing required packages"
+if python3 -m pip install -r $requirements --break-system-packages &> /dev/null; then
+    echo "Required python packages installed"
+else
+    echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages"
+    python3 -m pip install -r $requirements
+fi
+echo "done"
+
+touch .configured
+echo "Now run 'make' to build."
