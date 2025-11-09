@@ -197,5 +197,7 @@ nuitka-crash-report.xml
 # JetBrains IDE prefs
 .idea/
 
-# Copies of source code
+# Copies of source code, other things not supposed to be packaged into Git repo in Windows folder, and Windows build junk
 /Windows/src/
+/Windows/Makefile
+Output/
