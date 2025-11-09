@@ -55,6 +55,7 @@ Any PC running Windows 7/10 or later works depending on what installer you use
 - Windows 10 x64 or later
 - Additional requirements may be needed for building from source:
     - Windows 7 or later is supported for building from source, but Windows 10 or later is recommended
+    - A MSYS/MinGW environment (e.g. Git Bash, MSYS2, Cygwin)
     - Python 3.6 or later
     - Inno Setup
 
