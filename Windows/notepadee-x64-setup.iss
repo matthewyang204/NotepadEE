@@ -6,6 +6,7 @@
 #define MyAppPublisher "Matthew Yang"
 #define MyAppURL "https://www.github.com/matthewyang204/NotepadEE"
 #define MyAppExeName "Notepad==.exe"
+#define MyAppAssocName "Text Document"
 #define MyAppAssocExt ".txt"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
