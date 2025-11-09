@@ -36,6 +36,9 @@ install:
 	$(MAKE) bin-dist
 	Output/*.exe
 
+run:
+	dist/Notepad==/Notepad==.exe
+
 uninstall:
 	@echo "This operation is not supported on Windows. Please use the Apps & Features settings or control panel to uninstall Notepad==."
 
