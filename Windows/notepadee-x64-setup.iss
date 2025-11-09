@@ -48,6 +48,12 @@ Source: "dist\Notepad==\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\Notepad==\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
+[Registry]
+; Add context menu for all files (*)
+Root: HKCR; Subkey: "*\shell\Notepad=="; ValueType: string; ValueName: ""; ValueData: "Edit with Notepad=="; Flags: uninsdeletekey
+Root: HKCR; Subkey: "*\shell\Notepad=="; ValueType: string; ValueName: "Icon"; ValueData: "{app}\Notepad==.exe"
+Root: HKCR; Subkey: "*\shell\Notepad==\command"; ValueType: string; ValueName: ""; ValueData: """{app}\Notepad==.exe"" ""%1"""
+
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
