@@ -95,6 +95,10 @@ if command -v "C:/Program Files (x86)/Inno Setup 6/ISCC.exe" &> /dev/null
 then
     ISCC="C:/Program Files (x86)/Inno Setup 6/ISCC.exe"
     echo $ISCC
+elif command -v "C:/Program Files (x86)/Inno Setup 5/ISCC.exe" &> /dev/null
+then
+    ISCC="C:/Program Files (x86)/Inno Setup 5/ISCC.exe"
+    echo $ISCC
 elif command -v "iscc" &> /dev/null
 then
     ISCC="iscc"
