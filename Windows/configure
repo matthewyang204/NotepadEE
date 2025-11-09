@@ -38,7 +38,7 @@ echo $version
 printf "Setting requirements.txt..."
 if [[ $version == 3.4.* ]]; then
     requirements=requirements-3.4.txt
-elif [[ $version == 3.5.x ]]; then
+elif [[ $version == 3.5.* ]]; then
     requirements=requirements-3.4.txt
 else
     requirements=requirements.txt
