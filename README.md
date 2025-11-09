@@ -75,9 +75,7 @@ Installing from the precompiled binaries:
 Upgrading:
 - You can directly run the new installer to upgrade
 
--------
-License
--------
+# License
 This project is licensed under the GNU General Public License v3.0 (GPLv3).  
 All past and future versions of Notepad== are covered by this license.  
 See the LICENSE file for full details.
