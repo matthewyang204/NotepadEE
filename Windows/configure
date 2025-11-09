@@ -116,7 +116,7 @@ fi
 echo "done"
 
 # Patch Makefile
-echo "Executing depfiles commands..."
+printf "Executing depfiles commands..."
 cp Makefile.in Makefile
 sed -i "s#@ISCC@#$ISCC#g" Makefile
 
