@@ -26,7 +26,7 @@ Any PC running Windows 7/10 or later works depending on what installer you use
 
 ## Installation
 Installing from the precompiled binaries:
-- Windows installers (.exe) are available in the Releases section of this repository
+- x64 Windows installers (.exe) for Windows 10 or later are available in the Releases section of this repository
 - Simply download the installer and run it
 - Support:
     - Windows 10 or later for official installers
