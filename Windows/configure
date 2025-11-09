@@ -3,6 +3,7 @@
 printf "Copy fresh src from Linux..."
 rm -rf ./src
 cp -r ../Linux/src ./src
+cp Notepad.ico ./src/Notepad.ico
 echo "done"
 
 # Check for Python 3
