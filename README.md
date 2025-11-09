@@ -1,9 +1,8 @@
 # Notepad==
 Have you ever wanted to jot something down on a Unix system and wished the Windows Notepad were there? Then you can use Notepad==! Notepad== is a quick and simple text editor for POSIX systems.
 
------
-Linux
------
+
+# Linux
 - Download latest dev source code from the Linux section of this repository: https://github.com/matthewyang204/NotepadEE/tree/main/Linux
 - These binaries are next to the Windows binaries
 - Any Debian-based distro should work for building
@@ -19,9 +18,7 @@ Linux build instructions:
 - Requires Debian-based distro to build
 - Source code is in the Linux folder; Windows source code is in separate Windows folder
 
------
-macOS
------
+# macOS
 Source code located in the [macOS section](https://github.com/matthewyang204/NotepadEE/tree/main/macOS).
 
 Any Mac capable of running Python 3.4 works for building. Your Mac must be capable of running OS X 10.4 Tiger or later. OS X 10.5 Leopard is the earliest version of OS X supported by Python 3.4, so it is the earliest officially supported version. However, Tiger is also fine because it can actually run a very modern version of Python (3.10.16) via [Tigerbrew](https://github.com/mistydemeo/Tigerbrew).
@@ -49,9 +46,7 @@ Build instructions:
 3. Run `./autogen.sh --arch=<x86_64 or arm64>` to automatically configure and build. Note that `--arch` is optional and if you only want to compile for your machine's native architecture, just run `./autogen.sh`. You can also use `--gettext=<yourgettext>` to specify a gettext install root dir and `--tcl-tk=<yourtcltk>` to specify custom tcl-tk install root dir, assuming both `tcl` and `tk` are installed in the same prefix. They *must* be installed in the same prefix.
 4. After you're done compiling, you can use `sudo make install` to install.
 
--------
-Windows
--------
+# Windows
 Source code located in the [Windows section](Windows/)
 
 Any PC running Windows 7/10 or later works depending on what installer you use
