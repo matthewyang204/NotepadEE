@@ -92,3 +92,5 @@ clean-bin-dist:
 upgrade: uninstall-upgrade install
 
 upgrade-no-desktop-file: uninstall-no-desktop-file-upgrade install-no-desktop-file
+
+.PHONY: all configure build install uninstall clean dist bin-dist upgrade upgrade-no-desktop-file
