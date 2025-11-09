@@ -1072,7 +1072,7 @@ file_menu.add_command(label="New", command=newWindow)
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
-if platform.system() == "Linux":
+if not platform.system() == "Darwin":
     file_menu.add_command(label="Quit", command=exit_handler)
 
 edit_menu = tk.Menu(menu, tearoff=0)
@@ -1128,7 +1128,7 @@ root.bind_all("<Control-w>", exit_handler)
 if platform.system() == "Darwin":
     root.bind_all('<Command-n>', newWindow)
     root.bind_all('<Command-N>', newWindow)
-elif platform.system() == "Linux":
+else:
     root.bind_all('<Control-n>', newWindow)
     root.bind_all('<Control-N>', newWindow)
 root.bind_all('<Control-o>', open_file_v2)
@@ -1166,7 +1166,7 @@ root.protocol('WM_DELETE_WINDOW', exit_handler)
 # Implement quit event if macOS
 if platform.system() == "Darwin":
     root.createcommand('::tk::mac::Quit', exit_handler)
-elif platform.system() == "Linux":
+else:
     root.bind_all("<Control-q>", exit_handler)
 
 write_prefs()
