@@ -6,6 +6,8 @@
 #define MyAppPublisher "Matthew Yang"
 #define MyAppURL "https://www.github.com/matthewyang204/NotepadEE"
 #define MyAppExeName "Notepad==.exe"
+#define MyAppAssocExt ".txt"
+#define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -52,6 +54,11 @@ Source: "dist\Notepad==\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdir
 Root: HKCR; Subkey: "*\shell\Notepad=="; ValueType: string; ValueName: ""; ValueData: "Edit with Notepad=="; Flags: uninsdeletekey
 Root: HKCR; Subkey: "*\shell\Notepad=="; ValueType: string; ValueName: "Icon"; ValueData: "{app}\Notepad==.exe"
 Root: HKCR; Subkey: "*\shell\Notepad==\command"; ValueType: string; ValueName: ""; ValueData: """{app}\Notepad==.exe"" ""%1"""
+; File extensions
+Root: HKCR; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Software\Classes\{#MyAppAssocKey}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocName}"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\{#MyAppExeName},0"
+Root: HKCR; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
 
 [Icons]
 Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
