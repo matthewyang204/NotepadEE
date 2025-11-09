@@ -1,5 +1,5 @@
 # Notepad==
-Have you ever wanted to jot something down on a Unix system and wished the Windows Notepad were there? Then you can use Notepad==! Notepad== is a quick and simple text editor for POSIX systems.
+Have you ever wanted to jot something down on a Unix system and wished the Windows Notepad were there? Then you can use Notepad==! Notepad== is a quick and simple text editor for POSIX systems. It's also a good replacement for the newly bloated UWP Notepad and has more support for encoding and such.
 
 
 # Linux
