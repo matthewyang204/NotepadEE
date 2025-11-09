@@ -91,17 +91,19 @@ fi
 
 # Check for inno setup compiler
 printf "Checking for Inno Setup Compiler..."
-if command -v "C:/Program Files (x86)/Inno Setup 6/ISCC.exe" &> /dev/null
+if [[ -n "$ISCC" ]] && command -v "$ISCC" &> /dev/null; then
+    echo $ISCC
+elif command -v "C:/Program Files (x86)/Inno Setup 6/ISCC.exe" &> /dev/null
 then
     ISCC="C:/Program Files (x86)/Inno Setup 6/ISCC.exe"
-    echo $ISCC
-elif command -v "C:/Program Files (x86)/Inno Setup 5/ISCC.exe" &> /dev/null
-then
-    ISCC="C:/Program Files (x86)/Inno Setup 5/ISCC.exe"
     echo $ISCC
 elif command -v "iscc" &> /dev/null
 then
     ISCC="iscc"
+    echo $ISCC
+elif command -v "C:/Program Files (x86)/Inno Setup 5/ISCC.exe" &> /dev/null
+then
+    ISCC="C:/Program Files (x86)/Inno Setup 5/ISCC.exe"
     echo $ISCC
 else
     echo "not found"
