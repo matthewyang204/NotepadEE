@@ -28,19 +28,16 @@ build:
 windows-app-icon:
 	cp Notepad.ico dist\Notepad==\_internal\
 
+inno-setup:
+	"@ISCC@" @ISCSCRIPT@
+	echo "Inno Setup installer created."
+
 install:
-	sudo mkdir -p $(INSTALL_DIR)
-	sudo cp -R $(BUILD_DIR)/$(APP_NAME) $(INSTALL_DIR)/
-	sudo ln -s $(INSTALL_DIR)/$(APP_NAME)/$(APP_NAME) $(BIN_LINK)
-	sudo cp notepadee.desktop $(DESKTOP_FILE)
-	sudo update-desktop-database
-	echo "Install completed"
+	$(MAKE) bin-dist
+	Output/*.exe
 
 uninstall:
-	sudo rm -rf /opt/matthewyang/$(APP_NAME)
-	sudo rm -f $(BIN_LINK)
-	sudo rm -rf $(DESKTOP_FILE)
-	echo "Uninstalled. If issues experienced caused you to uninstall Notepad==, please report them on https://www.github.com/matthewyang204/NotepadEE."
+	@echo "This operation is not supported on Windows. Please use the Apps & Features settings or control panel to uninstall Notepad==."
 
 clean: clean-dist clean-bin-dist
 	rm -rf dist
@@ -59,16 +56,11 @@ clean-dist:
 	rm -rf ../temp
 
 bin-dist:
-	mkdir ../temp
-	cp -R dist build *.spec notepadee.desktop ../temp/
-	cp resources/dist.mak ../temp/Makefile
-	tar -czvf NotepadEE-Windows-$(VERSION_NUMBER)-$(shell uname -m).tar.gz -C ../temp .
-	rm -rf ../temp
+	$(MAKE) inno-setup
 
 clean-bin-dist: 
-	rm -rf ../temp
-	rm -rf NotepadEE-Windows-*.tar.gz
+	rm -rf Output
 
 upgrade: uninstall-upgrade install
 
-.PHONY: all configure build install uninstall clean dist bin-dist upgrade
+.PHONY: all configure build install uninstall clean dist bin-dist upgrade inno-setup windows-app-icon clean-dist clean-bin-dist

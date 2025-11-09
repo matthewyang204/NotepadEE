@@ -105,6 +105,27 @@ else
     exit 1
 fi
 
+# Check for CPU architecture
+printf "Checking CPU architecture (for Inno Setup script)..."
+arch=$(uname -m)
+if [[ $arch == x86_64 || $arch == AMD64 ]]; then
+    ARCH="x64"
+    iscscript="notepadee-x64-setup.iss"
+    echo $ARCH
+elif [[ $arch == i386 || $arch == i686 || $arch == x86 ]]; then
+    ARCH="x86"
+    iscscript="notepadee-x86-setup-is5.iss"
+    echo $ARCH
+elif [[ $arch == aarch64 || $arch == ARM64 ]]; then
+    ARCH="x64"
+    iscscript="notepadee-x64-setup.iss"
+    echo $ARCH
+else
+    echo "unknown architecture"
+    echo "Unknown CPU architecture. Please use x86, x64, or ARM64 architecture to continue."
+    exit 1
+fi
+
 # Install required python packages
 echo "Installing required packages"
 if python3 -m pip install -r $requirements --break-system-packages &> /dev/null; then
@@ -119,6 +140,8 @@ echo "done"
 printf "Executing depfiles commands..."
 cp Makefile.in Makefile
 sed -i "s#@ISCC@#$ISCC#g" Makefile
+sed -i "s#@ISCSCRIPT@#$iscscript#g" Makefile
+echo "done"
 
 touch .configured
 echo "Now run 'make' to build."
