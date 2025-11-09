@@ -115,5 +115,10 @@ else
 fi
 echo "done"
 
+# Patch Makefile
+echo "Executing depfiles commands..."
+cp Makefile.in Makefile
+sed -i "s#@ISCC@#$ISCC#g" Makefile
+
 touch .configured
 echo "Now run 'make' to build."
