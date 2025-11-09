@@ -46,6 +46,7 @@ clean: clean-dist clean-bin-dist
 	rm -rf dist
 	rm -rf build
 	rm -rf $(APP_NAME).spec
+	rm -rf Output
 	echo "Cleaned all temp files used"
 
 dist: clean
