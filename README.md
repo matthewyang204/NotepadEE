@@ -50,6 +50,37 @@ Build instructions:
 4. After you're done compiling, you can use `sudo make install` to install.
 
 -------
+Windows
+-------
+Source code located in the [Windows section](Windows/)
+
+Any PC running Windows 7/10 or later works depending on what installer you use
+
+## Requirements
+- Windows 10 x64 or later
+- Additional requirements may be needed for building from source:
+    - Windows 7 or later is supported for building from source, but Windows 10 or later is recommended
+    - Python 3.6 or later
+    - Inno Setup
+
+## Build instructions
+- Please clone the repo and cd into the Windows folder
+- `./configure` - configure the stuff
+- `make -j<number of CPU cores>` - build with pyinstaller
+- `make bin-dist` - create installer with Inno Setup
+
+## Installation
+Installing from the precompiled binaries:
+- Windows installers (.exe) are available in the Releases section of this repository
+- Simply download the installer and run it
+- Support:
+    - Windows 10 or later for official installers
+    - Windows 7 and 8 may work but only with custom-built installers - official installers are not built for these versions due to small Python incompatibilities
+
+Upgrading:
+- You can directly run the new installer to upgrade
+
+-------
 License
 -------
 This project is licensed under the GNU General Public License v3.0 (GPLv3).  
