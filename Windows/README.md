@@ -8,25 +8,20 @@ This is the Windows version's source code
 
 The Windows binaries can be downloaded from the releases
 
-Any PC running Windows XP or later works
+Any PC running Windows 7/10 or later works depending on what installer you use
 
 Build instructions:
-- Run the command prompt as admin and navigate to the cloned repository.
-- Run `dpinstall.bat` in the Command Prompt to find out what's missing. Install the missing component that the batch script specifies if it fails.
-- If all dependencies are met, it will automatically use pip3 to install the needed Python libraries.
-- Once dependencies are met, run `build.bat`.
-- Download and install Inno Setup if you haven't already. Then, open the .iss setup script and build by clicking Build>Compile. Note that you need to use Inno Setup 5 on Windows Vista or earlier.
-- Run the installer and you've successfully installed.
-
-Python 3.4 compatibility scripts:
-- There are scripts with `-3.4` appended to their filenames that are compatible with Python 3.4
+- Please clone the repo and cd into the Windows folder
+- `./configure` - configure the stuff
+- `make -j<number of CPU cores>` - build with pyinstaller
+- `make bin-dist` - create installer with Inno Setup
 
 Installing from the precompiled binaries:
-- Binaries are next to all other binaries
-- x64 binaries are provided for users, however, they are not signed
-- Version compatibility:
-- Windows XP or later; ARM64 systems need Win10 ARM64 or later
-- Python 3.4 or later
+- Windows installers (.exe) are available in the Releases section of this repository
+- Simply download the installer and run it
+- Support:
+    - Windows 10 or later for official installers
+    - Windows 7 and 8 may work but only with custom-built installers - official installers are not built for these versions due to small Python incompatibilities
 
 Upgrading:
-- You can directly run the new installer to upgrade. You can either download this from the Release of the new version or you can install from your custom-built installer.
+- You can directly run the new installer to upgrade
