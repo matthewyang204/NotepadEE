@@ -1,3 +1,4 @@
 pyinstaller
 pillow
 tk
+tklinenums

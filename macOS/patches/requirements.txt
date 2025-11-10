@@ -3,3 +3,4 @@ nuitka==2.7.11
 imageio
 setuptools
 pyyaml
+tklinenums
