@@ -1134,6 +1134,15 @@ window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Close", command=exit_handler)
 
+tool_menu = tk.Menu(menu, tearoff=0)
+menu.add_cascade(label="Tools", menu=tool_menu)
+# Begin tab modes submenu
+tab_modes_menu = tk.Menu(tool_menu, tearoff=0)
+tool_menu.add_cascade(label="Tab Modes", menu=tab_modes_menu)
+tab_modes_menu.add_radiobutton(label="Tab", variable=tab_mode, value="tab")
+tab_modes_menu.add_radiobutton(label="Spaces", variable=tab_mode, value="spaces")
+# End tab modes submenu
+
 about_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="About", menu=about_menu)
 about_menu.add_command(label="About Notepad==", command=about.about)
