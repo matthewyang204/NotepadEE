@@ -269,6 +269,8 @@ if platform.system() == "Darwin" or platform.system() == "Linux":
 else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
+tab_mode = tk.StringVar(value="tab")
+
 def retrieve_file(input):
     global encodings
     for enc in encodings[:]:
@@ -1062,6 +1064,16 @@ class lineNumbers:
         self.linenums.yview_moveto(first)
         self.linenums.redraw()
 linenums = lineNumbers()
+
+class keyShortcuts:
+    def insert_tab(event=None):
+        if tab_mode.get() == "tab":
+            text_area.insert("insert", "\t")
+        elif tab_mode.get() == "spaces":
+            text_area.insert("insert", "    ")
+        return 'break'
+
+    text_area.bind("<Tab>", insert_tab)
 
 class about():
     def about(event=None):
