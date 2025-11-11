@@ -58,10 +58,10 @@ def flushed_print(*args, **kwargs):
 builtins.print = flushed_print
 
 # Special printlog statement to print stuff that doesn't belong in a console to the log file
-def printlog(message):
+def printlog(message, *args):
     # with open(log_file, 'a', encoding='utf-8') as file:
     #     file.write("Notepad== at " + str(pid) + ": " + str(message))
-    print("Notepad== at " + str(pid) + ": " + str(message))
+    print("Notepad== at " + str(pid) + ": " + str(message), *args)
 
 versionInfo = """Notepad==, version 5.2.2
 (C) 2024-2025 Matthew Yang"""
