@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+import tklinenums as tkln
 import os
 from tkinter import messagebox
 from tkinter import font
