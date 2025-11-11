@@ -866,8 +866,8 @@ def unmark_all_text(event=None):
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
-    line_var.set("Line: " + line)
-    column_var.set("Column: " + column)
+    # line_var.set("Line: " + line)
+    # column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(current_file))
