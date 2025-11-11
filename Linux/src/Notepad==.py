@@ -315,7 +315,7 @@ def runonarg(arg):
         #printlog("File open: " + str(file_open))
         printlog("File loaded, closing resource...", end='')
         file.close()
-        printlog("done")
+        print("done")
     else:
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
         
