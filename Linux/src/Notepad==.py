@@ -877,6 +877,7 @@ def update_line_number(event=None):
         root.title("Notepad==")
     text_size = text_font['size']
     text_size_indicator.set("Size: " + str(text_size)) # f"Size: {text_size}"
+    linenums.linenums.redraw()
     # print("Status bar updated")
     root.after(100, update_line_number)
 
@@ -1047,6 +1048,16 @@ class edit_menu_funcs():
     def hide_edit_context_menu(event=None):
         edit_context_menu.unpost()
 
+class lineNumbers:
+    def __init__(self):
+        self.linenums = tkln.TkLineNumbers(text_frame, text_area, justify="center")
+        self.linenums.pack(side="left", fill="y")
+
+    def scrollBoth(self, *args):
+        self.linenums.redraw()
+        scrollbar.set()
+linenums = lineNumbers()
+
 class about():
     def about(event=None):
         messagebox.showinfo("About Notepad==", versionInfo)
@@ -1055,6 +1066,7 @@ class about():
         messagebox.showinfo("License", "This program is licensed under the GNU GPLv3. If you did not receive a copy with this program, go to https://github.com/matthewyang204/NotepadEE or read the LICENSE file in your copy of the source code.")
 
 scrollbar = tk.Scrollbar(text_frame, orient="vertical", command=text_area.yview)
+scrollbar.config(command=linenums.scrollBoth)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 text_area.config(yscrollcommand=scrollbar.set)
 
