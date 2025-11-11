@@ -1054,8 +1054,13 @@ class lineNumbers:
         self.linenums.pack(side="left", fill="y")
 
     def scrollBoth(self, *args):
+        text_area.yview(*args)
+        self.linenums.yview(*args)
+
+    def updateScroll(self, first, last):
+        scrollbar.set(first, last)
+        self.linenums.yview_moveto(first)
         self.linenums.redraw()
-        scrollbar.set()
 linenums = lineNumbers()
 
 class about():
@@ -1068,7 +1073,7 @@ class about():
 scrollbar = tk.Scrollbar(text_frame, orient="vertical", command=text_area.yview)
 scrollbar.config(command=linenums.scrollBoth)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-text_area.config(yscrollcommand=scrollbar.set)
+text_area.config(yscrollcommand=linenums.updateScroll)
 
 text_area.pack(fill=tk.BOTH, expand=tk.YES, side=tk.LEFT)
 text_area.bind('<KeyRelease>', runinbackground)
