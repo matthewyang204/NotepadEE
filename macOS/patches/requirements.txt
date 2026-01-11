@@ -4,3 +4,4 @@ imageio
 setuptools
 pyyaml
 tklinenums
+pyperclip

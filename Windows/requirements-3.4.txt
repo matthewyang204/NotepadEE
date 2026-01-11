@@ -3,3 +3,4 @@ pyinstaller==3.3.1
 pillow
 tk
 tklinenums
+pyperclip
