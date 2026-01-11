@@ -1,0 +1,41 @@
+From b67172602d28e770c4c55fb5b163dd0c5ff19c77 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Matthew=20Yang=20=28=E6=9D=A8=E4=BD=B3=E6=98=8E=29?=
+ <matthew.yang204@gmail.com>
+Date: Sun, 11 Jan 2026 10:48:45 -0800
+Subject: [PATCH] Patch version numbers for tcl/tk to stop complaints about
+ tcl/tk versions
+
+---
+ dist/Notepad==.app/Contents/Resources/tcl-files/tcl8.6/init.tcl | 2 +-
+ dist/Notepad==.app/Contents/Resources/tk-files/tk8.6/tk.tcl     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/dist/Notepad==.app/Contents/Resources/tcl-files/tcl8.6/init.tcl b/dist/Notepad==.app/Contents/Resources/tcl-files/tcl8.6/init.tcl
+index de8e13a..2b901ac 100644
+--- a/dist/Notepad==.app/Contents/Resources/tcl-files/tcl8.6/init.tcl
++++ b/dist/Notepad==.app/Contents/Resources/tcl-files/tcl8.6/init.tcl
+@@ -18,7 +18,7 @@
+ if {[info commands package] == ""} {
+     error "version mismatch: library\nscripts expect Tcl version 7.5b1 or later but the loaded version is\nonly [info patchlevel]"
+ }
+-package require -exact Tcl 8.6.16
++package require -exact Tcl 8.6.17
+ 
+ # Compute the auto path to use in this interpreter.
+ # The values on the path come from several locations:
+diff --git a/dist/Notepad==.app/Contents/Resources/tk-files/tk8.6/tk.tcl b/dist/Notepad==.app/Contents/Resources/tk-files/tk8.6/tk.tcl
+index 45bec84..5232d44 100644
+--- a/dist/Notepad==.app/Contents/Resources/tk-files/tk8.6/tk.tcl
++++ b/dist/Notepad==.app/Contents/Resources/tk-files/tk8.6/tk.tcl
+@@ -11,7 +11,7 @@
+ # this file, and for a DISCLAIMER OF ALL WARRANTIES.
+ 
+ # Verify that we have Tk binary and script components from the same release
+-package require -exact Tk  8.6.16
++package require -exact Tk  8.6.17
+ 
+ # Create a ::tk namespace
+ namespace eval ::tk {
+-- 
+2.52.0
+

@@ -39,7 +39,11 @@ build:
 	cp -R scripts dist/Notepad==.app/Contents/Resources/
 	chmod +x dist/Notepad==.app/Contents/Resources/scripts/*
 	echo "done"
+	$(MAKE) postbuild
 	echo "To install, run 'sudo make install'. To upgrade, run 'sudo make upgrade'."
+
+postbuild:
+	cat patches/postbuild/0001-Patch-tcl-tk.patch | patch -p1
 
 install:
 	sudo mv "dist/Notepad==.app" /Applications/
