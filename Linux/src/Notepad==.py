@@ -23,6 +23,7 @@ import pathlib
 import builtins
 import traceback
 import hashlib
+import pyperclip
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
