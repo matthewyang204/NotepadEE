@@ -678,20 +678,20 @@ class text_scroll():
 
 def cut_text(event=None):
     text_area.clipboard_clear()
-    text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
+    pyperclip.copy(text_area.get("sel.first", "sel.last"))
     text_area.delete("sel.first", "sel.last")
     printlog("Cut option succeeded")
     return 'break'
 
 def copy_text(event=None):
     text_area.clipboard_clear()
-    text_area.clipboard_append(text_area.get("sel.first", "sel.last"))
+    pyperclip.copy(text_area.get("sel.first", "sel.last"))
     printlog("Text copied to clipboard")
     return 'break'
 
 
 def paste_text(event=None):
-    text_area.insert("insert", text_area.clipboard_get())
+    text_area.insert("insert", pyperclip.paste())
     printlog("Text pasted from clipboard")
     return 'break'
 
