@@ -836,6 +836,7 @@ def find_text(event=None):
     find_button.pack()
     clear_button.pack()
     close_button.pack()
+    popup.protocol('WM_DELETE_WINDOW', close)
     entrybox.bind('<Return>', findNext_wrapper)
     
 def mark_text(event=None):
