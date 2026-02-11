@@ -271,6 +271,7 @@ else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
 tab_mode = tk.StringVar(value="tab")
+ogCursorColor = text_area.cget("fg")
 
 def retrieve_file(input):
     global encodings
@@ -929,6 +930,7 @@ def runinbackground(event=None):
     check_file_written()
     applySyntaxHighlighting()
     debug_var()
+    updateCursorColor()
 
 class nw():
     def macOS(openFile=""):
@@ -1064,6 +1066,16 @@ class lineNumbers:
         self.linenums.yview_moveto(first)
         self.linenums.redraw()
 linenums = lineNumbers()
+
+def updateCursorColor(event=None):
+    global ogCursorColor
+    tags = text_area.tag_names("insert")
+    if "highlight" in tags:
+        text_area.config(insertbackground="blue")
+    elif "highlight_permanent" in tags:
+        text_area.config(insertbackground="magenta")
+    else:
+        text_area.config(insertbackground=ogCursorColor)
 
 class keyShortcuts:
     def insert_tab(event=None):
