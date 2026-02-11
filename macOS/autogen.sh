@@ -53,8 +53,10 @@ cp patches/configure ./
 echo "Patching Makefile..."
 rm Makefile
 cp patches/Makefile ./
-echo "Patching the key mappings..."
-sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
+if printf '%s\n' "$@" | grep -q -- "--force-patch-keymappings"; then
+    echo "Patching the key mappings..."
+    sed -i '' 's/<Control-/<Command-/g' src/Notepad==.py
+fi
 echo "Patching the requirements..."
 rm requirements.txt
 cp patches/requirements.txt ./
