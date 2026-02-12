@@ -118,7 +118,14 @@ else:
 tab_mode = tk.StringVar(value="tab")
 ogCursorColor = text_area.cget("fg")
 
-
+if platform.system() == "Darwin":
+    try:
+        addOpenEventSupport(root)
+    except Exception as e:
+        fileToBeOpened = ""
+        openFile = 0
+        printlog(str(e))
+        printlog("fileToBeOpened: " + str(fileToBeOpened))
 
 class text_scroll():
     def to_cursor(event=None):

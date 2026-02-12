@@ -38,8 +38,6 @@ if platform.system() == "Darwin":
             # Hook into macOS-specific file open event
             root.createcommand("::tk::mac::OpenDocument", doOpenFile)
 
-        addOpenEventSupport(root)
-
     except Exception as e:
         fileToBeOpened = ""
         openFile = 0
