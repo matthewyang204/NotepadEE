@@ -385,7 +385,6 @@ def runinbackground(event=None):
     write_prefs()
     check_file_written()
     applySyntaxHighlighting()
-    debug_var()
     updateCursorColor()
 
 def newWindow(event=None):

@@ -2,8 +2,10 @@ import os
 import sys
 import subprocess
 import threading
+import platform
 from common import *
 from exceptions import *
+from fileio import *
 
 class nw():
     def macOS(openFile=""):
