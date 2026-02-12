@@ -7,6 +7,8 @@ from common import *
 from exceptions import *
 from fileio import *
 
+root = None
+
 class nw():
     def macOS(openFile=""):
         global folder_path
