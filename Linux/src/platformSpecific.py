@@ -3,6 +3,7 @@ import sys
 import subprocess
 import threading
 import platform
+from pathlib import Path
 from common import *
 from exceptions import *
 from fileio import *
@@ -53,12 +54,17 @@ class nw():
             emptyString = ""
             with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
                 file.write(emptyString)
+            executablePath = Path(sys.executable)
+            executable = executablePath.with_name("Notepad==")
             subprocess.call(["/bin/rm", "-rf", folder_path])
             printlog("Launching new instance...")
             if openFile:
-                subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app", openFile])
+                appbundle = executable
+                for i in range(3):
+                    appbundle = os.path.dirname(appbundle)
+                subprocess.call(["/usr/bin/open", "-n", "-a", appbundle, openFile])
             else:
-                subprocess.call(["/usr/bin/open", "-n", "-a", cwd + "/Notepad==.app"])
+                subprocess.call([executable])
             while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
                 pass
             write_prefs()
