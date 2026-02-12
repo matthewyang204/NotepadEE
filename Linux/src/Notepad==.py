@@ -1142,10 +1142,6 @@ menu.add_cascade(label="Accessibility", menu=accessibility_menu)
 accessibility_menu.add_command(label="Zoom in", command=increase_font_size)
 accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 
-window_menu = tk.Menu(menu, tearoff=0)
-menu.add_cascade(label="Window", menu=window_menu)
-window_menu.add_command(label="Close", command=exit_handler)
-
 tool_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Tools", menu=tool_menu)
 # Begin tab modes submenu
@@ -1154,6 +1150,10 @@ tool_menu.add_cascade(label="Tab Modes", menu=tab_modes_menu)
 tab_modes_menu.add_radiobutton(label="Tab", variable=tab_mode, value="tab")
 tab_modes_menu.add_radiobutton(label="Spaces", variable=tab_mode, value="spaces")
 # End tab modes submenu
+
+window_menu = tk.Menu(menu, tearoff=0)
+menu.add_cascade(label="Window", menu=window_menu)
+window_menu.add_command(label="Close", command=exit_handler)
 
 about_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="About", menu=about_menu)
