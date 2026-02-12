@@ -44,6 +44,7 @@ if platform.system() == "Darwin":
         openFile = 0
         printlog(str(e))
         printlog("fileToBeOpened: " + str(fileToBeOpened))
+
 class nw():
     def macOS(openFile=""):
         global folder_path

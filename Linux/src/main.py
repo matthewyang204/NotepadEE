@@ -140,7 +140,11 @@ else:
         openFile = 1
         printlog("Assuming argument is the file to open. Loading file...")
         fileToBeOpened = filearg[1]
-        runonarg(fileToBeOpened)
+        try:
+            runonarg(fileToBeOpened)
+        except FileNotFoundError:
+            messagebox.showerror("Error", "The file you attempted to open does not exist.")
+            openFile = 0
 
 class text_scroll():
     def to_cursor(event=None):
