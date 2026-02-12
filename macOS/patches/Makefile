@@ -31,6 +31,7 @@ build:
 	cd dist/Notepad==.app/Contents && \
 	mv MacOS/tk-files Resources/tk-files && \
 	mv MacOS/tcl-files Resources/tcl-files && \
+	cp ../../../Info.plist ./ && \
 	cd MacOS && \
 	ln -s ../Resources/tk-files ./tk-files && \
 	ln -s ../Resources/tcl-files ./tcl-files && \
