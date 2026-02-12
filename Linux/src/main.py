@@ -26,6 +26,7 @@ import hashlib
 import pyperclip
 from common import *
 from platformSpecific import *
+from exceptions import *
 
 root = tk.Tk()
 ask_quit = False

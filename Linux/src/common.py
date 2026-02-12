@@ -117,12 +117,4 @@ def setup_prefs(event=None):
             pass
 
 setup_prefs()
-
-class platformError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
-
-class UnsupportedEncodingError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
         

@@ -3,6 +3,7 @@ import sys
 import subprocess
 import threading
 from common import *
+from exceptions import *
 
 class nw():
     def macOS(openFile=""):
