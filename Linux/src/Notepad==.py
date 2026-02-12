@@ -1155,8 +1155,9 @@ window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
 window_menu.add_command(label="Close", command=exit_handler)
 
-about_menu = tk.Menu(menu, tearoff=0)
-menu.add_cascade(label="About", menu=about_menu)
+help_menu = tk.Menu(menu, tearoff=0)
+about_menu = help_menu
+menu.add_cascade(label="Help", menu=help_menu)
 about_menu.add_command(label="About Notepad==", command=about.about)
 about_menu.add_command(label="License", command=about.show_license)
 
