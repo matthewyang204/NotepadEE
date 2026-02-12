@@ -9,7 +9,7 @@ from fileio import *
 
 root = None
 
-# Check if the system is macOS (Darwin)
+# Platform-based file open event handling
 if platform.system() == "Darwin":
     try:
         def addOpenEventSupport(root):
