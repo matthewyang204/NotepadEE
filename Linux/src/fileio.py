@@ -2,10 +2,7 @@ import os
 import sys
 import traceback
 from tkinter import messagebox, filedialog
-import subprocess
 import errno
-import pathlib
-import pyperclip
 import common
 import platform
 import platformSpecific as ps

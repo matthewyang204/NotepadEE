@@ -2,9 +2,6 @@ import os
 import sys
 import hashlib
 import builtins
-import traceback
-import errno
-import pathlib
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')

@@ -1,17 +1,14 @@
 import tkinter as tk
-from tkinter import filedialog
 import tklinenums as tkln
 import os
 from tkinter import messagebox
 from tkinter import font
 import sys
-import time
 import platform
 import subprocess
 import threading
 # import atexit
 import signal
-import errno
 try:
     import idlelib.colorizer as ic
     import idlelib.percolator as ip
@@ -20,9 +17,6 @@ except ImportError:
     syntaxHighlighting = False
 import re
 import pathlib
-import builtins
-import traceback
-import hashlib
 import pyperclip
 from common import *
 from platformSpecific import *
