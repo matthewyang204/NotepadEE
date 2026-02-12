@@ -62,9 +62,9 @@ class nw():
                 appbundle = executable
                 for i in range(3):
                     appbundle = os.path.dirname(appbundle)
-                subprocess.call(["/usr/bin/open", "-n", "-a", appbundle, openFile])
+                subprocess.Popen(["/usr/bin/open", "-n", "-a", appbundle, openFile])
             else:
-                subprocess.call([executable])
+                subprocess.Popen([executable])
             while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
                 pass
             write_prefs()
