@@ -9,6 +9,58 @@ from fileio import *
 
 root = None
 
+# Check if the system is macOS (Darwin)
+if platform.system() == "Darwin":
+    try:
+        def addOpenEventSupport(root):
+            """
+            Enable the application to handle macOS 'Open with' events.
+            """
+            fileToBeOpenedPath = os.path.join(cache_path, "fileToBeOpened.txt")
+            openFilePath = os.path.join(cache_path, "openFile.txt")
+
+            def doOpenFile(*args):
+                global fileToBeOpened, openFile
+                if args:
+                    fileToBeOpened = str(args[0])
+                    openFile = 1
+                    printlog("File was passed from Finder, loading file...")
+                    runonarg(fileToBeOpened)
+                
+                else:
+                    fileToBeOpened = ""
+                    openFile = 0
+                    printlog("No file passed from Finder, loading program with last known file...")
+                    printlog("Program loaded")
+                
+                printlog("fileToBeOpened: " + str(fileToBeOpened))
+                printlog("openFile: " + str(openFile))
+            # Hook into macOS-specific file open event
+            root.createcommand("::tk::mac::OpenDocument", doOpenFile)
+
+        addOpenEventSupport(root)
+
+    except Exception as e:
+        fileToBeOpened = ""
+        openFile = 0
+        printlog(str(e))
+        printlog("fileToBeOpened: " + str(fileToBeOpened))
+
+else:
+    # Tell the user through the console that we are running on Linux
+    printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
+    # If not macOS, fallback to command line arguments
+    filearg = sys.argv
+    if len(filearg) <= 1:
+        openFile = 0
+        printlog("No arguments provided. Proceeding to load program with last known file...")
+        printlog("Program loaded")
+    else:
+        openFile = 1
+        printlog("Assuming argument is the file to open. Loading file...")
+        fileToBeOpened = filearg[1]
+        runonarg(fileToBeOpened)
+
 class nw():
     def macOS(openFile=""):
         global folder_path
