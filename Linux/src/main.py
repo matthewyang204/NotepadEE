@@ -605,5 +605,9 @@ if platform.system() == "Darwin":
 else:
     root.bind_all("<Control-q>", exit_handler)
 
-write_prefs()
-root.mainloop()
+def main(event=None):
+    root.mainloop()
+    write_prefs()
+
+if __name__ == "__main__":
+    main()
