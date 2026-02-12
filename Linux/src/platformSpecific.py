@@ -43,22 +43,6 @@ if platform.system() == "Darwin":
         openFile = 0
         printlog(str(e))
         printlog("fileToBeOpened: " + str(fileToBeOpened))
-
-else:
-    # Tell the user through the console that we are running on Linux
-    printlog("We are running on a standard Linux distro or other OS, falling back to file arguments...")
-    # If not macOS, fallback to command line arguments
-    filearg = sys.argv
-    if len(filearg) <= 1:
-        openFile = 0
-        printlog("No arguments provided. Proceeding to load program with last known file...")
-        printlog("Program loaded")
-    else:
-        openFile = 1
-        printlog("Assuming argument is the file to open. Loading file...")
-        fileToBeOpened = filearg[1]
-        runonarg(fileToBeOpened)
-
 class nw():
     def macOS(openFile=""):
         global folder_path
