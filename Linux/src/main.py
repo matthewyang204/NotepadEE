@@ -121,7 +121,7 @@ ogCursorColor = text_area.cget("fg")
 
 language_mode = tk.StringVar(value="none")
 
-Spelling = Spelling(text_widget=text_area, language_mode=language_mode.get().lower())
+Spelling = Spelling(text_widget=text_area)
 
 # Actually run the file opening logic
 if platform.system() == "Darwin":
@@ -196,6 +196,9 @@ def redo(event=None):
     except tk.TclError:
         pass
     printlog("Edit redone")
+
+def spellcheck_handler(event=None):
+    Spelling.spellcheck_selected(language_mode.get().lower())
 
 def find_and_replace(event=None):
     popup = tk.Toplevel(root)
@@ -524,7 +527,7 @@ edit_menu.add_command(label="Find and Replace", command=find_and_replace)
 edit_menu.add_separator()
 edit_menu.add_command(label="Go To Line", command=go_to_line)
 edit_menu.add_separator()
-edit_menu.add_command(label="Check Spelling", command=Spelling.spellcheck_selected)
+edit_menu.add_command(label="Check Spelling", command=spellcheck_handler)
 
 accessibility_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Accessibility", menu=accessibility_menu)

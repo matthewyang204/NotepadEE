@@ -4,9 +4,8 @@ from tkinter import messagebox
 
 # Spelling stuff
 class Spelling:
-    def __init__(self, text_widget=None, language_mode=None):
+    def __init__(self, text_widget=None):
         self.text_area = text_widget
-        self.language_mode = language_mode
         self.languages = {
             "english": "en",
             "russian": "ru",
@@ -55,10 +54,10 @@ class Spelling:
                 corrected_tokens.append(token)
         return ''.join(corrected_tokens)
     
-    def spellcheck_selected(self):
+    def spellcheck_selected(self, language_mode=None):
         try:
             selected_text = self.text_area.get("sel.first", "sel.last")
-            corrected_text = self.check_spelling(self.language_mode, selected_text)
+            corrected_text = self.check_spelling(language_mode, selected_text)
             self.text_area.delete("sel.first", "sel.last")
             self.text_area.insert("insert", corrected_text)
         except Exception as e:
