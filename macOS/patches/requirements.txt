@@ -1,5 +1,5 @@
 tk
-nuitka==2.8.9
+nuitka==2.8.10
 imageio
 setuptools
 pyyaml
