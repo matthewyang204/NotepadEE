@@ -356,9 +356,9 @@ def update_line_number(event=None):
     # column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
-    file_var.set("File: " + os.path.basename(current_file))
-    if current_file:
-        root.title(str(current_file) + " - Notepad==") # f"{current_file} - Notepad=="
+    file_var.set("File: " + os.path.basename(common.current_file))
+    if common.current_file:
+        root.title(str(common.current_file) + " - Notepad==") # f"{common.current_file} - Notepad=="
     else:
         root.title("Notepad==")
     text_size = text_font['size']
@@ -368,11 +368,10 @@ def update_line_number(event=None):
     root.after(100, update_line_number)
 
 def applySyntaxHighlighting(event=None):
-    global current_file, syntaxHighlighting
     pythonExts = ['.py', '.pyw', '.pyc', '.pyo', '.pyd', '.pyx', '.pxd', '.pxi', '.pyi', '.ipynb', '.pyz']
     if syntaxHighlighting:
         try:
-            if pathlib.Path(os.path.basename(current_file)).suffix in pythonExts:
+            if pathlib.Path(os.path.basename(common.current_file)).suffix in pythonExts:
                 ip.Percolator(text_area).insertfilter(cdg)
             else:
                 if getattr(cdg, 'delegate', None) is not None:
