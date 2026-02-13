@@ -19,7 +19,7 @@ configure:
 	./configure
 
 build:
-	pyinstaller --hidden-import=tkinter --windowed -i Notepad.ico src/$(APP_NAME).py
+	pyinstaller --add-data "$(shell python -c "import site; print(site.getsitepackages()[0])")\Lib\site-packages\spellchecker\resources;spellchecker/resources" --hidden-import=tkinter --windowed -i Notepad.ico src/$(APP_NAME).py
 	cp Notepad.ico dist/Notepad==/
 	touch dist/Notepad==/.pyinstaller
 	$(MAKE) windows-app-icon
