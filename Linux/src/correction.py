@@ -5,31 +5,32 @@ text_area = None
 
 # Spelling stuff
 class Spelling:
-    languages = {
-        "english": "en",
-        "russian": "ru",
-        "spanish": "es",
-        "portuguese": "pt",
-        "italian": "it",
-        "french": "fr",
-        "german": "de",
-        "arabic": "ar",
-        "persian": "fa",
-        "dutch": "nl",
-        "latvian": "lv",
-        "basque": "eu",
-    }
+    def __init__(self):
+        self.languages = {
+            "english": "en",
+            "russian": "ru",
+            "spanish": "es",
+            "portuguese": "pt",
+            "italian": "it",
+            "french": "fr",
+            "german": "de",
+            "arabic": "ar",
+            "persian": "fa",
+            "dutch": "nl",
+            "latvian": "lv",
+            "basque": "eu",
+        }
 
-    spellcheckers = {
-        name: SpellChecker(language=code)
-        for name, code in languages.items()
-    }
+        self.spellcheckers = {
+            name: SpellChecker(language=code)
+            for name, code in self.languages.items()
+        }
 
-    def tokenize(text):
+    def tokenize(self, text):
         TOKEN_PATTERN = re.compile(r"\w+|\W+")
         return TOKEN_PATTERN.findall(text)
-    def check_spelling(lang='none', text=""):
+    def check_spelling(self, lang='none', text=""):
         if lang == 'none':
             return text
-        checker = Spelling.spellcheckers.get(lang)
+        checker = self.spellcheckers.get(lang)
     
