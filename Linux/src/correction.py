@@ -2,12 +2,11 @@ from spellchecker import SpellChecker
 import re
 from tkinter import messagebox
 
-text_area = None
-language_mode = None
-
 # Spelling stuff
 class Spelling:
-    def __init__(self):
+    def __init__(self, text_widget=None, language_mode=None):
+        self.text_area = text_widget
+        self.language_mode = language_mode
         self.languages = {
             "english": "en",
             "russian": "ru",
@@ -58,9 +57,9 @@ class Spelling:
     
     def spellcheck_selected(self):
         try:
-            selected_text = text_area.get("sel.first", "sel.last")
-            corrected_text = self.check_spelling(language_mode, selected_text)
-            text_area.delete("sel.first", "sel.last")
-            text_area.insert("insert", corrected_text)
+            selected_text = self.text_area.get("sel.first", "sel.last")
+            corrected_text = self.check_spelling(self.language_mode, selected_text)
+            self.text_area.delete("sel.first", "sel.last")
+            self.text_area.insert("insert", corrected_text)
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred during spellcheck: {str(e)}")
