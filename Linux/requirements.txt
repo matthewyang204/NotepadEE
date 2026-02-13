@@ -3,3 +3,4 @@ pillow
 tk
 tklinenums
 pyperclip
+pyspellchecker
