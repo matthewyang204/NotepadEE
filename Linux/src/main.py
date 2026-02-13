@@ -18,6 +18,7 @@ except ImportError:
 import re
 import pathlib
 import pyperclip
+import common
 from common import *
 from platformSpecific import *
 import fileio
