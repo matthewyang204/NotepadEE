@@ -22,6 +22,7 @@ from common import *
 from platformSpecific import *
 import fileio
 from fileio import *
+from correction import *
 
 root = tk.Tk()
 ask_quit = False
@@ -118,6 +119,8 @@ else:
 tab_mode = tk.StringVar(value="tab")
 ogCursorColor = text_area.cget("fg")
 
+language_mode = tk.StringVar(value="none")
+
 # Actually run the file opening logic
 if platform.system() == "Darwin":
     try:
@@ -191,7 +194,6 @@ def redo(event=None):
     except tk.TclError:
         pass
     printlog("Edit redone")
-
 
 def find_and_replace(event=None):
     popup = tk.Toplevel(root)
@@ -532,7 +534,13 @@ tab_modes_menu = tk.Menu(tool_menu, tearoff=0)
 tool_menu.add_cascade(label="Tab Modes", menu=tab_modes_menu)
 tab_modes_menu.add_radiobutton(label="Tab", variable=tab_mode, value="tab")
 tab_modes_menu.add_radiobutton(label="Spaces", variable=tab_mode, value="spaces")
-# End tab modes submenu
+# End tab modes submenu & begin language selection menu
+language_modes_menu = tk.Menu(tool_menu, tearoff=0)
+tool_menu.add_cascade(label="Language", menu=language_modes_menu)
+language_modes_menu.add_radiobutton(label="None", variable=language_mode, value="none")
+for language in Spelling.languages.keys():
+    language_modes_menu.add_radiobutton(label=language.capitalize(), variable=language_mode, value=language)
+# End language selection menu
 
 window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
