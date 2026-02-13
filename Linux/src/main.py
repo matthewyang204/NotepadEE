@@ -121,6 +121,8 @@ ogCursorColor = text_area.cget("fg")
 
 language_mode = tk.StringVar(value="none")
 
+Spelling = Spelling()
+
 # Actually run the file opening logic
 if platform.system() == "Darwin":
     try:
