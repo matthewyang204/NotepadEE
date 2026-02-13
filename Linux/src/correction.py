@@ -1,7 +1,9 @@
 from spellchecker import SpellChecker
 import re
+from tkinter import messagebox
 
 text_area = None
+language_mode = None
 
 # Spelling stuff
 class Spelling:
@@ -29,8 +31,36 @@ class Spelling:
     def tokenize(self, text):
         TOKEN_PATTERN = re.compile(r"\w+|\W+")
         return TOKEN_PATTERN.findall(text)
+    
+    def preserve_case(self, original, corrected):
+        if original.isupper():
+            return corrected.upper()
+        if original[0].isupper():
+            return corrected.capitalize()
+        return corrected
+
     def check_spelling(self, lang='none', text=""):
         if lang == 'none':
             return text
         checker = self.spellcheckers.get(lang)
+        if not checker:
+            return text
+        tokens = self.tokenize(text)
+        corrected_tokens = []
+        for token in tokens:
+            if token.isalpha():
+                corrected = checker.correction(token)
+                corrected = self.preserve_case(token, corrected)
+                corrected_tokens.append(corrected)
+            else:
+                corrected_tokens.append(token)
+        return ''.join(corrected_tokens)
     
+    def spellcheck_selected(self):
+        try:
+            selected_text = text_area.get("sel.first", "sel.last")
+            corrected_text = self.check_spelling(language_mode, selected_text)
+            text_area.delete("sel.first", "sel.last")
+            text_area.insert("insert", corrected_text)
+        except Exception as e:
+            messagebox.showerror("Error", f"An error occurred during spellcheck: {str(e)}")
