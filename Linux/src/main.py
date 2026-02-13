@@ -109,11 +109,11 @@ else:
     printlog("Platform does not support newer idlelibs, syntax highlighting is disabled")
 
 text_area.delete(1.0, "end")
-with open(last_write, 'r') as file:
+with open(common.last_write, 'r') as file:
     text_area.insert(1.0, file.read())
 if platform.system() == "Darwin" or platform.system() == "Linux":
     printlog("Clearing any locks...")
-    subprocess.call(["/bin/rm", "-rf", os.path.join(cache_path, "loadPreviousSave.lock")])
+    subprocess.call(["/bin/rm", "-rf", os.path.join(common.cache_path, "loadPreviousSave.lock")])
 else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
@@ -396,17 +396,16 @@ def decrease_font_size(event=None):
 
 # Create a function to check for text in text_area
 def check_file_written(event=None):
-    global file_written
     printlog("Checking if text_area has been edited by the user to contain text...")
     current_text = text_area.get(1.0, "end-1c")
     # if there is text, set it to 1
     if current_text:
         printlog("There is text; setting to 1")
-        file_written = 1
+        common.file_written = 1
     # otherwise, set it to 0
     else:
         printlog("No text")
-        file_written = 0
+        common.file_written = 0
 
 def runinbackground(event=None):
     write_prefs()

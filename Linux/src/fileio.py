@@ -69,8 +69,7 @@ def write_prefs(event=None):
     common.setup_prefs()
     with open(os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_write'), 'w', encoding='utf-8') as file:
         file.write(text_area.get('1.0', 'end-1c'))
-    last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
-    with open(last_file_path, 'w', encoding='utf-8') as file:
+    with open(common.last_file_path, 'w', encoding='utf-8') as file:
         file.write(str(common.current_file))
     autosave_file()
     common.printlog("Wrote prefs successfully")
