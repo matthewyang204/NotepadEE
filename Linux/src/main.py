@@ -353,8 +353,8 @@ def unmark_all_text(event=None):
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
-    # line_var.set("Line: " + line)
-    # column_var.set("Column: " + column)
+    line_var.set("Line: " + line)
+    column_var.set("Column: " + column)
     words = text_area.get(1.0, 'end-1c').split()
     word_count_var.set("Words: " + str(len(words)))
     file_var.set("File: " + os.path.basename(common.current_file))
@@ -446,6 +446,9 @@ class lineNumbers:
         self.linenums = tkln.TkLineNumbers(text_frame, text_area, justify="center")
         self.linenums.pack(side=tk.LEFT, fill=tk.Y)
         self.unpacked = False
+        self.otherIndicatorsPacked = False
+        line_label.pack_forget()
+        column_label.pack_forget()
 
     def scrollBoth(self, *args):
         text_area.yview(*args)
@@ -461,10 +464,18 @@ class lineNumbers:
         if text_font.cget("size") > 15:
             self.linenums.pack_forget()
             self.unpacked = True
+            if not self.otherIndicatorsPacked:
+                self.otherIndicatorsPacked = True
+                line_label.pack(side=tk.LEFT)
+                column_label.pack(side=tk.LEFT)
         else:
             if self.unpacked:
                 self.linenums.pack(before=text_area, side=tk.LEFT, fill=tk.Y)
                 self.unpacked = False
+            if self.otherIndicatorsPacked:
+                self.otherIndicatorsPacked = False
+                line_label.pack_forget()
+                column_label.pack_forget()
 linenums = lineNumbers()
 
 def updateCursorColor(event=None):
