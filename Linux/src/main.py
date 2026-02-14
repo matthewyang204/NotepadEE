@@ -108,6 +108,45 @@ if syntaxHighlighting:
 else:
     printlog("Platform does not support newer idlelibs, syntax highlighting is disabled")
 
+def setup_markdown_tags():
+    text_area.tag_config("md_heading", foreground="#268bd2", font=(text_font.cget("family"), text_font.cget("size"), "bold"))
+    text_area.tag_config("md_bold", foreground="#DCDCAF")
+    text_area.tag_config("md_italic", foreground="#859900", font=(text_font.cget("family"), text_font.cget("size"), "italic"))
+    text_area.tag_config("md_code", foreground="#b97342", background="#fdf6e3")
+    text_area.tag_config("md_link", foreground="#ff0000", underline=True)
+setup_markdown_tags()
+
+def highlight_markdown(event=None):
+    content = text_area.get("1.0", "end-1c")
+
+    for tag in ["md_heading", "md_bold", "md_italic", "md_code", "md_link"]:
+        text_area.tag_remove(tag, "1.0", "end")
+
+    for match in re.finditer(r"^(#{1,6})\s.*", content, re.MULTILINE):
+        start = f"1.0 + {match.start()}c"
+        end = f"1.0 + {match.end()}c"
+        text_area.tag_add("md_heading", start, end)
+
+    for match in re.finditer(r"(\*\*|__)(.*?)\1", content):
+        start = f"1.0 + {match.start(2)}c"
+        end = f"1.0 + {match.end(2)}c"
+        text_area.tag_add("md_bold", start, end)
+
+    for match in re.finditer(r"(\*|_)(.*?)\1", content):
+        start = f"1.0 + {match.start(2)}c"
+        end = f"1.0 + {match.end(2)}c"
+        text_area.tag_add("md_italic", start, end)
+
+    for match in re.finditer(r"`([^`]+)`", content):
+        start = f"1.0 + {match.start(1)}c"
+        end = f"1.0 + {match.end(1)}c"
+        text_area.tag_add("md_code", start, end)
+
+    for match in re.finditer(r"\[([^\]]+)\]\(([^)]+)\)", content):
+        start = f"1.0 + {match.start(1)}c"
+        end = f"1.0 + {match.end(1)}c"
+        text_area.tag_add("md_link", start, end)
+
 text_area.delete(1.0, "end")
 with open(common.last_write, 'r') as file:
     text_area.insert(1.0, file.read())
@@ -370,20 +409,21 @@ def update_line_number(event=None):
 
 def applySyntaxHighlighting(event=None):
     pythonExts = ['.py', '.pyw', '.pyc', '.pyo', '.pyd', '.pyx', '.pxd', '.pxi', '.pyi', '.ipynb', '.pyz']
-    if syntaxHighlighting:
-        try:
-            if pathlib.Path(os.path.basename(common.current_file)).suffix in pythonExts:
+    markdownExts = ['.md', '.markdown', '.mdown', '.mkd', '.mkdn', '.mdwn', '.mdtxt', '.mdtext', '.rmd']
+    if pathlib.Path(os.path.basename(common.current_file)).suffix in pythonExts:
+        if syntaxHighlighting:
+            try:
                 ip.Percolator(text_area).insertfilter(cdg)
-            else:
+            except Exception as e:
                 if getattr(cdg, 'delegate', None) is not None:
-                    ip.Percolator(text_area).removefilter(cdg)
-        except Exception as e:
-            if getattr(cdg, 'delegate', None) is not None:
-                ip.Percolator(text_area).removefilter(cdg)
-        
+                    ip.Percolator(text_area).removefilter(cdg)            
+        else:
+            printlog("Python version does not support syntax highlighting")
+    elif pathlib.Path(os.path.basename(common.current_file)).suffix in markdownExts:
+        highlight_markdown()
     else:
-        printlog("Python version does not support syntax highlighting")
-
+        if getattr(cdg, 'delegate', None) is not None:
+            ip.Percolator(text_area).removefilter(cdg)
 def increase_font_size(event=None):
     current_size = text_font['size']
     text_font.config(size=current_size + 1)

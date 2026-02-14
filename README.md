@@ -9,6 +9,8 @@ Have you ever wanted to jot something down on a Unix system and wished the Windo
 - Any GUI distro from the last 10-15 years should work for running binaries
 - You need Python 3.4 or later
 
+**bold**
+
 Linux build instructions:
 - Please clone the repo and cd into it
 - If you haven't yet, please run the `dpinstall` script to install dependencies to your system
