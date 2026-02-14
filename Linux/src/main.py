@@ -444,7 +444,8 @@ class edit_menu_funcs():
 class lineNumbers:
     def __init__(self):
         self.linenums = tkln.TkLineNumbers(text_frame, text_area, justify="center")
-        self.linenums.pack(side="left", fill="y")
+        self.linenums.pack(side=tk.LEFT, fill=tk.Y)
+        self.unpacked = False
 
     def scrollBoth(self, *args):
         text_area.yview(*args)
@@ -454,6 +455,16 @@ class lineNumbers:
         scrollbar.set(first, last)
         self.linenums.yview_moveto(first)
         self.linenums.redraw()
+        self.updateAppearance()
+
+    def updateAppearance(self, event=None):
+        if text_font.cget("size") > 15:
+            self.linenums.pack_forget()
+            self.unpacked = True
+        else:
+            if self.unpacked:
+                self.linenums.pack(before=text_area, side=tk.LEFT, fill=tk.Y)
+                self.unpacked = False
 linenums = lineNumbers()
 
 def updateCursorColor(event=None):
