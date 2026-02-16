@@ -431,6 +431,10 @@ def increase_font_size(event=None):
 
 def decrease_font_size(event=None):
     current_size = text_font['size']
+    if current_size - 1 < 1:
+        messagebox.showerror("Error", "Font size cannot be negative or zero")
+        printlog("ERROR: User attempted to set font size to negative or zero value")
+        return
     text_font.config(size=current_size - 1)
     printlog("Font size decreased by 1 pt")
 
