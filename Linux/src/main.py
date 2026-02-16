@@ -148,7 +148,7 @@ def highlight_markdown(event=None):
         text_area.tag_add("md_link", start, end)
 
 text_area.delete(1.0, "end")
-with open(common.last_write, 'r') as file:
+with open(common.last_write, 'r', encoding='utf-8') as file:
     text_area.insert(1.0, file.read())
 if platform.system() == "Darwin" or platform.system() == "Linux":
     printlog("Clearing any locks...")

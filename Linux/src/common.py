@@ -83,7 +83,7 @@ global file_open
 file_open = 0
 last_file_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_file_path')
 if os.path.exists(last_file_path):
-    with open(last_file_path, 'r') as file:
+    with open(last_file_path, 'r', encoding='utf-8') as file:
         current_file = file.read()
         if current_file.strip() == '':
             file_open = 0
