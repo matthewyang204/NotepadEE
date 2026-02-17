@@ -102,6 +102,7 @@ def approval_dialog(title, message, text):
     cancel_button.pack(side=tk.RIGHT, padx=10, pady=10)
     confirm_button = tk.Button(popup, text="Confirm", command=confirm)
     confirm_button.pack(side=tk.RIGHT, padx=10, pady=10)
+    popup.protocol('WM_DELETE_WINDOW', cancel)
     
     popup.wait_window()
     return returnText
