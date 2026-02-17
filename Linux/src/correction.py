@@ -1,6 +1,9 @@
 from spellchecker import SpellChecker
 import re
+import tkinter as tk
 from tkinter import messagebox
+
+root = None
 
 # Spelling stuff
 class Spelling:
@@ -57,8 +60,48 @@ class Spelling:
     def spellcheck_selected(self, language_mode=None):
         try:
             selected_text = self.text_area.get("sel.first", "sel.last")
+            start = self.text_area.index("sel.first")
+            end = self.text_area.index("sel.last")
             corrected_text = self.check_spelling(language_mode, selected_text)
-            self.text_area.delete("sel.first", "sel.last")
-            self.text_area.insert("insert", corrected_text)
+            approved_text = approval_dialog("Spellcheck", "Is this text okay to insert into the editor?", corrected_text)
+            if approved_text is None:
+                messagebox.showinfo("Cancelled", "Spellcheck cancelled")
+                return
+            self.text_area.delete(start, end)
+            self.text_area.insert(start, approved_text)
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred during spellcheck: {str(e)}")
+
+# Utilities
+def approval_dialog(title, message, text):
+    global returnText
+    returnText = ""
+
+    popup = tk.Toplevel(root)
+    popup.title(title)
+    popup.geometry("512x342")
+    popup.resizable(True, True)
+
+    label = tk.Label(popup, text=message)
+    label.pack()
+    text_widget = tk.Text(popup, width=50, height=10)
+    text_widget.insert(tk.END, text)
+    text_widget.pack()
+
+    def confirm(event=None):
+        global returnText
+        returnText = text_widget.get("1.0", tk.END).rstrip("\n")
+        popup.destroy()
+    
+    def cancel(event=None):
+        global returnText
+        returnText = None
+        popup.destroy()
+    
+    cancel_button = tk.Button(popup, text="Cancel", command=cancel)
+    cancel_button.pack(side=tk.RIGHT, padx=10, pady=10)
+    confirm_button = tk.Button(popup, text="Confirm", command=confirm)
+    confirm_button.pack(side=tk.RIGHT, padx=10, pady=10)
+    
+    popup.wait_window()
+    return returnText
