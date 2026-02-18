@@ -43,7 +43,7 @@ def printlog(message, *args, **kwargs):
     print("Notepad== at " + str(pid) + ": " + str(message), *args, **kwargs)
 
 versionInfo = """Notepad==, version 5.3.0
-(C) 2024-2025 Matthew Yang"""
+(C) 2024-2026 Matthew Yang"""
 
 arg = sys.argv
 
