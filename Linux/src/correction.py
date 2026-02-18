@@ -67,8 +67,11 @@ class Spelling:
             if approved_text is None:
                 messagebox.showinfo("Cancelled", "Spellcheck cancelled")
                 return
+            approved_len = len(approved_text)
+            insert_end = self.text_area.index(f"{start} + {approved_len} chars")
             self.text_area.delete(start, end)
             self.text_area.insert(start, approved_text)
+            self.text_area.tag_add("sel", start, insert_end)
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred during spellcheck: {str(e)}")
 
