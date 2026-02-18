@@ -209,18 +209,15 @@ def copy_text(event=None):
     printlog("Text copied to clipboard")
     return 'break'
 
-
 def paste_text(event=None):
     text_area.insert("insert", pyperclip.paste())
     printlog("Text pasted from clipboard")
     return 'break'
 
-
 def select_all_text(event=None):
     text_area.tag_add("sel", "1.0", "end")
     printlog("Text selected")
     return 'break'
-
 
 def undo(event=None):
     try:
@@ -228,7 +225,6 @@ def undo(event=None):
     except tk.TclError:
         pass
     printlog("Edit undone")
-
 
 def redo(event=None):
     try:
