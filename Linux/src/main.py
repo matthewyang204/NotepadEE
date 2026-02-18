@@ -106,7 +106,7 @@ if syntaxHighlighting:
             cdg.tagdefs['STRING']     = {'foreground': '#00aa00', 'background': ''}  # green
             cdg.tagdefs['DEFINITION'] = {'foreground': '#000000', 'background': ''}  # black
 else:
-    printlog("Platform does not support newer idlelibs, syntax highlighting is disabled")
+    printlog("Platform does not support newer idlelibs, Python syntax highlighting is disabled")
 
 def setup_markdown_tags():
     text_area.tag_config("md_heading", foreground="#268bd2", font=(text_font.cget("family"), text_font.cget("size"), "bold"))
