@@ -64,9 +64,9 @@ text_frame = tk.Frame(root)
 text_frame.pack(fill=tk.BOTH, expand=True)
 
 def get_font_for_platform():
-    if os.name == 'nt':
+    if platform.system() == "Windows":
         return font.Font(family="Consolas", size=12)
-    elif os.uname().sysname == 'Darwin':
+    elif platform.system() == "Darwin":
         return font.Font(family="Menlo", size=12)
     else:
         return font.Font(family="DejaVu Sans Mono", size=12)
