@@ -578,8 +578,6 @@ edit_menu.add_command(label="Select All", command=select_all_text)
 edit_menu.add_separator()
 edit_menu.add_command(label="Undo", command=undo)
 edit_menu.add_command(label="Redo", command=redo)
-edit_menu.add_separator()
-edit_menu.add_command(label="Check Spelling", command=spellcheck_handler)
 
 search_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Search", menu=search_menu)
@@ -612,6 +610,8 @@ language_modes_menu.add_radiobutton(label="None", variable=language_mode, value=
 for language in Spelling.languages.keys():
     language_modes_menu.add_radiobutton(label=language.capitalize(), variable=language_mode, value=language)
 # End language selection menu
+tool_menu.add_command(label="Utilities", state=tk.DISABLED)
+tool_menu.add_command(label="Check Spelling", command=spellcheck_handler)
 
 window_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Window", menu=window_menu)
