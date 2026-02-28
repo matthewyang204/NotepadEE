@@ -597,7 +597,7 @@ accessibility_menu.add_command(label="Zoom out", command=decrease_font_size)
 
 tool_menu = tk.Menu(menu, tearoff=0)
 menu.add_cascade(label="Tools", menu=tool_menu)
-tool_menu.add_command(label="Options", state=tk.DISABLED)
+tool_menu.add_command(label="↓ Options", state=tk.DISABLED)
 # Begin tab modes submenu
 tab_modes_menu = tk.Menu(tool_menu, tearoff=0)
 tool_menu.add_cascade(label="Tab Modes", menu=tab_modes_menu)
@@ -610,7 +610,8 @@ language_modes_menu.add_radiobutton(label="None", variable=language_mode, value=
 for language in Spelling.languages.keys():
     language_modes_menu.add_radiobutton(label=language.capitalize(), variable=language_mode, value=language)
 # End language selection menu
-tool_menu.add_command(label="Utilities", state=tk.DISABLED)
+tool_menu.add_separator()
+tool_menu.add_command(label="↓ Utilities", state=tk.DISABLED)
 tool_menu.add_command(label="Check Spelling", command=spellcheck_handler)
 
 window_menu = tk.Menu(menu, tearoff=0)
