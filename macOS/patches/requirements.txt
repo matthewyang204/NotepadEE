@@ -1,6 +1,8 @@
 tk
-nuitka==2.7.11
+nuitka==2.8.10
 imageio
 setuptools
 pyyaml
 tklinenums
+pyperclip
+pyspellchecker

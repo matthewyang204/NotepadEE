@@ -25,12 +25,13 @@ build:
 	ARCH="$(ARCH)" && \
 	echo "Building for architecture $$ARCH..." && \
 	export ARCH && \
-	nuitka --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.3 src/Notepad==.py
-	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.2.3 src/Notepad==.py
+	nuitka --output-dir=dist --include-module=tkinter --include-data-dir="$(shell python3 -c "import spellchecker, os; print(os.path.join(os.path.dirname(spellchecker.__file__), 'resources'))")"="spellchecker/resources" --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.3.0 src/Notepad==.py
+	# nuitka --debug --show-progress --show-scons --verbose --output-dir=dist --include-module=tkinter --include-data-dir="$(shell python3 -c "import spellchecker, os; print(os.path.join(os.path.dirname(spellchecker.__file__), 'resources'))")"="spellchecker/resources" --enable-plugin=tk-inter --tcl-library-dir=@tcl-tk8@/lib --tk-library-dir=@tcl-tk8@/lib --macos-create-app-bundle --macos-target-arch="$$ARCH" --macos-app-icon=Notepad.png --macos-app-name="Notepad==" --macos-signed-app-name="com.matthewyang.NotepadEE" --macos-app-version=5.3.0 src/Notepad==.py
 	echo "Build completed. Patching the app bundle..."
 	cd dist/Notepad==.app/Contents && \
 	mv MacOS/tk-files Resources/tk-files && \
 	mv MacOS/tcl-files Resources/tcl-files && \
+	cp ../../../Info.plist ./ && \
 	cd MacOS && \
 	ln -s ../Resources/tk-files ./tk-files && \
 	ln -s ../Resources/tcl-files ./tcl-files && \

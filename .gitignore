@@ -201,3 +201,4 @@ nuitka-crash-report.xml
 /Windows/src/
 /Windows/Makefile
 Output/
+src/Notepad.ico

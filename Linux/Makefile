@@ -9,7 +9,7 @@ BUILD_DIR = dist
 INSTALL_DIR = /opt/matthewyang
 BIN_LINK = /usr/local/bin/notepadee
 DESKTOP_FILE = /usr/share/applications/notepadee.desktop
-VERSION_NUMBER = 5.2.3
+VERSION_NUMBER = 5.3.0
 
 .SILENT:
 
@@ -19,7 +19,7 @@ configure:
 	./configure
 
 build:
-	pyinstaller --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
+	pyinstaller --add-data "$(shell python -c "import site; print(site.getsitepackages()[0])")/spellchecker/resources:spellchecker/resources" --hidden-import=tkinter -i Notepad.png src/$(APP_NAME).py
 	cp Notepad.png dist/Notepad==/
 	touch dist/Notepad==/.pyinstaller
 	echo "Build completed. To install, run 'sudo make install'"
