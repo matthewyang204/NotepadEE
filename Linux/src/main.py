@@ -199,6 +199,11 @@ else:
             messagebox.showerror("Error", "The file you attempted to open does not exist.")
             openFile = 0
 
+tab_mode_plain, language_mode_plain, autosave_enabled_plain = read_settings()
+tab_mode.set(tab_mode_plain)
+language_mode.set(language_mode_plain)
+common.autosave_enabled.set(autosave_enabled_plain)
+
 class text_scroll():
     def to_cursor(event=None):
         text_area.see("insert")

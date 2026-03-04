@@ -91,6 +91,23 @@ def write_settings(event=None, tab_mode=None, language_mode=None, autosave_enabl
         file.write(f"autosave_enabled = {autosave_enabled_value}\n")
     common.printlog("Wrote settings successfully")
 
+def read_settings(event=None):
+    settings_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'settings.py')
+    if os.path.exists(settings_path):
+        with open(settings_path, 'r', encoding='utf-8') as file:
+            settings_content = file.read()
+        returned_settings = {}
+        exec(settings_content, returned_settings)
+        common.printlog("Read settings successfully")
+    else:
+        common.printlog("Settings file not found, using defaults")
+        returned_settings = {
+            "tab_mode": "tab",
+            "language_mode": "none",
+            "autosave_enabled": 1
+        }
+    return returned_settings["tab_mode"], returned_settings["language_mode"], returned_settings["autosave_enabled"]
+
 def save_as(event=None):
     file_path = filedialog.asksaveasfilename(
         defaultextension="",
