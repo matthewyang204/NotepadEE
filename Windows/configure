@@ -8,7 +8,7 @@ echo "done"
 
 # Check for Python 3
 printf "Checking for python3..."
-if ! command -v python3 &> /dev/null
+if ! command -v python &> /dev/null
 then
     echo "not found"
     echo "Python 3 not found. Please install it to continue."
@@ -19,7 +19,7 @@ fi
 
 # Check Python 3 version
 printf "Checking python3 version..."
-version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
 echo $version
 
 # version=3.11.5
@@ -59,7 +59,7 @@ fi
 
 # Check if tkinter is available
 printf "Checking if python3 supports tkinter..."
-if ! command -v python3 -c 'import tkinter' &> /dev/null
+if ! command -v python -c 'import tkinter' &> /dev/null
 then
     echo "not available"
     echo "Tkinter not available. It is a core framework and required for compilation. Please compile python with tkinter or install a package containing tkinter to continue."
@@ -70,7 +70,7 @@ fi
 
 # Check for idlelib
 printf "Checking if python3 supports idlelib..."
-if ! command -v python3 -c 'import idlelib' &> /dev/null
+if ! command -v python -c 'import idlelib' &> /dev/null
 then
     echo "not available"
     echo "IDLElib is not available. It is required for syntax highlighting. Please install it to continue."
@@ -135,11 +135,11 @@ fi
 
 # Install required python packages
 echo "Installing required packages"
-if python3 -m pip install -r $requirements --break-system-packages &> /dev/null; then
+if python -m pip install -r $requirements --break-system-packages; then
     echo "Required python packages installed"
 else
     echo "Command failed, probably because this is running on python that comes from apt on Debian-based distros, running without --break-system-packages"
-    python3 -m pip install -r $requirements
+    python -m pip install -r $requirements
 fi
 echo "done"
 
