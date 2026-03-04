@@ -63,6 +63,10 @@ file_label.pack(side=tk.LEFT)
 text_frame = tk.Frame(root)
 text_frame.pack(fill=tk.BOTH, expand=True)
 
+def write_settings2(*args, **kwargs):
+    global tab_mode, language_mode
+    fileio.write_settings(tab_mode=tab_mode, language_mode=language_mode, autosave_enabled=common.autosave_enabled)
+
 def get_font_for_platform():
     if platform.system() == "Windows":
         return font.Font(family="Consolas", size=12)
@@ -76,6 +80,7 @@ text_area = tk.Text(text_frame, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 fileio.text_area = text_area
 common.autosave_enabled = tk.IntVar(value=1)
+common.autosave_enabled.trace_add("write", write_settings2)
 
 if syntaxHighlighting:
     try:
@@ -158,9 +163,11 @@ else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
 tab_mode = tk.StringVar(value="tab")
+tab_mode.trace_add("write", write_settings2)
 ogCursorColor = text_area.cget("fg")
 
 language_mode = tk.StringVar(value="none")
+language_mode.trace_add("write", write_settings2)
 
 Spelling = Spelling(text_widget=text_area)
 

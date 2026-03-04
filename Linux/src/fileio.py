@@ -78,6 +78,18 @@ def write_prefs(event=None):
     autosave_file()
     common.printlog("Wrote prefs successfully")
 
+def write_settings(event=None, tab_mode=None, language_mode=None, autosave_enabled=None):
+    common.setup_prefs()
+    settings_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'settings.py')
+    tab_mode_value = tab_mode.get()
+    language_mode_value = language_mode.get()
+    autosave_enabled_value = autosave_enabled.get()
+    with open(settings_path, 'w', encoding='utf-8') as file:
+        file.write(f"tab_mode = '{tab_mode_value}'\n")
+        file.write(f"language_mode = '{language_mode_value}'\n")
+        file.write(f"autosave_enabled = {autosave_enabled_value}\n")
+    common.printlog("Wrote settings successfully")
+
 def save_as(event=None):
     file_path = filedialog.asksaveasfilename(
         defaultextension="",
