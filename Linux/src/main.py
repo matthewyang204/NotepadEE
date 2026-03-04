@@ -75,6 +75,7 @@ text_font = get_font_for_platform()
 text_area = tk.Text(text_frame, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 fileio.text_area = text_area
+common.autosave_enabled = tk.IntVar(value=1)
 
 if syntaxHighlighting:
     try:
@@ -610,6 +611,12 @@ language_modes_menu.add_radiobutton(label="None", variable=language_mode, value=
 for language in Spelling.languages.keys():
     language_modes_menu.add_radiobutton(label=language.capitalize(), variable=language_mode, value=language)
 # End language selection menu
+# Begin autosave toggle menu
+autosave_toggle = tk.Menu(tool_menu, tearoff=0)
+tool_menu.add_cascade(label="Autosave On/Off", menu=autosave_toggle)
+autosave_toggle.add_radiobutton(label="On", variable=common.autosave_enabled, value=1)
+autosave_toggle.add_radiobutton(label="Off", variable=common.autosave_enabled, value=0)
+# End autosave toggle menu
 tool_menu.add_command(label="--- Utilities ---", state=tk.DISABLED)
 tool_menu.add_command(label="Check Spelling", command=spellcheck_handler)
 

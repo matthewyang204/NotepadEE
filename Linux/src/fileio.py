@@ -56,6 +56,10 @@ def runonarg(arg):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), arg)
 
 def autosave_file(event=None):
+    # autosave_enabled is now a tkinter.IntVar; fetch the current value.
+    if common.autosave_enabled.get() == 0:
+        common.printlog("WARNING: Not running autosave (disabled)")
+        return
     try:
         if common.file_open == 1:
             with open(common.current_file, 'w', encoding='utf-8') as file:

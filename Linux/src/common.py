@@ -2,6 +2,7 @@ import os
 import sys
 import hashlib
 import builtins
+import tkinter as tk
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -114,4 +115,6 @@ def setup_prefs(event=None):
             pass
 
 setup_prefs()
+
+autosave_enabled = None
         
