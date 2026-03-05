@@ -63,6 +63,10 @@ file_label.pack(side=tk.LEFT)
 text_frame = tk.Frame(root)
 text_frame.pack(fill=tk.BOTH, expand=True)
 
+def write_settings2(*args, **kwargs):
+    global tab_mode, language_mode
+    fileio.write_settings(tab_mode=tab_mode, language_mode=language_mode, autosave_enabled=common.autosave_enabled)
+
 def get_font_for_platform():
     if platform.system() == "Windows":
         return font.Font(family="Consolas", size=12)
@@ -75,6 +79,8 @@ text_font = get_font_for_platform()
 text_area = tk.Text(text_frame, width=100, height=80, wrap=tk.WORD, undo=True)
 text_area.config(font=text_font)
 fileio.text_area = text_area
+common.autosave_enabled = tk.IntVar(value=1)
+common.autosave_enabled.trace_add("write", write_settings2)
 
 if syntaxHighlighting:
     try:
@@ -157,9 +163,11 @@ else:
     printlog("We are on a system that does not need or use file locks, skipping...")
 
 tab_mode = tk.StringVar(value="tab")
+tab_mode.trace_add("write", write_settings2)
 ogCursorColor = text_area.cget("fg")
 
 language_mode = tk.StringVar(value="none")
+language_mode.trace_add("write", write_settings2)
 
 Spelling = Spelling(text_widget=text_area)
 
@@ -190,6 +198,11 @@ else:
         except FileNotFoundError:
             messagebox.showerror("Error", "The file you attempted to open does not exist.")
             openFile = 0
+
+tab_mode_plain, language_mode_plain, autosave_enabled_plain = read_settings()
+tab_mode.set(tab_mode_plain)
+language_mode.set(language_mode_plain)
+common.autosave_enabled.set(autosave_enabled_plain)
 
 class text_scroll():
     def to_cursor(event=None):
@@ -610,6 +623,12 @@ language_modes_menu.add_radiobutton(label="None", variable=language_mode, value=
 for language in Spelling.languages.keys():
     language_modes_menu.add_radiobutton(label=language.capitalize(), variable=language_mode, value=language)
 # End language selection menu
+# Begin autosave toggle menu
+autosave_toggle = tk.Menu(tool_menu, tearoff=0)
+tool_menu.add_cascade(label="Autosave On/Off", menu=autosave_toggle)
+autosave_toggle.add_radiobutton(label="On", variable=common.autosave_enabled, value=1)
+autosave_toggle.add_radiobutton(label="Off", variable=common.autosave_enabled, value=0)
+# End autosave toggle menu
 tool_menu.add_command(label="--- Utilities ---", state=tk.DISABLED)
 tool_menu.add_command(label="Check Spelling", command=spellcheck_handler)
 
