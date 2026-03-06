@@ -194,8 +194,9 @@ nuitka-crash-report.xml
 # Configure files
 .configured
 
-# JetBrains IDE prefs
+# IDE junk
 .idea/
+.vscode/
 
 # Copies of source code, other things not supposed to be packaged into Git repo in Windows folder, and Windows build junk
 /Windows/src/
