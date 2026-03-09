@@ -1,5 +1,6 @@
 #!/bin/bash
 set +x
+set -euo pipefail
 
 if [ "$1" == "clean" ]; then
     echo "Received 'clean' argument, removing everything copied over for building..."
