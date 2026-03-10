@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 printf "Copy fresh src from Linux..."
 rm -rf ./src
