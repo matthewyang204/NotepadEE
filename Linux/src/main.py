@@ -19,12 +19,20 @@ import re
 import pathlib
 import pyperclip
 import builtins
-from . import common
-from .common import *
-from .platformSpecific import *
-from . import fileio
-from .fileio import *
-from .correction import *
+try:
+    from . import common
+    from .common import *
+    from .platformSpecific import *
+    from . import fileio
+    from .fileio import *
+    from .correction import *
+except Exception:
+    import common
+    from common import *
+    from platformSpecific import *
+    import fileio
+    from fileio import *
+    from correction import *
 
 # Redirect output to log file
 if __name__ == '__main__':
