@@ -4,9 +4,9 @@ import subprocess
 import threading
 import platform
 from pathlib import Path
-from common import *
-from exceptions import *
-from fileio import *
+from .common import *
+from .exceptions import *
+from .fileio import *
 
 root = None
 
