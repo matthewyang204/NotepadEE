@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo "Copying files..."
+cp -R -v ../src ./
+echo "done"
+
 # Check for Python 3
 printf "Checking for python3..."
 if ! command -v python3 &> /dev/null
