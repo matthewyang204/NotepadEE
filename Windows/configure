@@ -2,7 +2,7 @@
 
 printf "Copy fresh src from Linux..."
 rm -rf ./src
-cp -r ../Linux/src ./src
+cp -r ../src ./src
 cp Notepad.ico ./src/Notepad.ico
 echo "done"
 
