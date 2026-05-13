@@ -36,6 +36,7 @@ fi
 # First copy files from the Linux section of the repository
 echo "Copying files..."
 cp -R -v ../Linux/* ./
+cp -R -v ../src ./
 echo "done"
 
 # Debugging exit to check if files have been properly copied
