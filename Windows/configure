@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-printf "Copy fresh src from Linux..."
+printf "Copy fresh src..."
 rm -rf ./src
-cp -r ../Linux/src ./src
+cp -r ../src ./src
 cp Notepad.ico ./src/Notepad.ico
 echo "done"
 
