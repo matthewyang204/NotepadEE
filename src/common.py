@@ -5,17 +5,30 @@ import builtins
 import tkinter as tk
 
 # Define and create, if applicable, a cache folder
+import tempfile
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
-if not os.path.exists(cache_path):
-    os.makedirs(cache_path)
+try:
+    os.makedirs(cache_path, exist_ok=True)
+except Exception:
+    # Fallback: ignore failures to create cache (permissions may prevent it)
+    pass
 
 username = os.path.expanduser('~').encode()
 unSHA256 = hashlib.sha256()
 unSHA256.update(username)
 unDigest = unSHA256.hexdigest()
-logDir = os.path.join('/tmp', str(unDigest) + '-log')
-if not os.path.exists(logDir):
-    os.makedirs(logDir)
+# Use platform temporary directory instead of hard-coded '/tmp'
+tmpdir = tempfile.gettempdir()
+logDir = os.path.join(tmpdir, str(unDigest) + '-log')
+try:
+    os.makedirs(logDir, exist_ok=True)
+except Exception:
+    # Fallback: try creating log dir inside user cache
+    try:
+        logDir = os.path.join(cache_path, str(unDigest) + '-log')
+        os.makedirs(logDir, exist_ok=True)
+    except Exception:
+        pass
 
 # Open a log file in write mode
 # log_file = os.path.join(cache_path, "notepadee_log.txt")
@@ -90,8 +103,17 @@ printlog("file_written set to " + str(file_written))
 def setup_prefs(event=None):
     global folder_path, last_file_path, last_write
     
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
+    try:
+        os.makedirs(folder_path, exist_ok=True)
+    except Exception:
+        pass
+
+    # Ensure parent directory exists before touching files
+    try:
+        parent = os.path.dirname(last_file_path)
+        os.makedirs(parent, exist_ok=True)
+    except Exception:
+        pass
 
     if not os.path.exists(last_file_path):
         with open(last_file_path, 'w', encoding='utf-8'):
@@ -103,5 +125,15 @@ def setup_prefs(event=None):
 
 setup_prefs()
 
-autosave_enabled = None
+class SimpleVar:
+    def __init__(self, value=1):
+        self._value = value
+    def get(self):
+        return self._value
+    def set(self, v):
+        self._value = v
+
+# Provide a safe default for autosave_enabled (avoids creating a Tk root at import time)
+autosave_enabled = SimpleVar(1)
+
         
