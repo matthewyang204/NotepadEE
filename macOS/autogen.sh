@@ -104,3 +104,9 @@ else
     echo "Configuration failed. Exiting."
     exit 1
 fi
+
+if printf '%s\n' "$@" | grep -q -- "--patch-stock-python"; then
+    printf "Patching stock macOS Python Tcl..."
+    curl -L https://archive.org/download/misc-objects-storage/notepadee/tcl-tk-compile-macOS/patch-stock-python/0001-Patch-tcl-tk.patch | patch -p1
+    echo "done"
+fi
