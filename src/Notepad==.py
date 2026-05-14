@@ -30,4 +30,5 @@ if platform.system() != "Darwin":
     from spellchecker import SpellChecker
 
 if __name__ == "__main__":
+    main.setup_logging()
     main.main()

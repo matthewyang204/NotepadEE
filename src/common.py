@@ -123,6 +123,20 @@ def setup_prefs(event=None):
         with open(last_write, 'w', encoding='utf-8'):
             pass
 
+def setup_logging():
+    global log_file
+    log_file = open(log_file, 'a', encoding='utf-8', buffering=1)
+    sys.stdout = log_file
+    sys.stderr = log_file
+    original_print = builtins.print
+    def flushed_print(*args, **kwargs):
+        if 'flush' not in kwargs:
+            kwargs['flush'] = True
+        if 'end' not in kwargs:
+            kwargs['end'] = '\n'
+        return original_print(*args, **kwargs)
+    builtins.print = flushed_print
+
 setup_prefs()
 
 class SimpleVar:
