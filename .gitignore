@@ -203,3 +203,7 @@ nuitka-crash-report.xml
 /Windows/Makefile
 Output/
 src/Notepad.ico
+
+# Copies of source code copied for building
+/Linux/src/
+/macOS/src/
