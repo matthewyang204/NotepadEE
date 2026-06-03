@@ -3,16 +3,10 @@ import sys
 import subprocess
 import threading
 import platform
-import shutil
 from pathlib import Path
-try:
-    from .common import *
-    from .exceptions import *
-    from .fileio import *
-except Exception:
-    from common import *
-    from exceptions import *
-    from fileio import *
+from common import *
+from exceptions import *
+from fileio import *
 
 root = None
 
@@ -63,11 +57,7 @@ class nw():
                 file.write(emptyString)
             executablePath = Path(sys.executable)
             executable = executablePath.with_name("Notepad==")
-            # Remove preferences folder safely
-            try:
-                shutil.rmtree(folder_path, ignore_errors=True)
-            except Exception:
-                printlog("Warning: could not remove folder_path")
+            subprocess.call(["/bin/rm", "-rf", folder_path])
             printlog("Launching new instance...")
             if openFile:
                 appbundle = executable
@@ -96,11 +86,7 @@ class nw():
             emptyString = ""
             with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
                 file.write(emptyString)
-            # Remove preferences folder safely
-            try:
-                shutil.rmtree(folder_path, ignore_errors=True)
-            except Exception:
-                printlog("Warning: could not remove folder_path")
+            subprocess.call(["/bin/rm", "-rf", folder_path])
             printlog("Launching new instance...")
             def launcher():
                 if os.path.exists(pyInstFile):

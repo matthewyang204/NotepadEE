@@ -19,24 +19,26 @@ import re
 import pathlib
 import pyperclip
 import builtins
-try:
-    from . import common
-    from .common import *
-    from .platformSpecific import *
-    from . import fileio
-    from .fileio import *
-    from .correction import *
-except Exception:
-    import common
-    from common import *
-    from platformSpecific import *
-    import fileio
-    from fileio import *
-    from correction import *
+import common
+from common import *
+from platformSpecific import *
+import fileio
+from fileio import *
+from correction import *
 
 # Redirect output to log file
 if __name__ == '__main__':
-    setup_logging()
+    log_file = open(log_file, 'a', encoding='utf-8', buffering=1)
+    sys.stdout = log_file
+    sys.stderr = log_file
+    original_print = builtins.print
+    def flushed_print(*args, **kwargs):
+        if 'flush' not in kwargs:
+            kwargs['flush'] = True
+        if 'end' not in kwargs:
+            kwargs['end'] = '\n'
+        return original_print(*args, **kwargs)
+    builtins.print = flushed_print
 
 root = tk.Tk()
 ask_quit = False
@@ -348,13 +350,10 @@ def findNext(text):
         end = str(start) + " + " + str(len(text)) + "c"
         text_area.tag_add("highlight", start, end)
     except Exception as e:
-        if text in text_area.get('1.0', 'end-1c'):
-            start = "1.0"
-            start = text_area.search(text, start, stopindex="end")
-            end = str(start) + " + " + str(len(text)) + "c"
-            text_area.tag_add("highlight", start, end)
-        else:
-            messagebox.showerror("Text Not Found", "Query not found in text.")
+        start = "1.0"
+        start = text_area.search(text, start, stopindex="end")
+        end = str(start) + " + " + str(len(text)) + "c"
+        text_area.tag_add("highlight", start, end)
     
     text_area.tag_config("highlight", background="yellow")
     text_area.mark_set("insert", end)
