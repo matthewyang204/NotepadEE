@@ -28,17 +28,7 @@ from correction import *
 
 # Redirect output to log file
 if __name__ == '__main__':
-    log_file = open(log_file, 'a', encoding='utf-8', buffering=1)
-    sys.stdout = log_file
-    sys.stderr = log_file
-    original_print = builtins.print
-    def flushed_print(*args, **kwargs):
-        if 'flush' not in kwargs:
-            kwargs['flush'] = True
-        if 'end' not in kwargs:
-            kwargs['end'] = '\n'
-        return original_print(*args, **kwargs)
-    builtins.print = flushed_print
+    setup_logging()
 
 root = tk.Tk()
 ask_quit = False
