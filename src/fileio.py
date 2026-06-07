@@ -7,28 +7,9 @@ import common
 import platform
 import platformSpecific as ps
 from exceptions import UnsupportedEncodingError
+from zencodings import retrieve_file, write_file, retrieve_file_with_encoding
 
 text_area = None
-
-def retrieve_file(input):
-    for enc in common.encodings[:]:
-        try:
-            with open(input, 'r', encoding=enc) as file:
-                fileContent = file.read()
-            return fileContent
-        except UnicodeDecodeError:
-            print("UnicodeDecodeError caught!")
-            print("File is not " + str(enc) + ", trying next encoding...")
-        except LookupError:
-            print("LookupError caught!")
-            print("Encoding not supported in this copy of Python, removing from list to avoid future clashes...")
-            common.encodings.remove(enc)
-    messagebox.showinfo("The program crashed due to an error", "The program has crashed due to an error. Please relaunch the program; any unsaved work will be recovered automatically on relaunch.")
-    try:
-        raise UnsupportedEncodingError("The file at " + str(input) + " could not be opened due to its encoding not being supported. The program has crashed itself to avoid further problems.")
-    except UnsupportedEncodingError:
-        traceback.print_exc()
-        sys.exit(1)
 
 def runonarg(arg):
     if os.path.exists(arg):
