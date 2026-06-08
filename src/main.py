@@ -212,6 +212,7 @@ tab_mode.set(tab_mode_plain)
 language_mode.set(language_mode_plain)
 common.autosave_enabled.set(autosave_enabled_plain)
 common.default_encoding.set(default_encoding_plain)
+common.save_encoding.set(default_encoding_plain)
 
 class text_scroll():
     def to_cursor(event=None):
