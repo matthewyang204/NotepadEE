@@ -648,7 +648,7 @@ for encoding in common.encodings:
 # End default encoding menu
 # Begin save encoding menu
 encoding_menu = tk.Menu(tool_menu, tearoff=0)
-tool_menu.add_cascade(label="Encoding", menu=encoding_menu)
+tool_menu.add_cascade(label="Encoding for this file", menu=encoding_menu)
 for encoding in common.encodings:
     encoding_menu.add_radiobutton(label=encoding, variable=common.save_encoding, value=encoding)
 # End save encoding menu
