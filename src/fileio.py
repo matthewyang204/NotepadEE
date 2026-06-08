@@ -7,7 +7,7 @@ import common
 import platform
 import platformSpecific as ps
 from exceptions import UnsupportedEncodingError
-from zencodings import retrieve_file, write_file, retrieve_file_with_encoding
+from zencodings import retrieve_file, retrieve_file_with_encoding
 
 text_area = None
 
@@ -196,7 +196,9 @@ def open_file_v2(event=None):
     save_file("y")
     file_path = filedialog.askopenfilename(filetypes=[("All Files", "*.*")])
     if file_path:
-        content = retrieve_file(file_path)
+        # content = retrieve_file(file_path)
+        content, encoding_used = retrieve_file_with_encoding(file_path)
+        common.save_encoding.set(encoding_used)
         if common.file_written == 1:
             if platform.system() == "Darwin":
                 ps.nw.macOS(openFile=file_path)
