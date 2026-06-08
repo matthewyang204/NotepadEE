@@ -198,12 +198,10 @@ nuitka-crash-report.xml
 .idea/
 .vscode/
 
-# Copies of source code, other things not supposed to be packaged into Git repo in Windows folder, and Windows build junk
+# Copies of source code, other things not supposed to be packaged into Git repo, build junk
 /Windows/src/
+/Linux/src/
+/macOS/src/
 /Windows/Makefile
 Output/
 src/Notepad.ico
-
-# Copies of source code copied for building
-/Linux/src/
-/macOS/src/
