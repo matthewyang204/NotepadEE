@@ -43,7 +43,7 @@ def autosave_file(event=None):
         return
     try:
         if common.file_open == 1:
-            with open(common.current_file, 'w', encoding='utf-8') as file:
+            with open(common.current_file, 'w', encoding=common.save_encoding.get()) as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
     except FileNotFoundError:
@@ -180,7 +180,7 @@ def save_as(event=None):
     try:
         common.printlog("Saving file to location:")
         common.printlog(file_path)
-        with open(file_path, 'w', encoding='utf-8') as file:
+        with open(file_path, 'w', encoding=common.save_encoding.get()) as file:
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
@@ -218,7 +218,7 @@ def open_file_v2(event=None):
 def save_file(warn):
     if common.file_open == 1:
         try:
-            with open(common.current_file, 'w', encoding='utf-8') as file:
+            with open(common.current_file, 'w', encoding=common.save_encoding.get()) as file:
                 text = text_area.get('1.0', 'end-1c')
                 file.write(text)
             write_prefs()
