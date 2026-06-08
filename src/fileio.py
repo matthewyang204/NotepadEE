@@ -202,6 +202,7 @@ def open_file_v2(event=None):
             common.save_encoding.set(encoding_used)
         except Exception as e:
             messagebox.showerror("Error", f"Error occurred while reading file: {e}")
+            print(f"ERROR: Error occurred while reading file in function <open_file_v2>: {e}")
             return
         if common.file_written == 1:
             if platform.system() == "Darwin":
