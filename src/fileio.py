@@ -101,6 +101,7 @@ def save_as(event=None):
             ("Log file", ".log"),
             ("INI file", ".ini"),
             ("INF file (.inf)", ".inf"),
+            ("Property List (.plist)", ".plist"),
             ("C, C++, objc header", ".h"),
             ("C, C++, objc header", ".hh"),
             ("C, C++, objc header", ".hpp"),
