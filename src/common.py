@@ -118,4 +118,5 @@ def setup_logging():
 setup_prefs()
 
 autosave_enabled = None
-        
+default_encoding = None
+save_encoding = None
