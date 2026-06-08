@@ -86,7 +86,7 @@ text_area.config(font=text_font)
 fileio.text_area = text_area
 common.autosave_enabled = tk.IntVar(value=1)
 common.default_encoding = tk.StringVar(value="utf-8")
-common.save_encoding = tk.StringVar(value="utf-8")
+common.save_encoding = tk.StringVar(value=common.default_encoding.get())
 common.autosave_enabled.trace_add("write", write_settings2)
 common.default_encoding.trace_add("write", write_settings2)
 
