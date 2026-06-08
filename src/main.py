@@ -483,6 +483,7 @@ def newWindow(event=None):
         nw.Linux()
     elif platform.system() == "Windows":
         new_file()
+        common.save_encoding.set(common.default_encoding.get())
     else:
         raise platformError("There is no newWindow function available for your platform.")
 
