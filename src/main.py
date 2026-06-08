@@ -641,7 +641,7 @@ autosave_toggle.add_radiobutton(label="Off", variable=common.autosave_enabled, v
 # End autosave toggle menu
 # Begin default encoding menu
 default_encoding_menu = tk.Menu(tool_menu, tearoff=0)
-tool_menu.add_cascade(label="Default encoding:", menu=default_encoding_menu)
+tool_menu.add_cascade(label="Default encoding", menu=default_encoding_menu)
 for encoding in common.encodings:
     default_encoding_menu.add_radiobutton(label=encoding, variable=common.default_encoding, value=encoding)
 # End default encoding menu
