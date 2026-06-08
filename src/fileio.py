@@ -1,12 +1,9 @@
 import os
-import sys
-import traceback
 from tkinter import messagebox, filedialog
 import errno
 import common
 import platform
 import platformSpecific as ps
-from exceptions import UnsupportedEncodingError
 from zencodings import retrieve_file, retrieve_file_with_encoding
 
 text_area = None

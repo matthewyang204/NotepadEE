@@ -18,7 +18,6 @@ except ImportError:
 import re
 import pathlib
 import pyperclip
-import builtins
 import common
 from common import *
 from platformSpecific import *
