@@ -29,7 +29,7 @@ windows-app-icon:
 	cp Notepad.ico dist\Notepad==\_internal\
 
 inno-setup:
-	"@ISCC@" @ISCSCRIPT@
+	'@ISCC@' '@ISCSCRIPT@'
 	echo "Inno Setup installer created."
 
 install:
