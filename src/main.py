@@ -410,17 +410,17 @@ def unmark_all_text(event=None):
 
 def update_line_number(event=None):
     line, column = text_area.index(tk.INSERT).split('.')
-    line_var.set("Line: " + line)
-    column_var.set("Column: " + column)
+    line_var.set("Line: " + line + " |")
+    column_var.set("Column: " + column + " |")
     words = text_area.get(1.0, 'end-1c').split()
-    word_count_var.set("Words: " + str(len(words)))
-    file_var.set("File: " + os.path.basename(common.current_file))
+    word_count_var.set("| Words: " + str(len(words)) + " |")
+    file_var.set("File: " + os.path.basename(common.current_file) + " |")
     if common.current_file:
         root.title(str(common.current_file) + " - Notepad==") # f"{common.current_file} - Notepad=="
     else:
         root.title("Notepad==")
     text_size = text_font['size']
-    text_size_indicator.set("Size: " + str(text_size)) # f"Size: {text_size}"
+    text_size_indicator.set("Size: " + str(text_size) + " pt |") # f"Size: {text_size}"
     linenums.linenums.redraw()
     # print("Status bar updated")
     root.after(100, update_line_number)
