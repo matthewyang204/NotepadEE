@@ -417,8 +417,10 @@ def update_line_number(event=None):
     file_var.set("File: " + os.path.basename(common.current_file) + " |")
     if common.current_file:
         root.title(str(common.current_file) + " - Notepad==") # f"{common.current_file} - Notepad=="
+        file_var.set("File: " + os.path.basename(common.current_file) + " |")
     else:
         root.title("Notepad==")
+        file_var.set("File: " + "No File Opened" + " |")
     text_size = text_font['size']
     text_size_indicator.set("Size: " + str(text_size) + " pt |") # f"Size: {text_size}"
     linenums.linenums.redraw()
