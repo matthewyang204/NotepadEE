@@ -3,6 +3,7 @@ import sys
 import subprocess
 import threading
 import platform
+import time
 from pathlib import Path
 from common import *
 from exceptions import *
@@ -67,7 +68,7 @@ class nw():
             else:
                 subprocess.Popen([executable])
             while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
-                pass
+                time.sleep(0.1)
             write_prefs()
             printlog("done")
         else:
@@ -108,7 +109,7 @@ class nw():
                 launcher_thread = threading.Thread(target=launcher)
             launcher_thread.start()
             while os.path.exists(os.path.join(cache_path, "loadPreviousSave.lock")):
-                pass
+                time.sleep(0.1)
             write_prefs()
             printlog("done")
         if platform.system() == "Linux":
