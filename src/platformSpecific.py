@@ -123,11 +123,13 @@ def WinSetDPIAwareness():
         try:
             # Windows 10+
             ctypes.windll.shcore.SetProcessDpiAwareness(2)
+            return True
         except (AttributeError, OSError):
             try:
                 # Older versions fallback
                 ctypes.windll.user32.SetProcessDPIAware()
+                return True
             except (AttributeError, OSError):
-                pass
+                return False
     else:
         raise platformError("This system is not Windows and does not support this function.")
