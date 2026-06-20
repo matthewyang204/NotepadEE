@@ -9,6 +9,7 @@ import subprocess
 import threading
 # import atexit
 import signal
+import ctypes
 try:
     import idlelib.colorizer as ic
     import idlelib.percolator as ip
@@ -28,6 +29,9 @@ from correction import *
 # Redirect output to log file
 if __name__ == '__main__':
     setup_logging()
+
+if platform.system() == "Windows":
+    WinSetDPIAwareness()
 
 root = tk.Tk()
 ask_quit = False

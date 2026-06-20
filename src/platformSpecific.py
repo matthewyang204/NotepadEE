@@ -116,3 +116,17 @@ class nw():
             main()
         else:
             raise platformError("This function is only designed to be run on Linux. We do not understand why you would want this function to run anyway, nor how you got it to run. The function needs to be specific to the platform.")
+
+def WinSetDPIAwareness():
+    if platform.system() == "Windows":
+        try:
+            # Windows 10+
+            ctypes.windll.shcore.SetProcessDpiAwareness(2)
+        except (AttributeError, OSError):
+            try:
+                # Older versions fallback
+                ctypes.windll.user32.SetProcessDPIAware()
+            except (AttributeError, OSError):
+                pass
+    else:
+        raise platformError("This system is not Windows and does not support this function.")
