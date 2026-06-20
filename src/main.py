@@ -9,7 +9,6 @@ import subprocess
 import threading
 # import atexit
 import signal
-import ctypes
 try:
     import idlelib.colorizer as ic
     import idlelib.percolator as ip
