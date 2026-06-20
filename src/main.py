@@ -25,12 +25,12 @@ import fileio
 from fileio import *
 from correction import *
 
-# Redirect output to log file
+# Redirect output to log file & set up DPI awareness
 if __name__ == '__main__':
     setup_logging()
 
-if platform.system() == "Windows":
-    WinSetDPIAwareness()
+    if platform.system() == "Windows":
+        WinSetDPIAwareness()
 
 root = tk.Tk()
 ask_quit = False
