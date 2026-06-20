@@ -35,7 +35,8 @@ if platform.system() == "Windows":
 root = tk.Tk()
 ask_quit = False
 root.title("Notepad==")
-root.minsize(800, 600)
+root.minsize(640, 480)
+root.geometry("800x600")
 root.pack_propagate(False)
 
 if platform.system() == "Windows":
