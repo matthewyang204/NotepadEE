@@ -5,3 +5,4 @@ tk
 tklinenums
 pyperclip
 pyspellchecker
+tkscheduler==0.1.1
