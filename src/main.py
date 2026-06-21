@@ -18,6 +18,7 @@ except ImportError:
 import re
 import pathlib
 import pyperclip
+from tkscheduler import TkScheduler
 import common
 from common import *
 from platformSpecific import *
@@ -25,12 +26,12 @@ import fileio
 from fileio import *
 from correction import *
 
-# Redirect output to log file
+# Redirect output to log file & set up DPI awareness
 if __name__ == '__main__':
     setup_logging()
 
-if platform.system() == "Windows":
-    WinSetDPIAwareness()
+    if platform.system() == "Windows":
+        WinSetDPIAwareness()
 
 root = tk.Tk()
 ask_quit = False
@@ -462,6 +463,9 @@ def decrease_font_size(event=None):
     text_font.config(size=current_size - 1)
     printlog("Font size decreased by 1 pt")
 
+def longTermBGRun(event=None):
+    write_prefs()
+
 # Create a function to check for text in text_area
 def check_file_written(event=None):
     printlog("Checking if text_area has been edited by the user to contain text...")
@@ -475,8 +479,15 @@ def check_file_written(event=None):
         printlog("No text")
         common.file_written = 0
 
+longTermTimer = TkScheduler(root)
+longTermTimer.singleShotState = True
+longTermTimer.fn = longTermBGRun
+def resetTimer():
+    longTermTimer.stop()
+    longTermTimer.start(500)
+
 def runinbackground(event=None):
-    write_prefs()
+    resetTimer()
     check_file_written()
     applySyntaxHighlighting()
     updateCursorColor()
