@@ -462,6 +462,9 @@ def decrease_font_size(event=None):
     text_font.config(size=current_size - 1)
     printlog("Font size decreased by 1 pt")
 
+def longTermBGRun(event=None):
+    write_prefs()
+
 # Create a function to check for text in text_area
 def check_file_written(event=None):
     printlog("Checking if text_area has been edited by the user to contain text...")
@@ -476,7 +479,7 @@ def check_file_written(event=None):
         common.file_written = 0
 
 def runinbackground(event=None):
-    write_prefs()
+    resetTimer()
     check_file_written()
     applySyntaxHighlighting()
     updateCursorColor()
