@@ -2,6 +2,7 @@ import os
 import sys
 import hashlib
 import builtins
+import tempfile
 
 # Define and create, if applicable, a cache folder
 cache_path = os.path.join(os.path.expanduser('~'), '.notepadee', 'cache')
@@ -12,13 +13,15 @@ username = os.path.expanduser('~').encode()
 unSHA256 = hashlib.sha256()
 unSHA256.update(username)
 unDigest = unSHA256.hexdigest()
-logDir = os.path.join('/tmp', str(unDigest) + '-log')
+ostmpdir = tempfile.gettempdir()
+logDir = os.path.join(ostmpdir, str(unDigest) + '-log')
 if not os.path.exists(logDir):
     os.makedirs(logDir)
 
 # Open a log file in write mode
 # log_file = os.path.join(cache_path, "notepadee_log.txt")
 log_file = os.path.join(logDir, "notepadee_log.txt")
+print(f"INFO: Logging all console output to {log_file}")
 
 # Get current PID
 pid = os.getpid()
