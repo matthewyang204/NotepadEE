@@ -18,6 +18,7 @@ except ImportError:
 import re
 import pathlib
 import pyperclip
+from tkscheduler import TkScheduler
 import common
 from common import *
 from platformSpecific import *
@@ -477,6 +478,13 @@ def check_file_written(event=None):
     else:
         printlog("No text")
         common.file_written = 0
+
+longTermTimer = TkScheduler(root)
+longTermTimer.singleShotState = True
+longTermTimer.fn = longTermBGRun
+def resetTimer():
+    longTermTimer.stop()
+    longTermTimer.start(500)
 
 def runinbackground(event=None):
     resetTimer()
