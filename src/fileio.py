@@ -279,3 +279,19 @@ def new_file(event=None):
         text_area.delete(1.0, "end")
         common.printlog("Cleared text_area")
         common.current_file = ""
+
+def reload_file(event=None):
+    file_path = common.current_file
+    if not file_path:
+        messagebox.showinfo("Warning: Reload", "No file is currently open.")
+        return
+    try:
+        content, encoding_used = retrieve_file_with_encoding(file_path)
+        common.save_encoding.set(encoding_used)
+    except Exception as e:
+        messagebox.showerror("Error", f"Error occurred while reloading file: {e}")
+        print(f"ERROR: reload_file failed: {e}")
+        return
+    text_area.delete("1.0", "end")
+    text_area.insert("1.0", content)
+    common.printlog("File reloaded")

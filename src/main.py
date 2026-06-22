@@ -605,6 +605,7 @@ file_menu.add_command(label="New", command=newWindow)
 file_menu.add_command(label="Open...", command=open_file_v2)
 file_menu.add_command(label="Save", command=save_file2)
 file_menu.add_command(label="Save as...", command=save_as)
+file_menu.add_command(label="Reload File", command=reload_file)
 if not platform.system() == "Darwin":
     file_menu.add_command(label="Quit", command=exit_handler)
 
