@@ -21,7 +21,6 @@ if not os.path.exists(logDir):
 # Open a log file in write mode
 # log_file = os.path.join(cache_path, "notepadee_log.txt")
 log_file = os.path.join(logDir, "notepadee_log.txt")
-print(f"INFO: Logging all console output to {log_file}")
 
 # Get current PID
 pid = os.getpid()
@@ -107,6 +106,7 @@ def setup_prefs(event=None):
 
 def setup_logging():
     global log_file
+    print(f"INFO: Logging all console output to {log_file}")
     log_file = open(log_file, 'a', encoding='utf-8', buffering=1)
     sys.stdout = log_file
     sys.stderr = log_file
