@@ -74,7 +74,8 @@ text_frame.pack(fill=tk.BOTH, expand=True)
 
 def write_settings2(*args, **kwargs):
     global tab_mode, language_mode
-    fileio.write_settings(tab_mode=tab_mode, language_mode=language_mode, autosave_enabled=common.autosave_enabled, default_encoding=common.default_encoding)
+    common.geometry = root.winfo_geometry()
+    fileio.write_settings(tab_mode=tab_mode, language_mode=language_mode, autosave_enabled=common.autosave_enabled, default_encoding=common.default_encoding, geometry=common.geometry)
 
 def get_font_for_platform():
     if platform.system() == "Windows":
@@ -211,7 +212,10 @@ else:
             messagebox.showerror("Error", "The file you attempted to open does not exist.")
             openFile = 0
 
-tab_mode_plain, language_mode_plain, autosave_enabled_plain, default_encoding_plain = read_settings()
+tab_mode_plain, language_mode_plain, autosave_enabled_plain, default_encoding_plain, common.geometry = read_settings()
+root.geometry(common.geometry)
+root.update()
+root.bind("<Configure>", write_settings2)
 tab_mode.set(tab_mode_plain)
 language_mode.set(language_mode_plain)
 common.autosave_enabled.set(autosave_enabled_plain)

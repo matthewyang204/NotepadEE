@@ -89,6 +89,8 @@ last_write = os.path.join(os.path.expanduser('~'), '.notepadee', 'prefs', 'last_
 file_written = 0
 printlog("file_written set to " + str(file_written))
 
+geometry = ""
+
 def setup_prefs(event=None):
     global folder_path, last_file_path, last_write
     
