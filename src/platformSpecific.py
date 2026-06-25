@@ -48,6 +48,8 @@ if platform.system() == "Darwin":
         printlog("fileToBeOpened: " + str(fileToBeOpened))
 
 class nw():
+    delFiles = [common.last_file_path, common.last_write]
+    
     def macOS(openFile=""):
         global folder_path
         if platform.system() == "Darwin":
@@ -59,7 +61,8 @@ class nw():
                 file.write(emptyString)
             executablePath = Path(sys.executable)
             executable = executablePath.with_name("Notepad==")
-            subprocess.call(["/bin/rm", "-rf", folder_path])
+            for file in nw.delFiles:
+                os.remove(file)
             printlog("Launching new instance...")
             if openFile:
                 appbundle = executable
@@ -88,7 +91,8 @@ class nw():
             emptyString = ""
             with open(os.path.join(cache_path, "loadPreviousSave.lock"), "w", encoding='utf-8') as file:
                 file.write(emptyString)
-            subprocess.call(["/bin/rm", "-rf", folder_path])
+            for file in nw.delFiles:
+                os.remove(file)
             printlog("Launching new instance...")
             def launcher():
                 if os.path.exists(pyInstFile):
