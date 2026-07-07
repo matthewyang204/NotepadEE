@@ -19,6 +19,7 @@ import re
 import pathlib
 import pyperclip
 from tkscheduler import TkScheduler
+import gc
 import common
 from common import *
 from platformSpecific import *
@@ -469,6 +470,7 @@ def decrease_font_size(event=None):
 
 def longTermBGRun(event=None):
     write_prefs()
+    gc.collect()
 
 # Create a function to check for text in text_area
 def check_file_written(event=None):
