@@ -354,17 +354,24 @@ def findNext(text):
         start = str(cPos_line) + "." + str(cPos_column)
         # start= "1.0"
 
-    text_area.tag_remove("highlight", "1.0", "end")
     try:
         start = text_area.search(text, start, stopindex="end")
         end = str(start) + " + " + str(len(text)) + "c"
+        if not start or not end:
+            raise ValueError("No more occurrences found")
+        text_area.tag_remove("highlight", "1.0", "end")
         text_area.tag_add("highlight", start, end)
     except Exception as e:
-        start = "1.0"
-        start = text_area.search(text, start, stopindex="end")
-        end = str(start) + " + " + str(len(text)) + "c"
-        text_area.tag_add("highlight", start, end)
-    
+        answer = messagebox.askokcancel("No More Occurrences In Document", "No more occurrences found in document, return to top?")
+        if answer:
+            text_area.tag_remove("highlight", "1.0", "end")
+            start = "1.0"
+            start = text_area.search(text, start, stopindex="end")
+            end = str(start) + " + " + str(len(text)) + "c"
+            text_area.tag_add("highlight", start, end)
+        else:
+            return
+
     text_area.tag_config("highlight", background="yellow")
     text_area.mark_set("insert", end)
     text_scroll.to_position(start)
