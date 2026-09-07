@@ -314,6 +314,12 @@ def go_to_line(event=None):
 
     def go(event=None):
         line_number = entrybox.get()
+        
+        line_count = int(text_area.index("end-1c").split(".")[0])
+        if not line_number.isdigit() or int(line_number) < 1 or int(line_number) > line_count:
+            messagebox.showerror("Error", "Please enter a valid line number.")
+            return
+
         text_area.mark_set("insert", str(line_number) + ".0")
         text_scroll.to_cursor()
 
