@@ -287,6 +287,15 @@ def find_and_replace(event=None):
         find_text = find_entry.get()
         replace_text = replace_entry.get()
 
+        text_select = text_area.get("1.0", "end-1c")
+        count = text_select.count(find_text)
+        answer = messagebox.askyesno(
+            "Confirm Replace",
+            f"Replace {count} occurrence(s) of \"{find_text}\"?"
+        )
+        if not answer:
+            return
+
         text_widget = text_area.get("1.0", tk.END)
         if find_text:
             text_widget = text_widget.replace(find_text, replace_text)
