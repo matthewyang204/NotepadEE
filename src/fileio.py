@@ -175,7 +175,6 @@ def save_as(event=None):
             ("TeX file", ".tex"),
             ("SQL file", ".sql"),
             ("NFO file", ".nfo")))
-    common.current_file = file_path
     if not file_path:
         return False
     try:
@@ -185,6 +184,7 @@ def save_as(event=None):
             text = text_area.get(1.0, "end-1c")
             file.write(text)
         write_prefs()
+        common.current_file = file_path
         common.file_open = 1
         common.printlog("File was saved to different location successfully.")
         return True
@@ -298,3 +298,4 @@ def reload_file(event=None):
     text_area.delete("1.0", "end")
     text_area.insert("1.0", content)
     common.printlog("File reloaded")
+
