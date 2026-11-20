@@ -26,7 +26,7 @@ build:
 	echo "Build completed. To install, run 'sudo make install'"
 
 windows-app-icon:
-	cp Notepad.ico dist\Notepad==\_internal\
+	cp Notepad.ico dist/Notepad==/_internal/
 
 inno-setup:
 	'@ISCC@' '@ISCSCRIPT@'
