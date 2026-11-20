@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 printf "Copy fresh src..."
 rm -rf ./src
@@ -92,7 +92,7 @@ fi
 
 # Check for inno setup compiler
 printf "Checking for Inno Setup Compiler..."
-if [[ -n "$ISCC" ]] && command -v "$ISCC" &> /dev/null; then
+if [ -n "$ISCC" ] && command -v "$ISCC" &> /dev/null; then
     echo $ISCC
 elif command -v "C:/Program Files (x86)/Inno Setup 6/ISCC.exe" &> /dev/null
 then
@@ -115,15 +115,15 @@ fi
 # Check for CPU architecture
 printf "Checking CPU architecture (for Inno Setup script)..."
 arch=$(uname -m)
-if [[ $arch == x86_64 || $arch == AMD64 ]]; then
+if [ $arch == x86_64 ] || [ $arch == AMD64 ]; then
     ARCH="x64"
     iscscript="notepadee-x64-setup.iss"
     echo $ARCH
-elif [[ $arch == i386 || $arch == i686 || $arch == x86 ]]; then
+elif [ $arch == i386 ] || [ $arch == i686 ] || [ $arch == x86 ]; then
     ARCH="x86"
     iscscript="notepadee-x86-setup-is5.iss"
     echo $ARCH
-elif [[ $arch == aarch64 || $arch == ARM64 ]]; then
+elif [ $arch == aarch64 ] || [ $arch == ARM64 ]; then
     ARCH="x64"
     iscscript="notepadee-x64-setup.iss"
     echo $ARCH
